@@ -164,7 +164,6 @@ article > ul > li {
   }
   #image-container > img {
     max-width: 70%;
-    border: 2px black solid;
     border-radius: 5px;
   }
   #stack-exchange-container {
