@@ -1,0 +1,173 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    font-family: 'Open Sans';
+    font-size: 100%;
+    background-color: rgb(215, 212, 228);
+}
+
+.row {
+  position: relative;
+}
+
+#heading {
+  border-color: black;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+}
+
+header {
+    margin: auto;
+    padding: 100px 30px;
+    color: black;
+    text-align: left;
+    float: center;
+}
+
+h1 {
+  text-align: center;
+  font-size: 160%;
+  font-family: 'Libre Baskerville';
+}
+
+#headSubtitle {
+  font-family: 'Libre Baskerville';
+}
+
+#headSubtitle {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+nav {
+  width: 100%;
+}
+
+ul.no-bullets {
+  list-style: none;
+}
+
+ul.linksList {
+    display: flex;
+    list-style: none;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+ul.linksList > li {
+  flex: 1 1 auto;
+  display: inline-block;
+  padding: 0 0 0 0;
+  float: none;
+}
+
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:visited {
+  color: blue;
+}
+
+div.wrapper {
+  width: 90vw;
+  background-color: white;
+  overflow: hidden;
+  padding: 20px 20px;
+  min-height: 90vh;
+  margin: auto;
+}
+
+#Picture {
+  display: none;
+}
+
+section {
+  padding: 10px 0;
+}
+
+article {
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+details.hidden {
+  display: none;
+}
+
+article > ul > li {
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+
+@media screen and (min-width: 1000px) {
+  body {
+    font-size: 110%;
+  }
+  div.wrapper {
+    width: 60vw;
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+  }
+  #heading {
+    margin-bottom: 5px;
+  }
+  h1 {
+    text-align: left;
+  }
+  #headSubtitle {
+    text-align: left;
+  }
+  nav {
+    position: absolute;
+    bottom: 0;
+  }
+  #heading > .second-column {
+    position: relative;
+  }
+  .row {
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: 60% 40%;
+    grid-column-gap: 15%;
+  }
+  .first-column {
+    flex: 1;
+  }
+  .second-column {
+    flex: 1;
+  }
+
+  .two-column-box {
+    display: flex;
+    flex-direction: row;
+  }
+
+  #about-me {
+    flex: 1;
+  }
+
+  #Picture {
+    flex: 1;
+    display: block;
+    padding-top: 2.5%;
+  }
+  #image-container {
+    display: flex;
+    justify-content: right;
+  }
+  #image-container > img {
+    max-width: 70%;
+    border: 2px black solid;
+    border-radius: 5px;
+  }
+  #stack-exchange-container {
+    margin-top: 2%;
+  }
+}
