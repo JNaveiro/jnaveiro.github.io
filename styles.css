@@ -76,6 +76,7 @@ a:visited {
 
 div.wrapper {
   width: 90vw;
+  max-width: 900px;
   background-color: white;
   overflow: hidden;
   padding: 20px 20px;
