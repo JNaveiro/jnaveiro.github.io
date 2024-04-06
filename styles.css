@@ -106,6 +106,26 @@ article > ul > li {
   padding-bottom: 0.5%;
 }
 
+#links-row {
+  display: flex;
+  height: 7vh;
+  padding: 1% 1% 1% 0;
+  align-items: center;
+  justify-content: center;
+} 
+
+.link-item {
+  height: 100%;
+  padding: 0 0.5% 0 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-item > svg {
+  height: 100%;
+  width: auto;
+}
+
 @media screen and (min-width: 1000px) {
   body {
     font-size: 110%;
@@ -166,5 +186,8 @@ article > ul > li {
   }
   #stack-exchange-container {
     margin-top: 2%;
+  }
+  #links-row {
+    justify-content: start;
   }
 }
