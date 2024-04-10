@@ -109,6 +109,7 @@ article > ul > li {
 #links-row {
   display: flex;
   height: 7vh;
+  max-height: 40px;
   padding: 1% 1% 1% 0;
   align-items: center;
   justify-content: center;
@@ -189,5 +190,6 @@ article > ul > li {
   }
   #links-row {
     justify-content: start;
+    max-height: 40px;
   }
 }
