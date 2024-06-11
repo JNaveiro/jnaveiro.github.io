@@ -40,12 +40,12 @@ div.image-gallery {
   height: 80px;
   display: flex;
   justify-content: center;
-  border: solid black;
 }
 
 img {
   max-width: 100%;
   max-height: 100%;
+  border: solid black;
 }
 
 @media screen and (min-width: 1000px) {
