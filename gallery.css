@@ -26,24 +26,26 @@ div.wrapper {
   margin: auto;
 }
 
+div.image-gallery {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 20px;
+}
+
 .image-container {
-  height: 150px;
-  width: 200px;
+  width: auto;
+  height: 80px;
   display: flex;
   justify-content: center;
+  border: solid black;
 }
 
 img {
   max-width: 100%;
   max-height: 100%;
-}
-
-div.image-gallery {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  row-gap: 20px;
 }
 
 @media screen and (min-width: 1000px) {
@@ -63,5 +65,12 @@ div.image-gallery {
         flex-wrap: wrap;
         justify-content: space-evenly;
         row-gap: 20px;
+    }
+
+    .image-container {
+      height: 150px;
+      width: 200px;
+      display: flex;
+      justify-content: center;
     }
 }
