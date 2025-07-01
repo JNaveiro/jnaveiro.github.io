@@ -1,0 +1,2163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Submanifolds and actions on homogeneous manifolds">
+        <meta name="keywords" content="PhD dissertation, Isometric actions, Totally geodesic submanifolds, Homogeneous spacetimes">
+        <meta name="author" content="Juanma Lorenzo Naveiro">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap" rel="stylesheet">
+        <title>PhD thesis: Submanifolds and actions on homogeneous manifolds</title>
+        <link rel="stylesheet" href="slides.css">
+        <link rel="stylesheet" href="dark.css">
+        <script src="jax.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+        <!--Each slide will be represented with an article tag-->
+        <!--For printing, it seems that Adobe PDF goes pretty nicely-->
+        <div id="wrapper">
+            <article>
+                <div class="title-content">
+                    <h1 id="title">
+                        Submanifolds and actions on homogeneous manifolds
+                    </h1>
+                    <p id="speaker-info" style="font-size: 85%;">
+                        Juan Manuel Lorenzo Naveiro<br>
+                        CITMAGA, Universidade de Santiago de Compostela<br>
+                        PhD thesis<br>
+                        Advisor: José Carlos Díaz Ramos
+                    </p>
+                    <div style="margin-top: 10%; display: flex; flex-direction: row; width: 100%; height: 13%; justify-content: space-between;">
+                        <div style="width: 20%; display: flex; justify-content: center;">
+                            <img src="Pictures/CITMAGA-branco.png" alt="CITMAGA" style="object-fit: contain; height: 100%;">
+                        </div>
+                        <div style="width: 20%; display: flex; justify-content: center;">
+                            <img src="Pictures/usc.png" alt="USC" style="object-fit: contain; height: 100%;">
+                        </div>
+                        <div style="width: 50%; display: flex; justify-content: center;">
+                            <img src="Pictures/MICIU+Cofinanciado+AEI.svg" alt="AEI" style="object-fit: contain; height: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1>Structure of this thesis</h1>
+                <ul id="thesis-structure">
+                    <li> <strong>Part I</strong>: Polar homogeneous foliations on symmetric spaces of noncompact type (Chapters 2, 3 and 4). </li>
+                    <li> <strong>Part II</strong>: Totally geodesic submanifolds of homogeneous nearly Kähler $6$-manifolds and their $\s{G}_2$-cones (Chapters 5 and 6). </li>
+                    <li> <strong>Part III</strong>: $(3,2)$-kinematical Lie algebras (Chapters 7 and 8). </li>
+                    <li>
+                        Conclusions and open problems.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Symmetry</h1>
+                <p style="margin-bottom: 7%;">
+                    Existence of <strong>symmetry</strong> $\rightsquigarrow$ reduction of complexity.
+                </p>
+                <div class="show-10" style="height: 30%; display: flex; flex-direction: row; justify-content: space-around;">
+                    <div class="center" style="width: 30%; height: 100%; display: flex; justify-content: space-evenly; flex-direction: column; align-items: center;">
+                        Laplace equation <br> $\Delta u = 0$
+                    </div>
+                    <div style="width: 30%; display: flex; flex-direction: column; justify-content: space-between;">
+                    <svg height="100%" width="100%" viewBox="0 0 100 80" style="font-size: 2vh; font-weight: 100">
+                        <marker id="arrow-head" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                            <path d="M 0 0 L 10 5 L 0 10 L 5 5 L 0 0" fill="currentcolor"/>
+                        </marker>
+                        <path d="M 0 50 C 25 50 25 25 50 50 C 75 75 75 50 100 50" stroke="currentcolor" fill="none" marker-end="url(#arrow-head)"/>
+                    </svg>
+                    <div class="center" style="height: 20%; font-size: 70%;">
+                        $\mathsf{O}(n)\curvearrowright \RR^n$
+                    </div>
+                    </div>
+                    <div class="center" style="width: 30%; height: 100%; display: flex; justify-content: space-evenly; flex-direction: column; align-items: center;">
+                        $u(x)=f(\lvert x \rvert)$ $\dfrac{d}{dt}\bigl(t^{n-1}f'(t)\bigr)=0$
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1>Felix Klein: geometry via symmetry</h1>
+                <ul id="homogeneous-spaces">
+                    <li>
+                        <strong>Erlangen programme</strong>: study spaces via (transitive) symmetry groups.
+                    </li>
+                    <li class="show-10">
+                        <strong>Homogeneous space</strong>: a manifold $M$ with a transitive action $\s{G} \curvearrowright M$ of a Lie group $\s{G}$.
+                    </li>
+                    <li class="show-20">
+                        $M=\s{G}/\s{K}$, $\s{K}=\s{G}_o$ <strong>isotropy subgroup</strong> of $o\in M$.
+                    </li>
+                    <li class="show-30">
+                        $(\s{G},\s{K})$ is a <strong>Klein pair</strong>.
+                    </li>
+                </ul>
+            </article>
+            <article style="justify-content: center;">
+                <ul>
+                    <li style="margin-bottom: 3%;">Elements of $\s{G}$ $\rightsquigarrow$ transformations of $M=\s{G}/\s{K}$.</li>
+                    <li class="show-10">
+                        <strong>Fundamental vector fields</strong>: $X\in \g{g}\mapsto X^*\in \g{X}(M)$:
+                        \[
+                            X^*_p = \frac{d}{dt}\Big\vert_{t=0}\Exp(tX)\cdot p.
+                        \]
+                    </li>
+                    <li class="show-20">
+                        The map $X+\g{k}\in \g{g}/\g{k}\mapsto X^*_o$ is an isomorphism, so $T_o M \cong \g{g}/\g{k}$.
+                    </li>
+                </ul>
+                <div class="show-20" style="display: flex; height: 20%; flex-direction: row; align-items: center; justify-content: space-around;">
+                    <div style="height: 100%; width: 40%; text-align: center; margin: 0; display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                        <p>Isotropy representation <br> $\s{K}\curvearrowright T_o M$.</p>
+                    </div>
+                    <div style="padding: 0; height: 100%; width: 30%;">
+                        <svg width="100%" height="100%" viewBox="0 0 150 100">
+                            <marker id="arrow-tip" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 L 5 5 L 0 0" fill="currentcolor" />
+                            </marker>
+                            <path d="M 0 50 L 150 50" stroke="currentColor" stroke-with="3" marker-start="url(#arrow-tip)" marker-end="url(#arrow-tip)"/>
+                        </svg>
+                    </div>
+                    <div style="height: 100%; width: 40%; text-align: center; margin: 0; display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                        <p>Adjoint representation <br> $\s{K} \curvearrowright \g{g}/\g{k}$.</p>
+                    </div>
+                </div>
+            </article>
+            <article class="part">
+                <h1>
+                    Part I <br> Polar actions on symmetric spaces
+                </h1>
+            </article>
+            <article>
+                <h1>Polar actions</h1>
+                <p>$M$ complete Riemannian manifold, $\s{H}\curvearrowright M$ proper isometric action.</p>
+                <div style="padding: 0; height: 40%; display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="width: 50%; height: 100%;">
+                        <p class="show-10" style="margin-top: 0;">$\s{H}\curvearrowright M$ is <strong>polar</strong> if $\exists \, \Sigma \subseteq M$ with:
+                        <ul class="show-10" style="padding-left: 7%;">
+                            <li>
+                                $\Sigma \cap (\s{H}\cdot p)\neq \varnothing$ for all $p\in M$,
+                            </li>
+                            <li>
+                                $T_p \Sigma \perp T_p (\s{H}\cdot p)$ for all $p\in \Sigma$.
+                            </li>
+                        </ul>
+                        </p>
+                        <p class="show-10" style="margin-bottom: 0;">
+                            $\Sigma$ is a <strong>section</strong>.
+                        </p>
+                    </div>
+                    <div class="show-10" style="width: 50%; height: 100%;">
+                        <svg height="100%" width="100%" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" stroke="currentColor" fill="none"/>
+                            <circle cx="50" cy="50" r="35" stroke="currentColor" fill="none"/>
+                            <circle cx="50" cy="50" r="25" stroke="currentColor" fill="none"/>
+                            <circle cx="50" cy="50" r="15" stroke="currentColor" fill="none"/>
+                            <circle cx="50" cy="50" r="5" stroke="currentColor" fill="none"/>
+                            <circle cx="50" cy="50" r="1" fill="currentColor"/>
+                            <path d="M 0 0 L 100 100" stroke="#A3D4D5"/>
+                        </svg>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1 style="margin-bottom: 5%;">Examples on $\RR\s{H}^2=\s{SL}(2,\RR)/\s{SO}(2)$</h1>
+                <div style="height: 60%; display: flex; flex-direction: row; justify-content: space-around;">
+                    <div style="width: 30%;">
+                        <img src="Pictures/polarSingular.png" alt="Concentric spheres" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="width: 30%;">
+                        <img src="Pictures/solvableFoliation.png" alt="Solvable Foliation" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="width: 30%;">
+                        <img src="Pictures/horosphereFoliation.png" alt="Horosphere foliation" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1 style="margin-bottom: 10vh;">Examples from algebra</h1>
+                <ul id="polar-actions-from-algebra">
+                    <li>
+                        $M=\s{S}^2_{0}\RR^n$, $\s{H}=\s{SO}(n)$ acting by conjugation.
+                        <ul>
+                            <li>
+                                $\Sigma=\{ \text{diagonal matrices} \}$ (spectral theorem).
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="show-10">
+                        $M=\s{H}=\s{G}$ compact Lie group, $g\cdot x = gxg^{-1}$.
+                        <ul>
+                            <li>
+                                $\Sigma = \s{T}^r$ maximal torus of $\s{G}$ (maximal torus theorem).
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+            <article style="justify-content: center; align-items: center;">
+                <div class="remark-box" style="margin-bottom: 3%; width: 90%; line-height: 160%;">
+                    Two actions $\s{H}_1 \curvearrowright M$, $\s{H}_2 \curvearrowright M$ are <strong>orbit equivalent</strong> if <br> $\exists \, f\in I(M)$ with $f(\s{G}_1 \cdot p)=\s{G_2} \cdot f(p)$ for all $p\in M$.
+                </div>
+                <div class="problem-box" style="margin-top: 3%; width: 90%;">
+                    <b>Main problem.</b>
+                    Given $M$, classify polar actions on $M$ up to orbit equivalence.
+                </div>
+            </article>
+            <article>
+                <h1>Symmetric spaces</h1>
+                <div class="remark-box center">
+                    $M$ is a <strong>symmetric space</strong> if every $p\in M$ admits a geodesic reflection $s_p$.
+                </div>
+                <ul>
+                    <li class="show-10">
+                        $M=\s{G}/\s{K}$, where $\s{G}=I^0(M)$ and $\s{K}=\s{G}_o$, $o\in M$.
+                    </li>
+                    <li class="show-20">
+                        $\Theta \colon g\in \s{G}\mapsto s_o g s_o$ group involution $\rightsquigarrow$ $\theta=\Theta_*$ involution of $\g{g}$.
+                    </li>
+                    <li class="show-20">
+                        $\g{g}=\g{k}\oplus \g{p}$ <strong>Cartan decomposition</strong> ($\mathbb{Z}_2$-grading).
+                    </li>
+                    <li class="show-30">
+                        $\g{p}\cong \g{g}/\g{k}\cong T_o M$.
+                    </li>
+                    <li class="show-40">
+                        <strong>Rank</strong> of $M$ $=$ dimension of any maximal flat in $M$ $=$ dimension of any maximal abelian subspace $\g{a}\subseteq \g{p}$.
+                    </li>
+                </ul>
+            </article>
+            <article style="justify-content: center; align-items: center;">
+                <div style="display: flex; flex-direction: row; justify-content: space-around; padding-top: 0; margin-top: 0; width: 90%; margin-bottom: 5%;">
+                    <p class="center" style="margin: 0; line-height: 150%;">
+                        Euclidean type <br>
+                        $\c{B}\vert_{\s{S}^2 \g{p}} = 0$
+                    </p>
+                    <p class="center" style="margin: 0; line-height: 150%;">
+                        Compact type <br>
+                        $\c{B}\vert_{\s{S}^2 \g{p}} < 0$
+                    </p>
+                    <p class="center" style="margin: 0; line-height: 150%;">
+                        Noncompact type <br>
+                        $\c{B}\vert_{\s{S}^2 \g{p}} > 0$
+                    </p>
+                </div>
+                <table id="symmetric-spaces">
+                    <tr>
+                        <th>Compact type</th>
+                        <th>Noncompact type</th>
+                    </tr>
+                    <tr>
+                        <td>$\s{S}^n$</td>
+                        <td>$\RR\s{H}^n$</td>
+                    </tr>
+                    <tr>
+                        <td>$\F \s{P}^n$</td>
+                        <td>$\F \s{H}^n$</td>
+                    </tr>
+                    <tr>
+                        <td>$\s{G}_k (\F^n)$</td>
+                        <td>$\s{G}_k^* (\F^{k,n})$</td>
+                    </tr>
+                    <tr>
+                        <td>$\s{G}$ compact</td>
+                        <td>$\s{G}(\C)/\s{G}$</td>
+                    </tr>
+                </table>
+            </article>
+            <article>
+                <h1>
+                    Known classifications
+                </h1>
+                <ul>
+                    <li>
+                        $\s{S}^n$: Polar representations.
+                    </li>
+                </ul>
+                <div class="theorem-box">
+                    <b>Theorem (Dadok '85).</b>
+                    Every polar representation is orbit equivalent to the isotropy representation of a semisimple symmetric space.
+                </div>
+                <ul>
+                    <li class="show-10">
+                        $\RR\s{H}^n$: Wu ('92).
+                    </li>
+                    <li class="show-20">
+                        Compact rank one symmetric spaces ($\C\s{P}^n$, $\H\s{P}^n$, $\O\s{P}^2$): Podestà&ndash;Thorbergsson ('99).
+                    </li>
+                    <li class="show-30">
+                        Compact type, higher rank: Kollross&ndash;Lytchak.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>
+                    The noncompact setting
+                </h1>
+                <ul>
+                    <li style="margin-bottom: 4%;">
+                        $\C\s{H}^n$: Díaz-Ramos, Domínguez-Vázquez, Kollross ('17).
+                    </li>
+                    <li class="show-10" style="margin-bottom: 4%;">
+                        Cohomogeneity one actions: Berndt, Tamaru, Brück, Díaz-Ramos, Domínguez-Vázquez, Otero, Rodríguez-Vázquez, Sanmartín López, Solonenko ('01-'25).
+                    </li>                    
+                    <li class="show-20" style="margin-bottom: 2%;">
+                        Hyperpolar homogeneous foliations: Berndt, Díaz-Ramos, Tamaru ('10).
+                    </li>
+                </ul>
+                <div class="show-30 problem-box">
+                    <b>Objective.</b>
+                    Study polar <strong>homogeneous foliations</strong> on symmetric spaces of noncompact type.
+                </div>
+            </article>
+            <article class="part">
+                <h1>Codimension two polar homogeneous foliations on symmetric spaces of noncompact type</h1>
+                <p class="bibitem">
+                    J. C. Díaz-Ramos, J. M. Lorenzo-Naveiro, Codimension two polar homogeneous foliations on symmetric spaces of noncompact type, <i>Adv. Math.</i> <b>472</b> (2025), 110295
+                </p>
+            </article>
+            <article>
+                <h1>
+                    Symmetric spaces of noncompact type
+                </h1>
+                <ul id="noncompact-properties">
+                    <li>
+                        $M=\s{G}/\s{K}$ (irreducible) symmetric space of noncompact type.
+                    </li>
+                    <li>
+                        $\theta\in \Aut(\g{g})$ Cartan involution, $\g{g}=\g{k}\oplus\g{p}$ Cartan decomposition.
+                    </li>
+                    <li class="show-10">
+                        $\c{B}\vert_{\s{S}^2\g{p}}$ is the Riemannian metric on $\g{p}\cong T_o M$ (up to scaling).
+                    </li>
+                    <li class="show-20">
+                        $\left< X,Y \right> = -\c{B}(\theta X,Y)$ inner product on $\g{g}$.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Root space decomposition</h1>
+                <ul>
+                    <li>
+                        $\g{a}\subseteq \g{p}$ maximal abelian subspace.
+                    </li>
+                    <li class="show-10">
+                        For $\lambda \in \g{a}^*$, define
+                        $$\g{g}_\lambda = \{ X\in \g{g} \colon [H,X]=\lambda(H)X \text{ for all } H\in \g{a} \}.$$
+                    </li>
+                    <li class="show-20">
+                        $\Sigma \subseteq \g{a}^*$ set of <strong>roots</strong>. We obtain the <strong>root space decomposition</strong>
+                    </li>
+                    <p class="show-20 center">
+                        $$\g{g} = \g{g}_0 \oplus \bigoplus_{\lambda \in \Sigma} \g{g}_\lambda$$
+                    </p>
+                </ul>
+            </article>
+            <article>
+                <h1>Iwasawa decomposition</h1>
+                <div style="display: flex; flex-direction: row; height: 60%;">
+                    <div style="width: 50%;">
+                        <ul>
+                            <li class="show-10">
+                                Notion of positivity <br> $\rightsquigarrow$ <span style="color: #76946A;">positive roots $\Sigma^+\subseteq \Sigma$</span>.
+                            </li>
+                            <li class="show-20">
+                                <span style="color: #FFA066;">Simple roots $\Lambda \subseteq \Sigma^+$</span>.
+                            </li>
+                            <li class="show-30">
+                                $\Sigma^+$ induces a nilpotent subalgebra
+                                $$\g{n}=\bigoplus_{\lambda \in \Sigma^+}\g{g}_\lambda.$$
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="width: 50%; align-items: center; position: relative;">
+                        <div style="height: 100%; position: absolute; top: -5%; left: 9%;">
+                        <svg width="100%" height="100%" viewBox="0 0 200 200">
+                            <marker id="root-tip" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 L 5 5 L 0 0" fill="currentcolor" />
+                            </marker>
+                            <line x1="100" y1="100" x2="170" y2="100" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="30" y2="100" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="100" y2="30" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="100" y2="170" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="170" y2="30" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="170" y2="170" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="30" y2="170" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="30" y2="30" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                        </svg>
+                        </div>
+                        <div class="show-10" style="height: 100%; position: absolute; top: -5%; left: 9%;">
+                        <svg width="100%" height="100%" viewBox="0 0 200 200">
+                            <marker id="positive-root-tip" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 L 5 5 L 0 0" fill="#76946A" />
+                            </marker>
+                            <marker id="root-tip" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 L 5 5 L 0 0" fill="currentcolor" />
+                            </marker>
+                            <line x1="100" y1="100" x2="170" y2="100" stroke="#76946A" stroke-width="1" marker-end="url(#positive-root-tip)"/>
+                            <line x1="100" y1="100" x2="30" y2="100" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="100" y2="30" stroke="#76946A" stroke-width="1" marker-end="url(#positive-root-tip)"/>
+                            <line x1="100" y1="100" x2="100" y2="170" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="170" y2="30" stroke="#76946A" stroke-width="1" marker-end="url(#positive-root-tip)"/>
+                            <line x1="100" y1="100" x2="170" y2="170" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="30" y2="170" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="30" y2="30" stroke="#76946A" stroke-width="1" marker-end="url(#positive-root-tip)"/>
+                            <line x1="30" y1="65" x2="170" y2="135" stroke="currentColor" stroke-dasharray="10, 5"/>
+                        </svg>
+                        </div>
+                        <div class="show-20" style="height: 100%; position: absolute; top: -5%; left: 9%;">
+                        <svg width="100%" height="100%" viewBox="0 0 200 200">
+                            <marker id="positive-root-tip" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 L 5 5 L 0 0" fill="#76946A" />
+                            </marker>
+                            <marker id="simple-root-tip" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 L 5 5 L 0 0" fill="#FFA066" />
+                            </marker>
+                            <marker id="root-tip" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 L 5 5 L 0 0" fill="currentcolor" />
+                            </marker>
+                            <line x1="100" y1="100" x2="170" y2="100" stroke="#FFA066" stroke-width="1" marker-end="url(#simple-root-tip)"/>
+                            <line x1="100" y1="100" x2="30" y2="100" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="100" y2="30" stroke="#76946A" stroke-width="1" marker-end="url(#positive-root-tip)"/>
+                            <line x1="100" y1="100" x2="100" y2="170" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="170" y2="30" stroke="#76946A" stroke-width="1" marker-end="url(#positive-root-tip)"/>
+                            <line x1="100" y1="100" x2="170" y2="170" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="30" y2="170" stroke="currentColor" stroke-width="1" marker-end="url(#root-tip)"/>
+                            <line x1="100" y1="100" x2="30" y2="30" stroke="#FFA066" stroke-width="1" marker-end="url(#simple-root-tip)"/>
+                            <line x1="30" y1="65" x2="170" y2="135" stroke="currentColor" stroke-dasharray="10, 5"/>
+                        </svg>
+                        </div>
+                        <p class="center" style="margin: 0; position: absolute; top: 85%; right: 50%;">
+                            $B_2$
+                        </p>
+                    </div>
+                </div>
+                <div class="show-40 theorem-box center">
+                    $\g{g}=\g{k}\oplus \g{a}\oplus \g{n}, \qquad \s{G}=\s{KAN}$.
+                </div>
+            </article>
+            <article>
+                <h1>The canonical extension method</h1>
+                <ul>
+                    <li>
+                        $\Phi\subseteq \Lambda$ subset of simple roots.
+                    </li>
+                    <li class="show-10">
+                        Define 
+                        $$\g{a}_\Phi = \bigcap_{\alpha \in \Phi} \ker \alpha, \qquad \g{n}_\Phi = \bigoplus_{\lambda \in \Sigma^+\smallsetminus \Sigma^+_{\Phi}}\g{g}_{\lambda}$$
+                    </li>
+                    <li class="show-20">
+                        $\g{a}_\Phi\oplus\g{n}_\Phi$ subalgebra, $\s{A}_\Phi\s{N}_\Phi$ induces a polar homogeneous foliation.
+                    </li>
+                    <li class="show-30">
+                        $B_\Phi$ section of $\s{A}_\Phi\s{N}_\Phi\curvearrowright M$ through $o$ $\rightsquigarrow$ $\operatorname{rank}(B_\Phi)=\lvert \Phi \rvert$.
+                    </li>
+                    <li class="show-30">
+                        $B_\Phi$: <strong>boundary component</strong> of $M$ associated with $\Phi$.
+                    </li>
+                </ul>
+            </article>
+            <article style="justify-content: center; align-items: center;">
+                <div style="height: 80%; width:100%; display: flex; flex-direction: row; justify-content: space-between;">
+                    <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 50%;">
+                        <img src="Pictures/horosphereFoliationColored.png" alt="Horospherical foliation" style="height: 80%; object-fit: contain;">
+                        <p class="center">
+                            $\s{H}\curvearrowright B_\Phi$
+                        </p>
+                    </div>
+                    <div style="width: 50%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <img src="Pictures/horosphereExtension.png" alt="Canonical extension of the horosphere foliation" style="height: 100%; object-fit: contain;">
+                        <p class="center">
+                            $\s{H}\s{A}_{\Phi}\s{N}_\Phi \curvearrowright M$
+                        </p>
+                    </div>
+                </div>
+            </article>
+            <article style="justify-content: center;">
+                <div class="theorem-box">
+                    <b>Theorem A (Díaz-Ramos, LN).</b>
+                    $M$ irreducible symmetric space of noncompact type, $\c{F}$ codimension two polar homogeneous foliation on $M$.
+                    Then one of the following holds:
+                    <ol>
+                        <li>
+                            $\c{F}$ is hyperpolar [BDT].
+                        </li>
+                        <li>
+                            $\c{F}$ is orbit equivalent to the canonical extension of a polar homogeneous foliation on some $B_\Phi$, $\lvert \Phi \rvert = 1$.
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>Noncompact rank one symmetric spaces</h1>
+                <ul>
+                    <li>
+                        $M=\s{G}/\s{K}=\F\s{H}^n$ symmetric space of rank one.
+                    </li>
+                    <li>
+                        $\g{a}=\RR$ and $\g{n}=\g{g}_\alpha\oplus \g{g}_{2\alpha}$.
+                    </li>
+                </ul>
+                <div style="display: flex; flex-direction: row; justify-content: space-around;">
+                <div style="display: flex; justify-content: center; width: 70%;">
+                    <table id="rank-one">
+                        <tr>
+                            <th style="padding-left: 2%;">$M$</th>
+                            <th style="padding-left: 3%;">$\s{G}$</th>
+                            <th>$\s{K}$</th>
+                            <th>$\g{g}_\alpha$</th>
+                            <th>$\g{g}_{2\alpha}$</th>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 2%;"> $\RR\s{H}^n$ </td>
+                            <td style="padding-left: 3%;"> $\s{SO}^0(1,n)$ </td>
+                            <td> $\s{SO}(n)$ </td>
+                            <td> $\RR^{n-1}$ </td>
+                            <td> $0$ </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 2%;"> $\C\s{H}^n$ </td>
+                            <td style="padding-left: 3%;"> $\s{SU}(1,n)$ </td>
+                            <td> $\s{S}(\s{U}(1)\times\s{U}(n))$ </td>
+                            <td> $\C^{n-1}$ </td>
+                            <td> $\RR$ </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 2%;"> $\H\s{H}^n$ </td>
+                            <td style="padding-left: 3%;"> $\s{Sp}(1,n)$ </td>
+                            <td> $\s{Sp}(1)\times\s{Sp}(n-1)$ </td>
+                            <td> $\H^{n-1}$ </td>
+                            <td> $\RR^3$ </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 2%;"> $\O\s{H}^2$ </td>
+                            <td style="padding-left: 3%;"> $\s{F}_4^{-20}$ </td>
+                            <td> $\s{Spin}(9)$ </td>
+                            <td> $\O$ </td>
+                            <td> $\RR^7$ </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="show-10" style="width: 30%; display: flex; justify-content: center; align-items: center; flex-direction: column; font-size: 80%;">
+                    <p style="margin: 0;">$J\colon \g{g}_{2\alpha}\to \operatorname{End}(\g{g}_{\alpha})$ </p>
+                    <p>$J_Z V = -[\theta V, Z].$</p>
+                </div>
+            </div>
+            </article>
+            <article>
+                <h1>Nilpotent foliation $\c{F}_\xi$</h1>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; height: 80%;">
+                <div class="center" style="width: 60%;">$\g{s}_\xi=\g{n}\ominus \RR\xi, \qquad \xi\in \g{g}_\alpha$</div>
+                <div style="width: 100%; height: 70%; display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="width: 40%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="Pictures/horosphereFoliationNoSection.png" alt="Horospherical foliation" style="object-fit: contain; height: 80%;">
+                    </div>
+                    <div style="width: 40%; height: 100%; position: relative;">
+                        <img src="Pictures/horosphereFoliationStatic.png" alt="Horospherical foliation" style="position: absolute; object-fit: contain; height: 80%; top: 10%; right: 10%">
+                        <img class="show-1000" src="Pictures/horosphereFoliationAnimation.gif" alt="Horospherical foliation" style="position: absolute; object-fit: contain; height: 80%; top: 10%; right: 10%;">
+                    </div>
+                </div>
+                </div>
+            </article>
+            <article>
+                <h1>Solvable foliation $\c{F}_\g{v}$</h1>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; height: 80%;">
+                <div class="center" style="width: 60%;">$\g{s}_\g{v}=\g{a}\oplus(\g{n}\ominus \g{v}), \qquad \g{v}\subseteq \g{g}_\alpha$ totally real</div>
+                <div style="width: 100%; height: 70%; display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="width: 40%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="Pictures/solvableFoliationNoSection.png" alt="Horospherical foliation" style="object-fit: contain; height: 80%;">
+                    </div>
+                    <div style="width: 40%; height: 100%; position: relative;">
+                        <img src="Pictures/solvableFoliationStatic.png" alt="Horospherical foliation" style="position: absolute; object-fit: contain; height: 80%; top: 10%; right: 10%">
+                        <img class="show-1000" src="Pictures/solvableFoliationAnimation.gif" alt="Horospherical foliation" style="position: absolute; object-fit: contain; height: 80%; top: 10%; right: 10%;">
+                    </div>
+                </div>
+                </div>
+            </article>
+            <article style="justify-content: space-evenly;">
+                <div class="theorem-box">
+                    <b>Theorem (Díaz-Ramos, LN).</b>
+                    Every codimension two polar homogeneous foliation on $\F \s{H}^n$ is congruent to either an $\c{F}_\xi$ or an $\c{F}_{\g{v}}$.
+                </div>
+                <div class="theorem-box">
+                    <b>Theorem B (Díaz-Ramos, LN).</b>
+                    $M$ irreducible symmetric space of noncompact type.
+                    Every C2 polar nonhyperpolar homogeneous foliation on $M$ is congruent to the orbit foliation induced by either:
+                    <ol>
+                        <li>
+                            $\s{S}_\xi$, where $\g{s}_\xi = (\ker \alpha)\oplus (\g{n}\ominus \RR \xi), \; \alpha\in \Lambda, \, \xi\in \g{g}_\alpha$, or
+                        <li>
+                            $\s{S}_\g{v}$, where $\g{s}_\g{v} = \g{a}\oplus (\g{n}\ominus \g{v}), \; \alpha\in \Lambda, \, \g{v}\subseteq \g{g}_\alpha$ abelian.
+                        </li>
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>Proof sketch</h1>
+                <p style="margin-bottom: 3%;">Suppose $\c{F}$ is a C2 polar nonhyperpolar homogeneous foliation on $M$.</p>
+                <ol id="polar-proof">
+                    <li class="show-10">
+                        $\c{F}$ is induced by a closed connected solvable $\s{S}\subseteq \s{G}$.
+                    </li>
+                    <li class="show-20">
+                        We may assume $\g{s}\subseteq \g{t}\oplus \g{a}\oplus \g{n}, \;\g{t}\subseteq \g{g}_0\cap \g{k}$ abelian.
+                    </li>
+                    <li class="show-30">
+                        Using an algebraic characterization, we get $\g{s}_{\g{a}\oplus \g{n}}$ is an $\g{s}_\xi$ or an $\g{s}_{\g{v}}$.
+                    </li>
+                    <li class="show-40">
+                        If $\g{s}_{\g{a}\oplus \g{n}}=\g{s}_{\g{v}}$ (respectively, $\g{s}_{\xi}$), then $\s{S}$ has the same orbits as $\s{S}_{\g{v}}$ (respectively, $\s{S}_{\xi}$).
+                    </li>
+                </ol>
+            </article>
+            <article class="part">
+                <h1>
+                    Polar homogeneous foliations on <br> $\H\s{H}^n$ and $\O\s{H}^2$
+                </h1>
+                <p>
+                    Joint work with J. C. Díaz-Ramos
+                </p>
+            </article>
+            <article>
+                <h1>Polar actions on $\F\s{H}^n$</h1>
+                <ul id="actions-fhn">
+                    <li>Polar actions on $\RR\s{H}^n$ and $\C\s{H}^n$ are already classified.</li>
+                    <li class="show-10">
+                        $\H\s{H}^n$: polar actions induced by reductive algebraic subgroups of $\s{Sp}(1,n)$ (Kollross, '11).
+                    </li>
+                    <li class="show-20">
+                        $\O\s{H}^2$: polar actions leaving a totally geodesic submanifold invariant (Kollross, '20).
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Examples of foliations</h1>
+                <p>
+                    $M=\F\s{H}^n$.
+                    The foliations $\c{F}_\xi$ and $\c{F}_{\g{v}}$ generalize to higher codimension:
+                </p>
+                <p class="center">
+                    $\g{s}_{\g{b},\g{v}}=(\g{a}\ominus \g{b})\oplus (\g{n}\ominus \g{v}), \quad \g{b}\subseteq \g{a},\; \g{v}\subseteq \g{g}_\alpha$ totally real.
+                </p>
+                <ul>
+                    <li class="show-10">
+                        $\dim \g{v} \leq n-1$.
+                    </li>
+                    <li class="show-20">
+                        $\g{b}=\g{a} \rightsquigarrow$ nilpotent type.
+                    </li>
+                    <li class="show-20">
+                        $\g{b}=0 \rightsquigarrow$ solvable type.
+                    </li>
+                    <li class="show-30">
+                        The section is $\Sigma = \RR\s{H}^k(2), \quad k=\dim \g{b}+\dim \g{v}$.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Polar foliations on $\H\s{H}^2$ and $\O\s{H}^2$</h1>
+                <div class="theorem-box" style="margin-top: 5%;">
+                    <b>Theorem A (Díaz-Ramos, LN).</b>
+                    The hyperbolic plane $M=\F\s{H}^2$, $\F\in \{\H,\O\}$, admits exactly four (nontrivial) polar homogeneous foliations up to orbit equivalence:
+                    <p class="center" style="margin: 2%;">
+                        $\s{AN}\curvearrowright M, \quad \s{N}\curvearrowright M, \quad \s{S}_{0,\ell}\curvearrowright M,\quad \s{S}_{\g{a},\ell}\curvearrowright M.$
+                    </p>
+                </div>
+                <div class="remark-box" style="margin-top: 5%;">
+                    <b>Note.</b> $\dim \ell = 1$.
+                </div>
+            </article>
+            <article>
+                <h1>Sections of polar actions on $\F\s{H}^n$</h1>
+                <p style="margin-bottom: 0%;">Totally geodesic submanifolds of $\H\s{H}^n$ and $\O\s{H}^2$:</p>
+                <div style="display: flex; flex-direction: row; height: 60%;">
+                    <div style="width: 50%; display: flex; align-items: center; flex-direction: column;">
+                        <p class="center">$\H\s{H}^n$</p>
+                        <table class="hyperbolic-table">
+                            <tr>
+                                <th>Submanifold</th>
+                                <th>Comments</th>
+                            </tr>
+                            <tr>
+                                <td>$\RR\s{H}^k(2)$</td>
+                                <td>$2\leq k \leq n$</td>
+                            </tr>
+                            <tr>
+                                <td>$\C\s{H}^k$</td>
+                                <td>$2\leq k \leq n$</td>
+                            </tr>
+                            <tr>
+                                <td>$\H\s{H}^k$</td>
+                                <td>$2\leq k \leq n-1$</td>
+                            </tr>
+                            <tr>
+                                <td>$\RR\s{H}^k$</td>
+                                <td>$2\leq k \leq 4$</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width: 50%; display: flex; align-items: center; flex-direction: column;">
+                        <p class="center">$\O\s{H}^2$</p>
+                        <table class="hyperbolic-table">
+                            <tr>
+                                <th>Submanifold</th>
+                                <th>Comments</th>
+                            </tr>
+                            <tr>
+                                <td>$\RR\s{H}^2(2)$</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>$\C\s{H}^2$</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>$\H\s{H}^2$</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>$\RR\s{H}^k$</td>
+                                <td>$2\leq k \leq 8$</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </article>
+            <article style="justify-content: space-evenly;">
+                <div class="theorem-box">
+                    <b>Theorem B (Díaz-Ramos, LN).</b>
+                    If $\s{S}\curvearrowright \F\s{H}^n$ ($\F\in \{\H,\O\}$) is a nontrivial polar action with cohomogeneity $\geq 2$, then its section is a totally geodesic $\RR\s{H}^k$ with constant curvature $\kappa \in \{ -1,-\tfrac{1}{4} \}$.
+                </div>
+            </article>
+            <article>
+                <h1>Standard polar foliations on $\H\s{H}^n$</h1>
+                <div style="display: flex; flex-direction: column; justify-content: space-around; height: 70%;">
+                <p style="margin: 0;">
+                    $\c{F}$ polar foliation on $M$.
+                    $\c{F}$ is <strong>standard</strong> if it is induced by some $\s{S}\subseteq \s{AN}$ up to orbit equivalence.
+                </p>
+                <div class="remark-box">
+                    <b>Note.</b>
+                    $\s{S}_{\g{b},\g{v}}\curvearrowright \F\s{H}^n$ is standard, where $\g{s}_{\g{b},\g{v}}=(\g{a}\ominus \g{b})\oplus (\g{n}\ominus \g{v})$.
+                </div>
+                <div class="show-10 theorem-box">
+                    <b>Theorem C (Díaz-Ramos, LN).</b>
+                    If $\c{F}$ is a (nontrivial) polar standard homogeneous foliation on $\H\s{H}^n$, then $\c{F}$ is isometrically congruent to the orbit foliation induced by some $\s{S}_{\g{b},\g{v}}$.
+                </div>
+                </div>
+            </article>
+            <article class="part">
+                <h1>
+                    Part II <br> Totally geodesic submanifolds of <br> nearly Kähler and $\s{G}_2$-manifolds
+                </h1>
+                <p class="bibitem">
+                    J. M. Lorenzo-Naveiro, Alberto Rodríguez-Vázquez,
+                    Totally geodesic submanifolds of the homogeneous nearly Kähler 6-manifolds and their $\s{G}_2$-cones, <br> <span style="font-family: monospace;">arXiv:2411.11261</span> [math.DG]
+                </p>
+            </article>
+            <article>
+                <h1>Totally geodesic submanifolds</h1>
+                <ul style="margin-bottom: 1%;">
+                    <li>
+                        $M$ real analytic Riemannian manifold, $f\colon \Sigma \to M$ isometric immersion.
+                    </li>
+                    <li class="show-10">
+                        $f$ is <strong>totally geodesic</strong> if: <br>
+                    </li>
+                </ul>
+                <div class="show-10 center" style="margin: 1% 0 1% 0;">
+                    $\gamma \colon I \to \Sigma$ geodesic $\Rightarrow$ $f\circ \gamma\colon I \to M$ geodesic.
+                </div>
+                <div class="show-10" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; height: 45%;">
+                    <div style="width: 30%; display: flex; flex-direction: column; justify-content: space-evenly; height: 100%;">
+                        <div style="width: 100%; height: 70%; display: flex; justify-content: center; align-items: center;">
+                            <img src="Pictures/plane.png" alt="Plane" style="max-height: 100%; width: auto; object-fit: contain;">
+                        </div>
+                        <p class="center" style="margin: 6% 0 0 0; height: 20%;">
+                            $\RR^k\subseteq \RR^n$
+                        </p>
+                    </div>
+                    <div style="width: 30%; display: flex; flex-direction: column; justify-content: space-evenly; height: 100%;">
+                        <div style="width: 100%; height: 70%; display: flex; justify-content: center; align-items: center;">
+                            <img src="Pictures/greatCircle.png" alt="Plane" style="max-width: 100%; width: auto; object-fit: contain;">
+                        </div>
+                        <p class="center" style="margin: 6% 0 0 0; height: 20%;">
+                            $\s{S}^k\subseteq \s{S}^n$
+                        </p>
+                    </div>
+                    <div style="width: 30%; display: flex; flex-direction: column; justify-content: space-evenly; height: 100%;">
+                        <div style="width: 100%; height: 70%; display: flex; justify-content: center; align-items: center;">
+                            <img src="Pictures/greatHypPlane.png" alt="Plane" style="max-height: 100%; width: auto; object-fit: contain;">
+                        </div>
+                        <p class="center" style="margin: 6% 0 0 0; height: 20%;">
+                            $\RR\s{H}^k\subseteq \RR\s{H}^n$
+                        </p>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <p style="margin-bottom: 0;">Redundancies due to working with immersions:</p>
+                <ul id="redundancies">
+                    <li class="show-10">
+                        Coverings $\rightsquigarrow$ working with <strong>compatible</strong> immersions $f\colon \Sigma^k \to M$,
+                        <p class="center">
+                            $\widetilde{f}\colon x\in \Sigma \mapsto f_{*x}(T_x \Sigma)\in \s{G}_k(TM)$ injective.
+                        </p>
+                    </li>
+                    <li class="show-20">
+                        Extensions $\rightsquigarrow$ only consider <strong>inextendable immersions</strong>.
+                    </li>
+                    <li class="show-30" style="margin-bottom: 0;">
+                        Reparametrizations $\rightsquigarrow$ $f_i \colon \Sigma_i \to M$ ($i=1,2$) are <strong>equivalent</strong> (we write $f_1 \simeq f_2$) if there exists an isometry $\phi \colon \Sigma_1 \to \Sigma_2$ with $f_1 = f_2 \circ \phi$.
+                    </li>
+                </ul>
+                <div class="show-40 problem-box">
+                    <b>General problem.</b>
+                    Given $M$, classify (equivalence classes of) inextendable compatible totally geodesic immersions to $M$ up to congruence.
+                </div>
+            </article>
+            <article>
+                <h1>Known results</h1>
+                <ul id="tg-results">
+                    <li>Rank one symmetric spaces: Wolf '63.</li>
+                    <li>Rank two symmetric spaces: Chen&ndash;Nagano, Klein.</li>
+                    <li class="show-10">Reflective submanifolds: Leung.</li>
+                    <li class="show-10">Exceptional symmetric spaces: Kollross&ndash;Rodríguez-Vázquez '22.</li>
+                    <li class="show-20">
+                        Generalized Heisenberg groups: Eberlein '94.
+                    </li>
+                    <li class="show-20">
+                        Hopf&ndash;Berger spheres: Olmos&ndash;Rodríguez-Vázquez '23.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>
+                    Nearly Kähler manifolds
+                </h1>
+                <ul style="margin: 1% 0 0 0;">
+                    <li>
+                        $(M,J)$ almost Hermitian manifold.
+                    </li>
+                    <li class="show-10">
+                        $M$ is <strong>nearly Kähler</strong> if $\nabla J$ is skew-symmetric.
+                    </li>
+                    <li class="show-20">
+                        If $M^6$ is strictly nearly Kähler, then $\textup{Ric}=\lambda \langle \cdot, \cdot \rangle$ with $\lambda > 0$.
+                    </li>
+                    <li class="show-30">
+                        Butruille ('06): Homogeneous nearly Kähler $6$-manifolds:
+                    </li>
+                </ul>
+                <p class="show-30 center" style="margin-top: 0;">
+                    $$
+                    \begin{aligned}
+                        \s{S}^6 ={}& \frac{\s{G}_2}{\s{SU}(3)}, &
+                        \C\s{P}^3 ={}& \frac{\s{Sp}(2)}{\s{U}(1)\times \s{Sp}(1)}, \\
+                        \s{F}(\C^3) ={}& \frac{\s{SU}(3)}{\s{T}^2}, &
+                        \s{S}^3 \times \s{S}^3 ={}& \frac{\s{SU}(2)^3}{\Delta \s{SU}(2)}.
+                    \end{aligned}
+                    $$
+                </p>
+            </article>
+            <article>
+                <h1>Previously known results</h1>
+                <ul style="font-size: 90%;">
+                    <li>
+                        $\mathbb{C}\mathsf{P}^{3}:$
+                        <ul style="margin-top: 2%; margin-bottom: 2%;">
+                            <li>
+                                Totally geodesic Lagrangians (Aslan '23, Liefsoens '22).
+                            </li>
+                            <li>
+                                Totally geodesic $J$-holomorphic curves (Cwiklinski&ndash;Vrancken '22).
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        $\mathsf{F}(\mathbb{C}^3):$
+                        <ul style="margin-top: 2%; margin-bottom: 2%;">
+                            <li>
+                                Totally geodesic Lagrangians (Storm '20).
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        $\mathsf{S}^{3}\times\mathsf{S}^{3}:$
+                        <ul style="margin-top: 2%; margin-bottom: 2%;">
+                            <li>
+                                Totally geodesic Lagrangians (Zhang&ndash;Dioos&ndash;Hu&ndash;Vrancken&ndash;Wang '16).
+                            </li>
+                            <li>
+                                Totally geodesic $J$-holomorphic curves (Bolton&ndash;Dillen&ndash;Dioos&ndash;Vrancken '22).
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>
+                    Naturally reductive homogeneous spaces
+                </h1>
+                <ul style="margin-top: 1%;">
+                    <li>
+                        $M=\s{G}/\s{K}$ Riemannian homogeneous space, $o=e\s{K}$.
+                    </li>
+                    <li class="show-10">
+                        $\g{g}$ admits a <strong>reductive</strong> ($\s{K}$-module) decomposition $\g{g}=\g{k}\oplus \g{p}$.
+                    </li>
+                    <li class="show-20">
+                        $M$ is <strong>naturally reductive</strong> if $\exp_o(tX)=\Exp(tX)\cdot o, \; \forall X\in \g{p}$.
+                    </li>
+                    <li class="show-30">
+                        Canonical connection $\nabla^c \colon \g{X}(M)\times \g{X}(M)\to \g{X}(M):$
+                        $$
+                        (\nabla^c_{X^*}Y^*)_o = -[X,Y]_{\g{p}}.
+                        $$
+                    </li>
+                    <li class="show-30">
+                        Difference tensor $D=\nabla - \nabla^c \in \operatorname{Hom}(\Lambda^2 \g{p},\g{p})$:
+                        $$
+                        D_X Y = (1/2)[X,Y]_{\g{p}}.
+                        $$
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Totally geodesic subspaces</h1>
+                <ul>
+                    <li>
+                        $f\colon \Sigma \to M$ totally geodesic.
+                        Then $f$ is determined by any tangent subspace $V\in \widetilde{f}(\Sigma)$:
+                        $$
+                        f_i \colon \Sigma_i \to M, \quad \widetilde{f_1}(\Sigma_1)\cap \widetilde{f_2}(\Sigma_2)\neq \varnothing \Rightarrow f_1 \simeq f_2.
+                        $$
+                    </li>
+                    <li class="show-10" style="margin-top: 8%;">
+                        Given $V\subseteq T_p M$, when does $V$ generate a totally geodesic submanifold?
+                    </li>
+                </ul>
+            </article>
+            <article style="justify-content: center;">
+                <div class="theorem-box">
+                    <b>Theorem (Cartan '51, Hermann '59).</b>
+                    $M$ real analytic, $V\subseteq T_p M$.
+                    The following are equivalent:
+                    <ol>
+                        <li>
+                            $V$ is a totally geodesic subspace.
+                        </li>
+                        <li>
+                            $V$ is $\nabla^k R$-invariant for all $k\geq 0$.
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>Totally geodesic submanifolds of $\s{G}/\s{K}$</h1>
+                <ul>
+                    <li>
+                        $M=\s{G}/\s{K}$ naturally reductive homogeneous space.
+                    </li>
+                    <li>
+                        Totally geodesic submanifolds through $o$ $\Leftrightarrow$ totally geodesic subspaces of $\g{p}$.
+                    </li>
+                </ul>
+                <div class="show-10 theorem-box">
+                    <b>Tojo's criterion.</b>
+                    $M$ naturally reductive, $\g{v}\subseteq \g{p}$.
+                    The following are equivalent:
+                    <ol>
+                        <li>
+                            $\g{v}$ is a totally geodesic subspace.
+                        </li>
+                        <li>
+                            The subspace $e^{D_X}\g{v}$ is $R$-invariant for all $X\in \g{v}$.
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>
+                    $D$-invariant totally geodesic submanifolds
+                </h1>
+                <ul>
+                    <li>
+                        $M=\s{G}/\s{K}$ naturally reductive, $\Sigma \to M$ submanifold.
+                    </li>
+                    <li>
+                        $\Sigma$ is <strong>$D$-invariant</strong> if $T_x \Sigma$ is $D$-invariant for all $x\in \Sigma$.
+                    </li>
+                </ul>
+                <div class="show-10 theorem-box">
+                    <b>Theorem 6.3 (LN, Rodríguez-Vázquez).</b>
+                    $\g{v}\subseteq \g{p}$ invariant under $D$ and $R$.
+                    Then:
+                    <ol>
+                        <li>
+                            $\g{s}=[\g{v},\g{v}]+\g{v}=[\g{v},\g{v}]_{\g{k}}\oplus \g{v}$ is a subalgebra.
+                        </li>
+                        <li>
+                            $\Sigma = \s{S}\cdot o$ is totally geodesic and $D$-invariant with $T_o \Sigma = \g{v}$.
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>$\C\s{P}^3=\s{Sp}(2)/(\s{U}(1)\times \s{Sp}(1))$</h1>
+                <table id="table-cp3">
+                    <tr>
+                        <th>Submanifold</th>
+                        <th>Orbit of</th>
+                        <th>Relationship with $J$</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\RR\s{P}^3_{\C,1/2}(2)$
+                        </td>
+                        <td>
+                            $\s{SU}(2)$
+                        </td>
+                        <td>
+                            Lagrangian
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^2(1/\sqrt{2})$
+                        </td>
+                        <td>
+                            $\s{Sp}(1)_f$
+                        </td>
+                        <td>
+                            $J$-holomorphic
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^2(1)$
+                        </td>
+                        <td>
+                            $\s{SU}(2)$
+                        </td>
+                        <td>
+                            $J$-holomorphic
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^2(\sqrt{5})$
+                        </td>
+                        <td>
+                            $\s{SU}(2)_{\Lambda_3}$
+                        </td>
+                        <td>
+                            $J$-holomorphic
+                        </td>
+                    </tr>
+                </table>
+                <p style="margin-bottom: 0;">$\Lambda_3$: four-dimensional complex irrep of $\s{SU}(2)$: </p>
+                <p class="center">
+                    $\Lambda_{3}=\s{S}^3(\C^2)^*=\{ f \in \C[x,y]\colon f$ homogeneous of degree $3\}$.
+                </p>
+            </article>
+            <article>
+                <h1 style="margin-top: 2%;">$\s{F}(\C^3)=\s{SU}(3)/\s{T}^2$</h1>
+                <table id="table-fc3">
+                    <tr>
+                        <th>Submanifold</th>
+                        <th>Orbit of</th>
+                        <th>Relationship with $J$</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{F}(\RR^3)=\s{S}^3(2\sqrt{2})/\s{Q}_8$
+                        </td>
+                        <td>
+                            $\s{SO}(3)$
+                        </td>
+                        <td>
+                            Lagrangian
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^3_{\C,1/4}(2)$
+                        </td>
+                        <td>
+                            $\s{SU}(2)$
+                        </td>
+                        <td>
+                            Lagrangian
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{T}_\Lambda$
+                        </td>
+                        <td>
+                            $\s{T}^2$
+                        </td>
+                        <td>
+                            $J$-holomorphic
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^2(1/\sqrt{2})$
+                        </td>
+                        <td>
+                            $\s{U}(2)$
+                        </td>
+                        <td>
+                            $J$-holomorphic
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^2(\sqrt{2})$
+                        </td>
+                        <td>
+                            $\s{SO}(3)$
+                        </td>
+                        <td>
+                            $J$-holomorphic
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\RR\s{P}^2(2\sqrt{2})$
+                        </td>
+                        <td>
+                            Inhomogeneous
+                        </td>
+                        <td>
+                            Totally real
+                        </td>
+                    </tr>
+                </table>
+                <div style="height: 40%; display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="width: 40%; display: flex; justify-content: center; align-items: center;">
+                        <p class="center" style="font-size: 90%;">
+                            $\Lambda=\Bigl\langle \sqrt{\tfrac{2}{3}}\pi(0,2),\sqrt{2}\pi(1,\tfrac{1}{\sqrt{3}}) \Bigr\rangle$
+                        </p>
+                    </div>
+                    <div style="width: 40%; height: 100%; position: relative;">
+                        <svg width="100%" height="100%" viewBox="0 0 100 100" style="position: absolute; top: 0; right: 0;">
+                            <rect x="25" y="55" width="43.30127" height="50" stroke="currentColor" fill="#2D4F67" transform="skewY(-30) translate(0,-5)"/>
+                            <line x1="25" y1="55" x2="68.30127" y2="105" stroke="currentColor" transform="skewY(-30) translate(0,-5)" stroke-dasharray="5 3" stroke-width="0.7"/>
+                        </svg>
+                        <img class="show-1000" src="Pictures/torusLambdaAnimation.gif" alt="Animated 3D torus" style="position: absolute; top: 0; right: 20%; max-width: 100%; max-height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1 style="margin-top: 2%;">$\s{S}^3\times \s{S}^3=\s{SU}(2)^3/\Delta\s{SU}(2)$</h1>
+                <table id="table-s3s3">
+                    <tr>
+                        <th>Submanifold</th>
+                        <th>Orbit of</th>
+                        <th>Relationship with $J$</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^3(2/\sqrt{3})$
+                        </td>
+                        <td>
+                            $\s{SU}(2)_2$
+                        </td>
+                        <td>
+                            Lagrangian
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^3_{\C,1/3}(2)$
+                        </td>
+                        <td>
+                            $\s{SU}(2)_{13,2}$
+                        </td>
+                        <td>
+                            Lagrangian
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{T}_\Gamma$
+                        </td>
+                        <td>
+                            $\s{T}\subseteq \s{U}(1)^3$
+                        </td>
+                        <td>
+                            $J$-holomorphic
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^2(\sqrt{3/2})$
+                        </td>
+                        <td>
+                            $\Delta\s{SU}(2)$
+                        </td>
+                        <td>
+                            $J$-holomorphic
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\s{S}^2(2/\sqrt{3})$
+                        </td>
+                        <td>
+                            $\Delta\s{SU}(2)$
+                        </td>
+                        <td>
+                            Totally real
+                        </td>
+                    </tr>
+                </table>
+                <div style="height: 40%; display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="width: 40%; display: flex; justify-content: center; align-items: center;">
+                        <p class="center" style="font-size: 90%;">
+                            $\Gamma=\Bigl\langle \tfrac{4\pi}{\sqrt{3}}(1,0),\tfrac{2\pi}{\sqrt{3}}(1,\sqrt{3}) \Bigr\rangle$
+                        </p>
+                    </div>
+                    <div style="width: 40%; height: 100%; position: relative;">
+                        <svg width="100%" height="100%" viewBox="0 0 100 100" style="position: absolute; top: 0; right: 0;">
+                            <rect x="25" y="25" width="50" height="43.30127" stroke="currentColor" fill="rgb(118, 107, 144)" transform="skewX(-30) translate(20,0)"/>
+                            <line x1="25" y1="25" x2="75" y2="68.30127" stroke="currentColor" stroke-dasharray="5 3" stroke-width="0.7" transform="skewX(-30) translate(20,0)"/>
+                        </svg>
+                        <img class="show-1000" src="Pictures/torusGammaAnimation.gif" alt="Animated 3D torus" style="position: absolute; top: 0; right: 20%; max-width: 100%; max-height: 100%; object-fit: contain;">
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1>
+                    Riemannian cones
+                </h1>
+                <ul>
+                    <li>
+                        $(M,g)$ complete real analytic Riemannian manifold.
+                    </li>
+                    <li>
+                        <strong>Riemannian cone</strong>: $\widehat{M}=(0,\infty)\times_{r} M$ with the metric
+                        $$\widehat{g}=dr^2+r^2 g.$$
+                    </li>
+                    <li class="show-10">
+                        $I(\widehat{M})=I(M)$ (Corollary 6.20).
+                    </li>
+                    <li class="show-20">
+                        If $M^6 \neq \s{S}^6$, $\pi_1(M)=0$ and $\textup{Ric}=5g$, then (Bär '93):
+                        <p class="center">
+                            $M$ strictly nearly Kähler $\;\Rightarrow\;$ $\textup{Hol}(\widehat{M})=\s{G}_2$.
+                        </p>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <div class="theorem-box" style="margin: 1% 0 0 0;">
+                    <b>Theorem 6.25 (LN, Rodríguez-Vázquez).</b>
+                    $\Sigma$ totally geodesic in $\widehat{M}$.
+                    Then one of the two holds:
+                    <ol>
+                        <li class="show-10">
+                            $\Sigma=\widehat{S}$ for $S\to M$ totally geodesic.
+                        </li>
+                        <li class="show-20">
+                            $\Sigma$ is (up to surjective local isometry) a complete totally geodesic hypersurface in $\widehat{S}$ for $S\to M$ totally geodesic.
+                        </li>
+                    </ol>
+                </div>
+                <div class="show-10" style="height: 47%; margin: 3% 0 0 0; display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="width: 40%; display: flex; justify-content: center; align-items: center;">
+                        <img src="Pictures/coneOverTG.png" alt="Cone over tg submanifold" style="width: 80%; overflow: hidden;">
+                    </div>
+                    <div class="show-20" style="width: 40%; display: flex; justify-content: center; align-items: center;">
+                        <img src="Pictures/coneGeodesic.png" alt="Cone over tg submanifold" style="width: 80%; overflow: hidden;">
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1>
+                    Totally geodesic hypersurfaces
+                </h1>
+                <ul style="margin-bottom: 0;">
+                    <li>
+                        $\Sigma \to \widehat{M}$ complete totally geodesic hypersurface $\rightsquigarrow$ $\Sigma$ is locally the graph of some $f\colon \Omega \subseteq M \to (0,\infty)$.
+                    </li>
+                    <li class="show-10">
+                        If $\Sigma$ is the graph of $f\colon \Omega \subseteq M \to (0,\infty)$, 
+                        <p class="show-10 center">
+                            $\Sigma$ totally geodesic $\;\Leftrightarrow\;$ $\textup{Hess}\bigl(\frac{1}{f}\bigr)=-\frac{1}{f}g\qquad$ (<strong>Obata equation</strong>).
+                        </p>
+                    </li>
+                </ul>
+                <div class="show-20 theorem-box">
+                    <b>Theorem 6.32.</b>
+                    If $\widehat{M}$ has a complete totally geodesic hypersurface $\Sigma$, then $M$ is locally a <strong>sine-cone</strong> $I\times_{\sin} N$ and $\Sigma$ is locally the graph of $h(t,x)=A(\cos t)^{-1}$.
+                </div>
+            </article>
+            <article style="justify-content: space-evenly;">
+                <div class="remark-box">
+                    <b>
+                        Theorem (Jentsch, Moroianu, Semmelmann '13).
+                    </b>
+                    If $\textup{Hol}(M^7)=\s{G}_2$, then $M$ has no totally geodesic hypersurfaces.
+                </div>
+                <div class="show-10 theorem-box">
+                    <b>Corollary D (LN, Rodríguez-Vázquez).</b>
+                    $\widehat{M}$ cohomogeneity one <br> $\s{G}_2$-cone.
+                    Every maximal totally geodesic submanifold $\Sigma$ of $\widehat{M}$ is:
+                    <ol>
+                        <li>
+                            <strong>Associative</strong> (calibrated by the $\s{G}_2$-structure $\phi$) if $\dim \Sigma = 3$.
+                        </li>
+                        <li>
+                            <strong>Coassociative</strong> (calibrated by $\star\phi$) if $\dim \Sigma = 4$.
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article class="part">
+                <h1>
+                    Part III <br>
+                    Non-Lorentzian homogeneous spacetimes
+                </h1>
+                <p>
+                    Joint work with J. M. Figueroa-O'Farrill
+                </p>
+            </article>
+            <article>
+                <h1>
+                    Minkowski spacetime and limits
+                </h1>
+                <ul>
+                    <li>
+                        <strong>Minkowski spacetime</strong> $(c>0)$: $\RR^{d+1}$ with the Lorentzian inner product
+                        <p class="center">
+                            $\gamma((x,t),(y,s))=\langle x, y \rangle -c^2 ts.$
+                        </p>
+                    </li>
+                    <li class="show-10">
+                        <strong>Galilei spacetime</strong> ($c\to \infty$): $\RR^{d+1}$ with a <strong>clock</strong> and <strong>ruler</strong>:
+                        <p class="center">
+                            $\tau(x,t)=t, \qquad \lambda((x,0),(y,0))=\langle x, y \rangle.$
+                        </p>
+                    </li>
+                    <li class="show-20">
+                        <strong>Carroll spacetime</strong> ($c\to 0$): $\RR^{d+1}$ with
+                        <p class="center">
+                            $\kappa = (0,1), \qquad h((x,t),(y,s))=\langle x,y\rangle.$
+                        </p>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Symmetry algebras</h1>
+                <p style="margin-bottom: 0;">The symmetry algebras $\g{poin}(d)$, $\g{gal}(d)$, $\g{car}(d)$ consist of:</p>
+                <ul>
+                    <li>
+                        Space rotations $(x,t)\mapsto (Rx,0)$ ($R\in \g{so}(d)$).
+                    </li>
+                    <li>
+                        Space translations $(x,t)\mapsto (a,0)$ ($a\in \RR^d$).
+                    </li>
+                    <li>
+                        Time translations $(x,t)\mapsto (0,s)$ ($s\in \RR$).
+                    </li>
+                    <li>
+                        Inertial boosts ($v\in \RR^d$):
+                        <ul style="margin-top: 2%;">
+                            <li>
+                                Minkowski: $(x,t)\mapsto\bigl(tc^2v,\langle v, x \rangle\bigr)$.
+                            </li>
+                            <li>
+                                Galilei: $(x,t)\mapsto (tv,0)$.
+                            </li>
+                            <li>
+                                Carroll: $(x,t)\mapsto \bigl(0,\langle v, x \rangle\bigr).$
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Kinematical algebras</h1>
+                <p>
+                    An <strong>$(s,v)$-kinematical Lie algebra</strong> (KLA) (with $d$-dimensional space isotropy) is a real Lie algebra $\g{g}$ with:
+                    <ul style="padding-left: 5%; margin: 2% 0 0 0;">
+                        <li>
+                            $\g{so}(d)\subseteq \g{g}$,
+                        </li>
+                        <li>
+                            $\g{g}=\g{so}(d)\oplus \bigoplus^v \RR^d \oplus \bigoplus^s \RR$ as an $\g{so}(d)$-module.
+                        </li>
+                    </ul>
+                </p>
+                <div class="show-10 problem-box">
+                    <b>Key idea.</b>
+                    Understand homogeneous spacetimes as quotients of kinematical groups.
+                </div>
+            </article>
+            <article>
+                <h1>Spatially isotropic homogeneous spacetimes</h1>
+                <p>
+                    $M^{d+1}=\s{G}/\s{K}$ is <strong>spatially isotropic</strong> if $\g{g}$ is a $(1,2)$-KLA and the isotropy algebra is $\g{k}=\g{so}(d)\oplus \RR^d$.
+                </p>
+                <ul id="spatially-isotropic-classification">
+                    <li class="show-10">
+                        Bacry&ndash;Lévy-Leblond ('68), Bacry&ndash;Nuyts ('86): $(1,2)$-KLAs with $d=3$. 
+                    </li>
+                    <li class="show-20">
+                        Figueroa-O'Farrill ('18), Andrzejewski&ndash;Figueroa-O'Farrill ('18): $(1,2)$-KLAs with $d\geq 2$.
+                    </li>
+                    <li class="show-30">
+                        Figueroa-O'Farrill&ndash;Prohazka ('19): classification of spatially isotropic homogeneous spacetimes up to coverings.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Other families of spacetimes</h1>
+                <ul>
+                    <li>
+                        <strong>Aristotelian spacetimes</strong>: $M^{d+1}=\s{G}/\s{K}$ with $\g{g}$ a $(1,1)$-KLA and $\g{k}=\g{so}(d)$.
+                        <ul style="margin: 3% 0 3% 0;">
+                            <li>
+                            Classification: Figueroa-O'Farrill&ndash;Prohazka ('19).
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="show-20" style="margin-top: 5%;">
+                        <strong>Lifshitz spacetimes</strong>: $M^{d+1}=\s{G}/\s{K}$ with $\g{g}$ a $(2,1)$-KLA and $\g{k}=\g{so}(d)$.
+                        <ul style="margin: 3% 0 3% 0;">
+                            <li>
+                            Classification: Figueroa-O'Farrill&ndash;Grassie&ndash;Prohazka ('23).
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>
+                    Coisotropy one spacetimes
+                </h1>
+                <ul>
+                    <li>
+                        Natural continuation: <strong>coisotropy one spacetimes</strong> $M^{d+2}=\s{G}/\s{K}$.
+                    </li>
+                    <li>
+                        $\exists$ some spatial direction fixed by the rotational subalgebra.
+                    </li>
+                </ul>
+                <div class="show-10" style="height: 50%; display: flex; flex-direction: row; justify-content: space-between;">
+                    <div style="width: 50%; height: 100%;">
+                        <table id="coisotropy-one-transformations">
+                            <tr>
+                                <th>
+                                    Transformation
+                                </th>
+                                <th>
+                                    $\g{so}(d)$-module
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Space rotations
+                                </td>
+                                <td>
+                                    $\g{so}(d)$
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Space translations
+                                </td>
+                                <td>
+                                    $\RR^d\oplus\RR$
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Boosts
+                                </td>
+                                <td>
+                                    $\RR^d\oplus\RR$
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Time translations
+                                </td>
+                                <td>
+                                    $\RR$
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="width: 20%; height: 100%;">
+                        <svg width="100%" height="100%" viewBox="0 0 100 100">
+                            <marker id="coiso-one-tip" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 L 5 5 L 0 0" fill="currentcolor" />
+                            </marker>
+                            <path d="M 10 50 C 25,50 25,20 50,50 C 75,80 75,50 90,50" stroke="currentColor" marker-end="url(#coiso-one-tip)"/>
+                        </svg>
+                    </div>
+                    <div style="height: 100%; width: 40%; display: flex; flex-direction: column; justify-content: center;">
+                        <p class="center" style="font-size: 90%;">
+                            $\g{g}$ is a $(3,2)$-KLA
+                        </p>
+                        <p class="center" style="font-size: 90%;">
+                            $\g{k}=\g{so}(d)\oplus\RR^d\oplus\RR$
+                        </p>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1>
+                    Steps in the classification
+                </h1>
+                <ol id="coiso-one-steps">
+                    <li>
+                        Classify all $(3,2)$-KLAs up to (relative) isomorphism.
+                    </li>
+                    <li>
+                        For each $(3,2)$-KLA $\g{g}$, compute all subalgebras of the form $\g{k}=\g{so}(d)\oplus\RR^d\oplus \RR$ up to relative automorphism.
+                    </li>
+                    <li>
+                        Determine which Klein pairs $(\g{g},\g{k})$ are <strong>effective</strong> and <strong>geometrically realizable</strong> (i.e. coming from a homogeneous manifold $\s{G}/\s{K}$).
+                    </li>
+                </ol>
+                <div style="display: flex; justify-content: center;">
+                    <div class="problem-box center" style="width: max-content;">
+                        <b>Current work.</b>
+                        Classification of $(3,2)$-KLAs with $d>2$.
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1>Structure of $(3,2)$-KLAs</h1>
+                <ul>
+                    <li>
+                        Fix a $(3,2)$-KLA
+                        <p class="center">
+                            $\g{g}=\g{so}(V)\oplus(V\otimes W)\oplus \g{b}, \qquad V=\RR^d,\; W=\RR^2,\; \g{b}=\RR^3$.
+                        </p>
+                    </li>
+                    <li class="show-10" style="line-height: 300%;">
+                        The Lie bracket of $\g{g}$ is
+                        $$
+                            \begin{aligned}
+                                \left[X,Y\right]={}& XY-YX, & [B,C]={}&? \\
+                                [X,v\otimes w]={}& Xv\otimes w, & [B,v\otimes w]={}&? \\
+                                [X,B]={}& 0 & [v_1\otimes w_1,v_2\otimes w_2]={}&?.
+                            \end{aligned}
+                        $$
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Case $\dim V = d>3$</h1>
+                <ul>
+                    <li>
+                        <b>Key idea:</b>
+                        the bracket $\Lambda^2\g{g}\to \g{g}$ is $\g{so}(V)$-equivariant.
+                    </li>
+                    <li class="show-10">
+                        $\Lambda^2\g{b}\to \g{b}$, so $\g{b}$ is a <strong>Bianchi algebra</strong>.
+                    </li>    
+                    <li class="show-20">
+                        For each $B\in \g{b}$, $\ad(B)\colon V\otimes W \to \g{g}$ is $\g{so}(V)$-equivariant:
+                        <p class="center">
+                            $[B,v\otimes w]=v\otimes \rho(B)w, \qquad \rho \colon \g{b}\to \g{gl}(W).$
+                        </p>
+                    </li>
+                    <li class="show-30">
+                        Bracket on $\Lambda^2(V\otimes W)$:
+                        <p class="center">
+                            $[v_1\otimes w_1,v_2\otimes w_2]=\alpha(w_1,w_2)v_1\curlywedge v_2 + \langle v_1 , v_2 \rangle \varphi(w_1\wedge w_2).$
+                        </p>
+                        where $\alpha\in \s{S}^2W^*$ and $\varphi \in \textup{Hom}(\Lambda^2 W, \g{b})$
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <ul>
+                    <li>
+                        Jacobi identity: $\rho$ representation, $\alpha\in \s{S}^2_{\g{b}}W^*$, $\varphi \in \textup{Hom}_{\g{b}}(\Lambda^2 W,\g{b})$ and
+                        <p class="center">
+                            $\rho(\varphi(w_1\wedge w_2))w_3=\alpha(w_2,w_3)w_1-\alpha(w_1,w_3)w_2$.
+                        </p>
+                    </li>
+                </ul>
+                <div class="show-10 theorem-box">
+                    <b>Theorem A (Figueroa-O'Farrill, LN).</b>
+                    A $(3,2)$-KLA with $d>3$ is determined by
+                    <ol>
+                        <li>
+                            a Bianchi algebra $\g{b}$,
+                        </li>
+                        <li>
+                            a two-dimensional representation $\rho\colon \g{b}\to \g{gl}(W)$,
+                        </li>
+                        <li>
+                            and a $2$-form $\varphi \in \Hom_{\g{b}}(\Lambda^2 W,\g{b})$.
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>
+                    Case $\dim V = d = 3$
+                </h1>
+                <ul>
+                    <li>
+                        The subspace $\g{b}$ is a Bianchi algebra.
+                    </li>
+                    <li class="show-10">
+                        Bracket of $B\in \g{b}$ with elements of $V\otimes W$:
+                        <p class="center">
+                            $[B,v\otimes w]=\lambda_B(w)(v\times\cdot) + v\otimes \rho(B)w, \qquad \lambda \in Z^1(\g{b};W^*).$
+                        </p>
+                    </li>
+                    <li class="show-20">
+                        Jacobi identity $\rightsquigarrow$ $[\lambda]=0$ in $H^1(\g{b};W^*)$ $\rightsquigarrow$ we can assume $\lambda = 0$.
+                    </li>
+                    <li class="show-30" style="margin-top: 3%;">
+                        Bracket on $\Lambda^2(V\otimes W)$: ($d>3$) + $\sigma \in \Hom(\s{S}^2 W,W)$.
+                        <p class="center" style="font-size: 100%;">
+                        $$
+                            \begin{aligned}
+                                \left[v_1\otimes w_1,v_2\otimes w_2\right]={}&\alpha(w_1,w_2)v_1\curlywedge v_2+ \langle v_1 , v_2 \rangle \varphi(w_1\wedge w_2) \\[1ex]
+                                &+(v_1\times v_2)\sigma(w_1,w_2).
+                            \end{aligned}
+                        $$
+                        </p>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <ul>
+                    <li>
+                        Jacobi identity: $\rho$ representation, $\alpha$, $\varphi$, $\sigma$ invariant, and 
+                        <p class="center" style="font-size: 80%;">
+                            $
+                                \begin{aligned}
+                                    \alpha(w_2,w_3)w_1-\alpha(w_1,w_3)w_2={}&\rho(\varphi(w_1\wedge w_2))w_3\\
+                                    &+\sigma(\sigma(w_2,w_3),w_1)-\sigma(\sigma(w_1,w_3),w_2), \\[1ex]
+                                    \alpha(\sigma(w_1,w_2),w_3)={}&\alpha(\sigma(w_2,w_3),w_1), \\[1ex]
+                                    0={}&\varphi(\sigma(w_1,w_2)\wedge w_3)+\textsf{cyclic}.
+                                \end{aligned}
+                            $
+                        </p>
+                    </li>
+                </ul>
+                <div class="show-10 theorem-box" style="font-size: 80%;">
+                    <b>Theorem B (Figueroa-O'Farrill, LN).</b>
+                    A $(3,2)$-KLA with $d=3$ is determined by
+                    <ol>
+                        <li>
+                            a Bianchi algebra $\g{b}$,
+                        </li>
+                        <li>
+                            a two-dimensional representation $\rho\colon \g{b}\to \g{gl}(W)$,
+                        </li>
+                        <li>
+                            a $2$-form $\varphi \in \Hom_{\g{b}}(\Lambda^2 W,\g{b})$,
+                        </li>
+                        <li>
+                            and a bilinear $\sigma \in \Hom_\g{b}(\s{S}^2 W,W)$.
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>
+                    Classification of $(3,2)$-KLAs
+                </h1>
+                <ul>
+                    <li>
+                        $\g{g}=\g{so}(V)\oplus (V\otimes W)\oplus \g{b}, \quad \g{g}'=\g{so}(V)\oplus(V\otimes W')\oplus \g{b}'$.
+                    </li>
+                    <li class="show-10">
+                        If $d>3$, then $\g{g}\cong \g{g}'$ if and only if $\exists$ isomorphisms and $h\colon W \to W'$ and $\psi \colon \g{b}\to \g{b}'$ with
+                        <p class="center">
+                            $\rho' \circ \psi = \Ad(h)\circ \rho,\qquad\psi \circ \varphi=h^*\varphi'$.
+                        </p>
+                    </li>
+                    <li class="show-20">
+                        If $d=3$, then $\g{g}\cong \g{g}'$ if and only if $\exists$ $h$, $\psi$ and $\mu\in (W^*)^\g{b}$ with
+                        $$
+                            \begin{aligned}
+                                \rho' \circ \psi ={}& \Ad(h)\circ \rho,\qquad\psi \circ \varphi=h^*\varphi' \\[1ex]
+                                h\circ \sigma ={}& h^*\sigma' + \mu \otimes h + h \otimes \mu.
+                            \end{aligned}
+                        $$
+                    </li>
+                </ul>
+            </article>
+            <article style="justify-content: center;">
+                <div class="problem-box" style="font-size: 90%;">
+                    <b>Equivalent problem.</b>
+                    Compute for each Bianchi algebra $\g{b}$:
+                    <ol style="padding-left: 5%; margin: 2% 0 0 0;">
+                        <li>
+                            All $2$-dimensional representations of $\g{b}$ up to weak equivalence.
+                        </li>
+                        <li>
+                            For each representation $\rho$:
+                            <ul>
+                                <li style="margin-top: 2%;">
+                                    The orbit space of $\Aut(\rho)\curvearrowright \Hom_{\g{b}}(\Lambda^2 W ,\g{b})$, where
+                                    <p class="center" style="font-size: 90%; line-height: 200%;">
+                                        $
+                                        \begin{aligned}
+                                        \Aut(\rho)={}&\bigl\{(h,\psi)\in \s{GL}(W)\times \Aut(\g{b})\colon \rho \circ \psi = \Ad(h)\circ \rho\bigr\}, \\[1ex]
+                                        (h,\psi)\cdot \varphi={}&\frac{1}{\det h}(\psi \circ \varphi).
+                                        \end{aligned}$    
+                                    </p>
+                                </li>
+                                <li>
+                                    The orbit space of $\Aut(\rho)\ltimes (W^*)^\g{b}\curvearrowright E$, where
+                                    <p class="center" style="font-size: 90%;">
+                                        $
+                                        \begin{aligned}
+                                            E={}&\bigl\{ (\varphi,\sigma)\textsf{ solutions of the Jacobi identity} \bigr\},\\[1ex]
+                                            (h,\psi)\cdot (\varphi,\sigma)={}&
+                                            \biggl( \frac{1}{\det h}(\psi \circ \varphi),\bigl(h^{-1}\bigr)^*(h\circ \sigma-\mu\otimes h - h \otimes \mu) \biggr)
+                                        \end{aligned}
+                                        $
+                                    </p>
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>
+                    Bianchi algebras
+                </h1>
+                <table id="bianchi-algebras">
+                    <tr>
+                        <th>
+                            Bianchi
+                        </th>
+                        <th colspan="3" style="text-align: center;">
+                            Nonzero brackets
+                        </th>
+                        <th>
+                            Structure
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{I}$
+                        </td>
+                        <td colspan="3">
+
+                        </td>
+                        <td>
+                            Abelian
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{II}$
+                        </td>
+                        <td colspan="2">
+
+                        </td>
+                        <td>
+                            $[B_2,B_3]=B_1$
+                        </td>
+                        <td>
+                            Nilpotent
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{III}\cong \textup{VI}_1$
+                        </td>
+                        <td colspan="2">
+
+                        </td>
+                        <td>
+                            $[B_2,B_3]=2B_2$
+                        </td>
+                        <td>
+                            Solvable
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{IV}$
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            $[B_1,B_3]=B_1$
+                        </td>
+                        <td>
+                            $[B_2,B_3]=B_1+B_2$
+                        </td>
+                        <td>
+                            Solvable
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{V}$
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            $[B_1,B_3]=B_1$
+                        </td>
+                        <td>
+                            $[B_2,B_3]=B_2$
+                        </td>
+                        <td>
+                            Solvable
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{VI}_{1\neq c \geq 0}$
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            $[B_1,B_3]=(c-1)B_1$
+                        </td>
+                        <td>
+                            $[B_2,B_3]=(c+1)B_2$
+                        </td>
+                        <td>
+                            Solvable
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{VII}_{c \geq 0}$
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            $[B_1,B_3]=cB_1-B_2$
+                        </td>
+                        <td>
+                            $[B_2,B_3]=B_1+cB_2$
+                        </td>
+                        <td>
+                            Solvable
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{VIII}$
+                        </td>
+                        <td>
+                            $[B_1,B_2]=-B_3$
+                        </td>
+                        <td>
+                            $[B_1,B_3]=-B_2$
+                        </td>
+                        <td>
+                            $[B_2,B_3]=B_1$
+                        </td>
+                        <td>
+                            Simple
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{IX}$
+                        </td>
+                        <td>
+                            $[B_1,B_2]=B_3$
+                        </td>
+                        <td>
+                            $[B_1,B_3]=-B_2$
+                        </td>
+                        <td>
+                            $[B_2,B_3]=B_1$
+                        </td>
+                        <td>
+                            Simple
+                        </td>
+                    </tr>
+                </table>
+            </article>
+            <article>
+                <h1>
+                    Two-dimensional representations
+                </h1>
+                <div style="display: flex; justify-content: center; height: 80%;">
+                <table id="bianchi-representations">
+                    <tr>
+                        <th>
+                            Bianchi
+                        </th>
+                        <th>
+                            Nº of reps
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{I}$
+                        </td>
+                        <td>
+                            8
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{II}$
+                        </td>
+                        <td>
+                            8
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{III}$
+                        </td>
+                        <td>
+                            17
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{IV}$
+                        </td>
+                        <td>
+                            6
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{V}$
+                        </td>
+                        <td>
+                            6
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{VI}$
+                        </td>
+                        <td>
+                            7
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{VII}$
+                        </td>
+                        <td>
+                            5
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{VIII}$
+                        </td>
+                        <td>
+                            2
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            $\textup{IX}$
+                        </td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </article>
+            <article>
+                <h1>
+                    Algebras with $d>3$
+                </h1>
+                <ul>
+                    <li>
+                        Orbit of $\varphi = 0$ $\rightsquigarrow$ <strong>split abelian extension:</strong>
+                        <p class="center">
+                            $
+                            0 \longrightarrow V\otimes W \longrightarrow \g{g} \longrightarrow \g{so}(V)\oplus \g{b} \longrightarrow 0.
+                            $
+                        </p>
+                    </li>
+                </ul>
+                <div class="show-10 theorem-box">
+                    <b>Theorem C (Figueroa-O'Farrill, LN).</b>
+                    Three classes of $(3,2)$-KLAs with $d>3$:
+                    <ol class="upper">
+                        <li>
+                            Split abelian extensions (60 examples).
+                        </li>
+                        <li>
+                            Algebras with $\varphi \neq 0$ and $\alpha = 0$ (35 examples).
+                        </li>
+                        <li>
+                            Algebras with $\alpha \neq 0$ (10 examples).
+                        </li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>Algebras with $d=3$</h1>
+                <div class="theorem-box">
+                    <b>Theorem D (Figueroa-O'Farrill, LN).</b>
+                    Four classes of $(3,2)$-KLAs with $d=3$ up to relative isomorphism:
+                    <ol class="upper">
+                        <li>
+                            Split abelian extensions (60 examples).
+                        </li>
+                        <li>
+                            Algebras with $\varphi \neq 0$ and $\alpha,\,\sigma = 0$ (35 examples).
+                        </li>
+                        <li>
+                            Algebras with $\alpha \neq 0$ and $\sigma = 0$ (10 examples).
+                        </li>
+                        <li>
+                            Algebras with $\varphi = 0$ and $\sigma$ outside the orbit of $\sigma = 0$ (63 examples).
+                        </li>
+                    </ol>
+                </div>
+                <div class="show-10 remark-box" style="margin: 2% 0 0 0;">
+                    Examples in Class IV are exclusive to $d=3$.
+                </div>
+            </article>
+            <article class="part">
+                <h1>Conclusions and open problems</h1>
+            </article>
+            <article>
+                <h1>Part I: Conclusions</h1>
+                <ul id="part-i-conclusions">
+                    <li>
+                        Classification of C2 polar homogeneous foliations on symmetric spaces of noncompact type.
+                    </li>
+                    <li>
+                        Classification of polar foliations on $\F\s{H}^2$ and standard polar foliations on $\H\s{H}^n$.
+                    </li>
+                    <li>
+                        A section of a polar action on $\F\s{H}^n$ ($\F\in \{\H,\O\}$) is an $\RR\s{H}^k$ of constant curvature $\kappa \in \{-1,-\tfrac{1}{4}\}$.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Part I: Open problems</h1>
+                <ul id="part-i-problems">
+                    <li>
+                        Congruence of the C2 polar foliations.
+                    </li>                    
+                    <li>
+                        General polar homogeneous foliations on $\H\s{H}^n$.
+                    </li>
+                    <li>
+                        Existence of actions on $\H\s{H}^n$ and $\O\s{H}^2$ with section $\Sigma=\RR\s{H}^k(1)$.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>
+                    Part II: Conclusions
+                </h1>
+                <ul id="part-ii-conclusions">
+                    <li>
+                        Classification of totally geodesic submanifolds of the homogeneous nearly Kähler manifolds $\s{F}(\C^3)$, $\C\s{P}^3$ and $\s{S}^3\times \s{S}^3$.
+                    </li>
+                    <li>
+                        Structure theorem for totally geodesic submanifolds of Riemannian cones.
+                    </li>
+                    <li>
+                        Classification of maximal totally geodesic submanifolds of the cohomogeneity one $\s{G}_2$-cones.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>
+                    Part II: Open problems
+                </h1>
+                <ul id="part-ii-problems">
+                    <li>
+                        Totally geodesic submanifolds of nearly Kähler manifolds and Kähler angle.
+                    </li>
+                    <li>
+                        Maximal totally geodesic submanifolds in naturally reductive spaces and $D$-invariance.
+                    </li>
+                    <li>
+                        Complete totally geodesic hypersurfaces in Riemannian cones.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>
+                    Part III: Conclusions
+                </h1>
+                <ul id="part-iii-conclusions">
+                    <li>
+                        General expressions for the bracket of a $(3,2)$-KLA ($d>2$).
+                    </li>
+                    <li>
+                        Classification of $(3,2)$-KLAs with $d>2$ up to relative isomorphism.
+                    </li>
+                    <li>
+                        Byproduct: Classification of real two-dimensional representations of Bianchi algebras up to weak equivalence.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>
+                    Part III: Open problems
+                </h1>
+                <ul id="part-iii-problems">
+                    <li>
+                        $(3,2)$-KLAs with $d=2$.
+                    </li>
+                    <li>
+                        Classification of coisotropy one homogeneous spacetimes up to coverings.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <div class="title-content">
+                    <h1 id="title">
+                        Submanifolds and actions on homogeneous manifolds
+                    </h1>
+                    <p id="speaker-info" style="font-size: 85%;">
+                        Juan Manuel Lorenzo Naveiro<br>
+                        CITMAGA, Universidade de Santiago de Compostela<br>
+                        PhD thesis<br>
+                        Advisor: José Carlos Díaz Ramos
+                    </p>
+                    <div style="margin-top: 10%; display: flex; flex-direction: row; width: 100%; height: 13%; justify-content: space-between;">
+                        <div style="width: 20%; display: flex; justify-content: center;">
+                            <img src="Pictures/CITMAGA-branco.png" alt="CITMAGA" style="object-fit: contain; height: 100%;">
+                        </div>
+                        <div style="width: 20%; display: flex; justify-content: center;">
+                            <img src="Pictures/usc.png" alt="USC" style="object-fit: contain; height: 100%;">
+                        </div>
+                        <div style="width: 50%; display: flex; justify-content: center;">
+                            <img src="Pictures/MICIU+Cofinanciado+AEI.svg" alt="AEI" style="object-fit: contain; height: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    <script src="code.js"></script>
+</html>

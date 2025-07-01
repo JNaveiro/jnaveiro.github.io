@@ -1,0 +1,307 @@
+strong {
+    color: #FF5D62;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.theorem-box strong, .remark-box strong, .problem-box strong {
+    color: #c84053;
+}
+
+h1 {
+    font-size: 6vh;
+    margin: 5% 0 2% 0;
+    padding: 0;
+    font-style: normal;
+    color: rgb(163, 212, 213);
+}
+
+.part {
+    justify-content: center;
+}
+
+.part h1 {
+    font-size: 8vh;
+    text-align: center;
+}
+
+.part p {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.title-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#title {
+    text-align: center;
+    font-size: 7vh;
+}
+
+#speaker-info {
+    text-align: center;
+    font-size: 3vh;
+    line-height: normal;
+}
+
+.bibitem {
+    font-size: 70%;
+}
+
+.bibitem::before {
+    content: "📄";
+}
+
+.theorem-box {
+    background-color: rgb(163, 212, 213);
+    color: #16161D;
+    padding: 2% 2% 2% 2%;
+    border-radius: 1vh 3vh 1vh 3vh;
+}
+
+.theorem-box ul, .theorem-box ol {
+    padding: 0 5% 0 0;
+    margin: 2% 0 0 5%;
+}
+
+.theorem-box ol {
+    counter-reset: counter;
+}
+
+.theorem-box ol > li {
+    counter-increment: counter;
+}
+
+.theorem-box ol > li::marker {
+    content: "(" counter(counter,lower-roman) ")\a0";
+}
+
+.theorem-box > ol.upper > li::marker {
+    content: "(" counter(counter,upper-roman) ")\a0";
+}
+
+.object-box {
+    border: solid;
+    padding: 2% 2% 0 2%;
+    border-radius: 1vh 3vh 1vh 3vh;
+}
+
+.remark-box {
+    background-color: rgb(118, 148, 106);
+    color: #16161D;
+    padding: 2%;
+    border-radius: 1vh 3vh 1vh 3vh;
+}
+
+.problem-box {
+    background-color: rgb(255, 160, 102);
+    color: #16161D;
+    padding: 2%;
+    border-radius: 1vh 3vh 1vh 3vh;
+}
+
+li {
+    margin-bottom: 2vh;
+}
+
+#homogeneous-spaces > li {
+    margin-bottom: 5%;
+}
+
+#polar-actions-from-algebra > li {
+    margin-bottom: 5vh;
+    line-height: 200%;
+}
+
+/* Configuration for tables */
+
+table {
+    text-align: center;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 1% 0 1% 0;
+    background-color: #716e61;
+}
+
+td {
+    padding: 2% 0 2% 0;
+    border-bottom: 0.1vh solid;
+    border-top: 0.1vh solid;
+}
+
+#symmetric-spaces {
+    width: 70%;
+}
+
+#symmetric-spaces > td {
+    background-color: blue;
+}
+
+#polar-proof > li {
+    margin-bottom: 3%;
+}
+
+#horosphere-animation {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+#horosphere-animation:hover {
+    opacity: 1;
+}
+
+.hyperbolic-table {
+    width: 80%;
+    font-size: 90%;
+}
+
+.hyperbolic-table td, .hyperbolic-table th {
+    text-align: left;
+    padding-left: 5%
+}
+
+#rank-one {
+    width: 100%;
+    font-size: 75%;
+}
+
+#rank-one td, #rank-one th {
+    text-align: left;
+}
+
+#redundancies li {
+    margin-bottom: 4%;
+}
+
+#tg-results li {
+    margin-bottom: 3%;
+}
+
+#table-cp3 {
+    font-size: 80%;
+    margin-top: 4vh;
+}
+
+#table-cp3 td, #table-cp3 th {
+    padding: 1vh 0 1vh 0;
+}
+
+#table-fc3 {
+    font-size: 70%;
+    margin-top: 2vh;
+}
+
+#table-fc3 td, #table-fc3 th {
+    padding: 0.5vh 0 0.5vh 0;
+}
+
+
+#table-s3s3 {
+    font-size: 70%;
+    margin-top: 2vh;
+}
+
+#table-s3s3 td, #table-s3s3 th {
+    padding: 0.5vh 0 0.5vh 0;
+}
+
+.reveal-animation {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.reveal-animation:hover {
+    opacity: 1;
+}
+
+#spatially-isotropic-classification li {
+    margin-bottom: 3%;
+}
+
+#coisotropy-one-transformations {
+    width: 100%;
+    height: 100%;
+}
+
+#coisotropy-one-transformations td, #coisotropy-one-transformations tr {
+    font-size: 90%;
+}
+
+#coiso-one-steps li {
+    margin-bottom: 3%;
+}
+
+#bianchi-algebras {
+    font-size: 70%;
+}
+
+#bianchi-algebras td, #bianchi-algebras th {
+    padding: 1% 1% 1% 1%;
+    text-align: left;
+}
+
+#bianchi-representations {
+    height: 100%;
+    font-size: 90%;
+    width: 50%;
+    text-align: left;
+}
+
+#bianchi-representations th, #bianchi-representations td {
+    padding: 0% 4% 0% 4%;
+}
+
+#bianchi-representations tr>:nth-child(even) {
+    text-align: center;
+}
+
+#part-i-conclusions li {
+    margin-bottom: 5%;
+}
+
+#part-i-problems li {
+    margin-bottom: 7%;
+}
+
+#part-ii-conclusions li {
+    margin-bottom: 7%;
+}
+
+#part-ii-problems li {
+    margin-bottom: 7%;
+}
+
+#part-iii-problems {
+    margin-top: 12%;
+}
+
+#part-iii-conclusions li {
+    margin-bottom: 7%;
+}
+
+#part-iii-problems li {
+    margin-bottom: 7%;
+}
+
+#thesis-structure li {
+    padding-bottom: 5%;
+}
+
+#noncompact-properties li {
+    padding-bottom: 5%;
+}
+
+#actions-fhn li {
+    margin-bottom: 8%;
+}
