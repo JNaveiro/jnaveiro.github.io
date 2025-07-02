@@ -172,8 +172,8 @@ td {
 }
 
 #rank-one {
-    width: 80%;
-    font-size: 80%;
+    width: 100%;
+    font-size: 75%;
 }
 
 #rank-one td, #rank-one th {
