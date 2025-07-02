@@ -9,15 +9,11 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap" rel="stylesheet">
         <title>PhD thesis: Submanifolds and actions on homogeneous manifolds</title>
         <link rel="stylesheet" href="slides.css">
         <link rel="stylesheet" href="dark.css">
         <script src="jax.js"></script>
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </head>
     <body>
         <!--Each slide will be represented with an article tag-->
@@ -54,7 +50,7 @@
                     <li> <strong>Part II</strong>: Totally geodesic submanifolds of homogeneous nearly Kähler $6$-manifolds and their $\s{G}_2$-cones (Chapters 5 and 6). </li>
                     <li> <strong>Part III</strong>: $(3,2)$-kinematical Lie algebras (Chapters 7 and 8). </li>
                     <li>
-                        Conclusions and open problems.
+                        Conclusions.
                     </li>
                 </ul>
             </article>
@@ -188,7 +184,7 @@
                         $M=\s{S}^2_{0}\RR^n$, $\s{H}=\s{SO}(n)$ acting by conjugation.
                         <ul>
                             <li>
-                                $\Sigma=\{ \text{diagonal matrices} \}$ (spectral theorem).
+                                $\Sigma=\{ \textup{diagonal matrices} \}$ (spectral theorem).
                             </li>
                         </ul>
                     </li>
@@ -487,7 +483,7 @@
                     Then one of the following holds:
                     <ol>
                         <li>
-                            $\c{F}$ is hyperpolar [BDT].
+                            $\c{F}$ is hyperpolar (BDT).
                         </li>
                         <li>
                             $\c{F}$ is orbit equivalent to the canonical extension of a polar homogeneous foliation on some $B_\Phi$, $\lvert \Phi \rvert = 1$.
@@ -496,6 +492,56 @@
                 </div>
             </article>
             <article>
+                <h1>Noncompact rank one symmetric spaces</h1>
+                <ul>
+                    <li>
+                        $M=\s{G}/\s{K}=\F\s{H}^n$ symmetric space of rank one.
+                    </li>
+                    <li>
+                        $\g{a}=\RR$ and $\g{n}=\g{g}_\alpha\oplus \g{g}_{2\alpha}$.
+                    </li>
+                </ul>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <table id="rank-one">
+                    <tr>
+                        <th style="padding-left: 2%;">$M$</th>
+                        <th style="padding-left: 3%;">$\s{G}$</th>
+                        <th>$\s{K}$</th>
+                        <th>$\g{g}_\alpha$</th>
+                        <th>$\g{g}_{2\alpha}$</th>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 2%;"> $\RR\s{H}^n$ </td>
+                        <td style="padding-left: 3%;"> $\s{SO}^0(1,n)$ </td>
+                        <td> $\s{SO}(n)$ </td>
+                        <td> $\RR^{n-1}$ </td>
+                        <td> $0$ </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 2%;"> $\C\s{H}^n$ </td>
+                        <td style="padding-left: 3%;"> $\s{SU}(1,n)$ </td>
+                        <td> $\s{S}(\s{U}(1)\times\s{U}(n))$ </td>
+                        <td> $\C^{n-1}$ </td>
+                        <td> $\RR$ </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 2%;"> $\H\s{H}^n$ </td>
+                        <td style="padding-left: 3%;"> $\s{Sp}(1,n)$ </td>
+                        <td> $\s{Sp}(1)\times\s{Sp}(n-1)$ </td>
+                        <td> $\H^{n-1}$ </td>
+                        <td> $\RR^3$ </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 2%;"> $\O\s{H}^2$ </td>
+                        <td style="padding-left: 3%;"> $\s{F}_4^{-20}$ </td>
+                        <td> $\s{Spin}(9)$ </td>
+                        <td> $\O$ </td>
+                        <td> $\RR^7$ </td>
+                    </tr>
+                </table>
+            </div>
+            </article>
+            <!--<article>
                 <h1>Noncompact rank one symmetric spaces</h1>
                 <ul>
                     <li>
@@ -550,8 +596,8 @@
                     <p>$J_Z V = -[\theta V, Z].$</p>
                 </div>
             </div>
-            </article>
-            <article>
+            </article>-->
+            <!--<article>
                 <h1>Nilpotent foliation $\c{F}_\xi$</h1>
                 <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; height: 80%;">
                 <div class="center" style="width: 60%;">$\g{s}_\xi=\g{n}\ominus \RR\xi, \qquad \xi\in \g{g}_\alpha$</div>
@@ -580,6 +626,34 @@
                     </div>
                 </div>
                 </div>
+            </article>-->
+            <article>
+                <h1>Nilpotent foliation $\c{F}_\xi$</h1>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; height: 80%;">
+                <div class="center" style="width: 60%;">$\g{s}_\xi=\g{n}\ominus \RR\xi, \qquad \xi\in \g{g}_\alpha$</div>
+                <div style="width: 100%; height: 70%; display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="width: 40%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="Pictures/horosphereFoliationNoSection.png" alt="Horospherical foliation" style="object-fit: contain; height: 80%;">
+                    </div>
+                    <div style="width: 40%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="Pictures/horosphereFoliationAnimation.gif" alt="Horospherical foliation" style="object-fit: contain; height: 80%;">
+                    </div>
+                </div>
+                </div>
+            </article>
+            <article>
+                <h1>Solvable foliation $\c{F}_\g{v}$</h1>
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; height: 80%;">
+                <div class="center" style="width: 60%;">$\g{s}_\g{v}=\g{a}\oplus(\g{n}\ominus \g{v}), \qquad \g{v}\subseteq \g{g}_\alpha$ abelian</div>
+                <div style="width: 100%; height: 70%; display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="width: 40%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="Pictures/solvableFoliationNoSection.png" alt="Horospherical foliation" style="object-fit: contain; height: 80%;">
+                    </div>
+                    <div style="width: 40%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="Pictures/solvableFoliationAnimation.gif" alt="Horospherical foliation" style="object-fit: contain; height: 80%;">
+                    </div>
+                </div>
+                </div>
             </article>
             <article style="justify-content: space-evenly;">
                 <div class="theorem-box">
@@ -601,8 +675,8 @@
                 </div>
             </article>
             <article>
-                <h1>Proof sketch</h1>
-                <p style="margin-bottom: 3%;">Suppose $\c{F}$ is a C2 polar nonhyperpolar homogeneous foliation on $M$.</p>
+                <h1>Sketch of proof</h1>
+                <p style="margin-bottom: 3%;">Suppose $\c{F}$ is a cohomogeneity 2 polar nonhyperpolar homogeneous foliation on $M$.</p>
                 <ol id="polar-proof">
                     <li class="show-10">
                         $\c{F}$ is induced by a closed connected solvable $\s{S}\subseteq \s{G}$.
@@ -626,7 +700,7 @@
                     Joint work with J. C. Díaz-Ramos
                 </p>
             </article>
-            <article>
+            <!--<article>
                 <h1>Polar actions on $\F\s{H}^n$</h1>
                 <ul id="actions-fhn">
                     <li>Polar actions on $\RR\s{H}^n$ and $\C\s{H}^n$ are already classified.</li>
@@ -637,7 +711,7 @@
                         $\O\s{H}^2$: polar actions leaving a totally geodesic submanifold invariant (Kollross, '20).
                     </li>
                 </ul>
-            </article>
+            </article>-->
             <article>
                 <h1>Examples of foliations</h1>
                 <p>
@@ -645,7 +719,7 @@
                     The foliations $\c{F}_\xi$ and $\c{F}_{\g{v}}$ generalize to higher codimension:
                 </p>
                 <p class="center">
-                    $\g{s}_{\g{b},\g{v}}=(\g{a}\ominus \g{b})\oplus (\g{n}\ominus \g{v}), \quad \g{b}\subseteq \g{a},\; \g{v}\subseteq \g{g}_\alpha$ totally real.
+                    $\g{s}_{\g{b},\g{v}}=(\g{a}\ominus \g{b})\oplus (\g{n}\ominus \g{v}), \quad \g{b}\subseteq \g{a},\; \g{v}\subseteq \g{g}_\alpha$ abelian.
                 </p>
                 <ul>
                     <li class="show-10">
@@ -658,7 +732,7 @@
                         $\g{b}=0 \rightsquigarrow$ solvable type.
                     </li>
                     <li class="show-30">
-                        The section is $\Sigma = \RR\s{H}^k(2), \quad k=\dim \g{b}+\dim \g{v}$.
+                        The section is $\Sigma = \RR\s{H}^k$ with constant curvature $\kappa = -1/4$.
                     </li>
                 </ul>
             </article>
@@ -675,7 +749,7 @@
                     <b>Note.</b> $\dim \ell = 1$.
                 </div>
             </article>
-            <article>
+            <!--<article>
                 <h1>Sections of polar actions on $\F\s{H}^n$</h1>
                 <p style="margin-bottom: 0%;">Totally geodesic submanifolds of $\H\s{H}^n$ and $\O\s{H}^2$:</p>
                 <div style="display: flex; flex-direction: row; height: 60%;">
@@ -730,7 +804,7 @@
                         </table>
                     </div>
                 </div>
-            </article>
+            </article>-->
             <article style="justify-content: space-evenly;">
                 <div class="theorem-box">
                     <b>Theorem B (Díaz-Ramos, LN).</b>
@@ -756,7 +830,7 @@
             </article>
             <article class="part">
                 <h1>
-                    Part II <br> Totally geodesic submanifolds of <br> nearly Kähler and $\s{G}_2$-manifolds
+                    Part II <br> Totally geodesic submanifolds
                 </h1>
                 <p class="bibitem">
                     J. M. Lorenzo-Naveiro, Alberto Rodríguez-Vázquez,
@@ -803,7 +877,7 @@
                     </div>
                 </div>
             </article>
-            <article>
+            <!--<article>
                 <p style="margin-bottom: 0;">Redundancies due to working with immersions:</p>
                 <ul id="redundancies">
                     <li class="show-10">
@@ -823,7 +897,7 @@
                     <b>General problem.</b>
                     Given $M$, classify (equivalence classes of) inextendable compatible totally geodesic immersions to $M$ up to congruence.
                 </div>
-            </article>
+            </article>-->
             <article>
                 <h1>Known results</h1>
                 <ul id="tg-results">
@@ -931,7 +1005,7 @@
                     </li>
                 </ul>
             </article>
-            <article>
+            <!--<article>
                 <h1>Totally geodesic subspaces</h1>
                 <ul>
                     <li>
@@ -945,9 +1019,19 @@
                         Given $V\subseteq T_p M$, when does $V$ generate a totally geodesic submanifold?
                     </li>
                 </ul>
-            </article>
-            <article style="justify-content: center;">
-                <div class="theorem-box">
+            </article>-->
+            <article>
+                <h1>Totally geodesic subspaces</h1>
+                <ul>
+                    <li>
+                        $f\colon \Sigma \to M$ totally geodesic.
+                        Then $f$ is determined by any tangent space $f_{*x}(T_x \Sigma), \;x\in \Sigma$.
+                    </li>
+                    <li class="show-10">
+                        Given $V\subseteq T_p M$, when does $V$ generate a totally geodesic submanifold?
+                    </li>
+                </ul>
+                <div class="show-20 theorem-box">
                     <b>Theorem (Cartan '51, Hermann '59).</b>
                     $M$ real analytic, $V\subseteq T_p M$.
                     The following are equivalent:
@@ -961,6 +1045,21 @@
                     </ol>
                 </div>
             </article>
+            <!--<article style="justify-content: center;">
+                <div class="theorem-box">
+                    <b>Theorem (Cartan '51, Hermann '59).</b>
+                    $M$ real analytic, $V\subseteq T_p M$.
+                    The following are equivalent:
+                    <ol>
+                        <li>
+                            $V$ is a totally geodesic subspace.
+                        </li>
+                        <li>
+                            $V$ is $\nabla^k R$-invariant for all $k\geq 0$.
+                        </li>
+                    </ol>
+                </div>
+            </article>-->
             <article>
                 <h1>Totally geodesic submanifolds of $\s{G}/\s{K}$</h1>
                 <ul>
@@ -1064,7 +1163,7 @@
                         </td>
                     </tr>
                 </table>
-                <p style="margin-bottom: 0;">$\Lambda_3$: four-dimensional complex irrep of $\s{SU}(2)$: </p>
+                <p style="margin-bottom: 0;">$\Lambda_3$: four-dimensional complex irreducible representation of $\s{SU}(2)$: </p>
                 <p class="center">
                     $\Lambda_{3}=\s{S}^3(\C^2)^*=\{ f \in \C[x,y]\colon f$ homogeneous of degree $3\}$.
                 </p>
@@ -1284,7 +1383,7 @@
                     </div>
                 </div>
             </article>
-            <article>
+            <!--<article>
                 <h1>
                     Totally geodesic hypersurfaces
                 </h1>
@@ -1303,7 +1402,7 @@
                     <b>Theorem 6.32.</b>
                     If $\widehat{M}$ has a complete totally geodesic hypersurface $\Sigma$, then $M$ is locally a <strong>sine-cone</strong> $I\times_{\sin} N$ and $\Sigma$ is locally the graph of $h(t,x)=A(\cos t)^{-1}$.
                 </div>
-            </article>
+            </article>-->
             <article style="justify-content: space-evenly;">
                 <div class="remark-box">
                     <b>
@@ -1423,7 +1522,7 @@
                     </li>
                 </ul>
             </article>
-            <article>
+            <!--<article>
                 <h1>Other families of spacetimes</h1>
                 <ul>
                     <li>
@@ -1443,7 +1542,7 @@
                         </ul>
                     </li>
                 </ul>
-            </article>
+            </article>-->
             <article>
                 <h1>
                     Coisotropy one spacetimes
@@ -1453,7 +1552,7 @@
                         Natural continuation: <strong>coisotropy one spacetimes</strong> $M^{d+2}=\s{G}/\s{K}$.
                     </li>
                     <li>
-                        $\exists$ some spatial direction fixed by the rotational subalgebra.
+                        There exists some spatial direction fixed by the rotational subalgebra.
                     </li>
                 </ul>
                 <div class="show-10" style="height: 50%; display: flex; flex-direction: row; justify-content: space-between;">
@@ -1519,7 +1618,13 @@
                     </div>
                 </div>
             </article>
-            <article>
+            <article style="justify-content: center; align-items: center;">
+                <div class="center problem-box" style="width: max-content;">
+                        <b>Current work.</b>
+                        Classification of $(3,2)$-KLAs with $d>2$.
+                </div>
+            </article>
+            <!--<article>
                 <h1>
                     Steps in the classification
                 </h1>
@@ -1540,7 +1645,7 @@
                         Classification of $(3,2)$-KLAs with $d>2$.
                     </div>
                 </div>
-            </article>
+            </article>-->
             <article>
                 <h1>Structure of $(3,2)$-KLAs</h1>
                 <ul>
@@ -1686,13 +1791,13 @@
                         $\g{g}=\g{so}(V)\oplus (V\otimes W)\oplus \g{b}, \quad \g{g}'=\g{so}(V)\oplus(V\otimes W')\oplus \g{b}'$.
                     </li>
                     <li class="show-10">
-                        If $d>3$, then $\g{g}\cong \g{g}'$ if and only if $\exists$ isomorphisms and $h\colon W \to W'$ and $\psi \colon \g{b}\to \g{b}'$ with
+                        If $d>3$, then $\g{g}\cong \g{g}'$ if and only if there exist isomorphisms $h\colon W \to W'$ and $\psi \colon \g{b}\to \g{b}'$ with
                         <p class="center">
                             $\rho' \circ \psi = \Ad(h)\circ \rho,\qquad\psi \circ \varphi=h^*\varphi'$.
                         </p>
                     </li>
                     <li class="show-20">
-                        If $d=3$, then $\g{g}\cong \g{g}'$ if and only if $\exists$ $h$, $\psi$ and $\mu\in (W^*)^\g{b}$ with
+                        If $d=3$, then $\g{g}\cong \g{g}'$ if and only if there exist $h$, $\psi$ and $\mu\in (W^*)^\g{b}$ with
                         $$
                             \begin{aligned}
                                 \rho' \circ \psi ={}& \Ad(h)\circ \rho,\qquad\psi \circ \varphi=h^*\varphi' \\[1ex]
@@ -2043,13 +2148,13 @@
                 </div>
             </article>
             <article class="part">
-                <h1>Conclusions and open problems</h1>
+                <h1>Conclusions</h1>
             </article>
             <article>
                 <h1>Part I: Conclusions</h1>
                 <ul id="part-i-conclusions">
                     <li>
-                        Classification of C2 polar homogeneous foliations on symmetric spaces of noncompact type.
+                        Classification of cohomogeneity two polar homogeneous foliations on symmetric spaces of noncompact type.
                     </li>
                     <li>
                         Classification of polar foliations on $\F\s{H}^2$ and standard polar foliations on $\H\s{H}^n$.
@@ -2059,7 +2164,7 @@
                     </li>
                 </ul>
             </article>
-            <article>
+            <!--<article>
                 <h1>Part I: Open problems</h1>
                 <ul id="part-i-problems">
                     <li>
@@ -2072,7 +2177,7 @@
                         Existence of actions on $\H\s{H}^n$ and $\O\s{H}^2$ with section $\Sigma=\RR\s{H}^k(1)$.
                     </li>
                 </ul>
-            </article>
+            </article>-->
             <article>
                 <h1>
                     Part II: Conclusions
@@ -2089,7 +2194,7 @@
                     </li>
                 </ul>
             </article>
-            <article>
+            <!--<article>
                 <h1>
                     Part II: Open problems
                 </h1>
@@ -2104,7 +2209,7 @@
                         Complete totally geodesic hypersurfaces in Riemannian cones.
                     </li>
                 </ul>
-            </article>
+            </article>-->
             <article>
                 <h1>
                     Part III: Conclusions
@@ -2121,7 +2226,7 @@
                     </li>
                 </ul>
             </article>
-            <article>
+            <!--<article>
                 <h1>
                     Part III: Open problems
                 </h1>
@@ -2133,7 +2238,7 @@
                         Classification of coisotropy one homogeneous spacetimes up to coverings.
                     </li>
                 </ul>
-            </article>
+            </article>-->
             <article>
                 <div class="title-content">
                     <h1 id="title">
