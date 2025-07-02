@@ -305,3 +305,37 @@ td {
 #actions-fhn li {
     margin-bottom: 8%;
 }
+
+div.conclusions {
+    height: 30%;
+    width: 100%;
+    border-radius: 1vh;
+    border: solid;
+    display: flex;
+    flex-direction: row;
+}
+
+.conclusions-title {
+    display: flex;
+    font-size: 90%;
+    width: 15%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    color: #FF5D62;
+}
+
+.conclusions-list {
+    display: flex;
+    align-items: center;
+    font-size: 80%;
+}
+
+.conclusions-list ul {
+    margin: 0;
+}
+
+.conclusions-list > ul > li:last-child {
+    margin-bottom: 0;
+}
