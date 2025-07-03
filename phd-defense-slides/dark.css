@@ -4,8 +4,16 @@ strong {
     font-style: italic;
 }
 
-.theorem-box strong, .remark-box strong, .problem-box strong {
+.theorem-box strong {
     color: #c84053;
+}
+
+.problem-box strong {
+    color: #a52900;
+}
+
+.remark-box strong {
+    color: #e82424;
 }
 
 h1 {
@@ -96,14 +104,14 @@ h1 {
 }
 
 .remark-box {
-    background-color: rgb(118, 148, 106);
+    background-color: #b7d0ae;
     color: #16161D;
     padding: 2%;
     border-radius: 1vh 3vh 1vh 3vh;
 }
 
 .problem-box {
-    background-color: rgb(255, 160, 102);
+    background-color: #f9d791;
     color: #16161D;
     padding: 2%;
     border-radius: 1vh 3vh 1vh 3vh;
@@ -256,6 +264,28 @@ td {
     font-size: 90%;
     width: 50%;
     text-align: left;
+}
+
+#bianchi-representations-horizontal {
+    width: 85%;
+    height: 5%;
+}
+
+#bianchi-representations-horizontal th, #bianchi-representations-horizontal td {
+    border-style: none solid solid none;
+    padding: 0 0 0 0;
+    border: 1%;
+}
+
+#bianchi-representations-horizontal tr:last-child > th, #bianchi-representations-horizontal tr:last-child > td {
+    border-style: none solid none none;
+}
+
+#bianchi-representations-horizontal th {
+    text-align: left;
+    width: 20%;
+    padding-left: 1%;
+    border: 1%;
 }
 
 #bianchi-representations th, #bianchi-representations td {
