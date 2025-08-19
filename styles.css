@@ -127,6 +127,10 @@ article > ul > li {
   width: auto;
 }
 
+p {
+  margin-bottom: 3%;
+}
+
 @media screen and (min-width: 1000px) {
   body {
     font-size: 110%;
