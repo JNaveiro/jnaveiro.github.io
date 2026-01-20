@@ -144,3 +144,42 @@ div#schedule-container {
 #schedule-table th {
     background-color: #81c8be;
 }
+
+@media screen and (max-width: 1010px) and (min-width: 500px) {
+    main {
+        width: 100vw;
+        font-size: 50%;
+        box-shadow: none;
+    }
+
+    h2 {
+        border-bottom: solid 1px;
+    }
+
+    #midterm-grade-formula {
+        overflow: scroll;
+    }
+
+}
+
+
+@media screen and (max-width: 500px) {
+    main {
+        width: 100vw;
+        font-size: 50%;
+        box-shadow: none;
+    }
+
+    h2 {
+        border-bottom: solid 1px;
+    }
+
+    #midterm-grade-formula {
+        overflow: scroll;
+        font-size: 2vw;
+    }
+
+    #letter-grades-table, #schedule-table, #exam-dates {
+        width: 90%;
+    }
+}
