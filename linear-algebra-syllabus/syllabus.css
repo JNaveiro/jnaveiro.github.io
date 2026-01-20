@@ -1,0 +1,146 @@
+html {
+    font-family: Lato;
+    font-size: 120%;
+    background-color: #8839ef;
+    /**color: #4c4f69; **/
+    color: black;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    width: 1010px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #eff1f5;
+    padding: 1% 2% 0 2%;
+    line-height: 1.5;
+    box-shadow: 0 0 10px 5px rgb(0,0,0,0.3);
+}
+
+p {
+        margin: 1% 0 1% 0;
+        line-height: 150%;
+}
+
+a {
+    color: #d20f39;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #e64553;
+}
+
+section {
+    margin: 1% 0 1% 0;
+}
+
+strong {
+    font-style: italic;
+    color: #fe640b;
+}
+
+div.center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 140%;
+    font-weight: 100%;
+}
+
+h2 {
+    font-weight: 100%;
+    border-bottom: solid 2px;
+}
+
+li {
+    margin-left: 2%;
+}
+
+div#exam-dates-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#exam-dates {
+    width: 60%;
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+}
+
+#exam-dates th, #exam-dates td {
+    padding-left: 3%;
+}
+
+#exam-dates th {
+    border-bottom: solid 2px;
+    text-align: left;
+}
+
+div#letter-grades-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#letter-grades-table {
+    width: 50%;
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+}
+
+#letter-grades-table th {
+    border-bottom: solid 1px;
+}
+
+#letter-grades-table td {
+    text-align: center;
+}
+
+div#schedule-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#schedule-table {
+    width: 80%;
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+    table-layout: auto;
+}
+
+#schedule-table th, #schedule-table td {
+    border: solid 2px;
+    text-align: center;
+}
+
+#week {
+    width: 10%;
+}
+
+#dates {
+    width: 15%;
+}
+
+#schedule-table td.sections-covered {
+    text-align: left;
+    padding-left: 2%;
+}
+
+#schedule-table th {
+    background-color: #81c8be;
+}

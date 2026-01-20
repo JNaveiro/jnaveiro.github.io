@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>MATH 3333-004 Syllabus</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="syllabus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+        <div class="center" style="display: flex; flex-direction: column;">
+            <h1>MATH 3333-004: Linear Algebra</h1>
+            <h1>Course Syllabus</h1>
+        </div>
+
+        <section>
+            <h2>Quick links</h2>
+            <p>
+            <ul>
+                <li>
+                    <a href="https://canvas.ou.edu/" target="_blank">Canvas</a>
+                </li>
+                <li>
+                    <a href="https://open.umn.edu/opentextbooks/textbooks/533" target="_blank">Course textbook</a>
+                </li>
+                <li>
+                    <a href=#schedule>Course schedule</a>
+                </li>
+                <li>
+                    <a href="https://www.ou.edu/cas/mathcenter" target="_blank">OU Math Center</a>
+                </li>
+                <li>
+                    <a href="http://tiny.cc/OUPolicies" target="_blank">Official University Policies</a>
+                </li>
+                <li>
+                    Some online calculators:
+                    <ul>
+                        <li>
+                            <a href="https://www.wolframalpha.com/" target="_blank">Wolfram Alpha</a> (answer engine)
+                        </li>
+                        <li>
+                            <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a> (graphic calculator)
+                        </li>
+                        <li>
+                            <a href="https://matrixcalc.org/" target="_blank">Matrix calculator</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </p>
+        </section>
+
+        <section id="course-information">
+            <h2>Course information</h2>
+            <p>
+            <ul>
+                <li>
+                    <b>Instructor:</b> Juan Manuel Lorenzo Naveiro (please call me <i>Dr. Naveiro</i> or <i>Juan</i>).
+                </li>
+                <li>
+                    <b>Office Hours:</b> Wednesdays 9:00&ndash;11:00am at PHSC 1007.
+                    I am also available by appointment.
+                </li>
+                <li>
+                    <b>E-mail:</b> <img src="email.png" style="height: 1.25em; vertical-align: text-bottom;"></img>.
+                </li>
+                <li>
+                    <b>Course meetings:</b> This class meets in person, MWF 11:00&ndash;11:50am, at PHSC 323.
+                </li>
+                <li>
+                    <b>Course website:</b>
+                    The Learning Management System for this course is <a href="https://canvas.ou.edu/" target="_blank">Canvas</a>.
+                </li>
+                <li>
+                    <b>Prerequisites:</b>
+                    MATH 2123 or MATH 1823 or MATH 1914.
+                </li>
+            </ul>
+            </p>
+        </section>
+        <section>
+            <h2>
+                Catalog description
+            </h2>
+            <p>
+                Systems of linear equations, determinants, finite dimensional vector spaces, linear transformations and matrices, characteristic values and vectors. 
+            </p>
+        </section>
+        <section>
+            <h2>Textbook</h2>
+            <p>
+            We will be using the book
+            </p>
+            <p style="text-align: center;">
+            <i>Linear Algebra with Applications</i>, by W. Keith Nicholson.
+            </p>
+            <p>
+            This book is available online, and you can find it <a href="https://open.umn.edu/opentextbooks/textbooks/533" target="_blank">here</a> or in the files on Canvas.
+            </p>
+        </section>
+        <section>
+            <h2>Learning outcomes</h2>
+            <p>
+                <ul>
+                    <li>
+                        To interpret geometrically and solve (using the Gaussian elimination method) systems of linear equations.
+                    </li>
+                    <li>
+                        To calculate the (reduced) row-echelon form of a matrix and applying this tool in several Linear Algebra problems (finding the rank of a matrix, determining if a vector is a linear combination of a set of vectors, etc.).
+                    </li>
+                    <li>
+                        To perform basic operations with matrices, such as adding them, multiplying them, finding their inverses or computing their determinant.
+                    </li>
+                    <li>
+                        To understand the general concepts concerning abstract vector spaces (subspaces, spanning sets, linearly independent sets, dimension, etc.).
+                    </li>
+                    <li>
+                        To understand the deep connection between matrices, linear maps and linear systems of equations.
+                    </li>
+                </ul>
+            </p>
+        <section>
+            <h2>Official University policies</h2>
+            <p>
+                See <a href="http://tiny.cc/OUPolicies">this link</a> for all additional University policies.
+            </p>
+        </section>
+        <section id="grading-scheme">
+            <h2>Grading scheme</h2>
+            <p>
+            Your final grade will be divided into the following four components, which will be detailed individually below:
+            <ul>
+                <li><a href=#homework>Homework</a> (20%)</li>
+                <li><a href=#exams>Midterms</a> (45%)</li>
+                <li><a href=#exams>Final exam</a> (35%)</li>
+            </ul>
+            </p>
+            <p>
+            The final letter grades will be given according to the following provisional scale:
+            </p>
+            <div id="letter-grades-container">
+                <table id="letter-grades-table">
+                    <tr>
+                        <th>A</th>
+                        <th>B</th>
+                        <th>C</th>
+                        <th>D</th>
+                        <th>F</th>
+                    </tr>
+                    <tr>
+                        <td>100&ndash;90</td>
+                        <td>89&ndash;80</td>
+                        <td>79&ndash;70</td>
+                        <td>69&ndash;60</td>
+                        <td>59&ndash;0</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section id="homework">
+            <h2>Homework</h2>
+            <p>
+            You will be given weekly homework assignments to be submitted at 5:00pm on the corresponding due date.
+            Late homework will not be accepted, with the exception of the first assignment.
+            However, the lowest 20% of your homework scores will be dropped at the end of the semester.
+            </p>
+            <p>
+            The solutions to the homework assignments have to be written by hand and uploaded to Gradescope.
+            Note that you can access Gradescope from Canvas, and you do not need to create a separate account for this.
+            Please make sure that your submissions are legible, as anything difficult to read will not be graded.<br>
+            </p>
+            <p>
+            An important aspect of the solutions to the homework is that they have to be properly and clearly explained (in other words, you must <b>show your work</b>).
+            Showing a correct understanding of the concepts and methods that are used in order to solve a problem is more valuable than the numerical value of the solution.
+            It is usually a good idea to use words to explain your computations.
+            Ideally, your solutions should be understandable for someone with limited knowledge of the course.
+            </p>
+        </section>
+        <section id="exams">
+            <h2>Exams</h2>
+            <p>
+                This course will have three in-class midterm exams, as well as a comprehensive final exam covering all the contents of the course.
+                The (tentative) dates of the midterm exams, as well as the date of the final exam, are tabulated below:
+            </p>
+            <div id="exam-dates-container">
+                <table id="exam-dates">
+                    <tr>
+                        <th>Exam</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Place</th>
+                    </tr>
+                    <tr>
+                        <td>Midterm 1</td>
+                        <td>Feb 18</td>
+                        <td>11:00&ndash;11:50am</td>
+                        <td>PHSC 323</td>
+                    </tr>
+                    <tr>
+                        <td>Midterm 2</td>
+                        <td>Mar 13</td>
+                        <td>11:00&ndash;11:50am</td>
+                        <td>PHSC 323</td>
+                    </tr>
+                    <tr>
+                        <td>Midterm 3</td>
+                        <td>Apr 29</td>
+                        <td>11:00&ndash;11:50am</td>
+                        <td>PHSC 323</td>
+                    </tr>
+                    <tr>
+                        <td>Final exam</td>
+                        <td>May 15</td>
+                        <td>1:30&ndash;3:30pm</td>
+                        <td>PHSC 323</td>
+                    </tr>
+                </table>
+            </div>
+            <p>
+                <b>Please make the appropriate arrangements to be available for all exams.</b>
+                Exam makeups will not be granted in general, unless you have to miss an exam due to any of the reasons considered by the <a href="http://tiny.cc/OUPolicies" target="_blank">Official University Policies</a>.
+                You are required to bring your Sooner ID to all exams.
+                All of the considerations mentioned in the <a href=#homework>Homework</a> section apply for exam solutions as well.
+            </p>
+            <p>
+                As mentioned in the <a href=#grading-scheme>Grading scheme</a>, the final exam will have a weight of 35%.
+                The percentage grade obtained by the midterms&mdash;which has a weight of 45%&mdash;will be computed as follows:
+            </p>
+            <p>
+                \[\textsf{Midterm grade} = \Bigg(1-\frac{\textsf{Lowest midterm}}{300}\Bigg)\big(\textsf{Average of two best midterms}\big)+\frac{\textsf{Lowest midterm}}{3}\]
+            </p>
+            <p>
+                This formula is designed to give a grade that is never lower than the average of the two best midterms.
+                Moreover, the lowest midterm score will always contribute positively to this grade.
+            </p>
+        </section>
+        <section>
+            <h2>Math Center</h2>
+            <p>
+            The Math Center is dedicated to offering support to students enrolled in University of Oklahoma mathematics courses at the calculus level or below (though they also assist with a couple of higher-level courses, such as differential equations and linear algebra). The goal of the Math Center is to provide assistance to students as they work on understanding and mastering the concepts presented in their math courses. Highly-trained and qualified math graduate assistants and undergraduates will be available during regular working hours to help you. For more information, including hours of operation, visit <a href="https://www.ou.edu/cas/mathcenter" target="_blank">here</a>.
+            </p>
+        </section>
+        <section id="calculator-policy">
+            <h2>Calculator policy</h2>
+            <p>
+                Calculators will not be allowed on exams, and the exam questions will be designed so that they are not necessary.
+                However, I encourage you to incorporate their use as part of your studying practices.
+            </p>
+            <p>
+                Some online calculators that will be useful for this course are <a href="https://www.wolframalpha.com/" target="_blank">Wolfram Alpha</a>, <a href="https://matrixcalc.org/" target="_blank">Matrix calculator</a> and <a href="https://www.desmos.com/calculator" target="_blank">Desmos</a>.
+                Desmos actually has powerful graphical capabilities, and I strongly recommend that you use it for exploring the concepts that will be covered in class.
+            </p>
+        </section>
+        <section>
+            <h2>Academic misconduct</h2>
+            <p>
+            All cases of suspected academic misconduct will be reported to the Office of Academic Integrity Programs as possible violations of University's Academic Integrity Code. If the violation is confirmed by the Academic Integrity Program's Office, the penalties can be quite severe, so the best advice is <i>Don't do it!</i> For more details on the University's policies concerning academic misconduct consult <a href="https://www.ou.edu/integrity/students" target="_blank">this website</a>.
+            </p>
+            <p>
+            This link also has information about admonitions (essentially warnings about potential misconduct for fairly minor infractions) and your rights to appeal charges of academic misconduct. Students are also bound by the provisions of the OU Student Code, which can be found <a href="https://www.ou.edu/content/dam/studentlife/documents/AllCampusStudentCode.pdf" target="_blank">here</a>.
+            </p>
+        </section>
+        <section>
+            <h2>Generative AI policy</h2>
+            <p>
+                In recent years, the use of artificial intelligence (AI) tools has become quite common due to the rapid progress of this technology.
+                While in other aspects of your day to day life AI can prove to be useful, in this course its use is strictly forbidden and will be treated as plagiarism.
+                The objectives of this course include developing a deep understanding of the concepts that we cover.
+                This is only possible by honestly engaging with the materials and addressing one's weak points (for instance, you should ask yourself questions such as <i>What part of this section do I not understand?</i> or <i>Do I know how to solve this problem?</i>).
+                By employing AI tools to solve a math problem, you are trading the beneficial struggle that leads to a better understanding of the subject for an instant answer.
+                Because of this, any clear use of AI in the homework or exams will be considered academic misconduct.
+            </p>
+            <p>
+                Some practices that will aid you in honing your mathematical skills are:
+                attempting to solve the problems in the assignments without any external help, and only looking for it after spending some time struggling with the problem;
+                discussing the course topics and homework assignments with me and with your colleagues (this is a very productive practice!);
+                checking the numerical answers in your solutions with the help of a <a href=#calculator-policy>calculator</a> to look for potential mistakes;
+                etc.
+            </p>
+        </section>
+        <section>
+            <h2>Class recording/photographing policy</h2>
+            <p>
+                Unauthorized picture taking, as well as audio/video recording are strictly prohibited in this course and its associated online spaces. This policy protects all participants and respects intellectual property and FERPA rights. Violations and any refusals to comply may result in disciplinary action through the Office of Student Conduct.
+            </p>
+            <p>
+                Should you require recording accommodations, please register with the ADRC and obtain specific permission. Any recordings authorized by the accommodation process will be made by me and provided through an encrypted online process. These restrictions are designed to protect intellectual property rights and privacy concerns. Failure to adhere to these policies will result in a referral to the Office of Student Conduct for policy violation.
+            </p>
+        </section>
+        <section>
+            <h2>Policy on W grades</h2>
+            <p>
+            On or before April 17, undergraduate students can withdraw from the course with an automatic W. After this deadline, students can only withdraw via petition to the Dean of their college. The petition process also requires the instructor's signature with a passing- failing indication at the time the petition is filed. Note that a "failing" indication on the petition means that even if the petition is approved the grade in the course will be weighted in the GPA as an F.
+            </p>
+        </section>
+        <section>
+            <h2>Policy on I grades</h2>
+            <p>
+                The grade of I is not intended to serve as a benign substitute for the grade of F, and is only given if a student has completed the majority of the work in the course at a passing level (for example, if a student has completed everything except the final exam), the course work cannot be completed because of compelling and verifiable problem beyond the student's control, and the student expresses a clear intention of making up the missed work as soon as possible. Grades of I are very uncommon. If you believe that you may qualify to receive a grade of I, please discuss this with the instructor.
+            </p>
+        </section>
+        <section id="schedule">
+            <h2>Schedule</h2>
+            <p>
+                This is a tentative schedule for the class, which I will update along the way to reflect what is actually covered throughout the course.
+            </p>
+            <p>
+                The <span style="color: rgba(136, 57, 239, 1)">midterm dates</span> and the <span style="color: rgba(230, 69, 83, 1);">days without class</span> have been marked for your convenience.
+            </p>
+            <div id="schedule-container">
+                <table id="schedule-table">
+                    <tr>
+                        <th id="week">
+                            Week
+                        </th>
+                        <th id="dates">
+                            Dates
+                        </th>
+                        <th id="sections">
+                            Sections covered
+                        </th>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            1
+                        </td>
+                        <td style="background-color: rgba(230, 69, 83, 0.4);">
+                            Jan 19
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            Introduction <br>
+                            1.1 Solutions and Elementary Operations
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Jan 21
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Jan 23
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            2
+                        </td>
+                        <td>
+                            Jan 26
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            1.2 Gaussian Elimination <br>
+                            1.3 Homogeneous Equations
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Jan 28
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Jan 30
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            3
+                        </td>
+                        <td>
+                            Feb 2
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            2.1 Matrix Algebra <br>
+                            2.2 Matrix-Vector Multiplication
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Feb 4
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Feb 6
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            4
+                        </td>
+                        <td>
+                            Feb 9
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            2.3 Matrix Multiplication <br>
+                            2.4 Matrix Inverses
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Feb 11
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Feb 13
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            5
+                        </td>
+                        <td>
+                            Feb 16
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            Catch-up/Review<br>
+                            <b>Midterm 1</b><br>
+                            2.5 Elementary Matrices
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgba(136, 57, 239, 0.4);">
+                            Feb 18
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Feb 20
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            6
+                        </td>
+                        <td>
+                            Feb 23
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            2.6 Linear Transformations <br>
+                            3.1 The Cofactor Expansion <br>
+                            3.2 Determinants and Matrix Inverses
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Feb 25
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Feb 27
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            7
+                        </td>
+                        <td>
+                            Mar 2
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            3.2 <br>
+                            3.3 Diagonalization and Eigenvalues
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mar 4
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mar 6
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            8
+                        </td>
+                        <td>
+                            Mar 9
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            3.3 <br>
+                            Catch-up/Review <br>
+                            <b>Midterm 2</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mar 11
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgba(136, 57, 239, 0.4);">
+                            Mar 13
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            9
+                        </td>
+                        <td style="background-color: rgba(230, 69, 83, 0.4);">
+                            Mar 16
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            Spring vacation
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgba(230, 69, 83, 0.4);">
+                            Mar 18
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgba(230, 69, 83, 0.4);">
+                            Mar 20
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            10
+                        </td>
+                        <td>
+                            Mar 23
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            5.1 Subspaces and Spanning <br>
+                            5.2 Independence and dimension
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mar 25
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mar 27
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            11
+                        </td>
+                        <td>
+                            Mar 30
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            5.4 Rank of a Matrix <br>
+                            5.5 Similarity and Diagonalization
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Apr 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Apr 3
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            12
+                        </td>
+                        <td>
+                            Apr 6
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            6.1 Vector Spaces <br>
+                            6.2 Subspaces and Spanning Sets <br>
+                            6.3 Linear Independence and Dimension
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Apr 8
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Apr 10
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            13
+                        </td>
+                        <td>
+                            Apr 13
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            6.4 Finite Dimensional Vector Spaces <br>
+                            7.1 Examples and Elementary Properties <br>
+                            7.2 Kernel and Image of a Linear Transformation
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Apr 15
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Apr 17
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            14
+                        </td>
+                        <td>
+                            Apr 20
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            7.3 Isomorphisms and Composition <br>
+                            9.1 The Matrix of a Linear Transformation
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Apr 22
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Apr 24
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            15
+                        </td>
+                        <td>
+                            Apr 27
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            Catch-up/Review <br>
+                            <b>Midterm 3</b><br>
+                            Final review
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: rgba(136, 57, 239, 0.4);">
+                            Apr 29
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            May 1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan=3>
+                            16
+                        </td>
+                        <td>
+                            May 4
+                        </td>
+                        <td rowspan=3 class="sections-covered">
+                            Final review/Applications
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            May 6
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            May 8
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            17
+                        </td>
+                        <td>
+                            May 15
+                        </td>
+                        <td class="sections-covered">
+                            <b>Final Exam</b>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <p style="text-align: center;">
+        <b>This syllabus is subject to change</b>
+        </p>
+    </main>
+    </body>
+
+</html>
