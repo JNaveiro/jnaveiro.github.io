@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>2.5 Elementary Matrices</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="linear-algebra.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main id="elementary-matrices">
+            <h1>
+                2.5 Elementary Matrices
+            </h1> 
+
+            <p>
+            In this section we will relate the elementary row operations with matrix multiplication.
+            </p>
+
+            <div class="definition-box">
+                We say that a square matrix \(E\) is an <b>elementary matrix</b> if it is obtained from the identity matrix \(I_n\) by performing a single row operation (called the <em>row operation corresponding to</em> \(E\)).<br>
+                The <em>type</em> of \(E\) is said to be the type of the corresponding row operation (so there are three types I, II and III).
+            </div>
+
+            <p>
+            For instance, let us start with the \(3\times 3\) identity matrix \(I_3\).
+            If we apply (separately) the row operations \(R_1\leftrightarrow R_3\), \(2R_3\) and \(R_2-2R_1\), we obtain the matrices
+            </p>
+
+            \[
+                E_{R_1\leftrightarrow R_3}=
+                \begin{bmatrix}
+                    0 & 0 & 1 \\
+                    0 & 1 & 0 \\
+                    1 & 0 & 0
+                \end{bmatrix}, \quad
+                E_{2R_3}=
+                \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    0 & 1 & 0 \\
+                    0 & 0 & 3
+                \end{bmatrix}, \quad
+                E_{R_2-2R_1}=
+                \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    -2 & 1 & 0 \\
+                    0 & 0 & 1
+                \end{bmatrix}.
+            \]
+
+            <p>
+                The relationship between elementary row operations and elementary matrices is given in the following fact:
+            </p>
+
+            <div class="theorem-box" id="thm-row-operations">
+                Let \(A\) be an \(m\times n\) matrix.
+                If \(E\) is an \(m\times m\) elementary matrix, then \(EA\) is the result of applying the row operation associated with \(E\) to \(A\).
+            </div>
+
+            <details>
+                <summary>Proof.</summary>
+                The proof of this theorem boils down to the following observation:
+                Suppose \(E\) is an \(p\times n\) matrix and \(A\) is an \(n\times m\) matrix.
+                If we write \(E=[e_{ij}]\) and decompose the matrix \(B\) into its rows:
+                \[
+                    A=
+                    \begin{bmatrix}
+                        A_1 \\
+                        A_2 \\
+                        \vdots \\
+                        A_n
+                    \end{bmatrix},
+                \]
+                then the decomposition of \(EA\) into rows is
+                \[
+                    EA=
+                    \begin{bmatrix}
+                        e_{11}A_1 + e_{12}A_2 + \dots + e_{1n}A_n \\
+                        e_{21}A_1 + e_{22}A_2 + \dots + e_{2n}A_n \\
+                        \vdots \\
+                        e_{p1}A_1 + e_{m2}A_2 + \dots + e_{pn}A_n 
+                    \end{bmatrix}.
+                \]
+                <p>
+                For example, we prove the theorem for operations of type I (you can try the other types an as exercise).
+                If we exchange the \(i\)-th and \(j\)-th rows of \(A\) ,where \(i < j \), the result is
+                </p>
+                \[
+                    A=
+                    \begin{bmatrix}
+                        A_1 \\
+                        \vdots \\
+                        A_{i-1} \\
+                        A_{j} \\
+                        A_{i+1} \\
+                        \vdots \\
+                        A_{j-1} \\
+                        A_{i} \\
+                        A_{j+1} \\
+                        \vdots \\
+                        A_n
+                    \end{bmatrix},
+                \]
+
+                Now, consider the elementary matrix \(E_{R_i \leftrightarrow R_j}\).
+                Its entries are all zero except for:
+                \[
+                e_{11}=\dots=e_{i-1,i-1}=e_{i+1,i+1}=\dots=e_{j-1,j-1}=e_{j+1,j+1}=\dots=e_{nn}=1,\quad
+                e_{ij}=e_{ji}=1,
+                \]
+                So combining this with the above formula for \(EA\), we also get
+                \[
+                    EA=
+                    \begin{bmatrix}
+                        A_1 \\
+                        \vdots \\
+                        A_{i-1} \\
+                        A_{j} \\
+                        A_{i+1} \\
+                        \vdots \\
+                        A_{j-1} \\
+                        A_{i} \\
+                        A_{j+1} \\
+                        \vdots \\
+                        A_n
+                    \end{bmatrix}
+                \]
+                (you can see this more easily by performing this calculation with a specific example).
+            </details>
+
+            <p>
+                The previous theorem says that performing a series of elementary operations on a matrix \(A\) is the same as multiplying \(A\) by their corresponding elementary matrices.
+            </p>
+
+            <div class="example-box">
+                For instance, take
+            \[
+                A =
+                \begin{bmatrix}
+                    2 & 0 & 1 \\
+                    0 & 4 & 2 \\
+                    -2 & 0 & 7
+                \end{bmatrix}
+            \]
+            Performing the row operations
+            \[
+                \begin{bmatrix}
+                    2 & 0 & 1 \\
+                    0 & 4 & 2 \\
+                    -2 & 0 & 7
+                \end{bmatrix}
+                \underset{(1/2)R_2}{\longrightarrow}
+                \begin{bmatrix}
+                    2 & 0 & 1 \\
+                    0 & 2 & 1 \\
+                    -2 & 0 & 7
+                \end{bmatrix}
+                \underset{R_3+R_1}{\longrightarrow}
+                \begin{bmatrix}
+                    2 & 0 & 1 \\
+                    0 & 2 & 1 \\
+                    0 & 0 & 8
+                \end{bmatrix}
+            \]
+
+            is the same as performing the matrix multiplication
+
+            \[
+                E_{R_3 + R_1}(E_{(1/2) R_2}A)=
+                E_{R_3 + R_1}\,E_{(1/2) R_2}\,A,
+            \]
+
+            or in other words:
+
+            \[
+                \begin{bmatrix}
+                    2 & 0 & 1 \\
+                    0 & 2 & 1 \\
+                    0 & 0 & 8
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    0 & 1 & 0 \\
+                    1 & 0 & 1
+                \end{bmatrix}
+                \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    0 & \frac12 & 0 \\
+                    0 & 0 & 1
+                \end{bmatrix}
+                \begin{bmatrix}
+                    2 & 0 & 1 \\
+                    0 & 4 & 2 \\
+                    -2 & 0 & 7
+                \end{bmatrix}
+            \]
+            </div>
+
+            <div class="warning-box">
+                Note the order in which we are multiplying the elementary matrices!
+            </div>
+
+            <section id="inverses-of-elementary-matrices">
+            <h2>Inverses of Elementary Matrices</h2>
+
+            Since every row operation has a corresponding inverse row operation, it follows that every elementary matrix is invertible.
+            More precisely:
+
+            <div class="proposition-box">
+                If \(E\) is an elementary matrix corresponding to some row operation, then \(E\) is invertible and its inverse \(E^{-1}\) is precisely the elementary matrix associated with the inverse row operation.
+            </div>
+
+            <details>
+                <summary>Proof.</summary>
+
+            Suppose \(F\) is the elementary matrix associated with the inverse row operation.
+            If we start with the identity matrix \(I\), perform the row operation from \(E\), and then perform the row operation from \(F\), we come back to \(I\).
+            This is because the row operations are inverse.
+            In other words:
+            \(I_n=FEI_n=FE\).
+            Using the same argument but changing the order in which we perform the row operations, we obtain \(EF=I\).
+            Therefore, \(E\) is invertible with inverse \(E^{-1}=F\).
+            </details>
+
+            <div class="example-box">
+
+            The inverses of the matrices
+
+            \[
+                E_{R_1 \leftrightarrow R_3}=
+                \begin{bmatrix}
+                    0 & 0 & 1 \\
+                    0 & 1 & 0 \\
+                    1 & 0 & 0
+                \end{bmatrix},\quad
+                E_{3R_3}=
+                \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    0 & 1 & 0 \\
+                    0 & 0 & 3
+                \end{bmatrix},\quad
+                E_{R_1 + 4R_2}=
+                \begin{bmatrix}
+                    1 & 4 & 0 \\
+                    0 & 1 & 0 \\
+                    0 & 0 & 1
+                \end{bmatrix}
+            \]
+
+            are, respectively:
+
+            \[
+                E_{R_1 \leftrightarrow R_3}=
+                \begin{bmatrix}
+                    0 & 0 & 1 \\
+                    0 & 1 & 0 \\
+                    1 & 0 & 0
+                \end{bmatrix},\quad
+                E_{(1/3)R_3}=
+                \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    0 & 1 & 0 \\
+                    0 & 0 & \frac13
+                \end{bmatrix},\quad
+                E_{R_1 - 4R_2}=
+                \begin{bmatrix}
+                    1 & -4 & 0 \\
+                    0 & 1 & 0 \\
+                    0 & 0 & 1
+                \end{bmatrix}.
+            \]
+            </div>
+
+            <p>
+                More generally, the inverses of the elementary matrices are
+                \[
+                    E_{R_i\leftrightarrow R_j}^{-1} = E_{R_i\leftrightarrow R_j}, \quad
+                    E_{kR_i}^{-1} = E_{(1/k)R_i}, \quad
+                    E_{R_i+cR_j}^{-1} = E_{R_i-cR_j}.
+                \]
+            </p>
+
+            </section>
+
+            <section id="inverses-and-elementary-matrices">
+                <h2>Inverses and Elementary matrices</h2>
+
+                <p>
+                    Suppose we carry an \(m\times n\) matrix \(A\) to another matrix \(B\) by means of some elementary row operations.
+                    For example, \(B\) may be a row-echelon form of \(A\).
+                    By applying <a href=#thm-row-operations>the previous theorem</a> as many times as the number of row operations that we are performing, we see that there exist elementary matrices \(E_1,\,E_2,\,\dots,\,E_k\) such that \(B=E_{k}E_{k-1}\cdots E_{2}E_{1}A\).
+                </p>
+
+                <p>
+                    We write \(U=E_{k}E_{k-1}\cdots E_{2}E_{1}\), so that \(U\) is an invertible matrix (because it is a product of invertible matrices).
+                    The easiest way to find \(U\) is to take the identity matrix \(I_m\) and apply the same row operations (that we performed to get from \(A\) to \(B\)) to \(U\).
+                </p>
+
+                <p>
+                    In fact, if we perform the same operations on the (block) matrix \([A \, \vert \, I_m]\), the result has to be \([B\, \vert \, U]\).
+                </p>
+
+                <p>
+                    We gather this discussion by means of a theorem:
+                </p>
+
+                <div class="theorem-box" id="thm-row-equivalent">
+                    If an \(m\times n\) matrix \(A\) can be transformed into an \(m\times n\) matrix \(B\), then there exists an invertible \(m \times m\) matrix \(U\) such that \(B=UA\).
+                    Moreover, the same row operations that send \(A\to B\) send \([A\,\vert\, I_m]\to [B\,\vert \, U]\).
+                </div>
+            
+                <div class="example-box">
+                    Let
+                    \[
+                    A=
+                    \begin{bmatrix}
+                    1 & 2 & 3 \\
+                    4 & 5 & 6
+                    \end{bmatrix}.
+                    \]
+                    Calculate the reduced row-echelon form \(R\) of \(A\), and find an invertible matrix \(U\) such that \(R=UA\).
+                </div>
+
+                <details>
+                    <summary>Solution.</summary>
+
+                    Let's reduce the \(2\times 5\) matrix \([A\,\vert \, I_2]\):
+
+                    \[
+                    \begin{aligned}
+                    \left[\begin{array}{ccc|cc}
+                    1 & 2 & 3 & 1 & 0 \\
+                    4 & 5 & 6 & 0 & 1 \\
+                    \end{array}\right]
+                    &\underset{R_2-4R_1}{\longrightarrow}
+                    \left[\begin{array}{ccc|cc}
+                    1 & 2 & 3 & 1 & 0 \\
+                    0 & -3 & -6 & -4 & 1 \\
+                    \end{array}\right]
+                    \underset{-(1/3)R_2}{\longrightarrow}
+                    \left[\begin{array}{ccc|cc}
+                    1 & 2 & 3 & 1 & 0 \\
+                    0 & 1 & 2 & -\frac43 & \frac13 \\
+                    \end{array}\right]\\
+                    &\underset{R_1-2R_2}{\longrightarrow}
+                    \left[\begin{array}{ccc|cc}
+                    1 & 0 & -1 & -\frac{5}{3} & -\frac{2}{3} \\
+                    0 & 1 & 2 & -\frac43 & \frac13 \\
+                    \end{array}\right].
+                    \end{aligned}
+                    \]
+
+                    Thus, the desired matrices are
+
+                    \[
+                    R=
+                    \begin{bmatrix}
+                    1 & 0 & 1 \\
+                    0 & 1 & 2
+                    \end{bmatrix},\quad
+                    U=\frac{1}{3}
+                    \begin{bmatrix}
+                    -5 & -2 \\
+                    -4 & 1
+                    \end{bmatrix}.
+                    \]
+
+                </details>
+    
+                <p>
+                    Now, let's apply this idea to find the inverse of a matrix.
+                    In Section 2.4, we developed (without proof) a method for determining whether a square matrix \(A\) is invertible.
+                    Now, we are going to justify said method.
+                </p>
+
+                <p>
+                    Suppose that we are given a square matrix \(A\).
+                    If \(A\) is invertible, then as we mentioned in Section 2.4, we can bring \(A\) to the identity matrix \(I\) by means of some row operations.
+                    But then, <a href="#thm-row-operations">from the above</a> we know that there exists an invertible matrix \(U\) (which is a product of elementary matrices) such that \(UA=I\).
+                    As \(U\) is invertible, this gives \(A=U^{-1}\), so \(A^{-1}=U\).
+                    This means that the operations that send \(A\to I\) also send \([A\, \vert \, I]\to [I \,\vert \, A^{-1}]\), so the method that we discussed in Section 2.4 is indeed valid!
+                </p>
+
+                <p>
+                    Moreover, the above paragraph shows that an invertible matrix \(A\) is automatically a product of elementary matrices.
+                    Since elementary matrices are invertible themselves, this yields:
+                </p>
+
+                <div class="theorem-box" id="thm-invertible-characterization">
+                    A square matrix is invertible if and only if it is a product of elementary matrices.
+                </div>
+
+                In fact, this lets us say:
+
+                <div class="theorem-box" id="#thm-row-equivalent-enhanced">
+                    If \(A\) and \(B\) are both \(m\times n\) matrices, we can bring \(A\to B\) via elementary row operations if and only if there exists an invertible \(m\times m\) matrix \(U\) satisfying \(B=UA\).
+                </div>
+
+                <p>
+                    We actually say in this case that \(A\) and \(B\) are <em>row-equivalent</em>.
+                </p>
+
+                <div class=example-box>
+
+                Consider the matrix
+
+                \[
+                A=
+                \begin{bmatrix}
+                1 & 5 \\
+                1 & 11
+                \end{bmatrix}.
+                \]
+
+                Solve the following questions concerning \(A\):
+
+                <ol>
+                    <li>
+                        Determine \(A^{-1}\).  
+                    </li>
+                    <li>
+                        Write \(A\) as a product of elementary matrices.
+                    </li>
+                </ol>
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+
+                Let us find \(A^{-1}\):
+
+                \[
+                \begin{aligned}
+                \left[\begin{array}{cc|cc}
+                1 & 5 & 1 & 0 \\
+                1 & 11 & 0 & 1
+                \end{array}\right]
+                \underset{R_2-R_1}{\longrightarrow}
+                \left[\begin{array}{cc|cc}
+                1 & 5 & 1 & 0 \\
+                0 & 6 & -1 & 1
+                \end{array}\right]
+                \underset{(1/6)R_2}{\longrightarrow}
+                \left[\begin{array}{cc|cc}
+                1 & 5 & 1 & 0 \\
+                0 & 1 & -\frac16 & \frac16
+                \end{array}\right]
+                \underset{R_1-5R_2}{\longrightarrow}
+                \left[\begin{array}{cc|cc}
+                1 & 0 & \frac{11}{6} & -\frac56 \\
+                0 & 1 & -\frac16 & \frac16
+                \end{array}\right]
+                \end{aligned}
+                \]
+
+                Therefore, \(A\) is invertible with inverse
+
+                \[
+                A^{-1}=
+                \frac16
+                \begin{bmatrix}
+                11 & -5 \\
+                -1 & 1
+                \end{bmatrix}
+                =E_{R_1-5R_2}\,E_{(1/6)R_2}\,E_{R_2-R_1}.
+                \]
+
+                Note that we have written \(A^{-1}\) as a product of elementary matrices.
+                To write \(A\) as a product of elementary matrices, we can simply take the inverse of the above product:
+
+                \[
+                A=
+                (E_{R_1-5R_2}\,E_{(1/6)R_2}\,E_{R_2-R_1})^{-1}
+                =
+                E_{R_2+R_1}\, E_{6R_2}\, E_{R_1+5R_2}.
+                \]
+
+                In other words,
+
+                \[
+                A
+                =
+                \begin{bmatrix}
+                1 & 0 \\
+                1 & 1
+                \end{bmatrix}
+                \begin{bmatrix}
+                1 & 0 \\
+                0 & 6
+                \end{bmatrix}
+                \begin{bmatrix}
+                1 & 5 \\
+                0 & 1
+                \end{bmatrix}.
+                \]
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+</html>
