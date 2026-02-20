@@ -132,6 +132,10 @@ details {
 }
 
 @media print {
+    body {
+        font-family: "Libre Baskerville", serif;
+    }
+
     nav {
         display: none;
     }
