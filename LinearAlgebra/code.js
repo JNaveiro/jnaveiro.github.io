@@ -1,6 +1,7 @@
 /* Some scripts for the lecture notes */
 
 const navMenu = document.createElement("nav")
+const body = document.querySelector("body")
 
 function addTheorems() {
     var theorems = document.querySelectorAll(".theorem-box")
@@ -60,6 +61,16 @@ function createNavMenu() {
     }
     document.body.appendChild(navMenu)
 }
+
+/*---Toggle Dark Mode---*/
+
+document.addEventListener("keydown", function(e) {
+    if (e.code === "KeyI") {
+        body.classList.toggle("dark-mode")
+    }
+        console.log("Hello!")
+}
+)
 
 addTheorems()
 addPropositions()

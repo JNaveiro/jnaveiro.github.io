@@ -99,8 +99,16 @@ summary {
     border-left-color: #85c1dc;
 }
 
+body.dark-mode .theorem-box, body.dark-mode .proposition-box {
+    border-left-color: rgb(163, 212, 213);
+}
+
 .definition-box {
     border-left-color: #ef9f76;
+}
+
+body.dark-mode .definition-box {
+    border-left-color: #f9d791;
 }
 
 details {
@@ -113,6 +121,11 @@ details {
 
 .warning-box {
     border-left-color: red;
+}
+
+.dark-mode {
+    color: rgb(240, 240, 240);
+    background-color: #1f1f28;
 }
 
 @media screen and (max-width: 1010px) {
