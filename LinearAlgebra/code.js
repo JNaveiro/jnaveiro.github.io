@@ -2,6 +2,13 @@
 
 const navMenu = document.createElement("nav")
 const body = document.querySelector("body")
+var dark = localStorage.getItem("dark-mode")
+
+/*---Load dark mode if enabled on a previous session---*/
+
+if (dark == 1) {
+    body.classList.add("dark-mode")
+}
 
 function addTheorems() {
     var theorems = document.querySelectorAll(".theorem-box")
@@ -66,7 +73,19 @@ function createNavMenu() {
 
 document.addEventListener("keydown", function(e) {
     if (e.code === "KeyI") {
-        body.classList.toggle("dark-mode")
+        if (dark == 0) {
+            body.classList.add("dark-mode")
+            localStorage.setItem("dark-mode", 1)
+            dark = 1         
+        } else if (dark == 1) {
+            body.classList.remove("dark-mode")
+            localStorage.setItem("dark-mode", 0)
+            dark = 0
+        } else {
+            body.classList.add("dark-mode")
+            localStorage.setItem("dark-mode", 1)
+            dark = 1         
+        }
     }
         console.log("Hello!")
 }
