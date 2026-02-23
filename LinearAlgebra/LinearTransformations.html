@@ -271,8 +271,10 @@
             <section>
                 <h2>Examples of Linear Transformations</h2>
                 <div class="example-box">
-                    Suppose $\theta$ is an angle (measured in radians).
-                    The <b>rotation</b> $R_{\theta}\colon \RR^2 \to \RR^2$ is the transformation such that, for each $2$-vector $\bf{x}$, $R_{\theta}(\bf{x})$ is the result of rotating $\bf{x}$ counterclockwise by an angle of $\theta$ radians.
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <p style="width: 60%;">
+                    Suppose $\theta$ is an angle (measured in radians).<br>
+                    The <b>rotation</b> $R_{\theta}\colon \RR^2 \to \RR^2$ is the transformation such that, for each vector $\bf{x}$, $R_{\theta}(\bf{x})$ is the result of rotating $\bf{x}$ counterclockwise by an angle of $\theta$ radians.<br>
                     This transformation is linear, and its matrix is
                     \[
                         \begin{bmatrix}
@@ -280,16 +282,46 @@
                             \sin \theta & \cos \theta
                         \end{bmatrix}.
                     \]
+                    </p>
+                    <div style="width: 37%;">
+                        <img src="Pictures/rotation.png", alt="The basis vectors of the plane and their corresponding images under a rotation" style="width: 100%; max-height: 100%;"></img>
+                    </div>
+                    </div>
                 </div>
+                
+                <details>
+                    <summary>Proof that $R_\theta$ is linear.</summary>
+                    <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+                        <div style="width: 45%; display: flex; flex-direction: column;">
+                            <img src="Pictures/rotationSum.gif" style="width: 100%; max-height: 100%;"></img>
+                            <p style="text-align: center;">$R_{\theta}(\bf{x}+\bf{y})=R_{\theta}(\bf{x})+R_\theta(\bf{y})$</p>
+                        </div>
+                        <div style="width: 45%; display: flex; flex-direction: column;">
+                            <img src="Pictures/rotationScalar.gif" style="width: 100%; max-height: 100%;"></img>
+                            <p style="text-align: center;">$R_{\theta}(k\bf{x})=kR_{\theta}(\bf{x})$</p>
+                        </div>
+                    </div>
+                </details>
+
                 <div class="example-box">
-                    Let $\theta$ be an angle strictly between $-\pi$ and $\pi$, and consider the line $L$ in $\RR^2$ that forms an an angle of $\theta$ radians with respect to the $x$ axis.
-                    The equation of this line is $y=(\tan \theta) x$.
-                    <br>
-                    The <b>projection</b> $P_\theta \colon \RR^2 \to \RR^2$ is the linear transformation that sends each vector $\bf{x}$ in $\RR^2$ to the point $T(\bf{x})$ that lies inside $L$ and is closest to $\bf{x}$.
-                    <ol>
-                        <li>Show that $P_0$ is a linear transformation and find its matrix.</li>
-                        <li>Now, do the same thing for any angle $\theta$.</li>
-                    </ol>
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <div style="width: 60%;">
+                        <p>
+                        Let $\theta$ be an angle strictly between $-\pi$ and $\pi$, and consider the line $L$ in $\RR^2$ that forms an an angle of $\theta$ radians with respect to the $x$ axis.<br>
+                        The equation of this line is $y=(\tan \theta) x$.
+                        <br>
+                        The <b>projection</b> $P_\theta \colon \RR^2 \to \RR^2$ onto the line $L$ is the linear transformation that sends each vector $\bf{x}$ in $\RR^2$ to the point $T(\bf{x})$ that lies inside $L$ and is closest to $\bf{x}$.
+                        </p>
+                        <ol>
+                            <li>Show that $P_0$ is a linear transformation and find its matrix.</li>
+                            <li>Now, do the same for any angle $\theta$.</li>
+                        </ol>
+                        </div>
+                        <div style="width: 37%;">
+                            <img src="Pictures/projection.png", alt="A line in the plane, a vector in the plane, and the projection of the vector onto the line" style="width: 100%; max-height: 100%;"></img>
+                        </div>
+                    </div>
+                    </div>
                 </div>
                 <details>
                     <summary>Solution.</summary>
@@ -376,9 +408,16 @@
                 </details>
 
                 <div class="example-box">
-                    Let $\theta$ and $L$ be as in the previous example.
-                    The <b>reflection</b> $Q_\theta \colon \RR^2 \to \RR^2$ is the transformation that sends each $\bf{x}$ in $\RR^2$ to its mirror image with respect to the line $L$.
-                    Following the same procedure as with the projection $P_\theta$, show that $Q_\theta$ is linear and find its matrix.
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <p style="width: 60%;">
+                        Let $\theta$ and $L$ be as in the previous example.<br>
+                        The <b>reflection</b> $Q_\theta \colon \RR^2 \to \RR^2$ is the transformation that sends each $\bf{x}$ in $\RR^2$ to its mirror image with respect to the line $L$.<br>
+                        Following the same procedure as with the projection $P_\theta$, show that $Q_\theta$ is linear and find its matrix.
+                        </p>
+                        <div style="width: 37%;">
+                            <img src="Pictures/reflection.png", alt="A line in the plane, a vector in the plane, and the reflection of the vector along the line" style="width: 100%; max-height: 100%;"></img>
+                        </div>
+                    </div>
                 </div>
 
                 <details>
