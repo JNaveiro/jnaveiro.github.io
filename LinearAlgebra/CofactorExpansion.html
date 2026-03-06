@@ -157,7 +157,7 @@
                     [c_{ij}(A)]=
                     \begin{bmatrix}
                         -1 & 5 & -13 \\
-                        -8 & 4 & 14 \\
+                        -8 & 4 & -14 \\
                         4 & -2 & 16
                     \end{bmatrix}.
                 \]
@@ -170,10 +170,17 @@
                 \]
                 The above formula is known as the <b>cofactor expansion</b> of $\det(A)$ along the first row.
             </div>
+
+	<div class="warning-box">
+		Determinants are only defined for square matrices.
+		If $A$ is a nonsquare matrix, we do not have a notion of determinant of $A$.
+	</div>
+
             <p>
                 Interestingly, although determinants are defined by means of the cofactor expansion along the first row, it can be shown that we can expand along <em>any row or column</em> and still get the determinant.
                 More precisely, we have the following result, known as the <b>cofactor expansion theorem</b>.
             </p>
+
             <div class="theorem-box" id="thm-cofactor-expansion">
                 If $A=[a_{ij}]$ is an $n\times n$ matrix, then its determinant $\det(A)$ can be computed using the cofactor expansion along any row or column of $A$.
                 In other words, if $k$ is any integer between $1$ and $n$, we have
