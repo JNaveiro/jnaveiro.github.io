@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Diagonalization and Eigenvalues</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta author="Juan Manuel Lorenzo Naveiro" />
+		<meta name="description" content="" />
+		<link rel="icon" href="favicon.png">
+		<link rel="stylesheet" href="html5-reset.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="linear-algebra.css">
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+	</head>
+
+	<body>
+		<main>
+			<h1>
+				3.3 Diagonalization and Eigenvalues
+			</h1> 
+
+                        <p>
+                            In many practical problems that are tackled with linear algebra, there is a recurring need in computing large powers of a square matrix $A$.
+                            However, computing such powers can be a very costly operation, due to the amount of additions and multiplications that are involved in calculating a matrix product.
+                            Because of this, it is crucial to find a way to caltulate these powers in an efficient way.
+                        </p>
+
+                        <div class="example-box">
+                            The <em>Fibonacci sequence</em> is the sequence $F_0,\,F_1,\,F_2,\,\dots$ that is obtained by setting $F_0=0$, $F_1=1$, and the next terms are computed according to the following rule:
+                            \[
+                            F_{n}=F_{n-1}+F_{n-2}, \qquad n>1.
+                            \]
+                            The relationship above can be written as a vector equation:
+                            \[
+                                \begin{bmatrix}
+                                F_{n} \\ F_{n-1}
+                                \end{bmatrix}
+                                =
+                                \begin{bmatrix}
+                                    1 & 1 \\
+                                    1 & 0
+                                \end{bmatrix}
+                                \begin{bmatrix}
+                                F_{n-1} \\ F_{n-2}
+                                \end{bmatrix}
+                            \]
+                            Applying this equation $n-1$ times, we obtain that
+                            \[
+                                \begin{bmatrix}
+                                F_{n} \\ F_{n-1}
+                                \end{bmatrix}
+                                =
+                                \begin{bmatrix}
+                                    1 & 1 \\
+                                    1 & 0
+                                    \end{bmatrix}^{n-1}
+                                \begin{bmatrix}
+                                F_{1} \\ F_{0}
+                                \end{bmatrix}
+                                =
+                                \begin{bmatrix}
+                                    1 & 1 \\
+                                    1 & 0
+                                    \end{bmatrix}^{n-1}
+                                \begin{bmatrix}
+                                1 \\ 0
+                                \end{bmatrix}
+                            \]
+                            This means that, if we want to find a formula for $F_n$, we need to find a formula for the powers of
+                            \[
+                                A
+                                =
+                                \begin{bmatrix}
+                                    1 & 1 \\
+                                    1 & 0
+                                \end{bmatrix}.
+                            \]
+                        </div>
+
+                        <div class="example-box">
+                            If $A$ is a square matrix, we define the <em>matrix exponential</em> $e^A$ as the "power series"
+                            \[
+                            \begin{aligned}
+                                e^A&=
+                                    I+A+\frac{1}{2!}A^{2}+\frac{1}{3!}A^{3}+\frac{1}{4!}A^{4}+\,...
+                                \\&=
+                                \lim_{k\to \infty}
+                                \bigg(
+                                    I+A+\frac{1}{2!}A^{2}+\frac{1}{3!}A^{3}+\frac{1}{4!}A^{4}+\,...+\frac{1}{k!}A^{k}
+                                \bigg).
+                                \end{aligned}
+                            \]
+                            The matrix exponential appears, for instance, in solving linear systems of Ordinary Differential Equations (ODE), and its computation involves (theoretically) knowing all the powers of $A$.
+                        </div>
+
+                        <p>
+                            There are two key observations that will allow us to solve problems like the ones from these examples.
+                            The first one is that computing powers of <em>diagonal matrices</em> is particularly easy, since if $D$ is a diagonal (square) matrix, then the power $D^k$ is the diagonal matrix whose diagonal entries are the $k$-th powers of those of $D$.
+                            For instance,
+                            \[
+                                \begin{bmatrix}
+                                    2 & 0 & 0 \\
+                                    0 & 3 & 0 \\
+                                    0 & 0 & -1
+                                \end{bmatrix}^{3}
+                                =
+                                \begin{bmatrix}
+                                    8 & 0 & 0 \\
+                                    0 & 27 & 0 \\
+                                    0 & 0 & -1
+                                \end{bmatrix}.
+                            \]
+                        </p>
+                        <p>
+                            The second one is that, given a matrix $A$, if we were somehow able to find an invertible matrix $P$ and a diagonal matrix $D$ such that $A=PDP^{-1}$, then we could compute the powers of $A$ by the formula
+                            \[
+                                A^{k}=PD^{k}P^{-1}.
+                            \]
+                        </p>
+                        <p>
+                            Our objective in this section is to develop a technique to find the matrices $P$ and $D$.
+                            This technique is known as <em>diagonalization</em>.
+                        </p>
+                        <section id="eigenstuff">
+                            <h2>Eigenvalues and Eigenvectors</h2>                            
+                            <div class="definition-box">
+                                Let $A$ be an $n\times n$ square matrix.
+                                We say that a real number $\lambda$ is an <b>eigenvalue</b> of $A$ if there exists a nonzero vector $\bf{x}\neq \bf{0}$ in $\RR^n$ such that
+                                \[
+                                    A\bf{x}=\lambda \bf{x}.
+                                \]
+                                The vector $\bf{x}$ is called an <b>eigenvector</b> of $A$ associated with the eigenvalue $\lambda$ (or simply an $\lambda$-<b>eigenvector</b>).
+                            </div>
+                            <p>
+                                In general, how can we find the eigenvalues and eigenvectors of a square matrix $A$?
+                                Observe that if $\lambda$ is an eigenvalue of $A$ and $\bf{x}$ is an eigenvector of $A$ associated with $\lambda$, then we have
+                                \[
+                                A\bf{x}=\lambda \bf{x} \Rightarrow \bf{0}=\lambda\bf{x} - A\bf{x} = (\lambda I - A) \bf{x}.
+                                \]
+                                This means that a number $\lambda$ is an eigenvalue of $A$ if and only if the homogeneous system $(\lambda I - A)\bf{x}=\bf{0}$ as a nontrivial solution.
+                                From the results in Section 2.4, we know that this last condition is equivalent to $\lambda I - A$ not being invertible, and in terms of determinants, this means that $\det(\lambda I - A)=0$.
+                            </p>
+                            <div class="definition-box">
+                                If $A$ is an $n\times n$ matrix, we define a function $c_A\colon \RR \to \RR$ by the equation
+                                \[
+                                    c_{A}(x)=\det(xI-A).
+                                \]
+                                This function is a polynomial of degree $n$, known as the <b>characteristic polynomial</b> of $A$.
+                            </div>
+                            <p>
+                                From the discussion above, we arrive at the following result:
+                            </p>
+                            <div class="theorem-box">
+                                Let $A$ be an $n\times n$ matrix.
+                                <ul>
+                                    <li>
+                                        A number $\lambda$ is an eigenvalue of $A$ if and only if $c_{A}(\lambda) = 0$.
+                                    </li>
+                                    <li>
+                                        If $\lambda$ is an eigenvalue of $A$, then the $\lambda$-eigenvectors of $A$ are the nontrivial solutions to the homogeneous system \[(\lambda I-A)\bf{x}=\bf{0}.\]
+                                    </li>
+                                </ul>
+                            </div>
+                            <p>
+                                Recall that for a homogeneous system $B\bf{x}=\bf{0}$, we had a notion of <em>basic solutions</em>.
+                                If $\lambda$ is an eigenvalue of the square matrix $A$, then we will say that the <b>basic eigenvectors</b> of $A$ associated with $\lambda$ are the basic solutions of the homogeneous system $(\lambda I - A)\bf{x}=\bf{0}$.
+                            </p>
+                            <div class="example-box">
+                                Calculate the characteristic polynomial, the eigenvalues and the basic eigenvectors of
+                                \[
+                                    A
+                                    =
+                                    \begin{bmatrix}
+                                        1 & 2 & 3 \\
+                                        0 & 0 & 2 \\
+                                        0 & 1 & 1
+                                    \end{bmatrix}.
+                                \]
+                            </div>
+                            <details>
+                                <summary>Solution.</summary>
+                                <p>
+                                    The characteristic polynomial of $A$ is
+                                    \[
+                                        \begin{aligned}
+                                            c_A(x)
+                                            &=
+                                            \left\lvert
+                                            \begin{array}{ccc}
+                                                x-1 & -2 & -3 \\
+                                                0 & x & -2 \\
+                                                0 & -1 & x-1
+                                            \end{array}
+                                            \right\rvert
+                                            =
+                                            (x-1)(x^{2}-x-2)
+                                            =
+                                            (x-1)(x+1)(x-2).
+                                        \end{aligned}
+                                    \]
+                                    Therefore, there are three eigenvalues for $A$, which are $\lambda = 1$, $\lambda = -1$ and $\lambda = 2$.
+                                </p>
+                                <p>
+                                    Let us compute the basic eigenvectors of $A$ associated with $\lambda = 1$.
+                                    This amounts to solving the homogeneous system whose coefficient matrix is $I-A$, which is
+                                    \[
+                                        \begin{bmatrix}
+                                            0 & -2 & -3 \\
+                                            0 & 1 & -2 \\
+                                            0 & -1 & 0
+                                        \end{bmatrix}
+                                        \begin{bmatrix}
+                                            x \\ y \\ z
+                                        \end{bmatrix}
+                                        =
+                                        \begin{bmatrix}
+                                            0 \\ 0 \\ 0
+                                        \end{bmatrix}.
+                                    \]
+                                    Using Gaussian elimination (or direct inspection in this example), one sees that the $1$-eigenvectors of $A$ are of the form
+                                    \[
+                                    \bf{x}=t
+                                    \begin{bmatrix}
+                                        1 \\ 0 \\ 0
+                                    \end{bmatrix},
+                                    \qquad
+                                    t \textsf{ arbitrary}.
+                                    \]
+                                    Thus, a set of basic eigenvectors with basic eigenvalue $1$ is given by the single vector
+                                    \[
+                                    \bf{x}_1
+                                    =
+                                    \begin{bmatrix}
+                                        1 \\ 0 \\ 0
+                                    \end{bmatrix}.
+                                    \]
+                                </p>
+                            </details>
+                        </section>
+		</main>
+	</body>
+	<script src="code.js"></script>
+	<script src="jax.js"></script>
+</html> 
