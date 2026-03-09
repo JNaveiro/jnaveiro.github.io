@@ -23,9 +23,9 @@
 			</h1> 
 
                         <p>
-                            In many practical problems that are tackled with linear algebra, there is a recurring need in computing large powers of a square matrix $A$.
+                            In many practical problems that are tackled with linear algebra, there is a recurring need for computing large powers of a square matrix $A$.
                             However, computing such powers can be a very costly operation, due to the amount of additions and multiplications that are involved in calculating a matrix product.
-                            Because of this, it is crucial to find a way to caltulate these powers in an efficient way.
+                            Because of this, it is crucial to find a way to calculate these powers in an efficient way.
                         </p>
 
                         <div class="example-box">
@@ -124,6 +124,7 @@
                             Our objective in this section is to develop a technique to find the matrices $P$ and $D$.
                             This technique is known as <em>diagonalization</em>.
                         </p>
+
                         <section id="eigenstuff">
                             <h2>Eigenvalues and Eigenvectors</h2>                            
                             <div class="definition-box">
@@ -201,7 +202,7 @@
                                             (x-1)(x+1)(x-2).
                                         \end{aligned}
                                     \]
-                                    Therefore, there are three eigenvalues for $A$, which are $\lambda = 1$, $\lambda = -1$ and $\lambda = 2$.
+                                    Therefore, there are three eigenvalues for $A$, which are $\lambda_1 = 1$, $\lambda_2 = -1$ and $\lambda_3 = 2$.
                                 </p>
                                 <p>
                                     Let us compute the basic eigenvectors of $A$ associated with $\lambda = 1$.
@@ -237,8 +238,259 @@
                                         1 \\ 0 \\ 0
                                     \end{bmatrix}.
                                     \]
+                                    Using a similar argument, one sees that the $(-1)$-eigenvectors are the nontrivial solutions to
+                                    \[
+                                        \begin{bmatrix}
+                                            -2 & -2 & -3 \\
+                                            0 & -1 & -2 \\
+                                            0 & -1 & -2
+                                        \end{bmatrix}
+                                        \begin{bmatrix}
+                                            x \\ y \\ z
+                                        \end{bmatrix}
+                                        =
+                                        \begin{bmatrix}
+                                            0 \\ 0 \\ 0
+                                        \end{bmatrix},
+                                    \]
+                                    and a set of basic $(-1)$-eigenvectors is given by the sole vector
+                                    \[
+                                    \bf{x}_2=
+                                        \begin{bmatrix}
+                                            0 \\ 2 \\ 1
+                                        \end{bmatrix}.
+                                    \]
+                                    Finally, the $2$-eigenvectors are the nontrivial solutions to
+                                    \[
+                                        \begin{bmatrix}
+                                            1 & -2 & -3 \\
+                                            0 & 2 & -2 \\
+                                            0 & -1 & 1
+                                        \end{bmatrix}
+                                        \begin{bmatrix}
+                                            x \\ y \\ z
+                                        \end{bmatrix}
+                                        =
+                                        \begin{bmatrix}
+                                            0 \\ 0 \\ 0
+                                        \end{bmatrix},
+                                    \]
+                                    and a set of basic $2$-eigenvectors consists of the only vector
+                                    \[
+                                    \bf{x}_3
+                                        =
+                                        \begin{bmatrix}
+                                            0 \\ 1 \\ 1
+                                        \end{bmatrix}.
+                                    \]
+                                    We conclude that a set of basic eigenvectors is
+                                    \[
+                                        
+                                    \bf{x}_1
+                                    =
+                                    \begin{bmatrix}
+                                        1 \\ 0 \\ 0
+                                    \end{bmatrix}, \quad
+                                    \bf{x}_2=
+                                        \begin{bmatrix}
+                                            0 \\ 2 \\ 1
+                                        \end{bmatrix},\quad
+                                    \bf{x}_3
+                                        =
+                                        \begin{bmatrix}
+                                            0 \\ 1 \\ 1
+                                        \end{bmatrix}.
+                                    \]
                                 </p>
                             </details>
+                            <div class="example-box">
+                                Show that for any square matrix $A$, both $A$ and $A^{T}$ have the same characteristic polynomial and eigenvalues.
+                            </div>
+                            <details>
+                                <summary>Solution.</summary>
+                                <p>
+                                    We calculate the characteristic polynomial $c_{A^{T}}$:
+                                    \[
+                                        c_{A^{T}}(x)
+                                        =
+                                        \det\big(xI-A^{T}\big)
+                                        =
+                                        \det\bigg((xI-A)^{T}\bigg)
+                                        =
+                                        \det(xI-A)
+                                        =
+                                        c_{A}(x).
+                                    \]
+                                </p>
+                            </details>
+                            <div class="warning-box">
+                                A matrix can have repeated eigenvalues, in the sense that its characteristic polynomial may have a root with multiplicity greater than one.
+                                For instance, the matrix
+                                \[
+                                    \begin{bmatrix}
+                                        2 & 1 \\
+                                        0 & 2
+                                    \end{bmatrix}
+                                \]
+                                has characteristic polynomial $(x-2)^{2}$, so the eigenvalue $\lambda = 2$ is a double root in this case.
+                            </div>
+                        </section>
+
+                        <section id="diagonalization">
+                            <h2>Diagonalization</h2>
+                            <p>
+                                Recall that a square matrix $D$ is <em>diagonal</em> if all of its entries outside the main diagonal are zero.
+                                We usually denote diagonal matrices by
+                                \[
+                                    \begin{bmatrix}
+                                        d_1 & 0 & \cdots & 0 \\
+                                        0 & d_2 & \cdots & 0 \\
+                                        \vdots & \vdots & \ddots & \vdots \\
+                                        0 & 0 & \cdots & d_n
+                                    \end{bmatrix}
+                                    =
+                                    \operatorname{diag}(d_1,d_2,\dots,d_n).
+                                \]
+                                Taking products of diagonal matrices is particularly easy, since the product of two diagonal matrices takes the form
+                                \[
+                                \operatorname{diag}(d_1,d_2,\dots,d_n)
+                                \operatorname{diag}(c_1,c_2,\dots,c_n)
+                                =
+                                \operatorname{diag}(d_1c_1,d_2c_2,\dots,d_nc_n).
+                                \]
+                                As a consequence, if $D=\operatorname{diag}(d_1,d_2,\dots,d_n)$ is a diagonal matrix, its powers are
+                                \[
+                                    D^k=
+                                    \operatorname{diag}\big(d_1^k,d_2^k,\dots,d_n^k\big).
+                                \]
+                            </p>
+                            <div class="definition-box">
+                                An $n\times n$ matrix $A$ is <b>diagonalizable</b> if there exists an invertible $n\times n$ matrix $P$ such that $P^{-1}AP$ is a diagonal matrix.
+                                The matrix $P$ is called a <b>diagonalizing matrix</b> for $A$.
+                            </div>
+                            <p>
+                                Given an $n\times n$ matrix $A$, how can we check if it is diagonalizable, and how can we find a diagonalizing matrix for it?<br>
+                                Let's assume that $P$ is a diagonalizing matrix for $A$, so that $D=P^{-1}AP$ is a diagonal matrix.
+                                We decompose the matrix $P=[\bf{x}_1 \, \bf{x}_2 \, \cdots \, \bf{x}_n]$ into columns and also write $D=\operatorname{diag}(d_1,d_2,\dots,d_n)$.
+                                We have
+                                \[
+                                    D=P^{-1}AP \Rightarrow PD=AP.
+                                \]
+                                The left hand side of this last equation is
+                                \[
+                                    PD=\begin{bmatrix}
+                                        \bf{x}_1 & \bf{x}_2 & \cdots & \bf{x}_n
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                        d_1 & 0 & \cdots & 0 \\
+                                        0 & d_2 & \cdots & 0 \\
+                                        \vdots & \vdots & \ddots & \vdots \\
+                                        0 & 0 & \cdots & d_n
+                                    \end{bmatrix}
+                                    =
+                                    \begin{bmatrix}
+                                        d_1 \bf{x}_1 & d_2 \bf{x}_2 & \cdots & d_n \bf{x}_n
+                                    \end{bmatrix},
+                                \]
+                                whereas the right hand side is
+                                \[
+                                    AP=A
+                                    \begin{bmatrix}
+                                        \bf{x}_1 & \bf{x}_2 & \cdots & \bf{x}_n
+                                    \end{bmatrix}
+                                    =
+                                    \begin{bmatrix}
+                                        A \bf{x}_1 & A \bf{x}_2 & \cdots & A \bf{x}_n
+                                    \end{bmatrix}
+                                \]
+                                This means that if $P$ is a diagonalizing matrix, then each column $\bf{x}_i$ of $P$ is an eigenvector of $A$, whose corresponding eigenvalue is $d_i$.
+                                Moreover, the diagonal matrix $D$ is formed by eigenvalues of $A$.
+                                Summarizing:
+                            </p>
+                            <div class="theorem-box" id="thm-diagonal-criterion">
+                                Suppose $A$ is an $n\times n$ matrix.
+                                <ol>
+                                    <li>
+                                        $A$ is invertible if and only if there exist $n$ eigenvectors $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_n$ of $A$ such that $P=[\bf{x}_1\,\bf{x}_2\,\cdots\,\bf{x}_n]$ is an invertible matrix.
+                                        In this case, $P$ is a diagonalizing matrix for $A$.
+                                    </li>
+                                    <li>
+                                        We have $P^{-1}AP=\operatorname{diag}(\lambda_1,\lambda_2,\dots,\lambda_n)$, where each $\lambda_i$ is an eigenvalue of $A$ corresponding to the eigenvector $\bf{x}_i$.
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="example-box">
+                                Is the matrix
+                                \[
+                                    A=
+                                    \begin{bmatrix}
+                                        1 & 2 & 3 \\
+                                        0 & 0 & 2 \\
+                                        0 & 1 & 1
+                                    \end{bmatrix}
+                                \]
+                                diagonalizable?
+                                If so, find a diagonalizing matrix $P$ and a diagonal matrix $D$ such that $P^{-1}AP=D$.
+                            </div>
+                            <details>
+                                <summary>Solution.</summary>
+                                As we saw before, a set of basic eigenvectors of $A$ is given by 
+                                    \[
+                                        
+                                    \bf{x}_1
+                                    =
+                                    \begin{bmatrix}
+                                        1 \\ 0 \\ 0
+                                    \end{bmatrix}, \quad
+                                    \bf{x}_2=
+                                        \begin{bmatrix}
+                                            0 \\ 2 \\ 1
+                                        \end{bmatrix},\quad
+                                    \bf{x}_3
+                                        =
+                                        \begin{bmatrix}
+                                            0 \\ 1 \\ 1
+                                        \end{bmatrix},
+                                    \]
+                                and the associated eigenvalues are $\lambda_1 = 1$, $\lambda_2 = -1$ and $\lambda_3 = 2$.
+                                Because the matrix
+                                \[
+                                    P
+                                    =
+                                    \begin{bmatrix}
+                                        1 & 0 & 0 \\
+                                        0 & 2 & 1 \\
+                                        0 & 1 & 1
+                                    \end{bmatrix}
+                                \]
+                                is invertible (note that its determinant is $3$), we conclude that $A$ is diagonalizable and $P$ is a diagonalizing matrix.
+                                Furthermore, <a href="#thm-diagonal-criterion">the above theorem</a> states that
+                                \[
+                                    D=P^{-1}AP
+                                    =
+                                    \begin{bmatrix}
+                                        1 & 0 & 0 \\
+                                        0 & -1 & 0 \\
+                                        0 & 0 & 2
+                                    \end{bmatrix}.
+                                \]
+                                Note that we did not need to calculate $P^{-1}$ to find the diagonal matrix $D$.
+                                Nevertheless, you can check directly that the equation is correct (for instance, by checking that $PD=AP$).
+                            </details>
+
+                            <div class="example-box">
+                                Is the matrix
+                                \[
+                                    A=
+                                    \begin{bmatrix}
+                                        0 & 1 & 1 \\
+                                        1 & 0 & 1 \\
+                                        1 & 1 & 0
+                                    \end{bmatrix}
+                                \]
+                                diagonalizable?
+                                If so, find a diagonalizing matrix $P$ for $A$.
+                            </div>
                         </section>
 		</main>
 	</body>
