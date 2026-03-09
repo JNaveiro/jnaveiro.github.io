@@ -21,7 +21,6 @@
 			<h1>
 				3.3 Diagonalization and Eigenvalues
 			</h1> 
-
                         <p>
                             In many practical problems that are tackled with linear algebra, there is a recurring need for computing large powers of a square matrix $A$.
                             However, computing such powers can be a very costly operation, due to the amount of additions and multiplications that are involved in calculating a matrix product.
@@ -208,24 +207,24 @@
                                     Let us compute the basic eigenvectors of $A$ associated with $\lambda = 1$.
                                     This amounts to solving the homogeneous system whose coefficient matrix is $I-A$, which is
                                     \[
-                                        \begin{bmatrix}
-                                            0 & -2 & -3 \\
-                                            0 & 1 & -2 \\
-                                            0 & -1 & 0
-                                        \end{bmatrix}
-                                        \begin{bmatrix}
-                                            x \\ y \\ z
-                                        \end{bmatrix}
-                                        =
-                                        \begin{bmatrix}
-                                            0 \\ 0 \\ 0
-                                        \end{bmatrix}.
+                                    \begin{bmatrix}
+                                    0 & -2 & -3 \\
+                                    0 & 1 & -2 \\
+                                    0 & -1 & 0
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    x \\ y \\ z
+                                    \end{bmatrix}
+                                    =
+                                    \begin{bmatrix}
+                                    0 \\ 0 \\ 0
+                                    \end{bmatrix}.
                                     \]
                                     Using Gaussian elimination (or direct inspection in this example), one sees that the $1$-eigenvectors of $A$ are of the form
                                     \[
                                     \bf{x}=t
                                     \begin{bmatrix}
-                                        1 \\ 0 \\ 0
+                                    1 \\ 0 \\ 0
                                     \end{bmatrix},
                                     \qquad
                                     t \textsf{ arbitrary}.
@@ -235,67 +234,69 @@
                                     \bf{x}_1
                                     =
                                     \begin{bmatrix}
-                                        1 \\ 0 \\ 0
+                                    1 \\ 0 \\ 0
                                     \end{bmatrix}.
                                     \]
                                     Using a similar argument, one sees that the $(-1)$-eigenvectors are the nontrivial solutions to
                                     \[
-                                        \begin{bmatrix}
-                                            -2 & -2 & -3 \\
-                                            0 & -1 & -2 \\
-                                            0 & -1 & -2
-                                        \end{bmatrix}
-                                        \begin{bmatrix}
-                                            x \\ y \\ z
-                                        \end{bmatrix}
-                                        =
-                                        \begin{bmatrix}
-                                            0 \\ 0 \\ 0
-                                        \end{bmatrix},
+                                    \begin{bmatrix}
+                                    -2 & -2 & -3 \\
+                                    0 & -1 & -2 \\
+                                    0 & -1 & -2
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    x \\ y \\ z
+                                    \end{bmatrix}
+                                    =
+                                    \begin{bmatrix}
+                                    0 \\ 0 \\ 0
+                                    \end{bmatrix},
                                     \]
                                     and a set of basic $(-1)$-eigenvectors is given by the sole vector
                                     \[
                                     \bf{x}_2=
-                                        \begin{bmatrix}
-                                            0 \\ 2 \\ 1
-                                        \end{bmatrix}.
+                                    \begin{bmatrix}
+                                    0 \\ 2 \\ 1
+                                    \end{bmatrix}.
                                     \]
                                     Finally, the $2$-eigenvectors are the nontrivial solutions to
                                     \[
-                                        \begin{bmatrix}
-                                            1 & -2 & -3 \\
-                                            0 & 2 & -2 \\
-                                            0 & -1 & 1
-                                        \end{bmatrix}
-                                        \begin{bmatrix}
-                                            x \\ y \\ z
-                                        \end{bmatrix}
-                                        =
-                                        \begin{bmatrix}
-                                            0 \\ 0 \\ 0
-                                        \end{bmatrix},
+                                    \begin{bmatrix}
+                                    1 & -2 & -3 \\
+                                    0 & 2 & -2 \\
+                                    0 & -1 & 1
+                                    \end{bmatrix}
+                                    \begin{bmatrix}
+                                    x \\ y \\ z
+                                    \end{bmatrix}
+                                    =
+                                    \begin{bmatrix}
+                                    0 \\ 0 \\ 0
+                                    \end{bmatrix},
                                     \]
                                     and a set of basic $2$-eigenvectors consists of the only vector
                                     \[
                                     \bf{x}_3
-                                        =
-                                        \begin{bmatrix}
-                                            0 \\ 1 \\ 1
-                                        \end{bmatrix}.
-                                    \]
-                                    We conclude that a set of basic eigenvectors is
-                                    \[
-                                        
-                                    \bf{x}_1
                                     =
                                     \begin{bmatrix}
-                                        1 \\ 0 \\ 0
-                                    \end{bmatrix}, \quad
-                                    \bf{x}_2=
+                                    0 \\ 1 \\ 1
+                                    \end{bmatrix}.
+                                    \]
+                                </p>
+
+                                <p>
+                                    We conclude that a set of basic eigenvectors is
+                                    \[
+                                        \bf{x}_1
+                                        =
+                                        \begin{bmatrix}
+                                            1 \\ 0 \\ 0
+                                        \end{bmatrix}, \quad
+                                        \bf{x}_2=
                                         \begin{bmatrix}
                                             0 \\ 2 \\ 1
                                         \end{bmatrix},\quad
-                                    \bf{x}_3
+                                        \bf{x}_3
                                         =
                                         \begin{bmatrix}
                                             0 \\ 1 \\ 1
@@ -303,6 +304,7 @@
                                     \]
                                 </p>
                             </details>
+
                             <div class="example-box">
                                 Show that for any square matrix $A$, both $A$ and $A^{T}$ have the same characteristic polynomial and eigenvalues.
                             </div>
@@ -491,6 +493,168 @@
                                 diagonalizable?
                                 If so, find a diagonalizing matrix $P$ for $A$.
                             </div>
+
+                            <details>
+                                <summary>Solution.</summary>
+                                <p>
+                                    Firstly, the characteristic polynomial of $A$ is
+                                    \[
+                                        \begin{aligned}
+                                            c_A(x)&=\det(xI-A)
+                                            =
+                                            \left\lvert
+                                            \begin{array}{ccc}
+                                                x & -1 & -1 \\
+                                                -1 & x & -1 \\
+                                                -1 & -1 & x
+                                            \end{array}
+                                            \right\rvert
+                                            =
+                                            (x+1)^{2}(x-2),
+                                        \end{aligned}
+                                    \]
+                                    so the eigenvalues of $A$ are $\lambda_1 = -1$ and $\lambda_2 = 2$.
+                                </p>
+
+                                <p>
+                                    The eigenvectors associated with $\lambda_1 = -1$ are the nontrivial solutions to the homogeneous system
+                                    \[
+                                        \begin{bmatrix}
+                                            -1 & -1 & -1  \\
+                                            -1 & -1 & -1  \\
+                                            -1 & -1 & -1 
+                                        \end{bmatrix}
+                                        \bf{x}
+                                        =
+                                        \bf{0},
+                                    \]
+                                    and Gaussian elimination readily implies that a set of basic eigenvectors for $-1$ are
+                                    \[
+                                    \bf{x}_1
+                                    =
+                                    \begin{bmatrix}
+                                        -1 \\ 1 \\ 0
+                                    \end{bmatrix},\qquad
+                                    \bf{x}_2
+                                    =
+                                    \begin{bmatrix}
+                                        -1 \\ 0 \\ 1
+                                    \end{bmatrix}.
+                                    \]
+                                </p>
+
+                                <p>
+                                    We now compute the eigenvectors associated with $\lambda_2 = 2$.
+                                    These are the nontrivial solutions to
+                                    \[
+                                        \begin{bmatrix}
+                                            2 & -1 & -1  \\
+                                            -1 & 2 & -1  \\
+                                            -1 & -1 & 2
+                                        \end{bmatrix}
+                                        \bf{x}
+                                        =
+                                        \bf{0},
+                                    \]
+                                    and one sees from this that a set of basic eigenvectors is
+                                    \[
+                                        \bf{y}_1
+                                        =
+                                        \begin{bmatrix}
+                                            1 \\ 1 \\ 1
+                                        \end{bmatrix}.
+                                    \]
+                                </p>
+
+                                <p>
+                                    Take the matrix
+                                    \[
+                                        P
+                                        =
+                                        \begin{bmatrix}
+                                            \bf{x}_1 & \bf{x}_2 & \bf{y}_1
+                                        \end{bmatrix}
+                                        =
+                                        \begin{bmatrix}
+                                            -1 & -1 & 1 \\
+                                            1 & 0 & 1 \\
+                                            0 & 1 & 1
+                                        \end{bmatrix}.
+                                    \]
+                                    This matrix has eigenvectors as columns, and it is invertible (its determinant is $3$).
+                                    Therefore, $P$ is a diagonalizing matrix for $A$, and we also obtain that
+                                    \[
+                                        P^{-1}AP
+                                        =
+                                        \operatorname{diag}(-1,-1,2).
+                                    \]
+                                </p>
+                            </details>
+                            <p>
+                                Note how, in the previous example, the eigenvalue $-1$ was a double root of the characteristic polynomial $c_A$ and yielded two basic eigenvectors.
+                                Motivated by this, we make the following definition:
+                            </p>
+                            <div class="definition-box">
+                                If $\lambda$ is an eigenvalue of the square matrix $A$, we say that $\lambda$ has <b>multiplicity</b> $m$ if it occurs $m$ times as a root of the characteristic polynomial $c_A$.
+                                More precisely, we say that the multiplicity of $\lambda$ is $m$ if $(x-\lambda)^m$ is a factor of $c_A(x)$, but $(x-\lambda)^{m+1}$ is not a factor of $c_A(x)$.
+                            </div>
+                            <div class="warning-box">
+                                In general, if $\lambda$ is an eigenvalue of $A$ with multiplicity $m$, then the number of basic $\lambda$-eigenvectors is smaller than or equal to $m$.
+                            </div>
+                            <div class="theorem-box" id="thm-multiplicity">
+                                A matrix $A$ is diagonalizable if and only if, for each eigenvalue $\lambda$ of $A$, the number of basic eigenvectors of $A$ associated with $\lambda$ coincides with the multiplicity of $\lambda$.
+                            </div>
+                            <div class="example-box">
+                                Is the matrix
+                                \[
+                                    A
+                                    =
+                                    \begin{bmatrix}
+                                        3 & 1 \\
+                                        0 & 3
+                                    \end{bmatrix}
+                                \]
+                                diagonalizable?
+                                If so, find a diagonalizing matrix for $A$.
+                            </div>
+                            <details>
+                                <summary>Solution.</summary>
+                                <p>
+                                    The characteristic polynomial of $A$ is
+                                    \[
+                                        c_A(x)
+                                        =
+                                        \left\lvert
+                                            \begin{array}{cc}
+                                                x-3 & -1 \\
+                                                0 & x-3
+                                            \end{array}
+                                        \right\rvert
+                                        =
+                                        (x-3)^{2},
+                                    \]
+                                    so that $A$ has a unique eigenvalue $\lambda = 3$ (whose multiplicity is equal to $2$).
+                                    The eigenvectors associated with $\lambda = 3$ are the nontrivial solutions to
+                                    \[
+                                        \begin{bmatrix}
+                                            0 & -1 \\
+                                            0 & 0
+                                        \end{bmatrix}
+                                        \bf{x}
+                                        =
+                                        \bf{0},
+                                    \]
+                                    so one sees that a set of basic eigenvectors is given by the sole vector
+                                    \[
+                                        \bf{x}_1
+                                        =
+                                        \begin{bmatrix}
+                                            1 \\ 0
+                                        \end{bmatrix}.
+                                    \]
+                                    Since the number of basic eigenvectors is not equal to the multiplicity of $3$, <a href="#thm-multiplicity">the above theorem</a> asserts that the matrix $A$ is not diagonalizable.
+                                </p>
+                            </details>
                         </section>
 		</main>
 	</body>
