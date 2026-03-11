@@ -128,9 +128,14 @@ details {
     background-color: #1f1f28;
 }
 
+mjx-container {
+    overflow-x: auto;
+}
+
 @media screen and (max-width: 1010px) {
     main {
-        width: 100vw;
+        width: 90vw;
+        font-size: 3vw;
     }
 
     h2 {
