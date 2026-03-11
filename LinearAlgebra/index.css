@@ -1,0 +1,110 @@
+html {
+    font-family: Lato;
+    font-size: 120%;
+    background-color: #8839ef;
+    /**color: #4c4f69; **/
+    color: black;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    width: 1010px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #eff1f5;
+    padding: 1% 2% 0 2%;
+    line-height: 1.5;
+    box-shadow: 0 0 10px 5px rgb(0,0,0,0.3);
+}
+
+p {
+        margin: 1% 0 1% 0;
+        line-height: 150%;
+}
+
+a {
+    color: #d20f39;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #e64553;
+}
+
+section {
+    margin: 0%
+}
+
+strong {
+    font-style: italic;
+    color: #fe640b;
+}
+
+div.center {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 140%;
+    font-weight: 100%;
+}
+
+h2 {
+    font-weight: 100%;
+    border-bottom: solid 2px;
+}
+
+li {
+    margin-left: 2%;
+}
+
+ul {
+    padding-left: 0;
+}
+
+@media screen and (max-width: 1010px) and (min-width: 500px) {
+    main {
+        width: 100vw;
+        font-size: 50%;
+        box-shadow: none;
+    }
+
+    h2 {
+        border-bottom: solid 1px;
+    }
+
+    #midterm-grade-formula {
+        overflow: scroll;
+    }
+
+}
+
+
+@media screen and (max-width: 500px) {
+    main {
+        width: 100vw;
+        font-size: 50%;
+        box-shadow: none;
+    }
+
+    h2 {
+        border-bottom: solid 1px;
+    }
+
+    #midterm-grade-formula {
+        overflow: scroll;
+        font-size: 2vw;
+    }
+
+    #letter-grades-table, #schedule-table, #exam-dates {
+        width: 90%;
+    }
+}
