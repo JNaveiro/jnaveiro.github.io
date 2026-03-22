@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Subspaces and Spanning</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta author="Juan Manuel Lorenzo Naveiro" />
+		<meta name="description" content="" />
+		<link rel="icon" href="favicon.png">
+		<link rel="stylesheet" href="html5-reset.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="linear-algebra.css">
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+	</head>
+
+        <body>
+            <main>
+                <h1 class="center">
+                    Chapter 5: The Vector Space $\RR^n$
+                </h1>
+
+                <h1>
+                    5.1 Subspaces and Spanning
+                </h1> 
+
+                <p>
+                    This chapter is meant to bridge the gap between the more computational aspects of matrix algebra with the abstract theory of vector spaces.
+                    More precisely, we will start the study of the key concepts concerning vector spaces, but only in the particular case of $\RR^n$.
+                    Later on we will discuss the case of general vector spaces.
+                </p>
+
+                <section id="subspaces">
+                    <h2>
+                        Subspaces of $\RR^n$
+                    </h2>
+                    <p>
+                        From now on, we will be working with sets, and more particularly, with subsets of $\RR^n$.
+                        We first recall the basic ideas and notations from set theory:
+                    </p>
+                    <ul>
+                        <li>
+                            A <b>set</b> is a collection of objects, known as its <b>elements</b>.
+                            If $S$ is a set and $a$ is an element, then the notation $a\in S$ means that $a$ is an element of $S$.
+                        </li>
+                        <li>
+                            Two sets $S,\,T$ are <b>equal</b> if they have the same elements (that is, if for any element $a$ we have $a\in S$ if and only if <br>$s\in T$).
+                        </li>
+                        <li>
+                            More generally, if $S,\,T$ are sets, then we say that $S$ is a <b>subset</b> of $T$ (and we write $S\subseteq T$) if every element of $S$ is also an element of $T$.
+                            More precisely, $S\subseteq T$ if $a\in S$ implies $a\in T$.
+                        </li>
+                        <li>
+                            If $S$ and $T$ are sets, then $S=T$ if and only if $S\subseteq T$ and $T\subseteq S$.
+                        </li>
+                        <li>
+                            There exists a set that has no elements, and it is denoted by $\varnothing$.
+                            It is called the <b>empty set</b>.
+                        </li>
+                    </ul>
+
+                    <div class="definition-box" id="def-subspace">
+                        A subset $U\subseteq \RR^n$ is a (vector) <b>subspace</b> of $\RR^n$ if it satisfies the following conditions:
+
+                        <ol>
+                            <li>
+                                $\bf{0}\in U$.
+                            </li>
+                            <li>
+                                If $\bf{x}\in U$ and $\bf{y}\in U$, then $\bf{x}+\bf{y}\in U$ (we say that $U$ is <b>closed under addition</b>).
+                            </li>
+                            <li>
+                                If $\bf{x}\in U$ and $a\in \RR$, then $a\bf{x}\in U$ (we say that $U$ is <b>closed under scalar multiplication</b>).
+                            </li>
+                        </ol>
+                    </div>
+
+                    <p>
+                        The two simplest examples of vector subspaces of $\RR^n$ are the <b>zero subspace</b> $\{ \bf{0} \} $ and the whole $\RR^n$.
+                        Any subspace $U$ of $\RR^n$ that is different from $\RR^n$ and $\{\bf{0}\}$ is called a <b>proper subspace</b>.
+                    </p>
+
+                    <p>
+                        For example, given an $m\times n$ matrix $A$, we can construct a subspace of $\RR^n$ and a subspace of $\RR^m$, both associated with $A$.
+                    </p>
+
+                    <div class="definition-box">
+                        Let $A$ be an $m\times n$ matrix.
+                        The <b>null space</b> of $A$ (denoted by $\operatorname{null}(A)$) and the <b>image space</b> of $A$ (denoted by $\operatorname{im}(A)$) are defined to be the subsets
+                        \[
+                            \operatorname{null}(A)
+                            =
+                            \{ \bf{x}\in \RR^n \mid A\bf{x}=\bf{0} \},
+                            \qquad
+                            \operatorname{im}(A)
+                            =
+                            \{ A\bf{x}\mid \bf{x}\in \RR^n \} .
+                        \]
+                    </div>
+
+                    <div class="theorem-box" id="thm-null-image-spaces">
+                        If $A$ is an $m\times n$ matrix, then $\null(A)$ is a subspace of $\RR^n$ and
+                        $\im(A)$ is a subspace of $\RR^m$.
+                    </div>
+
+                    <details>
+                        <summary>Proof.</summary>
+                
+                        <p>
+                            First we prove that $\null(A)$ is a subspace of $\RR^n$.
+                            By definition, $\null(A)\subseteq \RR^n$.
+                            Moreover, $\bf{0}\in U$ because $A\bf{0}=\bf{0}$.
+                            Now, let $\bf{x}_1,\,\bf{x}_2\in \null(A)$ be two arbitrary vectors and $a\in \RR$ be any real number.
+                            We have
+                            \[
+                                A(\bf{x}_1 + \bf{x}_2)=A\bf{x}_1 + A\bf{x}_2 = \bf{0}+\bf{0}=\bf{0},
+                                \qquad
+                                A(a\bf{x})=aA\bf{x}_1=a\bf{0}=\bf{0}.
+                            \]
+                            Therefore, $\bf{x}_1+\bf{x}_2\in \null(A)$ and $a\bf{x}_1\in \null(A)$.
+                            Thus, $\null(A)$ satisfies the three defining conditions of a subspace, so $\null(A)$ is a subspace of $\RR^n$.
+                        </p>
+
+                        <p>
+                            We now prove that $\im(A)$ is a subspace of $\RR^m$.
+                            Again, we have by definition that $\im(A)\subseteq \RR^m$.
+                            In addition, $\im(A)$ contains the zero vector because $\bf{0}=A\bf{0}\in \im(A)$.
+                            <br>
+                            Take any two vectors $\bf{y}_1,\,\bf{y}_2\in \im(A)$ and any scalar $a\in \RR$.
+                            Since both $\bf{y}_1$ and $\bf{y}_2$ are in $\im(A)$, we can find vectors $\bf{x}_1$ and $\bf{x}_2$ in $\RR^n$ such that $\bf{y}_1=A\bf{x}_1$ and $\bf{y}_2=A\bf{x}_2$.
+                            As a consequence,
+                            \[
+                                \bf{y}_1+\bf{y}_2
+                                =
+                                A\bf{x}_1 + A\bf{x}_2
+                                =
+                                A(\bf{x}_1+\bf{x}_2),
+                                \qquad
+                                a\bf{y}_1
+                                =
+                                a(A\bf{x}_1)
+                                =
+                                A(a\bf{x}_1)
+                            \]
+                            are both in $\im(A)$.
+                            We conclude that $\im(A)$ is also a subspace because it satisfies the defining conditions.
+                        </p>
+
+                    </details>
+
+                    <div class="example-box">
+                        If $A$ is an $n\times n$ matrix and $\lambda\in \RR$, the <b>eigenspace</b> of $A$ corresponding to $\lambda$ is defined to be
+                        \[
+                            E_\lambda(A)
+                            =
+                            \{ \bf{x}\in \RR^n \mid A\bf{x}=\lambda \bf{x} \} 
+                            =
+                            \{ \bf{x}\in \RR^n \mid (\lambda I_n - A)\bf{x}=\bf{0} \} 
+                            =
+                            \null(\lambda I-A).
+                        \]
+                        From the above equation and the fact that <a href=#thm-null-image-spaces>the null space of a matrix is a subspace</a>, we see that $E_\lambda (A)$ is a vector subspace of $\RR^n$.
+                        Observe that $\lambda$ is an eigenvalue of $A$ if and only if $E_\lambda (A)\neq \{ 0 \} $.
+                    </div>
+
+                    <div class="example-box">
+                        Consider a line $L\subseteq \RR^2$ that passes through the origin.
+                        The equation of such a line is of the form
+                        \[
+                            ax+by=0,
+                        \]
+                        where $a$ and $b$ are both constants and at least one of them is nonzero.
+                        In other words, a vector $(x,y)\in \RR^2$ belongs to $L$ if and only if
+                        \[
+                            0=ax+by=
+                            \begin{bmatrix}
+                                a & b
+                            \end{bmatrix}
+                            \begin{bmatrix}
+                                x \\ y
+                            \end{bmatrix}.
+                        \]
+                        This means that $L$ is equal to
+                        $\null(\begin{bmatrix}a & b \end{bmatrix})$
+                        , and it is therefore a subspace of $\RR^2$ because <a href=#thm-null-image-spaces>the null space of a matrix is a subspace</a>.
+
+                        <p>
+                            Using a similar argument, one can show that a plane $\pi\subseteq \RR^3$ that contains the origin is a vector subspace of $\RR^3$.
+                        </p>
+                    </div>
+
+                    <div class="warning-box">
+                        Not every subset of $\RR^n$ is a subspace.
+                        For instance, here are some examples of subsets of $\RR^2$ that are not vector subspaces of $\RR^2$.
+                        <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+                            <div style="display: flex; flex-direction: column; width: 30%;">
+                                <img src="Pictures/circle.png" style="width: 100%; height: auto;"></img>
+                                <p style="text-align: center;">$\{ (x,y)\in\RR^2 \mid x^2 + y^2 = 1 \} $</p>
+                            </div style="display: flex; flex-direction: column; width: ;">
+                            <div style="display: flex; flex-direction: column; width: 30%;">
+                                <img src="Pictures/parabola.png" style="width: 100%; height: auto;"></img>
+                                <p style="text-align: center;">$\{ (x,y)\in\RR^2 \mid y=x^2 \} $</p>
+                            </div>
+                            <div style="display: flex; flex-direction: column; width: 30%;">
+                                <img src="Pictures/halfspace.png" style="width: 100%; height: auto;"></img>
+                                <p style="text-align: center;">$\{ (x,y)\in\RR^2 \mid xy\geq 0 \} $</p>
+                            </div>
+                        </div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+                    </div>
+                </section>
+
+                <section class="spanning-sets">
+                    <h2>Spanning sets</h2>
+
+                    <p>
+                        Recall that, when studying the solutions to a homogeneous linear system $A\bf{x}=\bf{0}$, we were interested in finding a family of solutions, called <em>basic solutions</em>, such that every solution to $A\bf{x}=\bf{0}$ is a linear combination of basic solutions.
+                        This meant that we could use a handful of solutions to $A\bf{x}=\bf{0}$ to describe all the possible solutions to this system.
+                        We now follow a similar approximation for subspaces:
+                        given a subspace $U\subseteq \RR^n$, can we find a collection of vectors $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k\in U$ such that every vector in $U$ is a linear combination of $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k$?
+                    </p>
+
+                    <div class="definition-box">
+                        Consider vectors $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k\in \RR^n$.
+                        We define the (linear) <b>span</b> of the vectors $\bf{x}_i$ as the set of all possible linear combinations of the $\bf{x}_i$, that is,
+                        \[
+                            \vecspan \{ \bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k \} 
+                            =
+                            \{ a_1 \bf{x}_1 + a_2 \bf{x}_2 + \cdots + a_k \bf{x}_k \mid a_1,\,a_2,\,\dots,\,a_k\in \RR \}.
+                        \]
+
+                        We say that $V=\vecspan\{ \bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k \}$ is <b>spanned</b> by the vectors $\bf{x}_1,\bf{x}_2,\,\cdots,\,\bf{x}_k$, that the vectors $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k$ <b>span</b> $V$, and that the set $\{ \bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k \} $ is a <b>spanning set</b> for $V$.
+                    </div>
+
+                    <div class="example-box">
+                        Consider the vectors $\bf{x}=(3,2,3)$ and $\bf{y}=(-1,2,0)$ of $\RR^3$.
+                        <ol>
+                            <li>Is $\bf{u}=(0,0,7)$ in $\vecspan\{\bf{x},\bf{y}\}$?</li>
+                            <li>Is $\bf{v}=(-11,6,-6)$ in $\vecspan\{\bf{x},\bf{y}\}$?</li>
+                        </ol>
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+
+                        <p>
+                        The vector $\bf{u}$ is in $\vecspan \{ \bf{x},\bf{y} \} $ if and only if it is a linear combination of $\bf{x}$ and $\bf{y}$.
+                        This is the same as saying that there exist constants $a_1,\,a_2\in \RR$ such that
+                        \[
+                        \bf{u}=a_1 \bf{x} + a_2 \bf{y} \iff 
+                        \begin{bmatrix}
+                            0 \\ 0 \\ 7
+                        \end{bmatrix}
+                        =
+                        a_1
+                        \begin{bmatrix}
+                            3 \\ 2\\ 3
+                        \end{bmatrix}
+                        +
+                        a_2
+                        \begin{bmatrix}
+                            -1 \\ 2 \\ 0
+                        \end{bmatrix}
+                        =
+                        \begin{bmatrix}
+                            3 & -1 \\
+                            2 & 2 \\
+                            3 & 0
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                            a_1 \\ a_2
+                        \end{bmatrix}.
+                        \]
+
+                        In other words, $\bf{u}\in \vecspan{\bf{x},\bf{y}}$ if and only if the linear system
+                        \[
+                        \begin{bmatrix}
+                            3 & -1 \\
+                            2 & 2 \\
+                            3 & 0
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                            a_1 \\ a_2
+                        \end{bmatrix}
+                        =
+                        \begin{bmatrix}
+                            0 \\ 0 \\ 7
+                        \end{bmatrix}
+                        \]
+                        is consistent.
+                        However, the Gaussian algorithm readily shows that this system is inconsistent, so $\bf{u}$ does not belong to $\vecspan \{ \bf{x},\bf{y} \} $.
+                        </p>
+
+                        <p>
+                        Arguing as with $\bf{u}$, we see that $\bf{v}\in \vecspan \{ \bf{x},\bf{y} \} $ if and only if the linear system
+                        \[
+                        \begin{bmatrix}
+                            3 & -1 \\
+                            2 & 2 \\
+                            3 & 0
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                            a_1 \\ a_2
+                        \end{bmatrix}
+                        =
+                        \begin{bmatrix}
+                            -11 \\ 6 \\ -6
+                        \end{bmatrix}
+                        \]
+                        is consistent.
+                        In this case, Gaussian elimination yields that this system has a unique solution: $a_1=-2$ and $a_2=5$.
+                        Therefore, we obtain that $\bf{v}=-2\bf{x}+5\bf{y}$, so $\bf{v}\in \vecspan \{ \bf{x},\bf{y} \} $.
+                        </p>
+
+                    </details>
+
+                    The following result is known as the <em>span theorem</em>:
+
+                    <div class="theorem-box" id="thm-span-theorem">
+                        Consider vectors $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k\in \RR^n$ and let $U=\vecspan \{ \bf{x}_1,\,\bf{x}_2,\,\cdots,\,\bf{x}_k \} $.
+                        Then the following assertions are true:
+                        <ol>
+                            <li>$U=\im(\begin{bmatrix}\bf{x}_1 & \bf{x}_2 & \cdots & \bf{x}_k\end{bmatrix})$, so $U$ is a vector subspace of $\RR^n$.</li>
+                            <li>
+                                If $V\subseteq \RR^n$ is a vector subspace of $\RR^n$ and $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k\in V$, then $U\subseteq V$.
+                            </li>
+                        </ol>
+                    </div>
+
+                    <details>
+                        <summary>Proof.</summary>
+
+                        <p>
+                            Let us prove the first assertion.
+                            Suppose $A=\begin{bmatrix}\bf{x}_1 & \bf{x}_2 & \cdots & \bf{x}_k\end{bmatrix}$ is the matrix whose columns are $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k$.
+                            If $\bf{t}=(t_1,t_2,\cdots,t_k)$ is any vector in $\RR^k$, then we have
+                            \[
+                                A\bf{t}=t_1\bf{x}_1+t_2\bf{x}_2+\cdots+t_k\bf{x}_k.
+                            \]
+                            This equation says that the elements of $\im(A)$ are precisely the linear combinations of the $\bf{x}_i$, so $U=\im(A)$.
+                            Consequently, $U$ is a subspace of $\RR^n$ because <a href=#thm-null-image-spaces>the image space of a matrix is a subspace</a>.
+                        </p>
+
+                        <p>
+                            We now proceed to prove the second statement.
+                            Let $\bf{v}$ be a vector in $\vecspan \{ \bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k \} $.
+                            Then there exist constants $t_1,\,t_2,\,\dots,\,t_k\in \RR$ such that
+                            \[
+                            \bf{v}=t_1\bf{x}_1+t_2\bf{x}_2+\cdots+t_k\bf{x}_k.
+                            \]
+                            Since $V$ is a subspace of $\RR^n$, each of the vectors $t_i\bf{x}_i$ is in $V$ (this is just the third condition in <a href=#def-subspace>the definition of subspace</a>).
+                            Now, since the sum of vectors in $V$ also belongs to $V$ (because of the second condition in <a href=#def-subspace>the definition of subspace</a>), we obtain that $\bf{v}\in V$ since it is the sum of vectors in $V$.
+                            As $\bf{v}$ was an arbitrary vector, we conclude that $U=\vecspan \{ \bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k \} \subseteq V$.
+                        </p>
+                    </details>
+
+                </section>
+            </main>
+        </body>
+	<script src="code.js"></script>
+	<script src="jax.js"></script>
+</html> 

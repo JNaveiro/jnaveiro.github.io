@@ -183,3 +183,24 @@ div#schedule-container {
         width: 90%;
     }
 }
+
+@media print {
+    html {
+        background: none;
+    }
+
+    main {
+        box-shadow: none;
+        font-family: 'Libre Baskerville';
+        width: 95%;
+        font-size: 70%;
+    }
+
+    #i-grades {
+        break-after: always;
+    }
+
+    #schedule-container {
+        font-size: 70%;
+    }
+}
