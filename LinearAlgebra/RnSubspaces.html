@@ -355,6 +355,102 @@
                         </p>
                     </details>
 
+                    <p>
+                        Because of the <a href=#thm-span-theorem>span theorem</a>, it is customary to say that $U=\vecspan \{ \bf{x}_1,\,\dots,\,\bf{x}_k \} $ is the <em>smallest subspace</em> of $\RR^n$ that contains the vectors $\bf{x}_1,\,\dots,\,\bf{x}_k$.
+                        Moreover, the span theorem makes it easy for us to check whether a subspace $V\subseteq \RR^n$ is contained in another subspace $W\subseteq \RR^n$:
+                        if we are able to find a spanning set for $V$, then $V\subseteq W$ if and only if the spanning set for $V$ is contained in $W$.
+                    </p>
+
+                    <div class="example-box">
+                        Let $\bf{x},\,\bf{y}\in \RR^n$ be two vectors.
+                        Show that
+                        \[
+                        \vecspan \{ \bf{x},\bf{y} \} = \vecspan \{ \bf{x}-2\bf{y},3\bf{y} \} .
+
+                        \]
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+
+                        <p>
+                            To make the notation simpler, let us write $U=\vecspan \{ \bf{x},\bf{y} \} $ and $V=\vecspan \{ \bf{x}-2\bf{y},3\bf{y} \} $.
+                            We have to show that $U=V$
+                            We first show that $U\subseteq V$.
+                            Due to the <a href=#thm-span-theorem>span theorem</a>, this is the same as checking that both $\bf{x}$ and $\bf{y}$ are in $V$.
+                        </p>
+
+                        <p>
+                            Note that $\bf{y}=\frac13 (3\bf{y})$.
+                            Since $3\bf{y}\in V$ and $V$ is a subspace, we get that $\bf{y}\in V$.
+                            In particular, the same reasoning gives $2\bf{y}\in V$ because $V$ is a subspace.
+                            Moreover, $\bf{x}=(\bf{x}-2\bf{y})+2\bf{y}\in V$ because it is the sum of two vectors in $V$.
+                            Since both $\bf{x}$ and $\bf{y}$ are in $V$, the <a href=#thm-span-theorem>span theorem</a> gives $U\subseteq V$.
+                        </p>
+
+                        <p>
+                            Secondly, we prove that $V\subseteq U$.
+                            As $\bf{x}$ and $\bf{y}$ are both in $U$, we have that $\bf{x}-2\bf{y}$ and $3\bf{y}$ are both in $U$ because they are linear combinations of $\bf{x}$ and $\bf{y}$.
+                            Thus, the <a href=#thm-span-theorem>span theorem</a> gives $V\subseteq U$.
+                        </p>
+
+                        <p>
+                            All in all, we showed that $U \subseteq V$ and $V\subseteq U$, so $U=V$ as desired.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        Let $\{ \bf{e}_1,\,\bf{e}_2,\,\dots,\,\bf{e}_n \} $ be the standard basis of $\RR^n$.
+                        Then $\RR^n=\vecspan\{ \bf{e}_1,\,\bf{e}_2,\,\dots,\,\bf{e}_n \}$ (try to check this as an exercise).
+                    </div>
+
+                    <div class="example-box">
+                        Consider a homogeneous linear system $A\bf{x}=\bf{0}$ and suppose $\bf{x}_1,\,\dots,\,\bf{x}_k$ is a set of basic solutions to the system.
+                        By definition of basic solutions, every solution to the system $A\bf{x}=\bf{0}$ is a linear combination of the basic solutions, so we obtain
+                        \[
+                            \null(A)
+                            =
+                            \vecspan \{ \bf{x}_1,\,\dots,\,\bf{x}_k \}. 
+                        \]
+                    </div>
+
+                    <div class="example-box">
+                        Decide whether the vectors
+                        \[
+                            \bf{x}=(1,-1,0),\quad
+                            \bf{y}=(2,-1,0),\quad
+                            \bf{z}=(1,0,1)
+                        \]
+                        span $\RR^3$ or not.
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+
+                        <p>
+                            By definition of spanning set, we have $\RR^3 = \vecspan \{ \bf{x},\bf{y},\bf{z} \} $ if and only if every vector of $\RR^3$ is a linear combination of $\bf{x},\,\bf{y},\,\bf{z}$.
+                            Suppose $(a,b,c)$ is an arbitrary element of $\RR^3$.
+                            Then $(a,b,c)$ is a linear combination of $\bf{x},\,\bf{y},\,\bf{z}$ if and only if the linear system
+                            \[
+                                \begin{bmatrix}
+                                    1 & 2 & 1 \\
+                                    -1 & -1 & 0 \\
+                                    0 & 0 & 1
+                                \end{bmatrix}
+                                \begin{bmatrix}
+                                    u_1 \\ u_2 \\ u_3
+                                \end{bmatrix}
+                                =
+                                \begin{bmatrix}
+                                    a \\ b \\ c
+                                \end{bmatrix}
+                            \]
+                            is consistent (check why this is true!).
+                            Using Gaussian elimination, it is easy to see that the above system is consistent regardless of the vector $(a,b,c)$.
+                            Thus, every vector of $\RR^3$ is a linear combination of $\bf{x},\,\bf{y},\,\bf{z}$, which means that<br>$\RR^3=\vecspan \{ \bf{x},\,\bf{y},\,\bf{z} \} $.
+                            We conclude that $\bf{x},\,\bf{y}$ and $\bf{z}$ span $\RR^3$.
+                        </p>
+                    </details>
                 </section>
             </main>
         </body>
