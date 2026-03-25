@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Independence and Dimension</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta author="Juan Manuel Lorenzo Naveiro" />
+		<meta name="description" content="" />
+		<link rel="icon" href="favicon.png">
+		<link rel="stylesheet" href="html5-reset.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="linear-algebra.css">
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+	</head>
+
+        <body>
+            <main>
+                <h1>
+                    5.2 Independence and Dimension
+                </h1> 
+
+                <p>
+                    Throughout the course, we have introduced the notion of <em>linear combination</em>.
+                    Given a set of vectors $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k\in \RR^n$, we say that a vector $\bf{x}\in \RR^n$ is a <em>linear combination</em> of $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k\in \RR^n$ if we can write it as
+                    \[
+                        \bf{x}=a_1 \bf{x}_1 + a_2 \bf{x}_2 + \cdots + a_k \bf{x}_k
+                    \]
+                    for some constants $a_1,\,a_2,\,\dots,\,a_k\in \RR$.
+                </p>
+
+                <p>
+                    However, is there more than one way to write $\bf{x}$ as a linear combination of the $\bf{x}_i$?
+                    Suppose that we can find another set of constants $b_1,\,b_2,\,\dots,\,b_k\in \RR$ such that
+                    \[
+                        \bf{x}=b_1 \bf{x}_1 + b_2 \bf{x}_2 + \cdots + b_k \bf{x}_k.
+                    \]
+                    Then, we have
+                    \[
+                        \bf{0}=\bf{x}-\bf{x}
+                        =
+                        (a_1-b_1) \bf{x}_1 + (a_2-b_2) \bf{x}_2 + \cdots + (a_k-b_k) \bf{x}_k.
+                    \]
+                </p>
+
+                <p>
+                    The equation above says that the vector $\bf{x}$ can be written in more than one way as a linear combination of the $\bf{x}_i$ if and only if we can find constants $t_1,\,t_2,\,\dots,\,t_k\in \RR$ such that at least one of the $t_i$ is different from zero and
+                    \[
+                        t_1 \bf{x}_1 + t_2 \bf{x}_2 + \cdots + t_k \bf{x}_k=\bf{0}.
+                    \]
+                    Observe that this condition <b>only depends on the</b> $\bf{x}_i$, and it does not depend on $\bf{x}$.
+                    This idea motivates the notion of linear independence.
+                </p>
+
+                <section id="linear-independence">
+
+                    <h2>Linear Independence</h2>
+
+                    <div class="definition-box">
+                        Let $\bf{x_1},\,\bf{x}_2,\,\dots,\,\bf{x}_k$ be a set of vectors in $\RR^k$.
+                        We say that the set $\{ \bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k \} $ is <b>linearly independent</b> if 
+                        \[
+                            t_1 \bf{x}_1 + t_2 \bf{x}_2 + \cdots + t_k \bf{x}_k=\bf{0}\implies t_1 = t_2 = \cdots = t_k = 0.
+                        \]
+                        Otherwise, we will say that $\{\bf{x}_1,\bf{x}_2,\,\dots,\,\bf{x}_k\}$ is <b>linearly dependent</b>.
+                    </div>
+
+                    <p>
+                        The vector equation $t_1 \bf{x}_1 + \cdots + t_k \bf{x}_k = \bf{0}$ amounts to a homogeneous linear system of equations, so the condition of linear independence amounts to saying that this system only has the trivial solution.
+                    </p>
+
+                    <div class="example-box" id="ex-linear-independence">
+                        Decide if the set $\{ (1,1,1,1),(2,0,4,5),(0,-1,3,0) \} $ is linearly dependent or not.
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+
+                        <p>
+                            Suppose that we have a linear combination of the above vectors that is equal to zero:
+                            \[
+                                t_1 (1,1,1,1) + t_2 (2,0,4,5) + t_3 (0,-1,3,0) = (0,0,0,0).
+                            \]
+                            This vector equation translates into the system of linear equations
+                            \[
+                                \left\{
+                                \begin{array}{ccccccc}
+                                    t_1 & + & 2t_2 & & & = & 0 \\
+                                    t_1 &  &  & - & t_3 & = & 0 \\
+                                    t_1 & + & 4t_2 & + & 3t_3 & = & 0 \\
+                                    t_1 & + & 5t_2 & & & = & 0 \\
+                                \end{array}
+                                \right.
+                            \]
+                            Using the Gaussian algorithm, one sees that the above system has a unique solution $t_1=t_2=t_3=0$.
+                            Thus, $\{ (1,1,1,1),(2,0,4,5),(0,-1,3,0) \} $ is a linearly independent set.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        The standard basis $\{ \bf{e}_1,\,\dots,\,\bf{e}_n \} $ of $\RR^n$ is linearly independent.
+                        Indeed, suppose we are given constants <br> $t_1,\,\dots,\,t_n\in \RR$ such that $t_1\bf{e}_1 + \dots +t_n \bf{e}_n = \bf{0}$.
+                        Then we have
+                        \[
+                        \bf{0}=t_1 \bf{e}_1 + t_2 \bf{e}_2 + \dots + t_n \bf{e}_n = 
+                        \begin{bmatrix}
+                            t_1 \\ t_2 \\ \vdots \\ t_n
+                        \end{bmatrix}
+                        \implies
+                        t_1 = t_2 = \cdots = t_n = 0.
+                        \]
+                    </div>
+
+                    <div class="example-box">
+                        Suppose $\{ \bf{x},\bf{y} \} $ is a linearly independent set in $\RR^n$.
+                        Show that the set $\{ \bf{x}+\bf{y},\bf{x}-\bf{y} \} $ is also linearly independent.
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Suppose that we have a linear combination
+                            \[
+                                a(\bf{x}+\bf{y})+b(\bf{x}-\bf{y})=\bf{0},
+                            \]
+                            where $a,\,b\in \RR$ are two scalars.
+                            We have to show that $a=b=0$.
+                        </p>
+                        <p>
+                            Note that the above equation can be rewritten as
+                            \[
+                                \bf{0}=(a+b)\bf{x}+(a-b)\bf{y},
+                            \]
+                            and since $\{\bf{x},\bf{y}\}$ is linearly independent, we have $a+b=a-b=0$.
+                            These two equations yield a linear system on $a$ and $b$, and the Gaussian algorithm readily yields $a=b=0$.
+                        </p>
+                        <p>
+                            We thus conclude that $\{ \bf{x}+\bf{y},\bf{x}-\bf{y} \} $ is linearly independent.
+                        </p>
+                    </details>
+
+                    <p>
+                        We now characterize when sets of one or two vectors are linearly independent.
+                    </p>
+
+                    <div class="example-box" id="ex-line">
+                        If $\bf{x}\in \RR^n$ is any vector, show that $\{\bf{x}\}$ is linearly independent if and only if $\bf{x}\neq \bf{0}$.
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Firstly, suppose that $\{\bf{x}\}$ is linearly independent.
+                            Then $\bf{x}$ cannot be zero.
+                            Indeed, if $\bf{x}=\bf{0}$, then the linear combination $1\bf{x}$ would be zero but contain a nonzero coefficient, contradicting that $\{\bf{x}\}$ is linearly independent.
+                        </p>
+                        <p>
+                            Conversely, suppose that $\bf{x}\neq \bf{0}$.
+                            If we have a linear combination $t\bf{x}=\bf{0}$, then automatically $t=0$ because $\bf{x}\neq\bf{0}$.
+                            Therefore, $\{\bf{x}\}$ is a linearly independent set.
+                        </p>
+                    </details>
+
+                    <p>
+                        If $\bf{x}$ and $\bf{y}$ are two vectors in $\RR^n$, then we say that $\bf{x}$ and $\bf{y}$ are <b>parallel</b> if either $\bf{x}$ is a scalar multiple of $\bf{y}$ or $\bf{y}$ is a scalar multiple of $\bf{x}$.
+                    </p>
+
+                    <div class="example-box" id="ex-parallel">
+                        Suppose $\bf{x},\,\bf{y}\in\RR^n$ are two vectors.
+                        Show that $\{\bf{x},\bf{y}\}$ is linearly dependent if and only if $\bf{x}$ and $\bf{y}$ are parallel.
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                        Firstly, suppose $\{\bf{x},\bf{y}\}$ is linearly dependent.
+                        This means that there exists a linear combination $u\bf{x}+v\bf{y}=\bf{0}$ where either $u\neq 0$ or $v\neq 0$.
+                        For instance, say $u\neq 0$.
+                        Then we can solve for $\bf{x}$ to obtain $\bf{x}=-\frac{v}{u}\bf{y}$, so that $\bf{x}$ and $\bf{y}$ are parallel.
+                        </p>
+                        <p>
+                        Secondly, assume that $\bf{x}$ and $\bf{y}$ are parallel.
+                        Then one of these vectors is a multiple of the other.
+                        For example, we can assume $\bf{x}=a\bf{y}$ for some scalar $a\in \RR$.
+                        Then we can rewrite this equation as $1\bf{x}-a\bf{y}=\bf{0}$, so that we have a linear combination of $\bf{x}$ and $\bf{y}$ that gives zero without the coefficients of the combination being zero.
+                        We conclude that $\{\bf{x},\bf{y}\}$ is a linearly dependent set.
+                        </p>
+                    </details>
+                </section>
+
+                <section id="matrices-linear-independence">
+                    <h2>Matrices and Linear Independence</h2>
+
+                    <p>
+                        As we have noticed when solving <a href=#ex-linear-independence>a previous example</a>, checking if a set of vectors in $\RR^n$ is linearly independent amounted to checking if an associated homogeneous system of linear equations has only the trivial solution.
+                        The reason for this is that if $\bf{c}_1,\,\bf{c}_2,\,\dots,\,\bf{c}_k$ are vectors in $\RR^n$ and $A=[\bf{c}_1\quad \bf{c}_2 \quad \cdots \quad \bf{c}_k]$, then the linear combinations of $\bf{c}_1,\,\bf{c}_2,\,\dots,\,\bf{c}_k$ are precisely the vectors of the form $A\bf{x}$, where $\bf{x}\in \RR^k$
+                        (cf. the <a href="RnSubspaces.html#thm-span-theorem">span theorem</a>).
+                        This allows us to give a matrix interpretation of the notions of spanning and linear independence.
+                    </p>
+
+                    <div class="theorem-box" id="thm-independence-matrix-columns">
+                        Suppose $A$ is an $n\times k$ matrix with columns $\bf{c}_1,\,\bf{c}_2,\,\dots,\,\bf{c}_k$. Then:
+                        <ol>
+                            <li>
+                                $\{ \bf{c}_1,\,\bf{c}_2,\,\dots,\,\bf{c}_k \} $ is a linearly independent set
+                                if and only if
+                                the homogeneous system $A\bf{x}=\bf{0}$ only has the trivial solution $\bf{x}=\bf{0}$.
+                            </li>
+                            <li>
+                                $\RR^n = \vecspan \{ \bf{c}_1,\bf{c}_2,\,\dots,\,\bf{c}_k \} $ if and only if the linear system $A\bf{x}=\bf{b}$ is consistent for all vectors $\bf{b}\in \RR^n$.
+                            </li>
+                        </ol>
+                    </div>
+
+                    <p>
+                        In the case of square matrices, we can say even more:
+                    </p>
+                    
+                    <div class="theorem-box">
+                        Let $A$ be an $n\times n$ matrix.
+                        The following conditions are equivalent:
+                        <ol>
+                            <li>
+                                $A$ is invertible.
+                            </li>
+                            <li>
+                                The columns of $A$ are linearly independent.
+                            </li>
+                            <li>
+                                The columns of $A$ span $\RR^n$.
+                            </li>
+                            <li>
+                                The rows of $A$ are linearly independent.
+                            </li>
+                            <li>
+                                The rows of $A$ span $\RR^n$.
+                            </li>
+                        </ol>
+                    </div>
+
+                    <details>
+                        <summary>Proof.</summary>
+
+                        <p>
+                            Let us first show that the conditions 1 and 2 are equivalent.
+                            By the inverse theorem, $A$ is invertible if and only if the homogeneous system $A\bf{x}=\bf{0}$ only has the trivial solution $\bf{x}=\bf{0}$.
+                            But <a href=#thm-independence-matrix-columns>the preceding theorem</a> states that this last condition is equivalent to the columns of $A$ being linearly independent, so 1 and 2 are equivalent.
+                        </p>
+
+                        <p>
+                            We now prove that 1 and 3 are equivalent.
+                            Using the inverse theorem again, $A$ is invertible if and only if for every <br>$\bf{b}\in \RR^n$ the linear system $A\bf{x}=\bf{b}$ is consistent, and <a href=#thm-independence-matrix-columns>the preceding theorem</a> says that this is equivalent to the columns of $A$ spanning $\RR^n$, so the assertion is proved.
+                        </p>
+
+                        <p>
+                            Finally, note that $A$ is invertible if and only if $A^T$ is invertible, and since the columns of $A^T$ are precisely the rows of $A$, we conclude that 1 is also equivalent to both 4 and 5.
+                        </p>
+                    </details>
+                </section>
+
+                <section id="dimension">
+                    <h2>Dimension</h2>
+
+                    We now combine the notions of spanning set and linearly independent set.
+
+                    <div class="definition-box">
+                       Suppose $U\subseteq \RR^n$ is a vector subspace.
+                       We say that a subset $B=\{ \bf{x}_1,\bf{x}_2,\dots,\bf{x}_k \} $ is a <b>basis</b> of $U$
+                       if it satisfies the following two conditions:
+                       <ol>
+                           <li>$\{ \bf{x}_1,\bf{x}_2,\dots,\bf{x}_k \} $ spans $U$ (that is, $U=\vecspan \{ \bf{x}_1,\bf{x}_2,\dots,\bf{x}_k \} $).</li>
+                           <li>$\{ \bf{x}_1,\bf{x}_2,\dots,\bf{x}_k \} $ is linearly independent.</li>
+                       </ol>
+                    </div>
+
+                    <p>
+                        In other words, if $U$ is a vector subspace, a basis $B$ of $U$ contains enough elements so that every vector in $U$ is a linear combination of elements of $B$, but not too many so that we have "redundant" vectors.
+                    </p>
+
+                    <p>
+                        If $U$ is a subspace of $\RR^n$, and $B\subseteq U$ is a basis of $U$, then the number of elements of $B$ tells us the amount of different directions in which we can move along $U$.
+                        This number is known as the <em>dimension</em> of $U$.
+                        However, in order for this number to make sense, we need to first make sure that two different bases of $U$ always have the same number of elements.
+                    </p>
+
+                    <div class="theorem-box" id="thm-comparison">
+                        Suppose $U$ is a subspace of $\RR^n$.
+                        If $\{ \bf{x}_1,\dots,\bf{x}_k \}\subseteq U$ is a linearly independent set and $\{ \bf{y}_1,\dots,\bf{y}_l \} \subseteq U$ is a spanning set for $U$, then $k\leq l$.
+                    </div>
+
+                    <p>
+                        We omit the proof for now (we will see a general proof when we discuss vector spaces).
+                    </p>
+
+                    <div class="theorem-box">
+                        Let $U$ be a subspace of $\RR^n$.
+                        Then all bases of $U$ have the same number of elements.
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+
+                        <p>
+                            Suppose $\{ \bf{x}_1,\dots,\bf{x}_k \} $ and $\{ \bf{y}_1,\dots,\bf{y}_l \} $ are two bases of $U$.
+                            We have to prove that $k=l$.
+                        </p>
+
+                        <p>
+                        Since $\{ \bf{x}_1,\dots,\bf{x}_k \} $ is a linearly independent set and $\{ \bf{y}_1,\dots,\bf{y}_l \} $ is a spanning set for $U$, we have $k\leq l$ by <a href=#thm-comparison>the above theorem</a>.
+                        We can repeat this argument interchanging the $\bf{x}_i$'s and the $\bf{y}_j$'s to obtain $l \leq k$.
+                        Therefore, $k=l$ as desired.
+                        </p>
+                    </details>
+
+                    <p>
+                        The fact that two bases of a subspace $U\subseteq \RR^n$ have the same number of elements allows us to give a precise definition of dimension.
+                    </p>
+
+                    <div class="definition-box">
+                        Let $U\subseteq \RR^n$ be a vector subspace.
+                        We define the <b>dimension</b> of $U$, denoted by $\dim U$, as the number of elements in any basis of $U$.
+                        In other words, if $\{ \bf{x}_1,\dots,\bf{x}_k \} $ is any basis of $U$, we define
+                        \[
+                            \dim U = k.
+                        \]
+                    </div>
+
+                    <div class="example-box">
+                        $\{ \bf{e}_1,\bf{e}_2,\dots,\bf{e}_n \} $ is a basis of $\RR^n$.
+                        Consequently, $\dim \RR^n = n$.
+                    </div>
+
+                    <div class="example-box">
+                        $\dim \{ \bf{0} \}=0 $.
+                        This is because the only (nonempty) subset of $\{ \bf{0} \} $ is itself, <a href=#ex-line>which is not linearly independent</a>, so it is not a basis of $\{ \bf{0} \} $.
+                    </div>
+
+                </section>
+
+                <div class="example-box">
+                    Consider the set
+                    \[
+                        U= \{ (x,y,z)\in \RR^3 \mid x-y+2z=0 \}.
+                    \]
+                    Show that $U$ is a subspace of $\RR^3$, find a basis of $U$ and calculate $\dim U$.
+                </div>
+
+                <details>
+                    <summary>Solution.</summary>
+
+                    <p>
+                        Observe that $U$ is the set of solutions of the homogeneous linear equation $x-y+2z=0$.
+                        Equivalently, $U$ is the null space of the matrix $A=[1\quad -1\quad 2]$.
+                        Thus, since the null space of a matrix is a vector subspace, we deduce that $U$ is a vector subspace of $\RR^3$.
+                    </p>
+
+                    <p>
+                        Now, in order to find a basis of $U$, let us first describe what an element $\bf{x}\in U$ looks like.
+                        If we solve, for example, for $y$ in the equation $x-y+2z=0$, we see that the elements of $U$ are of the form
+                        \[
+                        \bf{x}
+                        =
+                        \begin{bmatrix}
+                            s\\
+                            s+2t\\
+                            t
+                        \end{bmatrix}
+                        =
+                        s
+                        \begin{bmatrix}
+                            1 \\ 1 \\ 0
+                        \end{bmatrix}
+                        +
+                        t
+                        \begin{bmatrix}
+                            0 \\ 2 \\ 1
+                        \end{bmatrix},
+                        \quad
+                        s,\,t
+                        \text{ arbitrary.}
+                        \]
+                    </p>
+
+                    <p>
+                        The above equation shows that the elements of $U$ are precisely the linear combinations of $(1,1,0)$ and $(0,2,1)$,
+                        which yields
+                        \[
+                            U
+                            =
+                            \vecspan
+                            \left\{
+
+                            \begin{bmatrix}
+                                1 \\ 1 \\ 0
+                            \end{bmatrix},
+                            \begin{bmatrix}
+                                0 \\ 2 \\ 1
+                            \end{bmatrix}
+
+                            \right\}
+                        \]
+                        In addition, the set $\{(1,1,0),(0,2,1)\}$ is linearly independent because $(1,1,0)$ and $(0,2,1)$ <a href=#ex-parallel>are not parallel</a>.
+                        We thus conclude that a basis of $U$ is
+                        \[
+                            \left\{
+
+                            \begin{bmatrix}
+                                1 \\ 1 \\ 0
+                            \end{bmatrix},
+                            \begin{bmatrix}
+                                0 \\ 2 \\ 1
+                            \end{bmatrix}
+
+                            \right\}.
+                        \]
+                        Since this basis has two elements, we obtain that $\dim U = 2$.
+                    </p>
+                </details>
+
+                <p>
+                    The following theorem gives more information on how to find a basis of a vector subspace.
+                    We will prove it later on when we deal with abstract vector spaces.
+                </p>
+
+                <div class="theorem-box" id="thm-basis">
+                    Suppose $U$ is a subspace of $\RR^n$.
+                    Then the following assertions are true:
+                    <ol>
+                        <li>$U$ has a basis and $\dim U \leq n$.</li>
+                        <li>If $B$ is a basis of $U$ and $T$ is a linearly independent set in $U$, then $T$ can be enlarged to a basis of $U$ by adding appropriate elements of $B$.</li>
+                        <li>If $S$ is a spanning set for $U$, then $S$ contains a basis of $U$.</li>
+                    </ol>
+                </div>
+
+                This theorem has two important consequences:
+
+                <div class="theorem-box">
+                    If $U\subseteq \RR^n$ is a vector subspace with $\dim U = k$ and $B\subseteq U$ is a set with exactly $k$ elements, then the following conditions are equivalent:
+                    <ol>
+                        <li>$B$ is a spanning set for $U$.</li>
+                        <li>$B$ is linearly independent.</li>
+                        <li>$B$ is a basis of $U$.</li>
+                    </ol>
+                </div>
+
+                <details>
+                    <summary>Proof.</summary>
+
+                    <p>
+                        Firstly, suppose that $B$ is independent.
+                        Then part 1 of <a href=#thm-basis>the previous theorem</a> asserts that $B$ is contained in a basis $B'$ of $U$.
+                        Since $U$ has dimension $k$, $B'$ has exactly $k$ elements, so necessarily $B=B'$, which means that $B$ is a basis of $U$.
+                    </p>
+
+                    <p>
+                        Secondly, assume $B$ is a spanning set.
+                        We use part 2 of <a href=#thm-basis>the previous theorem</a> to conclude that $B$ contains a basis $B'$.
+                        As $B'$ has $k$ elements because $\dim U =k$, we have $B'=B$, so $B$ is once again a basis of $U$.
+                    </p>
+
+                </details>
+
+                <div class="theorem-box">
+                    Suppose $U,\,W$ are subspaces of $\RR^n$ such that $U\subseteq W$.
+                    Then,
+                    <ol>
+                        <li>$\dim U \leq \dim W$.</li>
+                        <li>If $\dim U=\dim W$, then $U=W$.</li>
+                    </ol>
+                </div>
+
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        If $B$ is a basis of $U$, then $B\subseteq U \subseteq W$ is linearly independent, so it is contained in a basis $B'$ of $W$.
+                        This means that $\dim U$ (the number of vectors in $B$) has to be at most $\dim W$ (the number of vectors in $B'$), which proves 1.
+                    </p>
+                    <p>
+                        We now prove 2.
+                        If $\dim U=\dim W$, then any basis $B$ of $U$ is in particular an independent set inside $W$ consisting of $\dim W$ elements, so $B$ is also a basis of $W$.
+                        This yields $U=\vecspan\, B = W$.
+                    </p>
+                </details>
+
+                <div class="example-box">
+                    Find a basis of $\RR^3$ that contains the vector $(1,1,1)$.
+                </div>
+
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Because $\dim \RR^3 = 3$, it suffices to enlarge the set $\{(1,1,0)\}$ to a linearly independent set that has three vectors.
+                        We can do this by adding elements of the standard basis of $\RR^n$ appropriately.
+                    </p>
+                    <p>
+                        Let us take $\bf{e}_1=(1,0,0)$.
+                        Then $\{ (1,1,0),(1,0,0) \} $ is linearly independent because $(1,1,0)$ and $(1,0,0)$ are not parallel.
+                    </p>
+                    <p>
+                    Now, what happens if we try to add $\bf{e}_2=(0,1,0)$?
+                    In this case, $\{ (1,1,0),(1,0,0),(0,1,0) \} $ is <em>not</em> linearly independent because
+                    \[
+                        (1,1,0)-(1,0,0)-(0,1,0)=(0,0,0).
+                    \]
+                    However, if we add $\bf{e}_3=(0,0,1)$ instead of $\bf{e}_2$, we see that
+                    \[
+                        \{(1,1,0),(1,0,0),(0,0,1)\}
+                    \]
+                    is indeed linearly independent.
+                    A quick way to see this is to notice that the matrix
+                    \[
+                        A=
+                        \begin{bmatrix}
+                            1 & 1 & 0 \\
+                            1 & 0 & 0 \\
+                            0 & 0 & 1
+                        \end{bmatrix}
+                    \]
+                    is invertible (because its determinant is $-1\neq 0$), so its columns are linearly independent.
+                    Since $\RR^3$ is three-dimensional and $\{(1,1,0),(1,0,0),(0,0,1)\}$ is a linearly independent set of three vectors, we conclude that
+                    \[
+                        \{ (1,1,0),(1,0,0),(0,0,1) \} 
+                    \]
+                    is a basis of $\RR^3$ containing $(1,1,0)$.
+                    </p>
+                </details>
+
+            </main>
+        </body>
+	<script src="code.js"></script>
+	<script src="jax.js"></script>
+</html> 
