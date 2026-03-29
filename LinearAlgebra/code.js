@@ -26,6 +26,14 @@ function addPropositions() {
     }
 }
 
+function addCorollaries() {
+    var corollaries = document.querySelectorAll(".corollary-box")
+
+    for (var i=0; i < corollaries.length; i++) {
+        corollaries[i].innerHTML = "<b>Corollary.</b>" + corollaries[i].innerHTML
+    }
+}
+
 function addDefinitions() {
     var definitions = document.querySelectorAll(".definition-box")
 
@@ -96,4 +104,5 @@ addPropositions()
 addDefinitions() 
 addExamples()
 addWarnings()
+addCorollaries()
 createNavMenu()

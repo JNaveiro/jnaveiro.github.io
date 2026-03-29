@@ -83,7 +83,7 @@ li {
     margin-left: 2%;
 }
 
-details, .theorem-box, .example-box, .proposition-box, .definition-box, .warning-box {
+details, .theorem-box, .example-box, .proposition-box, .definition-box, .warning-box, .corollary-box {
     border: solid rgb(180, 180, 180) 1px;
     border-radius: 10px;
     border-left-width: 5px;
@@ -95,11 +95,11 @@ summary {
     font-weight: bold;
 }
 
-.theorem-box, .proposition-box {
+.theorem-box, .proposition-box, .corollary-box {
     border-left-color: #85c1dc;
 }
 
-body.dark-mode .theorem-box, body.dark-mode .proposition-box {
+body.dark-mode .theorem-box, body.dark-mode .proposition-box, body.dark-mode .corollary-box {
     border-left-color: rgb(163, 212, 213);
 }
 

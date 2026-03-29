@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Rank of a Matrix</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta author="Juan Manuel Lorenzo Naveiro" />
+		<meta name="description" content="" />
+		<link rel="icon" href="favicon.png">
+		<link rel="stylesheet" href="html5-reset.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="linear-algebra.css">
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+	</head>
+
+        <body>
+            <main>
+                <h1>
+                    5.4 Rank of a Matrix
+                </h1> 
+
+                <p>
+                    In this section we revisit the notion of rank for a matrix, and develop ways to apply the Gaussian algorithm so as to solve problems concerning spanning sets and linear independence.
+                </p>
+
+                <section id="row-column-spaces">
+                    <h2>The Row and Column Spaces</h2>
+
+                    <div class="definition-box">
+                        Let $A$ be an $m\times n$ matrix.
+                        We define the <b>column space</b> $\col A$ of $A$ as the subspace of $\RR^m$ that is spanned by the columns of $A$.
+                        Similarly, the <b>row space</b> $\row A$ of $A$ is the subspace of $\RR^n$ that is spanned by the rows od $A$.
+                    </div>
+
+                    <p>
+                        Note that $\col A = \im A$.
+                    </p>
+
+                    <p>
+                        Our first objective is to develop a way to apply the Gaussian algorithm to calculate bases of $\row A$ and $\col A$.
+                        This will allow us to calculate a basis for any subspace of $\RR^n$ in terms of a spanning set.
+                        To start, we will relate the elementary row operations for matrices with <em>elementary operations</em> that we may do with sets of vectors.
+                    </p>
+
+                    <div class="definition-box">
+                        Let $\{ \bf{x}_1,\dots,\bf{x}_k \} $ be a set of vectors in $\RR^n$.
+                        We define three <b>elementary operations</b> on the set $\{ \bf{x}_1,\dots,\bf{x}_k \} $.
+                        <ol style="list-style-type: upper-roman;">
+                            <li>Interchanging two vectors in the set.</li>
+                            <li>Multiplying one of the vectors in the set by a nonzero real number.</li>
+                            <li>Adding a multiple of a vector in the set to another of the vectors in the set.</li>
+                        </ol style="list-style-type: ;">
+                    </div>
+
+                    <div class="warning-box">
+                        The operation (I) above does not actually do anything in terms of sets, but it is important to still mention it as it is the analogue of the row operations of type I.
+                    </div>
+
+                    <div class="theorem-box">
+                        Let $U\subseteq \RR^n$ be a subspace and assume that $\{ \bf{x}_1,\dots,\bf{x}_k \} $ is a spanning set of $U$.
+                        Then the result of applying an elementary operation to $\{ \bf{x}_1,\dots,\bf{x}_k \} $ is also a spanning set of $U$.
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            We will prove the result for operations of type (III), and the proof for the other two cases is left as an exercise.
+                        </p>
+                        <p>
+                            Let us apply an operation of type (III) to $\{ \bf{x}_1,\dots,\bf{x}_k \} $.
+                            In other words, we are adding a multiple of a vector in the set (let us suppose that the vector is $\bf{x}_j$) to another vector (say, $\bf{x}_i$).
+                            In other words, we are performing the transformation
+                            \[
+                            \{ \bf{x}_1,\dots,\bf{x}_i,\dots,\bf{x}_j,\dots,\bf{x}_k \} \to
+                            \{ \bf{x}_1,\dots,\bf{x}_i+c\bf{x}_j,\dots,\bf{x}_j,\dots,\bf{x}_k \}. 
+                            \]
+                            Thus, we are replacing $\bf{x}_i$ with $\bf{x}_i+c\bf{x}_j$, where $c\in \RR$ is some constant.
+                            We thus have to check if
+                            \[
+                            \vecspan\{ \bf{x}_1,\dots,\bf{x}_i,\dots,\bf{x}_j,\dots,\bf{x}_k \} =
+                            \vecspan\{ \bf{x}_1,\dots,\bf{x}_i+c\bf{x}_j,\dots,\bf{x}_j,\dots,\bf{x}_k \} .
+                            \]
+                        </p>
+                        <p>
+                            Let's first prove that
+                            \[
+                            \vecspan\{ \bf{x}_1,\dots,\bf{x}_i,\dots,\bf{x}_j,\dots,\bf{x}_k \} \subseteq
+                            \vecspan\{ \bf{x}_1,\dots,\bf{x}_i+c\bf{x}_j,\dots,\bf{x}_j,\dots,\bf{x}_k \}. 
+                            \]
+                            By the <a href=RnSubspaces.html#thm-span-theorem>span theorem</a>, it is enough to prove that the vectors $\bf{x}_1,\dots,\bf{x}_i,\dots,\bf{x}_j,\dots,\bf{x}_k$ are all contained in the right hand side.
+                            This is clear for the vectors $\bf{x}_j$ when $j\neq i$, so we have to see if $\bf{x}_i$ is also contained in the right hand side.
+                            To do this, we can observe that
+                            \[
+                                \bf{x}_i = (\bf{x}_i+c\bf{x}_j) - c\bf{x}_j\in\vecspan\{ \bf{x}_1,\dots,\bf{x}_i+c\bf{x}_j,\dots,\bf{x}_j,\dots,\bf{x}_k \}
+                            \]
+                            because it is a linear combination of elements in the right hand side.
+                            We thus conclude that the above inclusion is true.
+                        </p>
+
+                        <p>
+                            We now prove the inclusion
+                            \[
+                                \vecspan\{ \bf{x}_1,\dots,\bf{x}_i+c\bf{x}_j,\dots,\bf{x}_j,\dots,\bf{x}_k \}\subseteq
+                                \vecspan\{ \bf{x}_1,\dots,\bf{x}_i,\dots,\bf{x}_j,\dots,\bf{x}_k \} 
+                            \]
+                            This is now a more direct application of the <a href=RnSubspaces.html#thm-span-theorem>span theorem</a>.
+                            Indeed, all of the vectors $\bf{x}_1,\dots,\bf{x}_i+c\bf{x}_j,\dots,\bf{x}_j,\dots,\bf{x}_k$ are linear combinations of vectors in the right hand side, and thus the inclusion follows from the span theorem.
+                            This concludes the proof.
+                        </p>
+                    </details>
+
+                    <div class="corollary-box">
+                        If $A$ and $B$ are matrices of the same size and we can go from $A$ to $B$ by performing a sequence of elementary row operations, then $\row A = \row B$.
+                    </div>
+
+                    <div class="warning-box">
+                        In general, if $A\to B$ by row operations, it is not true that $\col A = \col B$.
+                    </div>
+
+                    <p>
+                        Because of the above corollary, if $A$ is any matrix, then it has the same row space as any of its row-echelon forms.
+                        However, is there a way to quickly determine a basis of the row space of a row-echelon matrix?
+                    </p>
+
+                    <p>
+                        To get some inspiration, let us look at the row-echelon matrix
+                        \[
+                            R
+                            =
+                            \begin{bmatrix}
+                                1 & 2 & 0 & 3 \\
+                                0 & 1 & -2 & 0 \\
+                                0 & 0 & 0 & 1 \\
+                                0 & 0 & 0 & 0
+                            \end{bmatrix}.
+                        \]
+                        Then its row space is
+                        \[
+                            \row R 
+                            =
+                            \vecspan \big\{ (1,2,0,3),(0,1,-2,0),(0,0,0,1),(0,0,0,0) \big\}
+                            =
+                            \vecspan \big\{ (1,2,0,3),(0,1,-2,0),(0,0,0,1)\big\},
+                        \]
+                        meaning that the nonzero rows of $R$ are a spanning set for $\row R$.
+                        Moreover, one can quickly show that these rows are also linearly independent, so that they give a basis of $\row R$.
+                    </p>
+
+                    <p>
+                        The general case works exactly in the same way as what happens for the above matrix $R$, so we obtain:
+                    </p>
+
+                    <div class="theorem-box">
+                        If $R$ is a row-echelon matrix, then the nonzero rows of $R$ are a basis of $\row R$.
+                    </div>
+    
+                    <p>
+                        But now, what about the column space?
+                        Coming back to the matrix
+                        \[
+                            R
+                            =
+                            \begin{bmatrix}
+                                1 & 2 & 0 & 3 \\
+                                0 & 1 & -2 & 0 \\
+                                0 & 0 & 0 & 1 \\
+                                0 & 0 & 0 & 0
+                            \end{bmatrix},
+                        \]
+                        we see that the column space of $R$ is
+                        \[
+                            \col R
+                            =
+                            \vecspan \big\{ (1,0,0,0),(2,1,0,0),(0,-2,0,0),(3,0,1,0) \big\}
+                            =
+                            \vecspan \big\{ (1,0,0,0),(2,1,0,0),(3,0,1,0) \big\}.
+                        \]
+                        We also see that the columns of $R$ containing leading ones are a basis of $\col R$.
+                    </p>
+
+                    <p>
+                        Now, take a matrix that is not in row-echelon form.
+                        For instance, let
+                        \[
+                        A=\begin{bmatrix}
+                            1 & 4 & -4 & 3\\
+                            0 & 1 & -2 & -4\\
+                            0 & 0 & 0 & 3\\
+                            2 & 4 & 0 & 8\\
+                        \end{bmatrix}.
+                        \]
+                        Then one can see that its reduced row-echelon form is precisely $R$.
+                        Now, while $\col A$ and $\col R$ are not necessarily the same, we can relate these two spaces.
+                        Indeed, recall that there exists an invertible matrix $U$ such that $UA=R$.
+                        This implies $A=U^{-1}R$.
+                        In particular, if we write the columns of $R$ as $\bf{r}_1,\dots,\bf{r}_4$, we obtain
+                        \[
+                        \col A = \col (U^{-1}R) = \vecspan \big\{ U^{-1}\bf{r}_1, U^{-1}\bf{r}_2, U^{-1}\bf{r}_3, U^{-1}\bf{r}_4\big\}.
+                        \]
+                    </p>
+
+                    <p>
+                        We claim that $\big\{ U^{-1}\bf{r}_1, U^{-1}\bf{r}_2, U^{-1}\bf{r}_4\big\}$ (the set of columns of $A$ at the positions of the leading ones) is a basis of $\col A$.
+                        Note that $\bf{r}_3$ is in $\col R = \vecspan \big\{ \bf{r}_1,\bf{r}_2,\bf{r}_4 \big\}$, so that we can find coefficients $a,\,b,\,c\in \RR$ with
+                        \[
+                            \bf{r}_3 = a\bf{r}_1 + b \bf{r}_2 + c\bf{r}_4.
+                        \]
+                        Multiplying both sides by $U^{-1}$ we obtain
+                        \[
+                            U^{-1}\bf{r}_3 = aU^{-1}\bf{r}_1 + b U^{-1}\bf{r}_2 + cU^{-1}\bf{r}_4\in\vecspan \big\{ U^{-1}\bf{r}_1, U^{-1}\bf{r}_2, U^{-1}\bf{r}_3, U^{-1}\bf{r}_4\big\}.
+                        \]
+                    </p>
+
+                </section>
+
+            </main>
+        </body>
+	<script src="code.js"></script>
+	<script src="jax.js"></script>
+</html> 
