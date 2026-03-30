@@ -197,7 +197,13 @@
                         This implies $A=U^{-1}R$.
                         In particular, if we write the columns of $R$ as $\bf{r}_1,\dots,\bf{r}_4$, we obtain
                         \[
-                        \col A = \col (U^{-1}R) = \vecspan \big\{ U^{-1}\bf{r}_1, U^{-1}\bf{r}_2, U^{-1}\bf{r}_3, U^{-1}\bf{r}_4\big\}.
+                        \begin{aligned}
+                            A &= U^{-1}R = 
+                            \begin{bmatrix}
+                            U^{-1}\bf{r}_1 & U^{-1}\bf{r}_2 & U^{-1}\bf{r}_3 & U^{-1}\bf{r}_4
+                            \end{bmatrix}\\[1em]
+                            \col A &= \col (U^{-1}R) = \vecspan \big\{ U^{-1}\bf{r}_1, U^{-1}\bf{r}_2, U^{-1}\bf{r}_3, U^{-1}\bf{r}_4\big\}.
+                        \end{aligned}
                         \]
                     </p>
 
@@ -211,7 +217,273 @@
                         \[
                             U^{-1}\bf{r}_3 = aU^{-1}\bf{r}_1 + b U^{-1}\bf{r}_2 + cU^{-1}\bf{r}_4\in\vecspan \big\{ U^{-1}\bf{r}_1, U^{-1}\bf{r}_2, U^{-1}\bf{r}_3, U^{-1}\bf{r}_4\big\}.
                         \]
+                        This shows that
+                        \[
+                        \col A 
+                        = 
+                        \vecspan \big\{ U^{-1}\bf{r}_1, U^{-1}\bf{r}_2, U^{-1}\bf{r}_4\big\}.
+                        \]
                     </p>
+
+                    <p>
+                        Let's now show that the set $\big\{ U^{-1}\bf{r}_1, U^{-1}\bf{r}_2, U^{-1}\bf{r}_4\big\}$ is linearly independent.
+                        Indeed, if we have constants $a,\,b,\,c\in \RR$ such that
+                        \[
+                            aU^{-1}\bf{r}_1 + b U^{-1}\bf{r}_2 + cU^{-1}\bf{r}_4 = \bf{0},
+                        \]
+                        then multiplying both sides by $U$ gives
+                        \[
+                            a\bf{r}_1 + b \bf{r}_2 + c\bf{r}_4 = \bf{0},
+                        \]
+                        and because $\{ \bf{r}_1,\bf{r}_2,\bf{r}_3 \} $ is linearly independent, we deduce $a=b=c=0$.
+                    </p>
+
+                    <p>
+                        In conclusion, a basis of $\col A$ is given by
+                        \[
+                            \big\{ U^{-1}\bf{r}_1, U^{-1}\bf{r}_2, U^{-1}\bf{r}_4\big\}
+                            =
+                            \big\{ (1,0,0,2),(4,1,0,4),(3,-4,3,8) \big\}.
+                        \]
+                    </p>
+
+                    <p>
+                        The argument above is valid for any matrix and any of its corresponding row-echelon forms.
+                        We summarize all of this discussion as follows:
+                    </p>
+
+                    <div class="theorem-box" id="thm-bases-row-column-spaces">
+                        Let $A$ be a matrix and assume that we can carry $A$ to a row-echelon matrix $R$ by means of elementary row operations.
+                        Then:
+                        <ol>
+                            <li>The nonzero rows of $R$ are a basis of $\row A$.</li>
+                            <li>The columns of $A$ that are at the same positions as the columns of $R$ containing leading ones are a basis of $\col A$.</li>
+                        </ol>
+                    </div>
+
+                    <div class="corollary-box">
+                        For any matrix $A$, we have $\dim (\row A)=\dim (\col A) = \operatorname{rank} A$.
+                    </div>
+
+                    <div class="example-box">
+                        Consider the matrix
+                        \[
+                            A
+                            =
+                            \begin{bmatrix}
+                                 0&	  0&	 4&	-11 \\
+                                 2&	  8&	 9&	 -8 \\
+                                -3&	-12&	-6&	 -8 \\
+                            \end{bmatrix}
+                        \]
+                        Find bases for $\row A$ and $\col A$, and calculate the rank of $A$.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+
+                        <p>
+                            The reduced row-echelon form of $A$ is
+                            \[
+                                R
+                                =
+                                \begin{bmatrix}
+                                    1 & 4 & 2 & 3 \\
+                                    0 & 0 & 1 & -4 \\
+                                    0 & 0 & 0 & 1
+                                \end{bmatrix},
+                            \]
+                            and its leading ones are in the first, third and fourth columns.
+                            By using <a href=#thm-bases-row-column-spaces>the above theorem</a>, we deduce that a basis for $\row A$ is
+                            \[
+                                \big\{ (1,4,2,3),(0,0,1,-4),(0,0,0,1) \big\},
+                            \]
+                            and a basis of $\col A$ is
+                            \[
+                            \big\{ (0,2,-3),(4,9,-6),(-11,-8,-8) \big\}.
+                            \]
+                            Moreover, the rank of $A$ is $r=3$.
+                        </p>
+                    </details>
+                </section>
+
+                <section id="rank-nullity">
+                    <h2>The rank-nullity theorem</h2>
+
+                    <p>
+                        Suppose $A$ is an $m\times n$ matrix.
+                        We are now going to relate the dimensions of $\im A = \col A$ and $\null A$.
+                        The latter number is known as the <b>nullity</b> of $A$.
+                    </p>
+
+                    <p>
+                        The following result is known as the <em>rank-nullity theorem</em>:
+                    </p>
+
+                    <div class="theorem-box" id="thm-rank-nullity">
+                        Let $A$ be an $m\times n$ matrix.
+                        Then the dimensions of $\null A$ and $\im A=\col A$ are related by the equation
+                        \[
+                            \dim (\null A) + \dim (\col A) = n.
+                        \]
+                    </div>
+
+                    <details>
+                        <summary>Proof.</summary>
+
+                        <p>
+                            Assume $\{ \bf{x}_1,\dots,\bf{x}_s \}$ is a basis of $\null A$.
+                            In particular, $\{ \bf{x}_1,\dots,\bf{x}_s \} $ is a linearly independent subset of $\RR^n$, which <a href=RnLinearIndependence.html#thm-basis>can be enlarged to a basis of $\RR^n$</a>.
+                            More precisely, we can find vectors $\bf{y}_1,\dots,\bf{y}_t$ such that $\{ \bf{x}_1,\dots,\bf{x}_s,\bf{y}_1,\dots,\bf{y}_t \} $ is a basis of $\RR^n$.
+                            Note that we have
+                            \[
+                                \dim (\null A) = s, \qquad
+                                \dim \RR^n = n = s+t.
+                            \]
+                            In particular, we are done if we can show that $\dim (\col A) = t$.
+                            We will show this by proving that \[B=\big \{ A\bf{y}_1,\dots,A\bf{y}_t \big \}\] is a basis of $\im A = \col A$.
+                        </p>
+
+                        <p>
+                            Let's start by proving that $B$ is a spanning set for $\im A$,
+                            which amounts to proving that every element of $\im A$ is a linear combination of
+                            the vectors in $B$.
+                            Thus, let $\bf{z}\in \im A$ be any vector.
+                            Since $\bf{z} \in \im A$, there exists some $\bf{x}\in \RR^n$ that satisfies $\bf{z}=A\bf{x}$.
+                            Using the fact that $\{ \bf{x}_1,\dots,\bf{x}_s,\bf{y}_1,\dots,\bf{y}_t \} $ is a basis of $\RR^n$, we can find coefficients $a_1,\,\dots,\,a_s,\,b_1,\,\dots,\,b_t\in \RR$ that satisfy
+                            \[
+                                \bf{x}=a_1 \bf{x}_1 + \cdots + a_s \bf{x}_s + b_1 \bf{y}_1 + \cdots + b_t \bf{y}_t,
+                            \]
+                            and applying $A$ to both sides gives
+                            \[
+                                \bf{z}=A\bf{x}=b_1 A\bf{y}_1 + \cdots + b_t A \bf{y}_t.
+                            \]
+                            This proves that $B$ is a spanning set for $\im A$.
+                        </p>
+
+                        <p>
+                            Now, we show that $B$ is linearly independent.
+                            Suppose we have a linear combination
+                            \[
+                                b_1 A\bf{y}_1 + \cdots + b_t A\bf{y}_t = \bf{0}.
+                            \]
+                            We have to show that all coefficients in the above combination are zero.
+                            Note that the previous equation can be rewritten as
+                            \[
+                                A(b_1 \bf{y}_1 + \cdots + b_t \bf{y}_t)=\bf{0},
+                            \]
+                            which means that
+                            \[
+                                b_1 \bf{y}_1 + \cdots + b_t \bf{y}_t\in \null A = \vecspan \{ \bf{x}_1,\dots,\bf{x}_s \} .
+                            \]
+                            Consequently, we can write the above vector as
+                            \[
+                                b_1 \bf{y}_1 + \cdots + b_t \bf{y}_t = a_1 \bf{x}_1+\cdots + a_s \bf{x}_s,
+                            \]
+                            and subtracting gives
+                            \[
+                                a_1 \bf{x}_1+\cdots + a_s \bf{x}_s-b_1 \bf{y}_1 - \cdots - b_t \bf{y}_t = \bf{0}.
+                            \]
+                            As $\{ \bf{x}_1,\dots,\bf{x}_s,\bf{y}_1,\dots,\bf{y}_t \} $ is linearly independent, all of the coefficients in the above combination have to be zero, which implies that
+                            \[
+                                a_1 = \cdots = a_s = b_1 = \cdots = b_t = 0.
+                            \]
+                            This proves linear independence.
+                        </p>
+
+                        <p>
+                            We finally conclude that $\dim (\im A) = t$, and thus
+                            \[
+                                n = \dim \RR^n = s + t = \dim (\null A) + \dim (\col A).
+                            \]
+                        </p>
+                    </details>
+
+                    <div class="corollary-box">
+                        If $A$ is an $m\times n$ matrix, then any set of basic solutions for the homogeneous system $A\bf{x}=\bf{0}$ is a basis of $\null A$.
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+
+                        <p>
+                            Let us write $r=\operatorname{rank}(A)=\dim (\im A)$.
+                            Then because of the <a href=#thm-rank-nullity>rank-nullity theorem</a> we know that
+                            the dimension of $\null A$ is $\dim (\null A) = n-r$.
+                            Any set of basic solutions for the system $A\bf{x}=\bf{0}$ has $n-r$ elements, and we already know that it is a spanning set for $\null A$.
+                            Using the fact that $\dim (\null A) = n-r$, we deduce that any set of basic solutions is a basis of $\null A$.
+                        </p>
+
+                    </details>
+
+                    <div class="example-box">
+                        Given the matrix
+                        \[
+                            A
+                            =
+                            \begin{bmatrix}
+                                1 & 7 & 1 & -4 \\
+                                0 & 0 & 4 & -8 \\
+                                5 & 35 & -3 & -4
+                            \end{bmatrix},
+                        \]
+                        Compute bases of $\row A$, $\col A$ and $\null A$.
+                        Verify the rank-nullity theorem for $A$.
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+
+                        <p>
+                            The reduced row-echelon form of $A$ is
+                            \[
+                                R
+                                =
+                                \begin{bmatrix}
+                                    1& 7& -1& 0 \\
+                                    0& 0& 1& -2 \\
+                                    0 & 0 & 0 & 0
+                                \end{bmatrix}.
+                            \]
+                            Consequently, a basis of $\row A$ is
+                            \[
+                                \big\{ (1,7,-1,0),(0,0,1,-2) \big\}.
+                            \]
+                            In addition, since the leading ones of $R$ are in the first and third column,
+                            a basis for $\col A$ is
+                            \[
+                                \big\{ (1,0,5),(1,4,-3) \big\}.
+                            \]
+                            Finally, since $R$ is the reduced row-echelon form of $A$, the elements of $\null A$ are the solutions to the system
+                            \[
+                            \left\{
+                                \begin{array}{ccccccccc}
+                                    x_1 & + & 7x_2 & - & x_3 &  & & = & 0 \\
+                                     &  &  &  & x_3 & - & 2x_4 & = & 0 \\
+                                \end{array}
+                            \right.
+                            \]
+                            A set of basic solutions for the above system is
+                            \[
+                            \bf{x}_1
+                            =
+                            \begin{bmatrix}
+                                -7 \\ 1 \\ 0 \\ 0
+                            \end{bmatrix}
+                            ,\qquad
+                            \bf{x}_2
+                            =
+                            \begin{bmatrix}
+                                2 \\ 0 \\ 2 \\ 1
+                            \end{bmatrix},
+                            \]
+                            and therefore a basis for $\null A$ is
+                            \[
+                                \big\{ (-7,1,0,0),(2,0,2,1) \big\}.
+                            \]
+                        </p>
+                        <p>
+                            Now, we have $\dim (\null A)=2$ and $\operatorname{rank}A=2$, so $\dim (\null A)+\operatorname{rank} A=4$, the number of columns of $A$, thus showing that the rank-nullity theorem holds for $A$.
+                        </p>
+                    </details>
 
                 </section>
 
