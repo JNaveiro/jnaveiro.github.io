@@ -32,7 +32,7 @@
                     <div class="definition-box">
                         Let $A$ be an $m\times n$ matrix.
                         We define the <b>column space</b> $\col A$ of $A$ as the subspace of $\RR^m$ that is spanned by the columns of $A$.
-                        Similarly, the <b>row space</b> $\row A$ of $A$ is the subspace of $\RR^n$ that is spanned by the rows od $A$.
+                        Similarly, the <b>row space</b> $\row A$ of $A$ is the subspace of $\RR^n$ that is spanned by the rows of $A$.
                     </div>
 
                     <p>
@@ -191,7 +191,7 @@
                             2 & 4 & 0 & 8\\
                         \end{bmatrix}.
                         \]
-                        Then one can see that its reduced row-echelon form is precisely $R$.
+                        Then one can see that $R$ is a row-echelon form of $A$.
                         Now, while $\col A$ and $\col R$ are not necessarily the same, we can relate these two spaces.
                         Indeed, recall that there exists an invertible matrix $U$ such that $UA=R$.
                         This implies $A=U^{-1}R$.
@@ -282,7 +282,7 @@
                         <summary>Solution.</summary>
 
                         <p>
-                            The reduced row-echelon form of $A$ is
+                            A row-echelon form of $A$ is
                             \[
                                 R
                                 =
@@ -433,7 +433,7 @@
                         <summary>Solution.</summary>
 
                         <p>
-                            The reduced row-echelon form of $A$ is
+                            A row-echelon form of $A$ is
                             \[
                                 R
                                 =
@@ -452,7 +452,7 @@
                             \[
                                 \big\{ (1,0,5),(1,4,-3) \big\}.
                             \]
-                            Finally, since $R$ is the reduced row-echelon form of $A$, the elements of $\null A$ are the solutions to the system
+                            Finally, since $R$ is a row-echelon form of $A$, the elements of $\null A$ are the solutions to the system
                             \[
                             \left\{
                                 \begin{array}{ccccccccc}
