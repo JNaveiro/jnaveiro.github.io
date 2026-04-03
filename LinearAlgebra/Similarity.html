@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Similarity and Diagonalization</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta author="Juan Manuel Lorenzo Naveiro" />
+		<meta name="description" content="" />
+		<link rel="icon" href="favicon.png">
+		<link rel="stylesheet" href="html5-reset.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="linear-algebra.css">
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+	</head>
+
+        <body>
+            <main>
+                <h1>
+                    5.5 Similarity and Diagonalization
+                </h1> 
+        
+                <p>
+                    In this section we revisit diagonalization of square matrices using the language of vector subspaces and bases.
+                </p>
+
+                <section id="similar-matrices">
+                    <h2>Similar Matrices</h2>
+                    <div class="definition-box">
+                        Suppose $A$ and $B$ are square matrices of the same size.
+                        We say that $A$ and $B$ are <b>similar</b> (denoted $A\sim B$)
+                        if there exists an invertible matrix $P$ such that
+                        \[
+                            B=P^{-1}AP.
+                        \]
+                    </div>
+
+                    <p>
+                        The similarity relation satisfies the following three properties:
+                        <ol>
+                            <li>$A\sim A$ (because $A=I^{-1}AI$).</li>
+                            <li>If $A\sim B$, then $B\sim A$ (because $B=P^{-1}AP$ with $P$ invertible implies $A=PBP^{-1}$).</li>
+                            <li>If $A\sim B$ and $B\sim C$ then $A\sim C$ (because $B=P^{-1}AP$ and $C=Q^{-1}BQ$ for invertible matrices $P,\,Q$ implies $C=(PQ)^{-1}A(PQ)$, with $PQ$ invertible).</li>
+                        </ol>
+                        It is common to say because of this that similarity is an <em>equivalence relation</em>.
+                    </p>
+
+                    <p>
+                        With this language, we can restate notion of diagonalizability as follows:
+                        A square matrix $A$ is <b>diagonalizable</b> if it is similar to a diagonal matrix.
+                    </p>
+
+                    <div class="example-box">
+                        If $A$ is a diagonalizable square matrix, then every matrix that is similar to $A$ is also diagonalizable.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        
+                        <p>
+                            If $A$ is diagonalizable, then $A\sim D$ for some diagonal matrix $D$.
+                            If $B$ is a square matrix such that $B\sim A$, then $B\sim D$ from the above properties,
+                            so $B$ is also diagonalizable.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        If $A,\,B$ are square matrices and $A\sim B$, show that
+                        <ol>
+                            <li>$A^{T}\sim B^{T}$.</li>
+                            <li>If $A$ is invertible, then $B$ is invertible and $A^{-1}\sim B^{-1}$.</li>
+                            <li>$A^{k}\sim B^{k}$ for all $k=1,2,\dots$</li>
+                        </ol>
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Since $A\sim B$, we know that there exists an invertible matrix $P$ such that $B=P^{-1}AP$.
+                            We will use this fact to show that the three above items are true.
+                        </p>
+                        <p>
+                            Firstly, by transposing the identity $B=P^{-1}AP$, we obtain $B^{T}=P^{T}A^{T}(P^{-1})^{T}=P^{T}A^{T}\big(P^{T}\big)^{-1}$, which shows that $A^{T}$ and $B^{T}$ are similar matrices.
+                        </p>
+                        <p>
+                            Secondly, since $B=P^{-1}AP$ and both $A$ and $P$ are invertible, it follows that $B$ is invertible as a product of invertible matrices.
+                            Moreover, by inverting the previous equation we get $B^{-1}=P^{-1}A^{-1}P$, so $A^{-1}$ and $B^{-1}$ are similar matrices.
+                        </p>
+                        <p>
+                            Finally, if we take the equation $B=P^{-1}AP$ and square both sides, we obtain $B^{2}=P^{-1}APP^{-1}AP=P^{-1}A^{2}P$, so $A^{2}$ and $B^{2}$ are similar matrices.
+                            For higher powers, the argument is the same.
+                        </p>
+                    </details>
+
+                    <p>
+                        It turns out that similar matrices will share many properties.
+                        For instance, if $A\sim B$, then $\det(A)=\det(B)$.
+                        This is because if $B=P^{-1}AP$ for some invertible matrix $P$, we get
+                        \[
+                            \det(B)=\det\big(P^{-1}\big)\det(A)\det(P)=\frac{1}{\det(P)}\det(A)\det(P)
+                            =
+                            \det(A).
+                        \]
+                        There is another function that, while we will not be using it much throughout the course, it appears in several contexts:
+                    </p>
+
+                    <div class="definition-box">
+                        If $A$ is an $n\times n$ matrix, then the <b>trace</b> of $A$ (denoted $\tr(A)$) is defined as the sum of the elements in its main diagonal.
+                        Explicitly, if $A=[a_{ij}]$, then $\tr(A)=a_{11}+a_{22}+\dots+a_{nn}$.
+                    </div>
+
+                    <p>
+                        For example:
+                        \[
+                            \tr
+                            \begin{bmatrix}
+                                1 & 2 & 3 \\
+                                4 & 5 & 6 \\
+                                7 & 8 & 9
+                            \end{bmatrix}
+                            =
+                            1+5+9
+                            =
+                            15.
+                        \]
+                        One can show by direct computation that
+                        \[
+                        \tr(AB)=\tr(BA) \quad \textsf{for all square matrices } A,\,B.
+                        \]
+                    </p>
+
+                    <div class="theorem-box">
+                        If $A$ and $B$ are similar matrices, then they have the same determinant, trace, characteristic polynomial and eigenvalues.
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            We already showed that $A$ and $B$ have the same determinant, so we have to focus on the other three items.
+                            As $A$ and $B$ are similar, we can write $B=P^{-1}AP$ for some invertible matrix $P$.
+                            Taking the trace of the above equation we get
+                            \[
+                                \tr(B)=\tr\big(P^{-1}AP\big)=\tr\big(APP^{-1}\big)=\tr(A).
+                            \]
+                            Let us now find the characteristic polynomial of $B$:
+                            \[
+                                \begin{aligned}
+                                c_{B}(x)&=\det(xI-B)=\det\big(x\big(P^{-1}IP\big)-P^{-1}AP\big)
+                                =
+                                \det\big(P^{-1}(xI-A)P\big)\\
+                                &=
+                                \det\big(P^{-1}\big)\det(xI-A)\det(P)=\det(xI-A)=c_{A}(x).
+                                \end{aligned}
+                            \]
+                            We conclude from the above equation that $A$ and $B$ have the same characteristic polynomial,
+                            and since the eigenvalues of a matrix coincide with the roots of the characteristic polynomial,
+                            we also conclude that $A$ and $B$ have the same eigenvalues.
+                        </p>
+                    </details>
+
+                    <div class="warning-box">
+                        The converse of the above theorem is not true.
+                        For instance, the matrices
+                        \[
+                            I=
+                            \begin{bmatrix}
+                                1 & 0 \\
+                                0 & 1
+                            \end{bmatrix},\qquad
+                            B=
+                            \begin{bmatrix}
+                                1 & 1 \\
+                                0 & 1
+                            \end{bmatrix}
+                        \]
+                        have the same determinant, trace, characteristic polynomial and eigenvalues, but they are not similar, because if $P$ is any invertible matrix we have $P^{-1}IP=I\neq B$.
+                    </div>
+
+                </section>
+
+            </main>
+        </body>
+	<script src="code.js"></script>
+	<script src="jax.js"></script>
+</html> 

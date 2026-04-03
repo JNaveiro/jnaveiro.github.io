@@ -9,6 +9,7 @@ window.MathJax = {
             row: "{\\operatorname{row}\\,}",
             col: "{\\operatorname{col}\\,}",
             vecspan: "{\\operatorname{span}}",
+            tr: "{\\operatorname{tr}}",
             bf: ["{\\mathbf{#1}}", 1]
         }
     }
