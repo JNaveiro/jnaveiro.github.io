@@ -129,7 +129,7 @@
                         \]
                     </p>
 
-                    <div class="theorem-box">
+                    <div class="theorem-box" id="thm-similar">
                         If $A$ and $B$ are similar matrices, then they have the same determinant, trace, characteristic polynomial and eigenvalues.
                     </div>
                     <details>
@@ -174,6 +174,191 @@
                         \]
                         have the same determinant, trace, characteristic polynomial and eigenvalues, but they are not similar, because if $P$ is any invertible matrix we have $P^{-1}IP=I\neq B$.
                     </div>
+
+                </section>
+
+                <section id="diagonalization">
+                    <h2>Diagonalization</h2>
+
+                    <p>
+                        Recall that an $n\times n$ matrix $A$ is <b>diagonalizable</b> if it is similar to a diagonal matrix $D$.
+                        We also say that a matrix $P$ satisfying $D=P^{-1}AP$ is a <b>diagonalizing matrix</b> for $A$.
+                    </p>
+
+                    <p>
+                        If $P$ is a diagonalizing matrix for $A$, then we saw (c.f. <a href=Diagonalization.html>Section 3.3</a>) that the columns of $P$ are eigenvectors of $A$ whose eigenvalues were the corresponding diagonal entries of $D$.
+                        Now, the fact that $P$ is invertible is equivalent to the columns of $P$ being a basis of $\RR^n$.
+                        Therefore, we have:
+                    </p>
+
+                    <div class="theorem-box">
+                        Let $A$ be an $n\times n$ matrix.
+                        <ol>
+                            <li>$A$ is diagonalizable if and only if there exists a basis $\{\bf{x}_1,\dots,\bf{x}_n\}$ consisting of eigenvectors of $A$.</li>
+                            <li>If $\{\bf{x}_1,\dots,\bf{x}_n\}$ is a basis of eigenvectors of $A$ and $\lambda_{i}$ is the eigenvalue of $A$ corresponding to $\bf{x}_i$ for each $i$ (that is, $A\bf{x}_i=\lambda_i \bf{x}_i$), then $P^{-1}AP=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$.</li>
+                        </ol>
+                    </div>
+
+                    <p>
+                        Given an $n\times n$ matrix $A$, recall that to determine if it is diagonalizable (and find a diagonalizing matrix) we had to:
+                        <ol>
+                            <li>Compute the eigenvalues of $A$ (that is, the roots of $c_A(x)$).</li>
+                            <li>For each eigenvalue $\lambda$ of $A$, find a set of basic eigenvectors (that is, a set of basic solutions to the matrix equation $(\lambda I - A)\bf{x}=\bf{0}$).</li>
+                            <li>Check if altogether we obtain $n$ basic eigenvectors for $A$.</li>
+                        </ol>
+                        This procedure can now be reinterpreted using subspaces and bases.
+                    </p>
+
+                    <div class="definition-box">
+                        If $A$ is a square matrix and $\lambda \in \RR$ is a real number, the <b>eigenspace</b> of $A$ corresponding to $\lambda$ is
+                        \[
+                            E_\lambda(A)=\{ \bf{x}\in\RR^n \mid A\bf{x}=\lambda \bf{x} \} 
+                            =
+                            \null(\lambda I - A).
+                        \]
+                        Observe that $\lambda$ is an eigenvalue if and only if $E_{\lambda}(A)\neq \{ \bf{0} \} $.
+                    </div>
+
+                    <p>
+                        With this nomenclature, we have that a set of basic eigenvectors for $A$ associated with an eigenvalue $\lambda$ is exactly the same as a basis for $E_\lambda(A)$.
+                    </p>
+
+                    <div class="theorem-box">
+                        Let $A$ be an $n\times n$ matrix and $\lambda\in \RR$ an eigenvalue of $A$.
+                        If $\lambda$ is an eigenvalue of multiplicity $n$, then
+                        \[
+                            \dim E_{\lambda}(A)\leq m.
+                        \]
+                    </div>
+
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            Let us set $\dim E_{\lambda}(A)=k$, and suppose $\{\bf{x}_1,\dots,\bf{x}_k\}$ is a basis of $E_{\lambda}(A)$.
+                            Then we may expand $\{\bf{1},\dots,\bf{x}_k\}$ to a basis $\{\bf{x}_1,\dots,\bf{x}_k,\bf{x}_{k+1},\dots,\bf{x}_n\}$ of $\RR^n$.
+                            Consider the matrix
+                            \[
+                                P
+                                =
+                                \begin{bmatrix}
+                                    \bf{x}_1 & \cdots & \bf{x}_k & \bf{x}_{k+1} & \cdots & \bf{x}_n
+                                \end{bmatrix}.
+                            \]
+                            Then $P$ is an invertible matrix because its columns are a basis of $\RR^n$.
+                            We compute $P^{-1}AP$:
+                            \[
+                                \begin{aligned}
+                                P^{-1}AP
+                                &=
+                                P^{-1}A
+                                \begin{bmatrix}
+                                    \bf{x}_1 & \cdots & \bf{x}_k & \bf{x}_{k+1} & \cdots & \bf{x}_n
+                                \end{bmatrix}
+                                =
+                                P^{-1}
+                                \begin{bmatrix}
+                                    \lambda_1\bf{x}_1 & \cdots & \lambda_k\bf{x}_k & A\bf{x}_{k+1} & \cdots & A\bf{x}_n
+                                \end{bmatrix}\\[1em]
+                                &=
+                                \begin{bmatrix}
+                                    \lambda \bf{e}_1 & \cdots & \lambda \bf{e}_k & P^{-1}A\bf{x}_{k+1} & \cdots & P^{-1}A\bf{x}_n
+                                \end{bmatrix}\\[1em]
+                                &=
+                                \begin{bmatrix}
+                                    \lambda I_k & X \\
+                                    0 & Y
+                                \end{bmatrix},
+                                \end{aligned}
+                            \]
+                            where the last matrix is written in block form and $X$ and $Y$ are unknown matrices.
+                        </p>
+                        <p>
+                            Since $A$ and $P^{-1}AP$ are similar, <a href=#thm-similar>they have the same characteristic polynomial</a>, so that
+                            \[
+                                c_{A}(x)
+                                =
+                                \det
+                                \begin{bmatrix}
+                                    (x-\lambda)I_k & X \\
+                                    0 & xI -Y
+                                \end{bmatrix}
+                                =
+                                (x-\lambda)^{k}c_{Y}(x).
+                            \]
+                            This implies that $(x-\lambda)^{k}$ divides $c_A(x)$, so that $\dim E_{\lambda}(A)=k\leq m$, as desired.
+                        </p>
+                    </details>
+
+                    <div class="theorem-box">
+                        Let $A$ be an $n\times n$ matrix.
+                        If $\bf{x}_1,\,\dots,\,\bf{x}_k$ are nonzero eigenvectors of $A$ whose corresponding eigenvalues $\lambda_1,\,\dots,\,\lambda_k$ are all distinct, then $\{\bf{x}_1,\dots,\bf{x}_k\}$ is a linearly independent set.
+                    </div>
+
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            We show that the result is true for $k=1,2,3$, and the general case can be done similarly.
+                        </p>
+                        <p>
+                            For $k=1$, the result follows from the fact that a set formed by a nonzero vector is linearly independent.
+                        </p>
+                        <p>
+                            Let us consider the case $k=2$, so that we have two nonzero eigenvectors $\bf{x}_1,\,\bf{x}_2\in \RR^n$ corresponding to different eigenvalues $\lambda_1,\,\lambda_2\in \RR$.
+                            If $t_1\bf{x}_1+t_2\bf{x}_2=\bf{0}$ for some scalars $t_1,\,t_2$, we can multiply this equation by $A$ and by $\lambda_1$ separately to obtain
+                            \[
+                            t_1\lambda_1\bf{x}_1+t_2\lambda_2\bf{x}_2 = \bf{0},\qquad 
+                            t_1\lambda_1\bf{x}_1+t_2\lambda_1\bf{x}_2 = \bf{0}.
+                            \]
+                            Subtracting both equations gives
+                            \[
+                            t_2(\lambda_2-\lambda_1)\bf{x}_2 = \bf{0},
+                            \]
+                            and since both $\lambda_2-\lambda_1$ and $\bf{x}_2$ are nonzero we conclude that $t_2=0$.
+                            Consequently, $t_1\bf{x}_1=\bf{0}$, so $t_1=0$ as well.
+                            Therefore, $\{\bf{x}_1,\bf{x}_2\}$ is linearly independent.
+                        </p>
+                        <p>
+                            Now we do the case $k=3$.
+                            Suppose $\bf{x}_1,\,\bf{x}_2,\,\bf{x}_3\in \RR^n$ are nonzero eigenvectors of $A$ corresponding to different eigenvalues $\lambda_1,\,\lambda_2,\,\lambda_3\in \RR$.
+                            We have to prove that these vectors are linearly independent.
+                        </p>
+                        <p>
+                            Consider scalars $t_1,\,t_2,\,t_3\in \RR$ satisfying
+                            \[
+                                t_1\bf{x}_1+t_2\bf{x}_2 + t_3 \bf{x}_3 = \bf{0}.
+                            \]
+                            On one hand, multiplying the above equation by $A$, we obtain
+                            \[
+                                t_1\lambda_1\bf{x}_1+t_2\lambda_2\bf{x}_2+t_3\lambda_3\bf{x}_3 = \bf{0}.
+                            \]
+                            On the other hand, multiplying by $\lambda_1$ instead we get
+                            \[
+                                t_1\lambda_1\bf{x}_1+t_2\lambda_1\bf{x}_2+t_3\lambda_1\bf{x}_3 = \bf{0}.
+                            \]
+                            Subtracting both equations yields
+                            \[
+                                t_2(\lambda_2-\lambda_1)\bf{x}_2 + t_3(\lambda_3-\lambda_1)\bf{x}_3 = \bf{0}.
+                            \]
+                            Now, $\bf{x}_2$ and $\bf{x}_3$ are linearly independent from the case $k=2$, so we must have
+                            \[
+                                t_2(\lambda_2-\lambda_1)=t_3(\lambda_3-\lambda_1)=0,
+                            \]
+                            and since the eigenvalues under consideration are all distinct, we must have $t_2=t_3=0$.
+                            This yields $t_1\bf{x}_1=\bf{0}$, so that $t_1=0$, and we deduce that $\{\bf{x}_1,\bf{x}_2,\bf{x}_3\}$ is a linearly independent set.
+                        </p>
+                    </details>
+
+                    <div class="corollary-box">
+                        If $A$ is an $n\times n$ matrix that has $n$ distinct eigenvalues, then $A$ is diagonalizable.
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            Let $\lambda_1,\,\dots,\,\lambda_n$ be the distinct eigenvalues of $A$, and choose a nonzero eigenvector $\bf{x}_i$ for each $\lambda_i$.
+                            Then $\{\bf{x}_1,\dots,\bf{x}_n\}$ is a linearly independent set by the preceding theorem, and since $\dim \RR^n = n$, it follows that this set is a basis of $\RR^n$ as well.
+                            Thus, $A$ is diagonalizable because it admits a basis formed by eigenvectors.
+                        </p>
+                    </details>
 
                 </section>
 
