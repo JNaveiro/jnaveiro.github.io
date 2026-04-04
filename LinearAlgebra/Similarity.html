@@ -1,369 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Similarity and Diagonalization</title>
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<meta author="Juan Manuel Lorenzo Naveiro" />
-		<meta name="description" content="" />
-		<link rel="icon" href="favicon.png">
-		<link rel="stylesheet" href="html5-reset.css">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="linear-algebra.css">
-		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
-	</head>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Similarity and Diagonalization</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="linear-algebra.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
 
-        <body>
-            <main>
-                <h1>
-                    5.5 Similarity and Diagonalization
-                </h1> 
-        
+    <body>
+        <main>
+            <h1>
+                5.5 Similarity and Diagonalization
+            </h1> 
+
+            <p>
+            In this section we revisit diagonalization of square matrices using the language of vector subspaces and bases.
+            </p>
+
+            <section id="similar-matrices">
+                <h2>Similar Matrices</h2>
+                <div class="definition-box">
+                    Suppose $A$ and $B$ are square matrices of the same size.
+                    We say that $A$ and $B$ are <b>similar</b> (denoted $A\sim B$)
+                    if there exists an invertible matrix $P$ such that
+                    \[
+                    B=P^{-1}AP.
+                    \]
+                </div>
+
                 <p>
-                    In this section we revisit diagonalization of square matrices using the language of vector subspaces and bases.
+                The similarity relation satisfies the following three properties:
+                <ol>
+                    <li>$A\sim A$ (because $A=I^{-1}AI$).</li>
+                    <li>If $A\sim B$, then $B\sim A$ (because $B=P^{-1}AP$ with $P$ invertible implies $A=PBP^{-1}$).</li>
+                    <li>If $A\sim B$ and $B\sim C$ then $A\sim C$ (because $B=P^{-1}AP$ and $C=Q^{-1}BQ$ for invertible matrices $P,\,Q$ implies $C=(PQ)^{-1}A(PQ)$, with $PQ$ invertible).</li>
+                </ol>
+                It is common to say because of this that similarity is an <em>equivalence relation</em>.
                 </p>
 
-                <section id="similar-matrices">
-                    <h2>Similar Matrices</h2>
-                    <div class="definition-box">
-                        Suppose $A$ and $B$ are square matrices of the same size.
-                        We say that $A$ and $B$ are <b>similar</b> (denoted $A\sim B$)
-                        if there exists an invertible matrix $P$ such that
-                        \[
-                            B=P^{-1}AP.
-                        \]
-                    </div>
+                <p>
+                With this language, we can restate notion of diagonalizability as follows:
+                A square matrix $A$ is <b>diagonalizable</b> if it is similar to a diagonal matrix.
+                </p>
+
+                <div class="example-box">
+                    If $A$ is a diagonalizable square matrix, then every matrix that is similar to $A$ is also diagonalizable.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
 
                     <p>
-                        The similarity relation satisfies the following three properties:
-                        <ol>
-                            <li>$A\sim A$ (because $A=I^{-1}AI$).</li>
-                            <li>If $A\sim B$, then $B\sim A$ (because $B=P^{-1}AP$ with $P$ invertible implies $A=PBP^{-1}$).</li>
-                            <li>If $A\sim B$ and $B\sim C$ then $A\sim C$ (because $B=P^{-1}AP$ and $C=Q^{-1}BQ$ for invertible matrices $P,\,Q$ implies $C=(PQ)^{-1}A(PQ)$, with $PQ$ invertible).</li>
-                        </ol>
-                        It is common to say because of this that similarity is an <em>equivalence relation</em>.
+                    If $A$ is diagonalizable, then $A\sim D$ for some diagonal matrix $D$.
+                    If $B$ is a square matrix such that $B\sim A$, then $B\sim D$ from the above properties,
+                    so $B$ is also diagonalizable.
                     </p>
+                </details>
 
+                <div class="example-box">
+                    If $A,\,B$ are square matrices and $A\sim B$, show that
+                    <ol>
+                        <li>$A^{T}\sim B^{T}$.</li>
+                        <li>If $A$ is invertible, then $B$ is invertible and $A^{-1}\sim B^{-1}$.</li>
+                        <li>$A^{k}\sim B^{k}$ for all $k=1,2,\dots$</li>
+                    </ol>
+                </div>
+                <details>
+                    <summary>Solution.</summary>
                     <p>
-                        With this language, we can restate notion of diagonalizability as follows:
-                        A square matrix $A$ is <b>diagonalizable</b> if it is similar to a diagonal matrix.
+                    Since $A\sim B$, we know that there exists an invertible matrix $P$ such that $B=P^{-1}AP$.
+                    We will use this fact to show that the three above items are true.
                     </p>
-
-                    <div class="example-box">
-                        If $A$ is a diagonalizable square matrix, then every matrix that is similar to $A$ is also diagonalizable.
-                    </div>
-                    <details>
-                        <summary>Solution.</summary>
-                        
-                        <p>
-                            If $A$ is diagonalizable, then $A\sim D$ for some diagonal matrix $D$.
-                            If $B$ is a square matrix such that $B\sim A$, then $B\sim D$ from the above properties,
-                            so $B$ is also diagonalizable.
-                        </p>
-                    </details>
-
-                    <div class="example-box">
-                        If $A,\,B$ are square matrices and $A\sim B$, show that
-                        <ol>
-                            <li>$A^{T}\sim B^{T}$.</li>
-                            <li>If $A$ is invertible, then $B$ is invertible and $A^{-1}\sim B^{-1}$.</li>
-                            <li>$A^{k}\sim B^{k}$ for all $k=1,2,\dots$</li>
-                        </ol>
-                    </div>
-                    <details>
-                        <summary>Solution.</summary>
-                        <p>
-                            Since $A\sim B$, we know that there exists an invertible matrix $P$ such that $B=P^{-1}AP$.
-                            We will use this fact to show that the three above items are true.
-                        </p>
-                        <p>
-                            Firstly, by transposing the identity $B=P^{-1}AP$, we obtain $B^{T}=P^{T}A^{T}(P^{-1})^{T}=P^{T}A^{T}\big(P^{T}\big)^{-1}$, which shows that $A^{T}$ and $B^{T}$ are similar matrices.
-                        </p>
-                        <p>
-                            Secondly, since $B=P^{-1}AP$ and both $A$ and $P$ are invertible, it follows that $B$ is invertible as a product of invertible matrices.
-                            Moreover, by inverting the previous equation we get $B^{-1}=P^{-1}A^{-1}P$, so $A^{-1}$ and $B^{-1}$ are similar matrices.
-                        </p>
-                        <p>
-                            Finally, if we take the equation $B=P^{-1}AP$ and square both sides, we obtain $B^{2}=P^{-1}APP^{-1}AP=P^{-1}A^{2}P$, so $A^{2}$ and $B^{2}$ are similar matrices.
-                            For higher powers, the argument is the same.
-                        </p>
-                    </details>
-
                     <p>
-                        It turns out that similar matrices will share many properties.
-                        For instance, if $A\sim B$, then $\det(A)=\det(B)$.
-                        This is because if $B=P^{-1}AP$ for some invertible matrix $P$, we get
-                        \[
-                            \det(B)=\det\big(P^{-1}\big)\det(A)\det(P)=\frac{1}{\det(P)}\det(A)\det(P)
-                            =
-                            \det(A).
-                        \]
-                        There is another function that, while we will not be using it much throughout the course, it appears in several contexts:
+                    Firstly, by transposing the identity $B=P^{-1}AP$, we obtain $B^{T}=P^{T}A^{T}(P^{-1})^{T}=P^{T}A^{T}\big(P^{T}\big)^{-1}$, which shows that $A^{T}$ and $B^{T}$ are similar matrices.
                     </p>
-
-                    <div class="definition-box">
-                        If $A$ is an $n\times n$ matrix, then the <b>trace</b> of $A$ (denoted $\tr(A)$) is defined as the sum of the elements in its main diagonal.
-                        Explicitly, if $A=[a_{ij}]$, then $\tr(A)=a_{11}+a_{22}+\dots+a_{nn}$.
-                    </div>
-
                     <p>
-                        For example:
-                        \[
-                            \tr
-                            \begin{bmatrix}
-                                1 & 2 & 3 \\
-                                4 & 5 & 6 \\
-                                7 & 8 & 9
-                            \end{bmatrix}
-                            =
-                            1+5+9
-                            =
-                            15.
-                        \]
-                        One can show by direct computation that
-                        \[
-                        \tr(AB)=\tr(BA) \quad \textsf{for all square matrices } A,\,B.
-                        \]
+                    Secondly, since $B=P^{-1}AP$ and both $A$ and $P$ are invertible, it follows that $B$ is invertible as a product of invertible matrices.
+                    Moreover, by inverting the previous equation we get $B^{-1}=P^{-1}A^{-1}P$, so $A^{-1}$ and $B^{-1}$ are similar matrices.
                     </p>
-
-                    <div class="theorem-box" id="thm-similar">
-                        If $A$ and $B$ are similar matrices, then they have the same determinant, trace, characteristic polynomial and eigenvalues.
-                    </div>
-                    <details>
-                        <summary>Proof.</summary>
-                        <p>
-                            We already showed that $A$ and $B$ have the same determinant, so we have to focus on the other three items.
-                            As $A$ and $B$ are similar, we can write $B=P^{-1}AP$ for some invertible matrix $P$.
-                            Taking the trace of the above equation we get
-                            \[
-                                \tr(B)=\tr\big(P^{-1}AP\big)=\tr\big(APP^{-1}\big)=\tr(A).
-                            \]
-                            Let us now find the characteristic polynomial of $B$:
-                            \[
-                                \begin{aligned}
-                                c_{B}(x)&=\det(xI-B)=\det\big(x\big(P^{-1}IP\big)-P^{-1}AP\big)
-                                =
-                                \det\big(P^{-1}(xI-A)P\big)\\
-                                &=
-                                \det\big(P^{-1}\big)\det(xI-A)\det(P)=\det(xI-A)=c_{A}(x).
-                                \end{aligned}
-                            \]
-                            We conclude from the above equation that $A$ and $B$ have the same characteristic polynomial,
-                            and since the eigenvalues of a matrix coincide with the roots of the characteristic polynomial,
-                            we also conclude that $A$ and $B$ have the same eigenvalues.
-                        </p>
-                    </details>
-
-                    <div class="warning-box">
-                        The converse of the above theorem is not true.
-                        For instance, the matrices
-                        \[
-                            I=
-                            \begin{bmatrix}
-                                1 & 0 \\
-                                0 & 1
-                            \end{bmatrix},\qquad
-                            B=
-                            \begin{bmatrix}
-                                1 & 1 \\
-                                0 & 1
-                            \end{bmatrix}
-                        \]
-                        have the same determinant, trace, characteristic polynomial and eigenvalues, but they are not similar, because if $P$ is any invertible matrix we have $P^{-1}IP=I\neq B$.
-                    </div>
-
-                </section>
-
-                <section id="diagonalization">
-                    <h2>Diagonalization</h2>
-
                     <p>
-                        Recall that an $n\times n$ matrix $A$ is <b>diagonalizable</b> if it is similar to a diagonal matrix $D$.
-                        We also say that a matrix $P$ satisfying $D=P^{-1}AP$ is a <b>diagonalizing matrix</b> for $A$.
+                    Finally, if we take the equation $B=P^{-1}AP$ and square both sides, we obtain $B^{2}=P^{-1}APP^{-1}AP=P^{-1}A^{2}P$, so $A^{2}$ and $B^{2}$ are similar matrices.
+                    For higher powers, the argument is the same.
                     </p>
+                </details>
 
+                <p>
+                It turns out that similar matrices will share many properties.
+                For instance, if $A\sim B$, then $\det(A)=\det(B)$.
+                This is because if $B=P^{-1}AP$ for some invertible matrix $P$, we get
+                \[
+                \det(B)=\det\big(P^{-1}\big)\det(A)\det(P)=\frac{1}{\det(P)}\det(A)\det(P)
+                =
+                \det(A).
+                \]
+                There is another function that, while we will not be using it much throughout the course, it appears in several contexts:
+                </p>
+
+                <div class="definition-box">
+                    If $A$ is an $n\times n$ matrix, then the <b>trace</b> of $A$ (denoted $\tr(A)$) is defined as the sum of the elements in its main diagonal.
+                    Explicitly, if $A=[a_{ij}]$, then $\tr(A)=a_{11}+a_{22}+\dots+a_{nn}$.
+                </div>
+
+                <p>
+                For example:
+                \[
+                \tr
+                \begin{bmatrix}
+                1 & 2 & 3 \\
+                4 & 5 & 6 \\
+                7 & 8 & 9
+                \end{bmatrix}
+                =
+                1+5+9
+                =
+                15.
+                \]
+                One can show by direct computation that
+                \[
+                \tr(AB)=\tr(BA) \quad \textsf{for all square matrices } A,\,B.
+                \]
+                </p>
+
+                <div class="theorem-box" id="thm-similar">
+                    If $A$ and $B$ are similar matrices, then they have the same determinant, trace, characteristic polynomial and eigenvalues.
+                </div>
+                <details>
+                    <summary>Proof.</summary>
                     <p>
-                        If $P$ is a diagonalizing matrix for $A$, then we saw (c.f. <a href=Diagonalization.html>Section 3.3</a>) that the columns of $P$ are eigenvectors of $A$ whose eigenvalues were the corresponding diagonal entries of $D$.
-                        Now, the fact that $P$ is invertible is equivalent to the columns of $P$ being a basis of $\RR^n$.
-                        Therefore, we have:
+                    We already showed that $A$ and $B$ have the same determinant, so we have to focus on the other three items.
+                    As $A$ and $B$ are similar, we can write $B=P^{-1}AP$ for some invertible matrix $P$.
+                    Taking the trace of the above equation we get
+                    \[
+                    \tr(B)=\tr\big(P^{-1}AP\big)=\tr\big(APP^{-1}\big)=\tr(A).
+                    \]
+                    Let us now find the characteristic polynomial of $B$:
+                    \[
+                    \begin{aligned}
+                    c_{B}(x)&=\det(xI-B)=\det\big(x\big(P^{-1}IP\big)-P^{-1}AP\big)
+                    =
+                    \det\big(P^{-1}(xI-A)P\big)\\
+                    &=
+                    \det\big(P^{-1}\big)\det(xI-A)\det(P)=\det(xI-A)=c_{A}(x).
+                    \end{aligned}
+                    \]
+                    We conclude from the above equation that $A$ and $B$ have the same characteristic polynomial,
+                    and since the eigenvalues of a matrix coincide with the roots of the characteristic polynomial,
+                    we also conclude that $A$ and $B$ have the same eigenvalues.
                     </p>
+                </details>
 
-                    <div class="theorem-box">
-                        Let $A$ be an $n\times n$ matrix.
-                        <ol>
-                            <li>$A$ is diagonalizable if and only if there exists a basis $\{\bf{x}_1,\dots,\bf{x}_n\}$ consisting of eigenvectors of $A$.</li>
-                            <li>If $\{\bf{x}_1,\dots,\bf{x}_n\}$ is a basis of eigenvectors of $A$ and $\lambda_{i}$ is the eigenvalue of $A$ corresponding to $\bf{x}_i$ for each $i$ (that is, $A\bf{x}_i=\lambda_i \bf{x}_i$), then $P^{-1}AP=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$.</li>
-                        </ol>
-                    </div>
+                <div class="warning-box">
+                    The converse of the above theorem is not true.
+                    For instance, the matrices
+                    \[
+                    I=
+                    \begin{bmatrix}
+                    1 & 0 \\
+                    0 & 1
+                    \end{bmatrix},\qquad
+                    B=
+                    \begin{bmatrix}
+                    1 & 1 \\
+                    0 & 1
+                    \end{bmatrix}
+                    \]
+                    have the same determinant, trace, characteristic polynomial and eigenvalues, but they are not similar, because if $P$ is any invertible matrix we have $P^{-1}IP=I\neq B$.
+                </div>
 
+            </section>
+
+            <section id="diagonalization">
+                <h2>Diagonalization</h2>
+
+                <p>
+                Recall that an $n\times n$ matrix $A$ is <b>diagonalizable</b> if it is similar to a diagonal matrix $D$.
+                We also say that a matrix $P$ satisfying $D=P^{-1}AP$ is a <b>diagonalizing matrix</b> for $A$.
+                </p>
+
+                <p>
+                If $P$ is a diagonalizing matrix for $A$, then we saw (c.f. <a href=Diagonalization.html>Section 3.3</a>) that the columns of $P$ are eigenvectors of $A$ whose eigenvalues were the corresponding diagonal entries of $D$.
+                Now, the fact that $P$ is invertible is equivalent to the columns of $P$ being a basis of $\RR^n$.
+                Therefore, we have:
+                </p>
+
+                <div class="theorem-box">
+                    Let $A$ be an $n\times n$ matrix.
+                    <ol>
+                        <li>$A$ is diagonalizable if and only if there exists a basis $\{\bf{x}_1,\dots,\bf{x}_n\}$ consisting of eigenvectors of $A$.</li>
+                        <li>If $\{\bf{x}_1,\dots,\bf{x}_n\}$ is a basis of eigenvectors of $A$ and $\lambda_{i}$ is the eigenvalue of $A$ corresponding to $\bf{x}_i$ for each $i$ (that is, $A\bf{x}_i=\lambda_i \bf{x}_i$), then $P^{-1}AP=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$.</li>
+                    </ol>
+                </div>
+
+                <p>
+                Given an $n\times n$ matrix $A$, recall that to determine if it is diagonalizable (and find a diagonalizing matrix) we had to:
+                <ol>
+                    <li>Compute the eigenvalues of $A$ (that is, the roots of $c_A(x)$).</li>
+                    <li>For each eigenvalue $\lambda$ of $A$, find a set of basic eigenvectors (that is, a set of basic solutions to the matrix equation $(\lambda I - A)\bf{x}=\bf{0}$).</li>
+                    <li>Check if altogether we obtain $n$ basic eigenvectors for $A$.</li>
+                </ol>
+                This procedure can now be reinterpreted using subspaces and bases.
+                </p>
+
+                <div class="definition-box">
+                    If $A$ is a square matrix and $\lambda \in \RR$ is a real number, the <b>eigenspace</b> of $A$ corresponding to $\lambda$ is
+                    \[
+                    E_\lambda(A)=\{ \bf{x}\in\RR^n \mid A\bf{x}=\lambda \bf{x} \} 
+                    =
+                    \null(\lambda I - A).
+                    \]
+                    Observe that $\lambda$ is an eigenvalue if and only if $E_{\lambda}(A)\neq \{ \bf{0} \} $.
+                </div>
+
+                <p>
+                With this nomenclature, we have that a set of basic eigenvectors for $A$ associated with an eigenvalue $\lambda$ is exactly the same as a basis for $E_\lambda(A)$.
+                </p>
+
+                <div class="theorem-box">
+                    Let $A$ be an $n\times n$ matrix and $\lambda\in \RR$ an eigenvalue of $A$.
+                    If $\lambda$ is an eigenvalue of multiplicity $n$, then
+                    \[
+                    \dim E_{\lambda}(A)\leq m.
+                    \]
+                </div>
+
+                <details>
+                    <summary>Proof.</summary>
                     <p>
-                        Given an $n\times n$ matrix $A$, recall that to determine if it is diagonalizable (and find a diagonalizing matrix) we had to:
-                        <ol>
-                            <li>Compute the eigenvalues of $A$ (that is, the roots of $c_A(x)$).</li>
-                            <li>For each eigenvalue $\lambda$ of $A$, find a set of basic eigenvectors (that is, a set of basic solutions to the matrix equation $(\lambda I - A)\bf{x}=\bf{0}$).</li>
-                            <li>Check if altogether we obtain $n$ basic eigenvectors for $A$.</li>
-                        </ol>
-                        This procedure can now be reinterpreted using subspaces and bases.
+                    Let us set $\dim E_{\lambda}(A)=k$, and suppose $\{\bf{x}_1,\dots,\bf{x}_k\}$ is a basis of $E_{\lambda}(A)$.
+                    Then we may expand $\{\bf{1},\dots,\bf{x}_k\}$ to a basis $\{\bf{x}_1,\dots,\bf{x}_k,\bf{x}_{k+1},\dots,\bf{x}_n\}$ of $\RR^n$.
+                    Consider the matrix
+                    \[
+                    P
+                    =
+                    \begin{bmatrix}
+                    \bf{x}_1 & \cdots & \bf{x}_k & \bf{x}_{k+1} & \cdots & \bf{x}_n
+                    \end{bmatrix}.
+                    \]
+                    Then $P$ is an invertible matrix because its columns are a basis of $\RR^n$.
+                    We compute $P^{-1}AP$:
+                    \[
+                    \begin{aligned}
+                    P^{-1}AP
+                    &=
+                    P^{-1}A
+                    \begin{bmatrix}
+                    \bf{x}_1 & \cdots & \bf{x}_k & \bf{x}_{k+1} & \cdots & \bf{x}_n
+                    \end{bmatrix}
+                    =
+                    P^{-1}
+                    \begin{bmatrix}
+                    \lambda_1\bf{x}_1 & \cdots & \lambda_k\bf{x}_k & A\bf{x}_{k+1} & \cdots & A\bf{x}_n
+                    \end{bmatrix}\\[1em]
+                    &=
+                    \begin{bmatrix}
+                    \lambda \bf{e}_1 & \cdots & \lambda \bf{e}_k & P^{-1}A\bf{x}_{k+1} & \cdots & P^{-1}A\bf{x}_n
+                    \end{bmatrix}\\[1em]
+                    &=
+                    \begin{bmatrix}
+                    \lambda I_k & X \\
+                    0 & Y
+                    \end{bmatrix},
+                    \end{aligned}
+                    \]
+                    where the last matrix is written in block form and $X$ and $Y$ are unknown matrices.
                     </p>
-
-                    <div class="definition-box">
-                        If $A$ is a square matrix and $\lambda \in \RR$ is a real number, the <b>eigenspace</b> of $A$ corresponding to $\lambda$ is
-                        \[
-                            E_\lambda(A)=\{ \bf{x}\in\RR^n \mid A\bf{x}=\lambda \bf{x} \} 
-                            =
-                            \null(\lambda I - A).
-                        \]
-                        Observe that $\lambda$ is an eigenvalue if and only if $E_{\lambda}(A)\neq \{ \bf{0} \} $.
-                    </div>
-
                     <p>
-                        With this nomenclature, we have that a set of basic eigenvectors for $A$ associated with an eigenvalue $\lambda$ is exactly the same as a basis for $E_\lambda(A)$.
+                    Since $A$ and $P^{-1}AP$ are similar, <a href=#thm-similar>they have the same characteristic polynomial</a>, so that
+                    \[
+                    c_{A}(x)
+                    =
+                    \det
+                    \begin{bmatrix}
+                    (x-\lambda)I_k & X \\
+                    0 & xI -Y
+                    \end{bmatrix}
+                    =
+                    (x-\lambda)^{k}c_{Y}(x).
+                    \]
+                    This implies that $(x-\lambda)^{k}$ divides $c_A(x)$, so that $\dim E_{\lambda}(A)=k\leq m$, as desired.
                     </p>
+                </details>
 
-                    <div class="theorem-box">
-                        Let $A$ be an $n\times n$ matrix and $\lambda\in \RR$ an eigenvalue of $A$.
-                        If $\lambda$ is an eigenvalue of multiplicity $n$, then
-                        \[
-                            \dim E_{\lambda}(A)\leq m.
-                        \]
-                    </div>
+                <div class="theorem-box" id="thm-eigen-independence">
+                    Let $A$ be an $n\times n$ matrix.
+                    If $\bf{x}_1,\,\dots,\,\bf{x}_k$ are nonzero eigenvectors of $A$ whose corresponding eigenvalues $\lambda_1,\,\dots,\,\lambda_k$ are all distinct, then $\{\bf{x}_1,\dots,\bf{x}_k\}$ is a linearly independent set.
+                </div>
 
-                    <details>
-                        <summary>Proof.</summary>
-                        <p>
-                            Let us set $\dim E_{\lambda}(A)=k$, and suppose $\{\bf{x}_1,\dots,\bf{x}_k\}$ is a basis of $E_{\lambda}(A)$.
-                            Then we may expand $\{\bf{1},\dots,\bf{x}_k\}$ to a basis $\{\bf{x}_1,\dots,\bf{x}_k,\bf{x}_{k+1},\dots,\bf{x}_n\}$ of $\RR^n$.
-                            Consider the matrix
-                            \[
-                                P
-                                =
-                                \begin{bmatrix}
-                                    \bf{x}_1 & \cdots & \bf{x}_k & \bf{x}_{k+1} & \cdots & \bf{x}_n
-                                \end{bmatrix}.
-                            \]
-                            Then $P$ is an invertible matrix because its columns are a basis of $\RR^n$.
-                            We compute $P^{-1}AP$:
-                            \[
-                                \begin{aligned}
-                                P^{-1}AP
-                                &=
-                                P^{-1}A
-                                \begin{bmatrix}
-                                    \bf{x}_1 & \cdots & \bf{x}_k & \bf{x}_{k+1} & \cdots & \bf{x}_n
-                                \end{bmatrix}
-                                =
-                                P^{-1}
-                                \begin{bmatrix}
-                                    \lambda_1\bf{x}_1 & \cdots & \lambda_k\bf{x}_k & A\bf{x}_{k+1} & \cdots & A\bf{x}_n
-                                \end{bmatrix}\\[1em]
-                                &=
-                                \begin{bmatrix}
-                                    \lambda \bf{e}_1 & \cdots & \lambda \bf{e}_k & P^{-1}A\bf{x}_{k+1} & \cdots & P^{-1}A\bf{x}_n
-                                \end{bmatrix}\\[1em]
-                                &=
-                                \begin{bmatrix}
-                                    \lambda I_k & X \\
-                                    0 & Y
-                                \end{bmatrix},
-                                \end{aligned}
-                            \]
-                            where the last matrix is written in block form and $X$ and $Y$ are unknown matrices.
-                        </p>
-                        <p>
-                            Since $A$ and $P^{-1}AP$ are similar, <a href=#thm-similar>they have the same characteristic polynomial</a>, so that
-                            \[
-                                c_{A}(x)
-                                =
-                                \det
-                                \begin{bmatrix}
-                                    (x-\lambda)I_k & X \\
-                                    0 & xI -Y
-                                \end{bmatrix}
-                                =
-                                (x-\lambda)^{k}c_{Y}(x).
-                            \]
-                            This implies that $(x-\lambda)^{k}$ divides $c_A(x)$, so that $\dim E_{\lambda}(A)=k\leq m$, as desired.
-                        </p>
-                    </details>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                    We show that the result is true for $k=1,2,3$, and the general case can be done similarly.
+                    </p>
+                    <p>
+                    For $k=1$, the result follows from the fact that a set formed by a nonzero vector is linearly independent.
+                    </p>
+                    <p>
+                    Let us consider the case $k=2$, so that we have two nonzero eigenvectors $\bf{x}_1,\,\bf{x}_2\in \RR^n$ corresponding to different eigenvalues $\lambda_1,\,\lambda_2\in \RR$.
+                    If $t_1\bf{x}_1+t_2\bf{x}_2=\bf{0}$ for some scalars $t_1,\,t_2$, we can multiply this equation by $A$ and by $\lambda_1$ separately to obtain
+                    \[
+                    t_1\lambda_1\bf{x}_1+t_2\lambda_2\bf{x}_2 = \bf{0},\qquad 
+                    t_1\lambda_1\bf{x}_1+t_2\lambda_1\bf{x}_2 = \bf{0}.
+                    \]
+                    Subtracting both equations gives
+                    \[
+                    t_2(\lambda_2-\lambda_1)\bf{x}_2 = \bf{0},
+                    \]
+                    and since both $\lambda_2-\lambda_1$ and $\bf{x}_2$ are nonzero we conclude that $t_2=0$.
+                    Consequently, $t_1\bf{x}_1=\bf{0}$, so $t_1=0$ as well.
+                    Therefore, $\{\bf{x}_1,\bf{x}_2\}$ is linearly independent.
+                    </p>
+                    <p>
+                    Now we do the case $k=3$.
+                    Suppose $\bf{x}_1,\,\bf{x}_2,\,\bf{x}_3\in \RR^n$ are nonzero eigenvectors of $A$ corresponding to different eigenvalues $\lambda_1,\,\lambda_2,\,\lambda_3\in \RR$.
+                    We have to prove that these vectors are linearly independent.
+                    </p>
+                    <p>
+                    Consider scalars $t_1,\,t_2,\,t_3\in \RR$ satisfying
+                    \[
+                    t_1\bf{x}_1+t_2\bf{x}_2 + t_3 \bf{x}_3 = \bf{0}.
+                    \]
+                    On one hand, multiplying the above equation by $A$, we obtain
+                    \[
+                    t_1\lambda_1\bf{x}_1+t_2\lambda_2\bf{x}_2+t_3\lambda_3\bf{x}_3 = \bf{0}.
+                    \]
+                    On the other hand, multiplying by $\lambda_1$ instead we get
+                    \[
+                    t_1\lambda_1\bf{x}_1+t_2\lambda_1\bf{x}_2+t_3\lambda_1\bf{x}_3 = \bf{0}.
+                    \]
+                    Subtracting both equations yields
+                    \[
+                    t_2(\lambda_2-\lambda_1)\bf{x}_2 + t_3(\lambda_3-\lambda_1)\bf{x}_3 = \bf{0}.
+                    \]
+                    Now, $\bf{x}_2$ and $\bf{x}_3$ are linearly independent from the case $k=2$, so we must have
+                    \[
+                    t_2(\lambda_2-\lambda_1)=t_3(\lambda_3-\lambda_1)=0,
+                    \]
+                    and since the eigenvalues under consideration are all distinct, we must have $t_2=t_3=0$.
+                    This yields $t_1\bf{x}_1=\bf{0}$, so that $t_1=0$, and we deduce that $\{\bf{x}_1,\bf{x}_2,\bf{x}_3\}$ is a linearly independent set.
+                    </p>
+                </details>
 
-                    <div class="theorem-box">
-                        Let $A$ be an $n\times n$ matrix.
-                        If $\bf{x}_1,\,\dots,\,\bf{x}_k$ are nonzero eigenvectors of $A$ whose corresponding eigenvalues $\lambda_1,\,\dots,\,\lambda_k$ are all distinct, then $\{\bf{x}_1,\dots,\bf{x}_k\}$ is a linearly independent set.
-                    </div>
+                <div class="corollary-box">
+                    If $A$ is an $n\times n$ matrix that has $n$ distinct eigenvalues, then $A$ is diagonalizable.
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                    Let $\lambda_1,\,\dots,\,\lambda_n$ be the distinct eigenvalues of $A$, and choose a nonzero eigenvector $\bf{x}_i$ for each $\lambda_i$.
+                    Then $\{\bf{x}_1,\dots,\bf{x}_n\}$ is a linearly independent set by the preceding theorem, and since $\dim \RR^n = n$, it follows that this set is a basis of $\RR^n$ as well.
+                    Thus, $A$ is diagonalizable because it admits a basis formed by eigenvectors.
+                    </p>
+                </details>
 
-                    <details>
-                        <summary>Proof.</summary>
-                        <p>
-                            We show that the result is true for $k=1,2,3$, and the general case can be done similarly.
-                        </p>
-                        <p>
-                            For $k=1$, the result follows from the fact that a set formed by a nonzero vector is linearly independent.
-                        </p>
-                        <p>
-                            Let us consider the case $k=2$, so that we have two nonzero eigenvectors $\bf{x}_1,\,\bf{x}_2\in \RR^n$ corresponding to different eigenvalues $\lambda_1,\,\lambda_2\in \RR$.
-                            If $t_1\bf{x}_1+t_2\bf{x}_2=\bf{0}$ for some scalars $t_1,\,t_2$, we can multiply this equation by $A$ and by $\lambda_1$ separately to obtain
-                            \[
-                            t_1\lambda_1\bf{x}_1+t_2\lambda_2\bf{x}_2 = \bf{0},\qquad 
-                            t_1\lambda_1\bf{x}_1+t_2\lambda_1\bf{x}_2 = \bf{0}.
-                            \]
-                            Subtracting both equations gives
-                            \[
-                            t_2(\lambda_2-\lambda_1)\bf{x}_2 = \bf{0},
-                            \]
-                            and since both $\lambda_2-\lambda_1$ and $\bf{x}_2$ are nonzero we conclude that $t_2=0$.
-                            Consequently, $t_1\bf{x}_1=\bf{0}$, so $t_1=0$ as well.
-                            Therefore, $\{\bf{x}_1,\bf{x}_2\}$ is linearly independent.
-                        </p>
-                        <p>
-                            Now we do the case $k=3$.
-                            Suppose $\bf{x}_1,\,\bf{x}_2,\,\bf{x}_3\in \RR^n$ are nonzero eigenvectors of $A$ corresponding to different eigenvalues $\lambda_1,\,\lambda_2,\,\lambda_3\in \RR$.
-                            We have to prove that these vectors are linearly independent.
-                        </p>
-                        <p>
-                            Consider scalars $t_1,\,t_2,\,t_3\in \RR$ satisfying
-                            \[
-                                t_1\bf{x}_1+t_2\bf{x}_2 + t_3 \bf{x}_3 = \bf{0}.
-                            \]
-                            On one hand, multiplying the above equation by $A$, we obtain
-                            \[
-                                t_1\lambda_1\bf{x}_1+t_2\lambda_2\bf{x}_2+t_3\lambda_3\bf{x}_3 = \bf{0}.
-                            \]
-                            On the other hand, multiplying by $\lambda_1$ instead we get
-                            \[
-                                t_1\lambda_1\bf{x}_1+t_2\lambda_1\bf{x}_2+t_3\lambda_1\bf{x}_3 = \bf{0}.
-                            \]
-                            Subtracting both equations yields
-                            \[
-                                t_2(\lambda_2-\lambda_1)\bf{x}_2 + t_3(\lambda_3-\lambda_1)\bf{x}_3 = \bf{0}.
-                            \]
-                            Now, $\bf{x}_2$ and $\bf{x}_3$ are linearly independent from the case $k=2$, so we must have
-                            \[
-                                t_2(\lambda_2-\lambda_1)=t_3(\lambda_3-\lambda_1)=0,
-                            \]
-                            and since the eigenvalues under consideration are all distinct, we must have $t_2=t_3=0$.
-                            This yields $t_1\bf{x}_1=\bf{0}$, so that $t_1=0$, and we deduce that $\{\bf{x}_1,\bf{x}_2,\bf{x}_3\}$ is a linearly independent set.
-                        </p>
-                    </details>
+                <p>
+                From the preceding results, it follows that in order for an $n\times n$ matrix $A$ to be diagonalizable, we need two things to happen:
+                <ul>
+                    <li>The characteristic polynomial $c_A(x)$ has to have <em>only real roots</em> (because the characteristic polynomial of a diagonal matrix only has real roots).</li>
+                    <li>For each eigenvalue $\lambda$ of $A$, the dimension of $E_{\lambda}(A)$ has to be the same as the multiplicity of $\lambda$.</li>
+                </ul>
+                </p>
+                <p>
+                The converse is also true:
+                suppose the above conditions are satisfied and let $\lambda_1,\,\dots,\,\lambda_{k}$ be the eigenvalues of $A$.
+                If we choose bases $B_1,\,\dots,\,B_k$ for each of the eigenspaces $E_{\lambda_1}(A),\,\dots,\,E_{\lambda_k}(A)$, then from the fact that <a href=#thm-eigen-independence>eigenvectors coming from different eigenvalues are linearly independent</a> it follows that the union of the sets $B_1,\,\dots,\,B_k$ is a linearly independent subset $B$ of $\RR^n$.
+                Now, we are assuming that
+                \[
+                c_A(x)=(x-\lambda_1)^{m_1}\cdots(x-\lambda_k)^{m_k},
+                \]
+                where the number $m_i$ is the multiplicity of $\lambda_i$ for each $i$, and (again, by assumption), $\dim E_{\lambda_i}=m_i$ for each $i$.
+                Therefore, the number of elements of $B$ is
+                \[
+                \dim E_{\lambda_1}(A)
+                +\cdots+
+                \dim E_{\lambda_k}(A)
+                =
+                m_1 + \cdots + m_k
+                =
+                n,
+                \]
+                so $B$ is necessarily a basis of $\RR^n$ consisting of eigenvectors of $A$.
+                </p>
+                <p>
+                This discussion is summarized by means of the <em>diagonal criterion</em>:
+                </p>
+                <div class="theorem-box" id="thm-diagonal">
+                    An $n\times n$ matrix $A$ is diagonalizable if and only if
+                    <ol>
+                        <li>The characteristic polynomial $c_A(x)$ only has real roots.</li>
+                        <li>For each eigenvalue $\lambda$ of $A$, the dimension of $E_{\lambda}(A)$ is equal to the multiplicity of $\lambda$.</li>
+                    </ol>
+                </div>
+                <p>
+                We remark that if $c_A(x)$ has complex roots (that are not real), one could wonder if $A$ is <em>diagonalizable over the complex numbers</em>.
+                More precisely, we say that $A$ is diagonalizable over the complex numbers if there exists a diagonal matrix $D$ with complex coefficients and an invertible matrix $P$ with complex coefficients such that $D=P^{-1}AP$.
+                The methods for diagonalizing matrices over the complex numbers work in exactly the same way as the ones that we have discussed for real numbers.
+                However, this goes beyond the scope of this course.
+                </p>
 
-                    <div class="corollary-box">
-                        If $A$ is an $n\times n$ matrix that has $n$ distinct eigenvalues, then $A$ is diagonalizable.
-                    </div>
-                    <details>
-                        <summary>Proof.</summary>
-                        <p>
-                            Let $\lambda_1,\,\dots,\,\lambda_n$ be the distinct eigenvalues of $A$, and choose a nonzero eigenvector $\bf{x}_i$ for each $\lambda_i$.
-                            Then $\{\bf{x}_1,\dots,\bf{x}_n\}$ is a linearly independent set by the preceding theorem, and since $\dim \RR^n = n$, it follows that this set is a basis of $\RR^n$ as well.
-                            Thus, $A$ is diagonalizable because it admits a basis formed by eigenvectors.
-                        </p>
-                    </details>
+                <div class="example-box">
+                    Decide if the matrix
+                    \[
+                    A
+                    =
+                    \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    1 & 2 & 1 \\
+                    0 & 0 & 1
+                    \end{bmatrix}
+                    \]
+                    is diagonalizable, and find a diagonalizing matrix if so.
+                </div>
 
-                </section>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                    The characteristic polynomial $c_A(x)$ of $A$ is
+                    \[
 
-            </main>
-        </body>
-	<script src="code.js"></script>
-	<script src="jax.js"></script>
+                    \begin{aligned}
+                    c_A(x)
+                    &=
+                    \left\lvert
+
+                    \begin{array}{ccc}
+                    x-1 & 0 & 0 \\
+                    -1 & x-2 & -1 \\
+                    0 &0 & x-1
+                    \end{array}
+                    \right\rvert
+                    =(x-1)^{2}(x-2),
+                    \end{aligned}
+                    \]
+                    and thus we have two eigenvalues for $A$ (all of which are real): $\lambda_1=1$ and $\lambda_2=2$.
+                    </p>
+                    <p>
+                    Let us find a basis and the dimension of $E_{1}(A)$.
+                    We have
+                    \[
+                    E_{1}(A)
+                    =
+                    \null(I-A)
+                    =
+                    \null
+                    \begin{bmatrix}
+                    0 & 0 & 0 \\
+                    -1 & -1 & -1 \\
+                    0 & 0 & 0
+                    \end{bmatrix}.
+                    \]
+                    Thus, a basis of $E_{1}(A)$ is
+                    \[
+                    B_1
+                    =
+                    \{ (1,-1,0),(0,1,-1) \} ,
+                    \]
+                    which shows that $\dim E_{1}(A)=2$ is equal to the multiplicity of $1$.
+                    </p>
+                    <p>
+                    We now deal with the eigenspace $E_{2}(A)$, which is
+                    \[
+                    E_{2}(A)
+                    =
+                    \null(2I-A)
+                    =
+                    \null
+                    \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    -1 & 0 & -1 \\
+                    0 & 0 & 1
+                    \end{bmatrix}.
+                    \]
+                    One sees using Gaussian elimination that
+                    \[
+                    B_{2}=\{(0,1,0)\}
+                    \]
+                    is a basis of $E_{2}(A)$, so $\dim E_{2}(A)=1$ coincides with the multiplicity of $2$.
+                    </p>
+                    <p>
+                    Now, because of the <a href=#thm-diagonal>diagonal criterion</a>, we can assert already that $A$ is diagonalizable.
+                    Moreover,
+                    \[
+                    B=\{(1,-1,0),(0,1,-1),(0,1,0)\}
+                    \]
+                    is a basis of $\RR^3$ consisting of eigenvectors of $A$.
+                    Consequently, if we let
+                    \[
+                    P
+                    =
+                    \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    -1 & 1 & 1 \\
+                    0 & -1 & 0
+                    \end{bmatrix},
+                    \]
+                    we obtain that $P$ is an invertible matrix satisfying that
+                    \[
+                    P^{-1}AP
+                    =
+                    \begin{bmatrix}
+                    1 & 0 & 0 \\
+                    0 & 1 & 0 \\
+                    0 & 0 & 2
+                    \end{bmatrix}
+                    \]
+                    is diagonal.
+                    </p>
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
 </html> 
