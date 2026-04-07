@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Nearly Kähler Geometry and Totally Geodesic Submanifolds">
+        <meta name="keywords" content="HTML, CSS, JavaScript, Slides">
+        <meta name="author" content="Juanma Lorenzo Naveiro">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap" rel="stylesheet">
+        <title>Nearly Kähler geometry and totally geodesic submanifolds</title>
+        <link rel="stylesheet" href="slides.css">
+        <link rel="stylesheet" href="light.css">
+        <script src="jax.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body>
+        <!--Each slide will be represented with an article tag-->
+        <!--For printing, it seems that Adobe PDF goes pretty nicely-->
+        <div id="wrapper">
+            <article>
+                <div class="title-content">
+                    <h1 id="title">
+                        Nearly Kähler geometry and<br> totally geodesic submanifolds
+                    </h1>
+                    <p id="speaker-info">
+                        Juan Manuel Lorenzo Naveiro<br>
+                        University of Oklahoma<br>
+                        Soul and Shape, April 8 2026<br>
+                    </p>
+                    <p style="text-align: center;">
+                        Joint work with Alberto Rodríguez-Vázquez<br>
+                        (Université Libre de Bruxelles) <br>
+                    </p>
+                    <p>
+                        &#128196; <span style="font-family: monospace;">arXiv:2411.11261</span> [math.DG]
+                    </p>
+                </div>
+            </article>
+            <!--<article>
+                <h1>Preliminaries</h1>
+                <ul id="prelims">
+                    <li>
+                        $M$ real analytic Riemannian manifold.
+                    </li>
+                    <li>
+                        Metric $\langle \cdot , \cdot \rangle\colon T_pM \times T_pM \to \mathbb{R}$.
+                    </li>
+                    <li>
+                        Levi-Civita connection $\nabla \colon \mathfrak{X}(M)\times \mathfrak{X}(M)\to \mathfrak{X}(M)$.
+                    </li>
+                    <li>
+                        Curvature tensor $R\colon T_p M \times T_p M \times T_p M \to T_p M$:
+                        \[
+                        R(X,Y)Z=\nabla_X \nabla_Y Z-\nabla_Y \nabla_X Z - \nabla_{[X,Y]} Z.
+                        \]
+                    </li>
+                </ul>
+            </article>-->
+            <article>
+                <h1>Totally geodesic submanifolds</h1>
+                <ul>
+                    <li>$M$ real analytic Riemannian manifold, $f\colon \Sigma \to M$ isometric immersion.</li>
+                    <li class="show-10">$f$ is <strong>totally geodesic</strong> if:</li>
+                    <p class="show-10 center">$\gamma\colon I\to \Sigma$ geodesic $\Rightarrow$ $f\circ \gamma \colon I \to M$ geodesic.</p>
+                </ul>
+                <div class="show-10" style="display: flex; flex-direction: row; height: 45%; justify-content: space-around;">
+                    <div style="width: 30%; display: flex; flex-direction: column;">
+                        <img src="Pictures/planeCropped.png" alt="Euclidean space" style="width: 100%; height: 60%; object-fit: contain;">
+                        <p class="center">$\mathbb{R}^{k}\subseteq\mathbb{R}^{n}$</p>
+                    </div>
+                    <div style="padding: 0; width: 30%; display: flex; flex-direction: column;">
+                        <img src="Pictures/greatCircleCropped.png" alt="Sphere" style="margin: 0; width: 100%; height: 60%; object-fit: contain;">
+                        <p class="center">$\mathsf{S}^{k}\subseteq\mathsf{S}^{n}$</p>
+                    </div>
+                    <div style="width: 30%; display: flex; flex-direction: column; align-items: center;">
+                        <img src="Pictures/greatHypPlaneCropped.png" alt="Hyperbolic space" style="width: 100%; height: 60%; object-fit: contain;">
+                        <p class="center">$\mathbb{R}\mathsf{H}^{k}\subseteq\mathbb{R}\mathsf{H}^{n}$</p>
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1>General problem</h1>
+                <ul>
+                    <li>$f\colon \Sigma^k \to M^n$ is <strong>compatible</strong> if $\widetilde{f}\colon \Sigma\to \mathsf{Gr}_{k}(TM)$ given by \[\widetilde{f}(x)=df_x(T_x\Sigma)\] is injective.</li>
+                    </li>
+                    <li class="show-10">$f$ admits a unique <strong>inextendable</strong> extension.</li>
+                    <li class="show-20">$f_i\colon \Sigma_i\to M$ ($i=1,2$) are <strong>equivalent</strong> (and we write $f_1\simeq f_2$) if there exists an isometry $\phi\colon \Sigma_1\to\Sigma_2$ with $f_1=f_2\circ\phi$.</li>
+                </ul>
+                <div class="show-30 problem-box center">
+                    Given $M$, classify (equivalence classes of) inextendable compatible totally geodesic immersions to $M$ up to congruence.
+                </div>
+            </article>
+            <article>
+                <h1>Nearly Kähler manifolds</h1>
+                <ul>
+                    <li>$(M,J)$ almost Hermitian manifold.</li>
+                    <li>$M$ is <strong>nearly Kähler</strong> if $\nabla J$ skew-symmetric.</li>
+                    <li class="show-20">Butruille ('06): Classification of homogeneous nearly Kähler manifolds $\mathsf{G}/\mathsf{K}$ in dimension six:</li>
+                </ul>
+                <div class="show-20" id="butruille-container">
+                    <table id="butruille">
+                        <tr>
+                            <th>$M$</th>
+                            <th>$\mathsf{G}$</th>
+                            <th>$\mathsf{K}$</th>
+                        </tr>
+                        <tr>
+                            <td>$\mathsf{S}^{6}$</td>
+                            <td>$\mathsf{G}_{2}$</td>
+                            <td>$\mathsf{SU}(3)$</td>
+                        </tr>
+                        <tr>
+                            <td>$\mathsf{F}(\mathbb{C}^{3})$</td>
+                            <td>$\mathsf{SU}(3)$</td>
+                            <td>$\mathsf{T}^{2}$</td>
+                        </tr>
+                        <tr>
+                            <td>$\mathbb{C}\mathsf{P}^{3}$</td>
+                            <td>$\mathsf{Sp}(2)$</td>
+                            <td>$\mathsf{U}(1)\times\mathsf{Sp}(1)$</td>
+                        </tr>
+                        <tr>
+                            <td>$\mathsf{S}^{3}\times\mathsf{S}^{3}$</td>
+                            <td>$\mathsf{SU}(2)^{3}$</td>
+                            <td>$\Delta\mathsf{SU}(2)$</td>
+                        </tr>
+                    </table>
+                </div>
+            </article>
+            <article>
+                <h1>Previously known results</h1>
+                <ul>
+                    <li>
+                        $\mathbb{C}\mathsf{P}^{3}:$
+                        <ul style="margin-top: 2%; margin-bottom: 2%;">
+                            <li>
+                                Totally geodesic + Lagrangian (Aslan '23, Liefsoens '22).
+                            </li>
+                            <li>
+                                Totally geodesic + $J$-holomorphic curve (Cwiklinski, Vrancken '22).
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        $\mathsf{F}(\mathbb{C}^3):$
+                        <ul style="margin-top: 2%; margin-bottom: 2%;">
+                            <li>
+                                Totally geodesic + Lagrangian (Storm '20).
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        $\mathsf{S}^{3}\times\mathsf{S}^{3}:$
+                        <ul style="margin-top: 2%; margin-bottom: 2%;">
+                            <li>
+                                Totally geodesic + Lagrangian (Zhang, Dioos, Hu, Vrancken, Wang  '16).
+                            </li>
+                            <li>
+                                Totally geodesic + $J$-holomorphic curve (Bolton, Dillen, Dioos, Vrancken '22).
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+            <!--<article>
+                <h1>Naturally reductive homogeneous spaces</h1>
+                <ul>
+                    <li>$M=\mathsf{G}/\mathsf{K}$ Riemannian homogeneous space, $o=e\mathsf{K}$.</li>
+                    <li class="show-10">$\mathfrak{g}=\mathfrak{k}\oplus\mathfrak{p}$ as $\mathrm{Ad}(\mathsf{K})$-modules (reductive decomposition).</li>
+                    <li class="show-20">$\mathfrak{p}=T_{o}M$ via Killing fields.</li>
+                    <li class="show-25">$M$ is <strong>naturally reductive</strong> if $\exp_{o}(tX)=\operatorname{Exp}(tX)\cdot o,$ $\forall X\in\mathfrak{p}$.</li>
+                    <li class="show-30">Canonical connection $\nabla^{c}\colon \mathfrak{X}(M)\times\mathfrak{X}(M)\to\mathfrak{X}(M)$:</li>
+                    <p class="show-30 center">$(\nabla^{c}_{X^{*}} Y^{*})_o=-[X,Y]_{\mathfrak{p}}.$</p>
+                    <li class="show-40">Difference tensor $\alpha=\nabla-\nabla^{c}\colon \mathfrak{p}\times\mathfrak{p}\to\mathfrak{p}.$</li> 
+                    <p class="show-40 center">$\alpha(X,Y)=\dfrac{1}{2}[X,Y]_{\mathfrak{p}}.$</p>           
+                </ul>
+            </article>-->
+            <article>
+                <h1>Riemannian homogeneous spaces</h1>
+                <ul>
+                    <li>
+                        $M=\mathsf{G}/\mathsf{K}$ Riemannian homogeneous space, $o=e\mathsf{K}$.
+                    </li>
+                    <li class="show-10">
+                        $\mathsf{G}\curvearrowright M$ gives a homomorphism $\mathsf{G}\to I(M)$.
+                    </li>
+                    <li class="show-20">
+                        Anti-homomorphism $X\in \mathfrak{g}\mapsto X^*\in \mathfrak{X}(M)$:
+                        \[
+                            X^*_p = \frac{d}{dt}\bigg\vert_{t=0} \operatorname{Exp}(tX)\cdot p.
+                        \]
+                    </li>
+                </ul>
+                <div class="show-30 remark-box">
+                    $M$ is <strong>reductive</strong> if there exists $\mathfrak{p}\subseteq \mathfrak{g}$ with
+                    \[
+                        \mathfrak{g}=\mathfrak{k}\oplus \mathfrak{p}, \quad \operatorname{Ad}(\mathsf{K})\mathfrak{p}=\mathfrak{p}.
+                    \]
+                </div>
+            </article>
+            <article>
+                <h1>Riemannian homogeneous spaces</h1>
+                <div class="remark-box" style="margin-bottom: 5%">
+                    $M$ is <strong>reductive</strong> if there exists $\mathfrak{p}\subseteq \mathfrak{g}$ with
+                    \[
+                        \mathfrak{g}=\mathfrak{k}\oplus \mathfrak{p}, \quad \operatorname{Ad}(\mathsf{K})\mathfrak{p}=\mathfrak{p}.
+                    \]
+                </div>
+                <ul id="reductive-properties">
+                    <li>
+                        $\mathfrak{p}=\mathfrak{g}/\mathfrak{k}=T_o M$ as $\mathsf{K}$-modules.
+                    </li>
+                    <li class="show-20">
+                        Isotropy representation $\mathsf{K}\curvearrowright T_o M$
+                        $\leftrightsquigarrow$
+                        Adjoint action $\mathsf{K}\curvearrowright \mathfrak{p}$.
+                    </li>
+                    <li class="show-30">
+                        $\mathsf{G}$-invariant tensors on $M$
+                        $\leftrightsquigarrow$
+                        $\operatorname{Ad}(\mathsf{K})$-invariant tensors on $\mathfrak{p}$.
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Connection and curvature</h1>
+                <ul style="margin-bottom: 0;">
+                    <li>
+                        $M$ has a <strong>canonical connection</strong> $\nabla^c$.
+                        \[
+                        (\nabla^c_{X^*}Y^*)_o = -[X,Y]_\mathfrak{p}, \quad X,\,Y\in \mathfrak{p}.
+                        \]
+                    </li>
+                    <li class="show-10">
+                        $D=\nabla-\nabla^c$ <strong>difference tensor</strong>.
+                    </li>
+                </ul>
+                <div class="show-20 center">
+                    \[
+                    \begin{align}
+                        D_X Y &= \frac{1}{2}[X,Y]_{\mathfrak{p}}+U(X,Y), \\[0.5em]
+                        2 \langle U(X,Y),Z\rangle &= \langle [Z,X]_{\mathfrak{p}},Y \rangle + \langle X,[Z,Y]_{\mathfrak{p}} \rangle, \\[0.5em]
+                        (\nabla_{X^*}Y^*)_o &= -[X,Y]_{\mathfrak{p}}+D_X Y, \\[0.5em]
+                        R(X,Y) &= [D_X,D_Y]-D_{[X,Y]_{\mathfrak{p}}}-\operatorname{ad}([X,Y]_{\mathfrak{k}}).
+
+                    \end{align}
+                    \]
+                </div>
+            </article>
+            <article>
+                <h1>Natural reductivity</h1>
+                <ul id="naturally-reductive">
+                    <li>
+                        $M$ is <strong>naturally reductive</strong> if $U=0$.
+                    </li>
+                    <li class="show-10">
+                        $M$ is naturally reductive $\Leftrightarrow$ 
+                        $\operatorname{Exp}(tX)\cdot o$ geodesic for all $X\in \mathfrak{p}$.
+                    </li>
+                    <li class="show-20">
+                        $M$ is <strong>normal homogeneous</strong> if:
+                        <ol style="margin-top: 5%;">
+                            <li>
+                                $\mathsf{G}$ has a bi-invariant metric.
+                            </li>
+                            <li>
+                                The complement $\mathfrak{p}=\mathfrak{g}\ominus \mathfrak{k}$.
+                            </li>
+                            <li>
+                                The metric on $M$ is induced from the metric on $\mathsf{G}$.
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+            </article>
+            <article>
+                <h1>Totally geodesic subspaces</h1>
+                <ul>
+                    <li>$f\colon \Sigma\to M$ totally geodesic. Then $f$ is determined by any tangent subspace $V\in\widetilde{f}(\Sigma):$</li>
+                    <p class="center">$f_i\colon\Sigma_i\to M,\quad\widetilde{f_1}(\Sigma_1)\cap\widetilde{f_2}(\Sigma_2)\neq\varnothing\Rightarrow f_1\simeq f_2.$</p>
+                    <li class="show-10">Given $V\subseteq T_pM$, when does $V$ generate a totally geodesic submanifold?</li> 
+                </ul>
+                <!--<div class="show-20 theorem-box">
+                    <b>Tojo's criterion.</b> $M$ naturally reductive, $\mathfrak{v}\subseteq \mathfrak{p}.$ The following are equivalent:
+                    <ol style="margin-top: 2%;">
+                        <li>$\mathfrak{v}$ is a totally geodesic subspace.</li>
+                        <li>The subspace $e^{\nabla X^{*}}\mathfrak{v}$ is $R$-invariant for all $X\in\mathfrak{v}$.</li>
+                    </ol>
+                </div>-->
+                <div class="show-20 theorem-box">
+                    <b>Theorem (Cartan '51, Hermann '59).</b> $M$ real analytic, $V\subseteq T_pM.$ The following are equivalent:
+                    <ol style="margin-top: 2%;">
+                        <li>$V$ is a totally geodesic subspace.</li>
+                        <li>$V$ is $\nabla^kR$-invariant for all $k\geq0$.</li>
+                    </ol>
+                </div>
+            </article>
+            <article>
+                <h1>$D$-invariant totally geodesic submanifolds</h1>
+                <ul>
+                    <li>$M=\mathsf{G}/\mathsf{K}$ naturally reductive, $\Sigma\to M$ submanifold.</li>
+                    <li style="margin-top: 5%;">$\Sigma$ is $D$<strong>-invariant</strong> if $T_x\Sigma$ is $D$-invariant for all $x\in\Sigma$.</li>                </ul>
+                </ul>
+                <div class="show-10 theorem-box" style="padding-bottom: 2%;">
+                    <b>Theorem (LN, Rodríguez-Vázquez).</b>
+                    $\mathfrak{v}\subseteq \mathfrak{p}$ subspace.
+                    The following are equivalent:
+                    <ol>
+                        <li>
+                            $\mathfrak{v}$ is invariant under $R$ and $D$.
+                        </li>
+                        <li>
+                            $\mathfrak{v}$ is invariant under $R^c$ and $D$.
+                        </li>
+                        <li>
+                            There exists a $D$-invariant t.g. $\Sigma \to M$ with $T_o\Sigma = \mathfrak{v}$.
+                        </li>
+                    </ol>
+                    The corresponding t.g. submanifold is $\Sigma = \mathsf{S}\cdot o$, where $\mathfrak{s}=[\mathfrak{v},\mathfrak{v}]+\mathfrak{v}$.
+                </div>
+                <!--<div class="show-10 theorem-box" style="margin-top: 5%;">
+                    <b>Theorem.</b> $\mathfrak{v}\subseteq\mathfrak{p}$ invariant under $R$ and $D$. Then:
+                    <ol style="margin-top: 2%;">
+                        <li>$\mathfrak{s}=[\mathfrak{v},\mathfrak{v}]+\mathfrak{v}=[\mathfrak{v},\mathfrak{v}]_{\mathfrak{k}}\oplus\mathfrak{v}$ is a subalgebra.</li>
+                        <li>$\Sigma=\mathsf{S}\cdot o$ is totally geodesic and $D$-invariant with $T_{o}\Sigma=\mathfrak{v}$.</li>
+                    </ol>
+                </div>-->
+            </article>
+            <article>
+                <h1>$\mathbb{C}\mathsf{P}^{3}=\mathsf{Sp}(2)/(\mathsf{U}(1)\times\mathsf{Sp}(1))$</h1>
+                <table style="margin-top: 5%; margin-bottom: 2%;">
+                    <tr>
+                        <th>Submanifold</th>
+                        <th>Orbit of</th>
+                        <th>Relationship with $J$</th>
+                    </tr>
+                    <tr>
+                        <td>$\mathbb{R}\mathsf{P}^3_{\mathbb{C},1/2}(\sqrt{2})$</td>
+                        <td>$\mathsf{SU}(2)$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(1/\sqrt{2})$</td>
+                        <td>$\mathsf{Sp}(1)_{f}$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(1)$</td>
+                        <td>$\mathsf{SU}(2)$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(\sqrt{5})$</td>
+                        <td>$\mathsf{SU}(2)_{\Lambda_{3}}$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                </table>
+                <p>$\Lambda_{3}=\mathsf{S}^{3}(\mathbb{C}^{2})$ is the four-dimensional irrep. of $\mathsf{SU}(2)$.</p>
+                <p class="center" style="font-size: 82%;">
+                    $\begin{pmatrix}a & -\bar{b} \\ b & \bar{a}\end{pmatrix}\mapsto \begin{pmatrix}a(\lvert a\rvert^{2}-2\lvert b \rvert^2) & -\sqrt{3}a^{2}\bar{b} \\ \sqrt{3}a^{2}\bar{b} & a^{3}\end{pmatrix}+\boldsymbol{\mathbf{j}}\begin{pmatrix}b(2\lvert a\rvert^{2}-\lvert b \rvert^{2}) & -\sqrt{3}ab^2 \\ \sqrt{3}\bar{a}b^2 & -b^3\end{pmatrix}$
+                </p>
+            </article>
+            <article>
+                <h1 style="margin-top: 2%;">$\mathsf{F}(\mathbb{C}^{3})=\mathsf{SU}(3)/\mathsf{T^{2}}$</h1>
+                <table style="font-size: 80%;">
+                    <tr>
+                        <th>Submanifold</th>
+                        <th>Orbit of</th>
+                        <th>Relationship with $J$</th>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{F}(\mathbb{R}^{3})=\mathsf{S}^{3}(2\sqrt{2})/\mathsf{Q}_{8}$</td>
+                        <td>$\mathsf{SO}(3)$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{3}_{\mathbb{C},1/4}(2)$</td>
+                        <td>$\mathsf{SU}(2)$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{T}_{\Lambda}$</td>
+                        <td>$\mathsf{T}^{2}$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(1/\sqrt{2})$</td>
+                        <td>$\mathsf{U}(2)$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(\sqrt{2})$</td>
+                        <td>$\mathsf{SO}(3)$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathbb{R}\mathsf{P}^{2}(2\sqrt{2})$</td>
+                        <td>Inhomogeneous</td>
+                        <td>Totally real</td>
+                    </tr>
+                </table>
+                <div style="display: flex; height: 40%; margin: 2%;">
+                    <div class="center" style="font-size: 90%; display: flex; justify-content: center; align-items: center; width: 50%;">
+                        <p class="center">$\Lambda=\left\langle\sqrt{\frac{2}{3}}\pi\left(0,2\right),\sqrt{2}\pi\left(1,\frac{1}{\sqrt{3}}\right)\right\rangle$</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; width: 50%;">
+                        <img src="Pictures/latticeLambdaWithFundamentalDomain.png" alt="Lattice of Lambda" style="object-fit: contain; height: 100%;">
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1 style="margin-top: 2%;">$\mathsf{S}^{3}\times\mathsf{S}^{3}=\mathsf{SU}(2)^{3}/\Delta\mathsf{SU}(2)$</h1>
+                <table>
+                    <tr>
+                        <th>Submanifold</th>
+                        <th>Orbit of</th>
+                        <th>Relationship with $J$</th>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{3}(2/\sqrt{3})$</td>
+                        <td>$\mathsf{SU}(2)_{2}$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{3}_{\mathbb{C},1/3}(2)$</td>
+                        <td>$\mathsf{SU}(2)_{13,2}$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{T}_{\Gamma}$</td>
+                        <td>$\mathsf{T}\subseteq \mathsf{U}(1)^{3}$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(\sqrt{3/2})$</td>
+                        <td>$\Delta\mathsf{SU}(2)$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(2/\sqrt{3})$</td>
+                        <td>$\mathsf{H}\subseteq \mathsf{SU}(2)_{13,2}$</td>
+                        <td>Totally real</td>
+                    </tr>
+                </table>
+                <div style="display: flex; height: 40%; margin: 2%;">
+                    <div class="center" style="font-size: 90%; display: flex; justify-content: center; align-items: center; width: 50%;">
+                        <p class="center">$\Gamma=\left\langle \frac{4\pi}{\sqrt{3}}(1,0),\frac{2\pi}{\sqrt{3}}(1,\sqrt{3}) \right\rangle$</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; width: 50%;">
+                        <img src="Pictures/latticeGammaWithFundamentalDomain.png" alt="Lattice of Gamma" style="object-fit: contain; height: 100%;">
+                    </div>
+                </div>
+            </article>
+            <article>
+                <h1>Riemannian cones</h1>
+                <ul>
+                    <li>$(M,g)$ complete real analytic Riemannian manifold.</li>
+                    <li class="show-10"><strong>Riemmanian cone:</strong> $\widehat{M}=(0,\infty)\times M$ with the metric</li> 
+                    <p class="show-10 center">$\widehat{g}=dr^{2}+r^{2}g.$</p>
+                    <li class="show-15">$I(\widehat{M})=I(M)$.</li>
+                    <li class="show-20">If $\dim M = 6$, and $\mathrm{Ric}=5g$, then (Bär '93):</li>
+                    <p class="show-20 center">$M$ is strict nearly Kähler $\Rightarrow$ $\mathrm{Hol}(\widehat{M})\in \{0,\mathsf{G}_{2}\}$.</p>
+                    <li class="show-30">If $M\neq \mathsf{S}^{6}$ and $\pi_1(M)=0$, then $\mathrm{Hol}(\widehat{M})=\mathsf{G}_{2}$.</li>
+                </ul>
+            </article>
+            <article>
+                <div class="theorem-box" style="margin-top: 5%;">
+                    <b>Theorem (LN, Rodríguez-Vázquez).</b>
+                    $\Sigma$ totally geodesic in $\widehat{M}$. Then one of the two holds:
+                    <ol style="list-style-type: lower-roman; margin-top: 2%;">
+                        <li>$\Sigma=\widehat{S}$ for $S\to M$ totally geodesic.</li>
+                        <li>$\Sigma$ is (up to surjective local isometry) a totally geodesic hypersurface in $\widehat{S}$ for $S\to M$ totally geodesic.</li>
+                    </ol>
+                </div>
+                <div style="height: 55%; display: flex; flex-direction: row; justify-content: space-around;">
+                    <div style="width: 35%; height: 100%; display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 100%; height: 80%;">
+                            <img src="Pictures/coneOverTG.png" alt="Cone over submanifold" style="object-fit: cover; height: 130%;">
+                        </div>
+                        <p class="center" style="display: flex; justify-content: center;">$\Sigma=\widehat{S}$</p>
+                    </div>
+                    <div style="width: 35%; height: 100%; display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 100%; height: 80%;">
+                            <img src="Pictures/coneGeodesic.png" alt="Hypersurface" style="object-fit: cover; height: 130%;">
+                        </div>
+                        <p class="center" style="display: flex; justify-content: center; font-size: 100%;">$\Sigma\subseteq\widehat{S}$</p>
+                    </div>
+                </div>
+            </article>
+            <!--<article>
+                <div class="theorem-box" style="margin-top: 5%;">
+                    <b>Theorem.</b>
+                    $\Sigma$ totally geodesic in $\widehat{M}$. Then one of the two holds:
+                    <ol style="list-style-type: lower-alpha; margin-top: 2%;">
+                        <li>$\Sigma=\widehat{S}$ for $S\to M$ totally geodesic.</li>
+                        <li>$\Sigma$ is (up to desingularizing) a totally geodesic hypersurface in $\widehat{S}$ for $\phi\colon S\to M$ totally geodesic.</li>
+                    </ol>
+                </div>
+                <div style="height: 55%; display: flex; flex-direction: row; justify-content: space-around;">
+                    <div style="width: 35%; height: 100%; display: flex; flex-direction: column; align-items: center; align-items: center; justify-content: center;">
+                        <div style="width: 100%; height: 80%; display: flex; align-items: center; justify-content: center;">
+                            <p class="center" style="font-size: 120%;">\[
+                                    \begin{CD}
+                                    \begin{CD}
+                                        \widetilde{\Sigma} @>g>> \widehat{S}\\
+                                        @V \pi V V @VV \widehat{\phi} V\\
+                                        \Sigma @>>f> \widehat{M}
+                                        \end{CD}
+                                    \end{CD}
+                                \]</p>
+                        </div>
+                    </div>
+                    <div style="width: 35%; height: 100%; display: flex; flex-direction: column; align-items: center;">
+                        <div style="width: 100%; height: 80%;">
+                            <img src="Pictures/coneTGExtension.png" alt="Hypersurface" style="object-fit: cover; height: 130%;">
+                        </div>
+                        <p class="center" style="display: flex; justify-content: center; font-size: 100%;">$\Sigma\subseteq\widehat{S}$</p>
+                    </div>
+                </div>
+            </article>-->
+            <article>
+                <div class="theorem-box" style="margin-top: 5%;">
+                    <b>Corollary.</b> $\Sigma \to \widehat{M}$ maximal totally geodesic submanifold. Then one of the two holds:
+                    <ol style="list-style-type: lower-roman;">
+                        <li>$\Sigma=\widehat{S}$ for a maximal totally geodesic $S\to M$.</li>
+                        <li>$\Sigma$ is a complete totally geodesic hypersurface.</li>
+                    </ol>
+                </div>
+                <div class="show-10 remark-box" style="margin: 2% 0 0 0; padding-bottom: 2%">
+                    <b>Example of a type ii submanifold.</b>
+                    Take $M=(0,\pi/2)\times \mathbb{R}^2$ with the metric
+                    \[
+                        dx^2+(\sin x)^2 p(y,z)^2 dy^2+(\sin x)^2 q(y,z)^2 dz^2
+                    \]
+                    The hypersurface
+                    \[
+                        \Sigma = \Big\{(\sec x,x,y,z)\colon (x,y,z)\in M\Big\} \subseteq \widehat{M}
+                    \]
+                    is totally geodesic.
+                </div>
+            </article>
+            <article>
+                <p>The case ii. is not possible if $\mathrm{Hol}(\widehat{M})=\mathsf{G}_2$ (Jentsch, Moroianu, Semmelmann, '13).</p>
+                <div class="show-10 theorem-box" style="margin-bottom: 5%; padding-bottom: 2%;">
+                    <b>Theorem (LN, Rodríguez-Vázquez).</b> Let $\widehat{M}\neq \widehat{\mathsf{S}^6}$ be a cohomogeneity one $\mathsf{G}_{2}$-cone. Every maximal totally geodesic submanifold of $\widehat{M}$ is the cone of a maximal totally geodesic submanifold of $M$.
+                </div>
+                <div class="show-20 theorem-box">
+                    <b>Theorem (LN, Rodríguez-Vázquez).</b> Let $\widehat{M}\neq \widehat{\mathsf{S}^6}$ be a cohomogeneity one $\mathsf{G}_{2}$-cone. Every maximal totally geodesic submanifold $\Sigma$ of $\widehat{M}$ is
+                    <ol style="list-style-type: lower-roman;">
+                        <li>Associative (i.e. calibrated by the $\mathsf{G}_{2}$-structure $\phi$) if $\dim \Sigma = 3$.</li>
+                        <li>Coassociative (i.e. calibrated by $\star\phi$) if $\dim \Sigma = 4$.</li>
+                    </ol>
+                </div>
+            </article>
+            <article id="classification">
+                <table id="tg-classification">
+                    <tr>
+                        <th>Ambient</th>
+                        <th>Submanifold</th>
+                        <th>Orbit of</th>
+                        <th>Relationship with $J$</th>
+                    </tr>
+                    <tr>
+                        <td class="ambient" rowspan="4">$\mathbb{C}\mathsf{P}^{3}$</td>
+                        <td>$\mathbb{R}\mathsf{P}^{3}_{\mathbb{C},1/2}(\sqrt{2})$</td>
+                        <td>$\mathsf{SU}(2)^{j}$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(1/\sqrt{2})$</td>
+                        <td>$\mathsf{Sp}(1)_{f}$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(1)$</td>
+                        <td>$\mathsf{SU}(2)$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(\sqrt{5})$</td>
+                        <td>$\mathsf{SU}(2)_{\Lambda_{3}}$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td class="ambient" rowspan="6">$\mathsf{F}(\mathbb{C}^{3})$</td>
+                        <td>$\mathsf{F}(\mathbb{R}^{3})$</td>
+                        <td>$\mathsf{SO}(3)$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{3}_{\mathbb{C},1/4}(2)$</td>
+                        <td>$\mathsf{SU}(2)$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{T}_{\Lambda}$</td>
+                        <td>$\mathsf{T}^{2}$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(1/\sqrt{2})$</td>
+                        <td>$\mathsf{U}(2)$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(\sqrt{2})$</td>
+                        <td>$\mathsf{SO}(3)$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathbb{R}\mathsf{P}^{2}(2\sqrt{2})$</td>
+                        <td>Inhomogeneous</td>
+                        <td>Totally real</td>
+                    </tr>
+                    <tr>
+                        <td class="ambient" rowspan="5">$\mathsf{S}^{3}\times\mathsf{S}^{3}$</td>
+                        <td>$\mathsf{S}^{3}(2/\sqrt{3})$</td>
+                        <td>$\mathsf{SU}(2)_{2}$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{3}_{\mathbb{C},1/3}(2)$</td>
+                        <td>$\mathsf{SU}(2)_{13,2}$</td>
+                        <td>Lagrangian</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{T}_{\Gamma}$</td>
+                        <td>$\mathsf{T}\subseteq \mathsf{U}(1)^{3}$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(\sqrt{3/2})$</td>
+                        <td>$\Delta\mathsf{SU}(2)$</td>
+                        <td>$J$-holomorphic</td>
+                    </tr>
+                    <tr>
+                        <td>$\mathsf{S}^{2}(2/\sqrt{3})$</td>
+                        <td>$\mathsf{H}\subseteq \mathsf{SU}(2)_{13,2}$</td>
+                        <td>Totally real</td>
+                    </tr>
+                </table>
+            </article>
+        </div>
+    </body>
+    <script src="code.js"></script>
+</html>

@@ -1,0 +1,74 @@
+@font-face {
+    font-family: "lato-local";
+    src: url("file:///D:/Talk/Lato/Lato-Regular.ttf");
+}
+
+@font-face {
+    font-family: "lato-local-bold";
+    src: url("file:///D:/Talk/Lato/Lato-Bold.ttf");
+}
+
+@font-face {
+    font-family: "lato-local-italic";
+    src: url("file:///D:/Talk/Lato/Lato-Italic.ttf");
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Lato";
+    font-weight: 400;
+    width: 100vw;
+    /*background-color: rgb(22, 22, 22);*/
+    /*background-color: rgb(45, 45, 45);*/
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+
+#wrapper {
+    margin: 0;
+    padding: 0;
+    width: calc(4 * 100vh / 3);
+    height: auto;
+    background-color: black;
+}
+
+article {
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100vh;
+    width: auto;
+    margin: 0;
+    padding: 0 5%;
+    font-size: 5vh;
+    background-color: #eff1f5;
+    color: #1e2030;
+    /*background-image: radial-gradient(circle, white, gray);*/
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+[class^="show-"] {
+    transition: 0.25s;
+}
+
+.hidden {
+    display: none;
+}
+
+.transparent {
+    opacity: 0;
+    animation-name: fade-out;
+    animation-duration: 0.5s;
+}
+
+@media print {
+    article {
+        aspect-ratio: 4/3;
+        break-after: always;
+        background-image: radial-gradient(circle,#eff1f5,#eff1f5);
+    }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Vector Spaces: Examples and Basic Properties</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="linear-algebra.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <main>
+                <h1 class="center">
+                    Chapter 6: Vector Spaces
+                </h1>
+
+                <h1>
+                    6.1 Examples and Basic Properties
+                </h1> 
+
+                <p>
+                    The purpose of this chapter is to introduce the theory of <em>vector spaces</em>.
+                    We have already introduced the most important example of a vector space, which is $\RR^n$.
+                    However, there are other mathematical objects that behave similarly to vectors,
+                    and that fact will allow us to also do linear algebra with them.
+                </p>
+                    
+                <p>
+                    The introduction of general vector spaces is an example of <em>abstraction</em>, which is a very common technique in mathematical reasoning.
+                    By applying intuition that we have with vectors in $\RR^n$ to other mathematical entities,
+                    we are able to obtain a new perspective on said entities and also obtain new results.
+                </p>
+
+                <section id="vector-spaces">
+                    <div class="definition-box">
+                        A <b>vector space</b> is a triple $(V,+,\cdot)$ consisting of three pieces of data:
+                        <ul>
+                            <li>A nonempty set $V$, whose elements are called <b>vectors</b>.</li>
+                            <li>A map $+$ that takes any pair $(\bf{v},\bf{w})$ consisting of elements of $V$ and returns another element $\bf{v}+\bf{w}\in V$.</li>
+                            <li>A map $\cdot$ that takes any scalar $a\in \RR$ and any vector $\bf{v}\in V$ and returns a vector $a\bf{v}\in V$.</li>
+                        </ul>
+                        The operation $+$ is called <b>vector addition</b>, whereas $\cdot$ is called <b>scalar multiplication</b>.
+                        In addition, both operations are going to be subject to the following relations:
+                        <ol>
+                            <li>
+                                $\bf{u}+\bf{v}=\bf{v}+\bf{u}$ for all $\bf{u},\,\bf{v}\in V$.
+                            </li>
+                            <li>
+                                $\bf{u}+(\bf{v}+\bf{w})=(\bf{u}+\bf{v})+\bf{w}$ for all $\bf{u},\,\bf{v},\,\bf{w}\in V$.
+                            </li>
+                            <li>
+                                There exists an element $\bf{0}\in V$, called the <b>zero vector</b>, such that $\bf{v}+\bf{0}=\bf{0}+\bf{v}=\bf{v}$ for all $\bf{v}\in V$.
+                            </li>
+                            <li>
+                                For each $\bf{v}\in V$, there exists another element $-\bf{v}\in V$ that satisfies $\bf{v}+(-\bf{v})=-\bf{v}+\bf{v}=\bf{0}$.
+                            </li>
+                            <li>
+                                $a(\bf{v}+\bf{w})=a\bf{v}+a\bf{w}$ for all $a\in \RR$ and $\bf{v},\,\bf{w}\in \RR$.
+                            </li>
+                            <li>
+                                $(a+b)\bf{v}=a\bf{v}+b\bf{v}$ for all $a,\,b\in \RR$ and $\bf{v}\in\RR$.
+                            </li>
+                            <li>
+                                $(ab)\bf{v}=a(b\bf{v})$ for all $a,\,b\in \RR$ and $\bf{v}\in V$.
+                            </li>
+                            <li>
+                                $1\bf{v}=\bf{v}$ for all $\bf{v}\in V$.
+                            </li>
+                        </ol>
+                    </div>                    
+
+                    <p>
+                        For simplicity, we usually denote a vector space $(V,+,\cdot)$ only by its underlying set $V$.
+                    </p>
+
+                    <div class="example-box">
+                        $\RR^n$ is a vector space when endowed with the vector addition and scalar multiplication that were defined in Chapter 1.
+                    </div>
+
+                    <div class="example-box">
+                        Suppose $U\subseteq \RR^n$ is a subspace of $\RR^n$.
+                        Then $U$ is also a vector space itself when considered with the same vector addition and scalar multiplication as $\RR^n$.
+                    </div>
+
+                    <div class="example-box">
+                        Let $m$ and $n$ be two natural numbers and consider the set
+                        \[
+                            M_{mn}=\{ X \mid X \text{ is an $m\times n$ matrix} \} .
+                        \]
+                        Then $M_{mn}$ is a vector space when endowed with the vector addition and scalar multiplication that were defined in Chapter 2.
+                    </div>
+
+                    <p>
+                        We now introduce the vector space of real polynomials.
+                        To do this, we need to remind some concepts regarding polynomials.
+                    </p>
+
+                    <p>
+                        A <b>polynomial</b> $p(x)$ is a function of the form
+                        \[
+                            p(x)=a_{n}x^{n}+\cdots+a_{1}x+a_{0},
+                        \]
+                        where $a_{0},\,\dots,\,a_{n}\in \RR$ are real constants called, the <b>coefficients</b> of $p(x)$.
+                    </p>
+
+                </section>
+
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
