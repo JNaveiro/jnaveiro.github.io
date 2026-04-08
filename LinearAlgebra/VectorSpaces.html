@@ -41,7 +41,7 @@
                 </p>
 
                 <section id="vector-spaces">
-                    <div class="definition-box">
+                    <div class="definition-box" id="def-vector-space">
                         A <b>vector space</b> is a triple $(V,+,\cdot)$ consisting of three pieces of data:
                         <ul>
                             <li>A nonempty set $V$, whose elements are called <b>vectors</b>.</li>
@@ -94,9 +94,9 @@
                     <div class="example-box">
                         Let $m$ and $n$ be two natural numbers and consider the set
                         \[
-                            M_{mn}=\{ X \mid X \text{ is an $m\times n$ matrix} \} .
+                            \bf{M}_{mn}=\{ X \mid X \textsf{ is an $m\times n$ matrix} \} .
                         \]
-                        Then $M_{mn}$ is a vector space when endowed with the vector addition and scalar multiplication that were defined in Chapter 2.
+                        Then $\bf{M}_{mn}$ is a vector space when endowed with the vector addition and scalar multiplication that were defined in Chapter 2.
                     </div>
 
                     <p>
@@ -110,10 +110,328 @@
                             p(x)=a_{n}x^{n}+\cdots+a_{1}x+a_{0},
                         \]
                         where $a_{0},\,\dots,\,a_{n}\in \RR$ are real constants called, the <b>coefficients</b> of $p(x)$.
+                        The number $n$ (that is, the higher power of $x$ that appears in the polynomial) is called the <b>degree</b> of $f$ (denoted $\operatorname{deg} f$).
+                        The number $a_n$ is the <b>leading coefficient of $f$</b>.
                     </p>
 
+                    <p>
+                        Now, let $\bf{P}$ be the set of all polynomials.
+                        We can define the operations of addition and scalar multiplication on $\bf{P}$ as follows:
+                        suppose we are given two polynomials (of possibly different degrees)
+                        \[
+                            p(x)= a_0 + a_1 x + a_2 x^2 + \cdots,
+                            \qquad
+                            q(x)= b_0 + b_1 x + b_2 x^2 + \cdots,
+                        \]
+                        and a scalar $a\in \RR$.
+                        Then we define the sum $(p+q)(x)$ and the scalar product $(ap)(x)$ by the equations
+                        \[
+                            \begin{aligned}
+                                (p+q)(x)
+                                &=
+                                (a_0+b_0) + (a_1+b_1) x + (a_2 + b_2) x^2 + \cdots,\\[1em]
+                                (ap)(x)
+                                &=
+                                aa_0 + (aa_1)x + (aa_2) x^2 + \cdots.
+                            \end{aligned}
+                        \]
+                        It is clear that both $(p+q)(x)$ and $(ap)(x)$ are again polynomials, so they are elements of $\bf{P}$.
+                    </p>
+
+                    <div class="example-box">
+                        The set $\bf{P}$ is a vector space with the operations of addition and scalar multiplication defined above.
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                        It is a straightforward (but long) process to check that $\bf{P}$ satisfies the properties 1, 2, 5, 6, 7 and 8 of the <a href=#def-vector-space>definition of vector space</a>.
+                        </p>
+                        <p>
+                            To check property 3, we need to have a polynomial that acts as the zero vector.
+                            If we take the polynomial $0(x)=0$, then it is clear that $(0+p)(x)=(p+0)(x)=p(x)$ for every polynomial $p(x)\in\bf{P}$, so $0(x)$ is the zero vector of $\bf{P}$.
+                        </p>
+                        <p>
+                            Now, to check property 4, suppose $p(x)=a_0 + a_1 x + a_2 x^2 +\cdots$ is a polynomial.
+                            The polynomial $-p(x)=-a_0 - a_1 x - a_2 x^2 - \cdots$ satisfies $(-p+p)(x)=(p+(-p))(x)=0(x)$, so that property 4 holds.
+                        </p>
+                        <p>
+                            We conclude that $\bf{P}$ is a vector space.
+                        </p>
+                    </details>
+
+                    <p>
+                        We also give an example of a vector space that arises as a subset of $\bf{P}$:
+                    </p>
+
+                    <div class="example-box">
+                        Fix a number $n\geq 0$.
+                        The set of polynomials of degree at most $n$:
+                        \[
+                            \bf{P}_n
+                            =
+                            \big\{
+                            a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n
+                            \mid
+                            a_0,a_1,\dots,a_n\in \RR
+                            \big\}
+                        \]
+                        is a vector space with the operations of addition and scalar multiplication defined for polynomials.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            The key is to notice that if $p(x)$ and $q(x)$ are in $\bf{P}_n$, then so is their sum $(p+q)(x)$, since the degree of $(p+q)(x)$ is bounded from above by both the degrees of $p(x)$ and $q(x)$.
+                            This means that the addition and scalar multiplication operations are well-defined on $\bf{P}_n$, and the <a href=#def-vector-space>defining properties of a vector space</a> follow from the same reasoning as with $\bf{P}$.
+                        </p>
+                    </details>
+
+                    <p>
+                        We already know that polynomials form a vector space, so it is natural to ask if (more generally) functions form a vector space.
+                        The answer is yes:
+                    </p>
+                    <p>
+                        Suppose we take a closed interval $[a,b]$.
+                        We define the set
+                        \[
+                            \bf{F}[a,b]=\big\{f\colon [a,b]\to \RR \mid f \textsf{ is a function}\big\}.
+                        \]
+                        We can define addition and scalar multiplication on $\bf{F}[a,b]$.
+                        To do this, suppose $f,\,g\in\bf{F}[a,b]$ are functions and $a\in \RR$ is a scalar.
+                        Then we define the sum $f+g$ and the scalar multiplication $af$ by the formulas
+                        \[
+                            \begin{aligned}
+                                (f+g)(x)&=f(x)+g(x), \\[1em]
+                                (af)(x)&=a\cdot f(x),
+                            \end{aligned}
+                        \]
+                        for every $x\in [a,b]$.
+                        We have that both $f+g$ and $af$ are elements of $\bf{F}[a,b]$.
+                    </p>
+                    <div class="example-box">
+                        The set $\bf{F}[a,b]$ is a vector space with the operations of addition and scalar multiplication defined as above.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            The properties 1, 2, 5, 6, 7 and 8 from the <a href=#def-vector-space>definition of vector space</a> are checked easily.
+                        </p>
+                        <p>
+                            To check property 3, we define the zero function $0$ to be the function that satisfies $0(x)=0$ for all $x\in [a,b]$.
+                            Then it is clear that $0+f=f+0=0$ for every $f\in \bf{F}[a,b]$, so property 3 is satisfied.
+                        </p>
+                        <p>
+                            Similarly, we check property 4.
+                            If $f\in \bf{F}[a,b]$ is any function, then we define $-f$ by the condition that $(-f)(x)=-f(x)$ for all $x\in [a,b]$.
+                            Then $f+(-f)=-f+f=0$, so property 4 follows.
+                        </p>
+                    </details>
                 </section>
 
+                <section class="vector-space-properties">
+                    <h2>Properties of Vector Spaces</h2>
+                    <p>
+                        It is natural to expect that many of the basic arithmetic rules that hold for vectors in $\RR^n$ should also hold in general vector spaces.
+                        While those rules are easy to check in $\RR^n$, the way in which we check them for vector spaces changes drastically.
+                        Indeed, when we are given a <em>general</em> vector space $V$, we only know that it satisfies the <a href=#def-vector-space>defining properties</a>, <b>but nothing more</b>.
+                        We cannot even assume that its elements are vectors, or functions, or anything particular.
+                        Thus, in order to obtain properties that apply for any vector space, we have to deduce them from the defining properties only.
+                    </p>
+                    <p>
+                        In this subsection we will derive some of these basic properties using only the axioms for a vector space.
+                    </p>
+                    <div class="example-box">
+                        Suppose $\bf{u},\,\bf{v},\,\bf{w}\in V$ are vectors in some vector space $V$.
+                        If $\bf{u}+\bf{w}=\bf{v}+\bf{w}$, then $\bf{u}=\bf{v}$.
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            We start with the condition
+                            \[
+                            \bf{u}+\bf{w}=\bf{v}+\bf{w}.
+                            \]
+                            By property 4, the vector $\bf{w}$ has an additive inverse $-\bf{w}$, so let us add it to the equation:
+                            \[
+                            (\bf{u}+\bf{w})+(-\bf{w})=(\bf{v}+\bf{w})+(-\bf{w}).
+                            \]
+                            Now, property 2 says that the above equation is equal to
+                            \[
+                            \bf{u}+(\bf{w}+(-\bf{w}))=\bf{v}+(\bf{w}+(-\bf{w})).
+                            \]
+                            By property 4, $\bf{w}+(-\bf{w})=\bf{0}$, so
+                            \[
+                            \bf{u}+\bf{0}=\bf{w}+\bf{0},
+                            \]
+                            and using property 3, we see that
+                            \[
+                            \bf{u}=\bf{w},
+                            \]
+                            as desired.
+                        </p>
+                    </details>
+                    <div class="example-box" id="ex-subtraction">
+                        If $V$ is a vector space and $\bf{v},\,\bf{w}\in V$, we define the <b>subtraction</b> $\bf{v}-\bf{w}$ as the vector
+                        \[
+                        \bf{v}-\bf{w}=\bf{v}+(-\bf{w}).
+                        \]
+                        If $\bf{x}$ is another vector in $V$, show that
+                        \[
+                        \bf{v}=\bf{w}+\bf{x} \iff \bf{x}=\bf{v}-\bf{w}.
+                        \]
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Firstly, suppose that $\bf{v}=\bf{w}+\bf{x}$.
+                            Adding $-\bf{w}$ to this equation yields
+                            \[
+                            (-\bf{w})+\bf{v}=(-\bf{w})+(\bf{w}+\bf{x}).
+                            \]
+                            The left hand side of the above equation is
+                            \[
+                            -\bf{w}+\bf{v}=\bf{v}+(-\bf{w})=\bf{v}-\bf{w}
+                            \]
+                            due to property 1 and the definition of subtraction.
+                            The right hand side is equal to
+                            \[
+                            (-\bf{w})+(\bf{w}+\bf{x})=(-\bf{w}+\bf{w})+\bf{x}=\bf{0}+\bf{x}=\bf{x}
+                            \]
+                            because of properties 2, 4 and 3.
+                            Altogether we obtain
+                            \[
+                            \bf{x}=\bf{v}-\bf{w}.
+                            \]
+                        </p>
+                        <p>
+                        Now, assume that $\bf{x}=\bf{v}-\bf{w}$.
+                        By adding $\bf{w}$ to both sides of this equation, we get
+                        \[
+                        \bf{x}+\bf{w}=(\bf{v}-\bf{w})+\bf{w}.
+                        \]
+                        The right hand side is equal to
+                        \[
+                        (\bf{v}-\bf{w})+\bf{w}=\bf{v}+(-\bf{w}+\bf{w})=\bf{v}+\bf{0}=\bf{v}
+                        \]
+                        because of properties 2, 4 and 3.
+                        The left hand side is
+                        \[
+                        \bf{x}+\bf{w}=\bf{w}+\bf{x}
+                        \]
+                        due to property 1.
+                        Thus, we obtain
+                        \[
+                        \bf{w}+\bf{x}=\bf{v},
+                        \]
+                        as desired.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        Suppose $V$ is a vector space, $\bf{v}\in V$ and $a\in \RR$.
+                        Then we have
+                        <ol>
+                            <li>$0\bf{v}=\bf{0}$.</li>
+                            <li>$a\bf{0}=\bf{0}$.</li>
+                            <li>If $a\bf{v}=\bf{0}$, then either $a=0$ or $\bf{v}=\bf{0}$.</li>
+                            <li>$(-1)\bf{v}=-\bf{v}$.</li>
+                            <li>$(-a)\bf{v}=a(-\bf{v})=-a\bf{v}$.</li>
+                        </ol>
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            We prove the second, third and fourth assertions, and the rest are left as an exercise.
+                        </p>
+                        <p>
+                            To see that $a\bf{0}=\bf{0}$, observe that
+                            \[
+                            a\bf{0}=a(\bf{0}+\bf{0})=a\bf{0}+a\bf{0}
+                            \]
+                            due to properties 4 and 6.
+                            Using <a href=#ex-subtraction>the above exercise</a>, we obtain
+                            \[
+                            a\bf{0}=a\bf{0}-a\bf{0}=\bf{0}.
+                            \]
+                            This proves 2.
+                        </p>
+                        <p>
+                            We now prove 3.
+                            Suppose $a\bf{v}=\bf{0}$.
+                            If $a=0$, then we are done.
+                            If $a\neq 0$, then we can consider the inverse real number $a^{-1}\in \RR$.
+                            We then have using part 2 of this exercise and the defining properties 7 and 8 that
+                            \[
+                            a\bf{v}=\bf{0}\implies a^{-1}(a\bf{v})=a^{-1}\bf{0}=\bf{0}\implies (a^{-1}a)\bf{v}=\bf{0}\implies 1\bf{v}=\bf{0}\implies \bf{v}=\bf{0}.
+                            \]
+                        </p>
+                        <p>
+                            Let us prove 4.
+                            To do this, we have to show that $(-1)\bf{v}$ is the additive inverse of $\bf{v}$.
+                            Indeed,
+                            \[
+                            (-1)\bf{v}+\bf{v}=(-1)\bf{v}+1\bf{v}=(-1+1)\bf{v}=0\bf{v}=\bf{0}
+                            \]
+                            due to the defining properties 8, 6 and part 2 of this exercise.
+                            Since addition is commutative, we get
+                            \[
+                            (-1)\bf{v}+\bf{v}=\bf{v}+(-1)\bf{v}=\bf{0}.
+                            \]
+                            Since the additive inverse of $\bf{v}$ is unique (see Homework 9), we conclude that $(-1)\bf{v}=-\bf{v}$.
+                        </p>
+                    </details>
+
+                    <p>
+                    Observe that if $\bf{v}_1,\,\dots,\,\bf{v}_k$ are vectors in a vector space $V$, because the addition operation is associative, it makes sense to write the sum
+                    \[
+                    \bf{v}_1+\bf{v}_2+\cdots+\bf{v}_k,
+                    \]
+                    in the sense that it does not matter in which order we perform the individual additions.
+                    Moreover, it is straightforward to show that if $a$ is any real scalar, we have
+                    \[
+                    a(\bf{v}_1+\bf{v}_2+\cdots+\bf{v}_k)
+                    =
+                    a\bf{v}_1+a\bf{v}_2+\cdots+a\bf{v}_k.
+                    \]
+                    Similarly, if $a_1,\,\dots,\,a_k\in \RR$ are scalars and $\bf{v}\in V$ is a vector, we also have
+                    \[
+                    (a_1+a_2+\cdots+a_k)\bf{v}=
+                    a_1\bf{v}+a_2\bf{v}+\cdots +a_k\bf{v}.
+                    \]
+                    </p>
+
+                    <div class="example-box">
+                        If $V$ is a vector space and $\bf{u},\,\bf{v},\,\bf{w}\in V$ are vectors, simplify the expression
+                        \[
+                        3(\bf{u}-\bf{w})+5(\bf{v}+2\bf{u})-4\bf{v}.
+                        \]
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            We use the properties that we have derived in this section.
+                            Indeed,
+                            \[
+                            \begin{aligned}
+                                3(\bf{u}-\bf{w})+5(\bf{v}+2\bf{u})-4\bf{v}
+                                &=
+                                3\bf{u}+3(-\bf{w})+5\bf{v}+5(2\bf{u})-4\bf{v}
+                                =
+                                3\bf{u}-3\bf{w}+5\bf{v}+10\bf{u}-4\bf{v}\\[1em]
+                                &=
+                                3\bf{u}+10\bf{u}+5\bf{v}-4\bf{v}-3\bf{w}
+                                =
+                                (3+10)\bf{u}+(5-4)\bf{v}-3\bf{w} \\[1em]
+                                &=
+                                13\bf{u}+1\bf{v}-3\bf{w}
+                                =
+                                13\bf{u}+\bf{v}-3\bf{w}.
+                            \end{aligned}
+                            \]
+                        </p>
+                    </details>
+                </section>
         </main>
     </body>
     <script src="code.js"></script>
