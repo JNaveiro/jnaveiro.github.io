@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Linear Independence and Dimension</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="linear-algebra.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <main>
+                <h1>
+                    6.3 Linear Independence and Dimension
+                </h1> 
+
+                <p>
+                    In this section we revisit the concepts of linear independence and dimension from the perspective of abstract vector spaces.
+                    We will also fill in some of the gaps that were left in <a href=RnLinearIndependence.html>Section 5.2</a>.
+                </p>
+
+                <section id="linear-independence">
+                    <h2>Linear Independence</h2>
+                    <div class="definition-box">
+                        Let $V$ be a vector space and $\{\bf{v}_1,\dots,\bf{v}_k\}$ a set of vectors in $V$.
+                        We say that $\{\bf{v}_1,\dots,\bf{v}_1\}$ is <b>linearly independent</b> if, whenever we have scalars $t_1,\,\dots,\,t_k\in \RR$ such that
+                        \[
+                            t_1\bf{v}_1+\cdots+t_k\bf{v}_k=\bf{0},
+                        \]
+                        then $t_1=\cdots=t_k=0$.
+                        If $\{\bf{v}_1,\dots,\bf{v}_k\}$ is not linearly independent, then we say that it is <b>linearly dependent</b>.
+                    </div>
+
+                    <p>
+                        Suppose that $V$ is a vector space and $\{\bf{v}_1,\dots,\bf{v}_k\}$ is a spanning set for $V$.
+                        Then this means that every vector $\bf{v}\in V$ can be written as a linear combination of $\bf{v}_1,\,\dots,\,\bf{v}_k$:
+                        \[
+                            \bf{v}=a_1\bf{v}_1+\cdots+a_k\bf{v}_k.
+                        \]
+                        However, what happens if we have <em>another linear combination</em> of $\bf{v}_1,\dots,\bf{v}_k$ that also gives $\bf{v}$?
+                        Formally, suppose that
+                        \[
+                            \bf{v}=b_1\bf{v}_1+\cdots+b_k\bf{v}_k
+                        \]
+                        for scalars $b_1,\,\dots,\,b_k\in \RR$.
+                        Then by subtracting both combinations we deduce that
+                        \[
+                            \bf{0}=\bf{v}-\bf{v}
+                            =
+                            (a_1-b_1)\bf{v}_1 + \cdots + (a_k-b_k) \bf{v}_k.
+                        \]
+                        If we now impose that $\{\bf{v}_1,\dots,\bf{v}_k\}$ is also linearly independent, then the coefficients of the above combination have to be zero, giving us
+                        \[
+                            a_1 = b_1, \quad \dots, \quad a_k = b_k.
+                        \]
+                        Therefore, we have proved the following (very important!) result:
+                    </p>
+
+                    <div class="theorem-box">
+                        Let $V$ be a vector space and $\{\bf{v}_1,\dots,\bf{v}_k\}$ a linearly independent subset of $V$.
+                        Then every vector $\bf{v}\in \vecspan \{\bf{v}_1,\dots,\bf{v}_k\}$ can be written uniquely as a linear combination of $\bf{v}_1,\,\dots,\,\bf{v}_k$.
+                    </div>
+
+                    <div class="example-box">
+                        Show that the set $\{x^3 + 2 x^2 - x + 3, -x^2 + 2, x^3 -3x - 1\}$ is linearly independent in $\bf{P}_3$.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Suppose that we have a linear combination of the form
+                            \[
+                                 a(x^3 + 2 x^2 - x + 3)+b(-x^2 + 2)+c(x^3 -3x - 1)=0,
+                            \]
+                            where $a,\,b,\,c\in \RR$ are scalars.
+                            We have to check that $a=b=c=0$.
+                        </p>
+                        <p>
+                            By rearranging the above equation in terms of the coefficients of $1,\,x,\,x^2,\,x^3$, we obtain that
+                            \[
+                                (a+c)x^3+(2a-b)x^2+(-a-3c)x+(3a+2b-c)=0,
+                            \]
+                            and since equal polynomials have the same coefficients, we see that the above equation is equivalent to the linear system
+                            \[
+                            \left\{
+                                \begin{array}{rcrcrcc}
+                                    a & & & + & c & = & 0 \\
+                                    2a & - & b & & & = & 0 \\
+                                    -a & & & - & 3c & = & 0 \\
+                                    3a & + & 2b & - & c & = & 0
+                                \end{array}
+                            \right.
+                            \]
+                            Using Gaussian elimination, one sees that the above homogeneous system only has the trivial solution $a=b=c=0$.
+                            Therefore, the set $\{x^3 + 2 x^2 - x + 3, -x^2 + 2, x^3 -3x - 1\}$ is linearly independent.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        Consider the vector space $\bf{F}[0,2\pi]$ of all functions defined on the closed interval $[0,2\pi]$.
+                        Show that the set $\{\sin x, \cos x, 1\}$ is linearly independent but the set $\{\sin^2 x, \cos^2 x, 1\}$ is not.
+                    </div>
+
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Let us start by proving the first assertion.
+                            Suppose that we are given scalars $a,\,b,\,c\in \RR$ such that
+                            \[
+                                a(\sin x)+b(\cos x)+c1=0.
+                            \]
+                            Then this means that the above equation holds for all possible values of $x\in[0,2\pi]$.
+                        </p>
+                        <p>
+                            Let us take $x=0$.
+                            Then we get
+                            \[
+                                b+c=0\Rightarrow b=-c.
+                            \]
+                            Similarly, if we take $x=\tfrac{\pi}{2}$, we get
+                            \[
+                                a+c=0 \Rightarrow a=-c.
+                            \]
+                            Finally, if we take $x=\pi$ we get
+                            \[
+                                -b+c=1 \Rightarrow b=c.
+                            \]
+                            From the first and third equations we deduce that $b=c=0$, whereas from the second one we obtain that $a=-c=0$.
+                            Thus, $a=b=c=0$, so $\{\sin x, \cos x, 1\}$ is linearly independent.
+                        </p>
+                        <p>
+                            Now, let us check that $\{\sin^2 x, \cos^2 x, 1\}$ is linearly dependent.
+                            To see this, recall that the fundamental identity of trigonometry gives
+                            \[
+                                \sin^2 x + \cos^2 x = 1 \Rightarrow \sin^2 x + \cos^2 x -1 = 0.
+                            \]
+                            Thus, we have found a linear combination of $\sin^2 x,\,\cos^2 x,\,1$ that gives the zero function but does not have all its coefficients equal to zero.
+                            Thus, $\{\sin^2 x, \cos^2 x, 1\}$ is a linearly dependent set.
+                        </p>
+                    </details>
+
+                    <p>
+                        It is worth mentioning that our criteria for linear independence of sets of one or two vectors still works in the setting of general vector spaces.
+                        We record this fact—the proof is exactly the same as the one given in <a href="RnLinearIndependence.html">Section 5.2</a>.
+                    </p>
+
+                    <div class="theorem-box">
+                        Let $V$ be a vector space and $\bf{v},\,\bf{w}\in V$ two arbitrary vectors.
+                        Then:
+                        <ol>
+                            <li>$\{\bf{v}\}$ is linearly independent if and only if $\bf{v}\neq \bf{0}$.</li>
+                            <li>$\{\bf{v},\bf{w}\}$ is linearly independent if and only if $\bf{v}$ and $\bf{w}$ are not parallel.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="dimension">
+                    <h2>Dimension</h2>
+                    <p>
+                        We now aim to extend the ideas of bases and dimension to general vector spaces.
+                        Do do this, we first need the a preliminary result, known as the <b>Steinitz Exchange Lemma</b>.
+                    </p>
+                    <div class="theorem-box" id="thm-steinitz">
+                        Let $V$ be a vector space, $\{\bf{u}_1,\dots,\bf{u}_n\}$ a spanning set of $V$ and $\{\bf{v}_1,\dots,\bf{v}_m\}$ a linearly independent set.
+                        Then the following assertions are true:
+                        <ol>
+                            <li>$m\leq n$.</li>
+                            <li>There exist $m$ vectors in the set $\{\bf{u}_1,\dots,\bf{u}_n\}$ that can be exchanged by $\bf{v}_1,\,\dots,\,\bf{v}_m$ in such a way that the resulting set is still a spanning set for $V$.</li>
+                        </ol>
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            Since $\{\bf{v}_1,\dots,\bf{v}_m\}$ is a linearly independent set, we have that each of the vectors of the set are nonzero.
+                            In particular, $\bf{v}_1\neq 0$.
+                            Now, since $\bf{v}\in V = \vecspan \{\bf{u}_1,\dots,\bf{u}_n\}$, there exist scalars $a_1,\,\dots,\,a_n\in \RR$ such that
+                            \[
+                            \bf{v}_1=a_1 \bf{u}_1 + \cdots + a_n \bf{u}_n.
+                            \]
+                            Note that at least one of the scalars has to be nonzero (otherwise $\bf{v}$ would be zero).
+                            Therefore, after relabelling the vectors $\bf{u}_1,\,\dots,\,\bf{u}_n$, we can suppose that $a_1\neq 0$.
+                        </p>
+                        <p>
+                            Under these conditions, we clain that
+                            \[
+                                V
+                                =
+                                \vecspan\{\bf{v}_1,\bf{u}_2,\dots,\bf{u}_n\}.
+                            \]
+                            In other words, we claim that exchanging $\bf{u}_1$ and $\bf{v}_1$ yields a spanning set.
+                            Because of the span theorem, it suffices to check that $\bf{u}_1\in \vecspan\{\bf{v}_1,\bf{u}_2,\dots,\bf{u}_n\}$.
+                            However, this is true because, using the fact that $a_1 \neq 0$, we get
+                            \[
+                                \bf{u}_1
+                                =
+                                \frac{1}{a_1}\big(\bf{v}_1-a_2\bf{u}_2-\dots-a_n \bf{u}_n\big).
+                            \]
+                        </p>
+                        <p>
+                            Now we look at $\bf{v}_2$.
+                            Since $V=\vecspan\{\bf{v}_1,\bf{u}_2,\dots,\bf{u}_n\}$, there we can write $\bf{v}_2$ as a linear combination
+                            \[
+                                \bf{v}_2 = b\bf{v}_1 + c_2\bf{u}_2 + \cdots + c_n \bf{u}_n.
+                            \]
+                            Observe that at least one of the $c_i$ has to be different from zero, since otherwise we would obtain $\bf{v}_2=b\bf{v}_1$, contradicting linear independence of $\{\bf{v}_1,\dots,\bf{v}_n\}$.
+                            Therefore, after again relabelling the $\bf{u}_i$ if necessary we can assume that $a_2\neq 0$.
+                            Arguing in the same way as above we can see that
+                            \[
+                                V=\vecspan\{\bf{v}_1,\bf{u}_2,\bf{u}_3,\dots,\bf{u}_n\}
+                                =
+                                \vecspan\{\bf{v}_1,\bf{v}_2,\bf{u}_3,\dots,\bf{u}_n\}.
+                            \]
+                        </p>
+                        <p>
+                            We can continue the above procedure inductively.
+                            Now, if $m\leq n$ we conclude (after $m$ steps and possibly relabelling the $\bf{u}_i$) that
+                            \[
+                                V=\vecspan\{\bf{v}_1,\dots,\bf{v}_m,\bf{u}_{m+1},\dots,\bf{u}_n\}.
+                            \]
+                            This proves the second assertion of the theorem.
+                        </p>
+                        <p>
+                            We now are left to prove that $m\leq n$.
+                            If $m>n$, then we obtain after performing $n$ steps we would conclude that
+                            \[
+                            V=\vecspan \{\bf{v}_1,\dots,\bf{v}_n\},
+                            \]
+                            which yields in particular that $\bf{v}_{n+1}$ is a linear combination of $\bf{v}_1,\,\dots,\,\bf{v}_n$.
+                            This contradicts the fact that $\{\bf{v}_1,\dots,\bf{v}_m\}$ is linearly independent, so that we necessarily have $m\leq n$.
+                        </p>
+                    </details>
+
+                    <div class="definition-box">
+                        Let $V$ be a vector space.
+                        A subset $\{\bf{e}_1,\dots,\bf{e}_n\}$ of $V$ is called a <b>basis</b> of $V$ if it satisfies the following two conditions:
+                        <ol>
+                            <li>$\{\bf{e}_1,\dots,\bf{e}_n\}$ is a spanning set of $V$.</li>
+                            <li>$\{\bf{e}_1,\dots,\bf{e}_n\}$ is linearly independent.</li>
+                        </ol>
+                        Moreover, we define the <b>dimension</b> of $V$, denoted $\dim V$, as the number of elements in any basis of $V$.
+                    </div>
+
+                    <p>
+                        The fact that two bases of a vector space $V$ have the same number of elements can be proved by using the <a href=#thm-steinitz>Steinitz exchange lemma</a> and arguing as in the case of $\RR^n$.
+                    <p>
+
+                    <p>
+                        Let us compute the dimension of some vector spaces that do not arise as subspaces of $\RR^n$:
+                    </p>
+
+                    <div class="example-box">
+                        The dimension of the vector space $\bf{M}_{mn}$ of all $m\times n$ matrices is
+                        \[
+                            \dim \bf{M}_{mn}=m\cdot n.
+                        \]
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            For each $i\in \{1,\dots,m\}$ and $j=\{1,\dots,n\}$ we consider the matrix $E_{ij}$ whose entries are all zero, except for the $(i,j)$ entry, which we declare to be one.
+                            For intance, in $\bf{M}_{22}$,
+                            \[
+                                E_{11}
+                                =
+                                \begin{bmatrix}
+                                    1 & 0 \\
+                                    0 & 0
+                                \end{bmatrix},\quad
+                                E_{21}
+                                =
+                                \begin{bmatrix}
+                                    0 & 0 \\
+                                    1 & 0
+                                \end{bmatrix},\quad
+                                E_{12}
+                                =
+                                \begin{bmatrix}
+                                    0 & 1 \\
+                                    0 & 0
+                                \end{bmatrix},\quad
+                                E_{22}
+                                =
+                                \begin{bmatrix}
+                                    0 & 0 \\
+                                    0 & 1
+                                \end{bmatrix}.
+                            \]
+                            Then the set
+                            \[
+                                B=\{E_{11},E_{12},\dots,E_{1n},\dots,E_{2n},\dots,E_{mn}\},
+                            \]
+                            is a basis of $\bf{M}_{mn}$ (the argument is the same as the one for showing that $\{\bf{e}_1,\dots,\bf{e}_n\}$ is a basis of $\RR^n$).
+                            Since $B$ has $mn$ elements, we conclude that $\dim \bf{M}_{mn}=m\cdot n$.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        The dimension of the vector space $\bf{P}_n$ of all polynomials of degree at most $n$ is $n+1$.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            As we saw on <a href=VectorSubspaces.html#ex-polynomial>the previous section</a>, the set
+                            \[
+                                B=\big\{ 1,x,\dots,x^n \big\}
+                            \]
+                            is a spanning set for $\bf{P}_n$.
+                            If we show that $B$ is also linearly independent, then it is a basis of $\bf{P}_n$ and we are done.
+                        </p>
+                        <p>
+                            Suppose that we have a linear combination of the elements of $B$ that yields the zero polynomial:
+                            \[
+                                a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n = 0.
+                            \]
+                            Then, because two equal polynomials have the same coefficients, we have automatically $a_0=a_1=a_2=\cdots=a_n=0$, which shows that $B$ is a linearly independent set. 
+                        </p>
+                        <p>
+                            We thus conclude that $B$ is a basis of $\bf{P}_n$ consisting of $n+1$ elements, so that $\dim \bf{P}_{n}=n+1$.
+                        </p>
+                    </details>
+
+                </section>
+                
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
