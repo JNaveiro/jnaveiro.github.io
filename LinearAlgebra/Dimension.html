@@ -152,7 +152,7 @@
                         We record this fact—the proof is exactly the same as the one given in <a href="RnLinearIndependence.html">Section 5.2</a>.
                     </p>
 
-                    <div class="theorem-box">
+                    <div class="theorem-box" id="thm-small-sets">
                         Let $V$ be a vector space and $\bf{v},\,\bf{w}\in V$ two arbitrary vectors.
                         Then:
                         <ol>
@@ -324,6 +324,158 @@
                         </p>
                         <p>
                             We thus conclude that $B$ is a basis of $\bf{P}_n$ consisting of $n+1$ elements, so that $\dim \bf{P}_{n}=n+1$.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        If $V$ is a vector space and $\bf{v}\in V$, then the dimension of $\RR\bf{v}$ is
+                        \[
+                            \dim \RR \bf{v}
+                            =
+                            \begin{cases}
+                                1, & \text{if} & \bf{v}\neq \bf{0}, \\
+                                0, & \text{if} & \bf{v}=\bf{0}
+                            \end{cases}
+                        \]
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            If $\bf{v}=\bf{0}$, then $\RR \bf{v}=\{\bf{0}\}$, which has dimension zero because its only nonzero subset is $\{\bf{0}\}$ (which is not linearly independent).
+                        </p>
+                        <p>
+                            If $\bf{v}\neq \bf{0}$, then $\RR\bf{v}=\vecspan \{\bf{v}\}$, so that $\{\bf{v}\}$ is a spanning set for $\RR\bf{v}$.
+                            Moreover, $\{\bf{v}\}$ is linearly independent because <a href=#thm-small-sets>it consists of a nonzero vector</a>, so it is a basis of $\RR\bf{v}$, which yields $\dim \RR\bf{v}=1$.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        Consider the matrix
+                        \[
+                            X
+                            =
+                            \begin{bmatrix}
+                                1 & 1 \\
+                                -1 & 0
+                            \end{bmatrix}\in \bf{M}_{22}.
+                        \]
+                        Calculate the dimension of the subspace
+                        \[
+                            V
+                            =
+                            \big\{
+                                A\in \bf{M}_{22}\mid AX=XA
+                            \big\}.
+                        \]
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            To find a basis of $V$, we have to first find a better description of its element.
+                            In order to do this, let us consider any matrix
+                            \[
+                                A
+                                =
+                                \begin{bmatrix}
+                                    a & b \\
+                                    c & d
+                                \end{bmatrix} \in \bf{M}_{22}.
+                            \]
+                        </p>
+
+                        <p>
+                            We compute the products $AX$ and $XA$:
+                            \[
+                                AX
+                                =
+                                \begin{bmatrix}
+                                    a - b & a \\
+                                    c - d & c
+                                \end{bmatrix}, \qquad
+                                XA
+                                =
+                                \begin{bmatrix}
+                                    a + c & b + d \\
+                                    -a & -b
+                                \end{bmatrix}
+                            \]
+                            Using Gaussian elimination, we see that $AX=XA$ if and only if $b=c=0$ and $a=d$, so that the elements of $V$ are the matrices of the form
+                            \[
+                                A
+                                =
+                                \begin{bmatrix}
+                                    a & 0 \\
+                                    0 & a
+                                \end{bmatrix}
+                                =
+                                aI, \textsf{ $a$ arbitrary.}
+                            \]
+                        </p>
+                        <p>
+                            This means that $V=\RR I$, and because $\{I\}$ is linearly independent, it is also a basis of $V$.
+                            We conclude that the dimension of $V$ is $\dim V = 1$.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        Compute a basis and the dimension of
+                        \[
+                            V
+                            =
+                            \big\{
+                                p(x)\in \bf{P}_3 \mid p(2)=0
+                            \big\}.
+                        \]
+                    </div>
+                    <p>
+                        We present two different ways of solving this exercise:
+                    </p>
+                    <details>
+                        <summary>Solution 1.</summary>
+                        <p>
+                            Suppose $p(x)=a+bx+cx^2+dx^3 \in \bf{P}_3$ is a polynomial.
+                            Then $p(x)\in V$ if and only if
+                            \[
+                                0=p(2)=a+2b+4c+8d,
+                            \]
+                            Consequently, $p(x)$ is in $V$ if and only if it $a=-(2b+4c+8d)$, so the elements of $V$ are the polynomials of the form
+                            \[
+                                -(2b+4c+8d)+bx+cx^2+dx^3=b(x-2)+c(x^2-4)+d(x^3-8), \textsf{ $b,\,c,\,d$ arbitrary}.
+                            \]
+                            This implies that
+                            \[
+                                B=\{x-2,x^2-4,x^3-8\}
+                            \]
+                            is a spanning set of $V$.
+                            It is also a linearly independent set of $\bf{P}_3$ (check this as an exercise!), so $B$ is a basis of $V$, which yields
+                            \[
+                                \dim V = 3.
+                            \]
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Solution 2.</summary>
+                        <p>
+                            Recall that a polynomial $p(x)$ satisfies $p(2)=0$ if and only if $x-2$ divides $p(x)$.
+                            This means that the polynomials that have $2$ as a root are those of the form $(x-2)q(x)$, where $q(x)$ is another polynomial.
+                        </p>
+                        <p>
+                            Now, assume that $p(x)\in \bf{P}_3$.
+                            Then $p(x)\in V$ if and only if $p(x)$ is a product of the form $(x-2)q(x)$, where $q(x)$ is a polynomial of degree at most $2$ (because the degree of $p(x)$ is at most $3$).
+                            Explicitly, $p(x)$ is in $V$ if and only if it takes the form
+                            \[
+                                p(x)=(a+bx+cx^2)(x-2)=a(x-2)+bx(x-2)+cx^2(x-2), \quad \textsf{$a,\,b,\,c$ arbitrary.}
+                            \]
+                        </p>
+                        <p>
+                            The above equation shows that
+                            \[
+                                B
+                                =
+                                \{x-2,x(x-2),x^2(x-2)\}
+                            \]
+                            is a spanning set for $V$, and since it is also linearly independent (check this as an exercise!), it follows that $B$ is a basis for $V$.
+                            In conclusion, $\dim V = 3$.
                         </p>
                     </details>
 
