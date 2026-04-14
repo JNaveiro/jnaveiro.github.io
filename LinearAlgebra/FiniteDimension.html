@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Finite Dimensional Vector Spaces</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="linear-algebra.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <main>
+                <h1>
+                    6.4 Finite Dimensional Vector Spaces
+                </h1> 
+
+                <p>
+                    In this section, we continue our exploration of linearly independent subsets and bases of vector spaces.
+                </p>
+                <p>
+                    We have already seen examples of bases in some vector spaces.
+                    For example:
+                </p>
+                    <ul>
+                        <li>
+                            $\{\bf{e}_1,\dots,\bf{e}_n\}$ is a basis of $\RR^n$.
+                        </li>
+                        <li>
+                            $\{E_{11},E_{12},\dots,E_{mn}\}$ is a basis of $\bf{M}_{mn}$.
+                        </li>
+                        <li>
+                            $\{1,x,x^2,\dots,x^n\}$ is a basis of $\bf{P}_n$.
+                        </li>
+                    </ul>
+                <p>
+                    However, <b>in general, a vector space may not have a basis</b>.
+                    In fact, this will be the case for $\bf{P}$ and $\bf{F}[a,b]$.
+                    However, for the purposes of this course we will only worry about understanding vector spaces that do have a basis.
+                </p>
+
+                <section id="finite-dimension">
+                <h2>Finite Dimensional Spaces</h2>
+
+                <div class="definition-box">
+                    Let $V$ be a vector space.
+                    We say that $V$ is <b>finite dimensional</b> if it admits a (finite) spanning set.
+                    Otherwise, we say that $V$ is <b>infinite dimensional</b>.
+                </div>
+                <p>
+                    We start by giving some conditions that characterize when a vector space is finite dimensional.
+                </p>
+                <div class="theorem-box" id="thm-fd-characterization">
+                    If $V$ is a vector space, then the following conditions are equivalent:
+                    <ol>
+                        <li>$V$ is finite dimensional.</li>
+                        <li>$V$ has a (finite) basis.</li>
+                        <li>There exists an integer $n\geq 0$ such that any subset of $V$ with more than $n$ vectors is linearly dependent.</li>
+                    </ol>
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        We first prove that 1 implies 2.
+                        Assume that $V$ is finite dimensional, so it contains some spanning set $\{\bf{v}_1,\dots,\bf{v}_m\}$.
+                        We will show that this spanning set contains a basis of $V$.
+                    </p>
+                    <p>
+                        If $\{\bf{v}_1,\dots,\bf{v}_m\}$ is already a basis of $V$, then we are done.
+                        Otherwise, there exists some linear combination
+                        \[
+                            a_1\bf{v}_1 + \cdots + a_m \bf{v}_m = \bf{0}
+                        \]
+                        where at least one of the coefficients in the combination is nonzero.
+                        After relabelling the vectors if necessary, we can suppose that $a_1\neq 0$.
+                        Then we can see that
+                        \[
+                            \bf{v}_1 = -\frac{a_2}{a_1}\bf{v}_2 - \cdots - \frac{a_m}{a_1}\bf{v}_m\in \vecspan\{\bf{v}_2,\dots,\bf{v}_m\},
+                        \]
+                        which implies that
+                        \[
+                            V=\vecspan\{\bf{v}_1,\dots,\bf{v}_m\}=\vecspan\{\bf{v}_2,\dots,\bf{v}_m\}.
+                        \]
+                        Now, if $\{\bf{v}_2,\dots,\bf{v}_m\}$ is linearly independent, then it is a basis, and we are done.
+                        If not, we can repeat the argument above to see that (after perhaps relabelling the vectors)
+                        \[
+                            V=\vecspan\{\bf{v}_3,\dots,\bf{v}_m\}.
+                        \]
+                        We can continue this process, deleting vectors from our original spanning set appropriately, until we reach a basis.
+                        Therefore, 2 is true.
+                    </p>
+                    <p>
+                        Next, we show that 2 implies 3.
+                        If we take $n=\dim V$ (which is possible because $V$ has a basis by assumption),
+                        then the <a href=Dimension.html#thm-steinitz>Steinitz Exchange Lemma</a> implies that any set of vectors in $V$
+                        with more than $n$ elements is linearly dependent.
+                        This proves our claim.
+                    </p>
+                    <p>
+                        Finally, let us check that 3 implies 1.
+                        Since we are assuming that 3 holds, we can find a natural number $n$ such that there exists a linearly independent set $\{\bf{v}_1,\dots,\bf{v}_n\}$ in $V$ but any subset of $V$ with more than $n$ elements is not independent.
+                        We claim that $\{\bf{v}_1,\dots,\bf{v}_n\}$ is a spanning set (in fact, a basis) of $V$.
+                    </p>
+                    <p>
+                        To show this, take any vector $\bf{v}\in V$.
+                        The set $\{\bf{v},\bf{v}_1,\dots,\bf{v}_n\}$ is linearly dependent because it has $n+1$ elements, so we can find a linear combination
+                        \[
+                            a\bf{v}+b_1\bf{v}_1+\dots+b_n\bf{v}_n=\bf{0}
+                        \]
+                        where one of the coefficients is nonzero.
+                        Actually, we need to have $a=0$, since otherwise we would get
+                        \[
+                            b_1\bf{v}_1+\dots+b_n\bf{v}_n=\bf0{}
+                        \]
+                        with one of the coefficients being nonzero, and this contradicts linear independence of $\{\bf{v}_1,\dots,\bf{v}_n\}$.
+                        Therefore, because $a\neq 0$, we get
+                        \[
+                            \bf{v}=-\frac{b_1}{a}\bf{v}_1-\cdots-\frac{b_n}{a}\bf{v}_n\in\vecspan\{\bf{v}_1,\dots,\bf{v}_n\}.
+                        \]
+                        Since $\bf{v}$ is any vector, we conclude that $V=\vecspan\{\bf{v}_1,\dots,\bf{v}_n\}$, so $V$ has a finite spanning set, thus showing 1.
+                    </p>
+                </details>
+                <p>
+                    The above theorem, together with the <a href=Dimension.html#thm-steinitz>Steinitz exchange lemma</a>, has several important consequences.
+                    The first one gives us some hints on how to find bases of vector spaces, and it extends what we already know from the case of $\RR^n$:
+                </p>
+                <div class="theorem-box">
+                    Let $V$ be a finite dimensional vector space and $n=\dim V$.
+                    Then the following statements are true:
+                    <ol>
+                        <li>Every spanning set of $V$ contains a basis.</li>
+                        <li>If $B$ is a basis of $V$ and $C$ is a linearly independent subset of $V$, then $C$ can be enlarged to a basis of $V$ by appropriately adding elements of $B$.</li>
+                    </ol>
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        The first statement is actually proved when showing that 1 implies 2 in the <a href=#thm-fd-characterization>characterization of finite dimensional spaces</a>.
+                        Thus, we just have to show the second statement.
+                    </p>
+                    <p>
+                        Assume $B=\{\bf{v}_1,\dots,\bf{v}_n\}$ is a basis of $V$ and $C=\{\bf{u}_1,\dots,\bf{u}_k\}$ is a linearly independent set.
+                        By the <a href=Dimension.html#thm-steinitz>Steinitz exchange lemma</a> we know that $k\leq n$ and (after perhaps changing the order of the elements in $B$), the set $C'=\{\bf{u}_1,\dots,\bf{u}_k,\bf{v}_{k+1},\dots,\bf{v}_n\}$ is a spanning set for $V$.
+                        The set $C'$ is also a basis.
+                        Indeed, if $C'$ were not a basis then by part 1 it would contain a basis with less than $n$ elements, contradicting the fact that $\dim V = n$.
+                        Therefore, 2 is also true.
+                    </p>
+                </details>
+                <p>
+                As a consequence of the above theorem, we recover a result that can be proved with the same arguments as <a href=RnLinearIndependence.html#thm-n-elements>its analogue in $\RR^n$</a>.
+                </p>
+                <div class="theorem-box" id="thm-basis-characterization">
+                    Suppose $V$ is a finite dimensional vector space with $\dim V = n$ and $B=\{\bf{v}_1,\dots,\bf{v}_n\}$ is a subset of $V$ with exactly $n$ elements.
+                    Then the following conditions are equivalent:
+                    <ol>
+                        <li>$B$ spans $V$.</li>
+                        <li>$B$ is linearly independent.</li>
+                        <li>$B$ is a basis of $V$.</li>
+                    </ol>
+                </div>
+
+                <div class="example-box">
+                    The subset $\{1-2x,5x^2\}$ is linearly independent in $\bf{P}_2$.
+                    Find a basis of $\bf{P}_2$ containing this set.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We know that the set $\{1,x,x^2\}$ is a basis of $\bf{P}_2$, so there must exist an element in this basis that can be added to $\{1-2x,5x^2\}$ in order to obtain a basis of $\bf{P}_2$.
+
+                        For instance, we can try adding the polynomial $1$ to obtain the set $\{1-2x,5x^2,1\}$.
+                        This set is linearly independent (check this as an exercise!), and because $\dim \bf{P}_2 =3$ it follows that $\{1-2x,5x^2,1\}$ is a basis of $\bf{P}_2$.
+                    </p>
+                </details>
+                <div class="warning-box">
+                    If you consider adding $x$ instead of $1$ in the above exercise, that will also yield a basis.
+                    However, adding $x^2$ will not result in a basis.
+                </div>
+                
+                <div class="example-box">
+                    Suppose $\bf{c}_1,\,\dots,\,\bf{c}_k$ are linearly independent vectors in $\RR^n$.
+                    Prove that there exists an invertible $n\times n$ matrix $A$ whose first $k$ rows are $\bf{c}_1,\,\dots,\,\bf{c}_k$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Since $\{\bf{c}_1,\dots,\bf{c}_k\}$ is a linearly independent subset of $\RR^n$ and $\dim \RR^n = n$, we can find vectors $\bf{c}_{k+1},\,\dots,\,\bf{c}_n\in \RR^n$ that satisfy that $\{\bf{c}_1,\dots,\bf{c}_k,\bf{c}_{k+1},\dots,\bf{c}_n\}$ is a basis of $\RR^n$.
+                        Consequently, the matrix
+                        \[
+                            A=
+                            \begin{bmatrix}
+                                \bf{c}_1 & \cdots & \bf{c}_k & \bf{c}_{k+1} & \cdots & \bf{c}_n
+                            \end{bmatrix}
+                        \]
+                        is an invertible $n\times n$ matrix whose first $k$ columns are $\bf{c}_1,\,\dots,\,\bf{c}_k$, as desired.
+                    </p>
+                </details>
+                </section>
+
+                <section id="fd-subspaces">
+                    <h2>Subspaces of Finite Dimensional Spaces</h2>
+
+                    <p>
+                        As one may expect, a subspace of a finite dimensional vector space is automatically a finite dimensional vector space in its own right:
+                    </p>
+                    <div class="theorem-box">
+                        Let $V$ be a finite dimensional vector space and $U\subseteq V$ a vector subspace.
+                        Then:
+                        <ol>
+                            <li>$U$ is finite dimensional and $\dim U \leq \dim V$.</li>
+                            <li>$U=V$ if and only if $\dim U = \dim V$.</li>
+                        </ol>
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            Because of the <a href=#thm-fd-characterization>characterization of finite dimensional spaces</a>, to show that $U$ is finite dimensional it is enough to prove that there exists some natural number $n$ such that any subset of $U$ with more than $n$ elements is dependent.
+                        </p>
+                        <p>
+                            Set $n=\dim V$.
+                            Then any subset of $V$ with more than $n$ vectors is linearly dependent.
+                            Now, $U$ is contained in $V$, so any subset of $U$ with more than $n$ vectors is automatically dependent.
+                            Becaues of this, we conclude that $U$ is finite dimensional.
+                        </p>
+                        <p>
+                            Let us show that $\dim U \leq n = \dim V$.
+                            If $B=\{\bf{v}_1,\dots,\bf{v}_k\}$ is a basis of $U$, then in particular it is a linearly independent subset of $V$.
+                            By the <a href=Dimension.html#thm-steinitz>Steinitz exchange lemma</a>, this means that $\dim U = k \leq n = \dim V$, so our claim follows.
+                        </p>
+                        <p>
+                            Let us prove the second assertion.
+                            If $\dim U = \dim V = n$ and $B$ is a basis of $U$, then it is also a linearly independent subset of $V$ having $n$ elements, so it must be a basis of $V$ as well <a href=#thm-basis-characterization>because $\dim V = n$</a>.
+                            This means that $U=\vecspan B = V$, as desired.
+                        </p>
+                    </details>
+
+                    <p>
+                        Because of the above theorem, we have that if $U$ is a subspace of a finite dimensional vector space $V$, then
+                    </p>
+                    <ul>
+                        <li>$U=\{\bf{0}\}$ if and only if $\dim U = 0$.</li>
+                        <li>$U=V$ if and only if $\dim U = \dim V$.</li>
+                    </ul>
+
+                    <p>
+                        Consequently, a proper subspace of $V$ will always have dimension between $1$ and $\dim V - 1$.
+                    </p>
+
+                    <p>
+                        The previous results can be used to minimize computations in solving exercises.
+                        Here are some examples.
+                    </p>
+
+                    <div class="example-box">
+                        Let $a\in \RR$ be a fixed real number, and consider the vector subspace
+                        \[
+                            V=\{p(x)\in\bf{P}_n \mid p(a)=0 \}\subseteq \bf{P}_n.
+                        \]
+                        Show that $\dim V=n$ and find a basis of $V$.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Since $V$ is a subspace of $\bf{P}_n$ and $V\neq \bf{P}_n$,
+                            we have $\dim V \leq \dim\bf{P}_n - 1=n$.
+                            Moreover, if
+                            \[
+                                p(x)=c_0 + c_1 x + c_2 x^2 + \cdots + c_n x^n
+                            \]
+                            is a polynomial in $\bf{P}_n$, then $p(x)\in V$ if and only if
+                            the coefficients of $p(x)$ satisfy
+                            \[
+                                c_0 + c_1 a + c_2 a^2 + \cdots + c_n a^n = 0.
+                            \]
+                            This implies that, for instance, the polynomials
+                            \[
+                                x-a, \,x^2-a^2,\,\dots,\,x^n-a^n
+                            \]
+                            are all in $V$.
+                            These polynomials are also linearly independent.
+                            Indeed, if we have a linear combination
+                            \[
+                                u_1(x-a)+u_2(x^2-a^2)+\cdots+u_n(x^n-a^n)=0,
+                            \]
+                            then equating the coefficients of the polynomials on each side we obtain $u_1=\dots=u_n=0$, showing that the set \[\{x-a,x^2-a^2,\dots,x^n-a^n\}\] is a linearly independent subset of $\bf{P}_n$.
+                            Since this set has $n$ elements, it follows that $\dim V \geq n$.
+                            However, $\dim V \leq n$ from what we saw before, so $\dim V=n$ and
+                            \[
+                                \{x-a,x^2-a^2,\dots,x^n-a^n\}
+                            \]
+                            is a basis of $V$.
+                        </p>
+                        <p>
+                            It is worth mentioning that there are other natural choices for bases of $V$, such as
+                            \[
+                                \{x-a,(x-a)^2,\dots,(x-a)^n\}
+                            \]
+                            or
+                            \[
+                                \{x-a,x(x-a),x^2(x-a),\dots,x^{n-1}(x-a)\}.
+                            \]
+                            You can try to check that these sets are bases, for instance, showing that they are linearly independent.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        The set
+                        \[
+                            \{3+2x+4x^2, 1+x+x^2, 5-x-2x^2, 2x-3x^2\}
+                        \]
+                        is a spanning set for $\bf{P}_2$.
+                        Find a basis of $\bf{P}_2$ inside of this set.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Because $\dim \bf{P}_2 = 3$, we know that there must exist a polynomial in the above set such that the result of removing it is a basis of $\bf{P}_2$.
+                            Let us try to find one such polynomial.
+                        </p>
+                        <p>
+                            For instance, if we remove the polynomial $3+2x+4x^2$, we are left with the set
+                            \[
+                                B
+                                =
+                                \{1+x+x^2,5-x-2x^2,2x-3x^2\}.
+                            \]
+                            It can be shown directly that $B$ is linearly independent, and since $\dim \bf{P}_2=3$, we conclude that $B$ is a basis of $\bf{P}_2$.
+                        </p>
+                    </details>
+
+                    <div class="example-box">
+                        Show that the vector space $\bf{P}$ is not finite dimensional.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Recall that $\bf{P}_n\subseteq \bf{P}$ for every $n=1,2,\dots$.
+                            In particular, if $\bf{P}$ were a finite dimensional vector space (say $\dim \bf{P}=m$), then we would have
+                            $m=\dim \bf{P}\geq \dim \bf{P}_n = n+1$ for every $n$.
+                            In particular, by choosing $n=m$ we see that $m\geq m+1$, a contradiction.
+                            Therefore, $\bf{P}$ is infinite dimensional.
+                        </p>
+                    </details>
+
+                    <p>
+                        We finish this section with a formula to compute the dimension of the sum of two vector spaces.
+                        If $V$ is a vector space and $U,\,W\subseteq V$ are vector subspaces of $V$, then the <b>sum</b> and <b>intersection</b> of $U$ and $V$ are defined to be the subspaces
+                        \[
+                            \begin{aligned}
+                                U+V
+                                &=
+                                \{\bf{u}+\bf{w}\mid\bf{u}\in U,\,\bf{w}\in W\}.\\[1em]
+                                U\cap V
+                                &=
+                                \{\bf{v}\mid\bf{v}\in U \textsf{ and } \bf{v}\in W\}.
+                            \end{aligned}
+                        \]
+                    </p>
+                    <div class="theorem-box">
+                        Let $V$ be a finite dimensional vector space and $U,\,W\subseteq V$ two subspaces.
+                        Then
+                        \[
+                            \dim U + \dim V = \dim (U+V) + \dim (U\cap V).
+                        \]
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            Let us first define $k=\dim(U\cap W)$, $n=\dim U$ and $m=\dim W$.
+                            Our objective is to prove that $\dim(U+W)=m+n-k$.
+                        </p>
+                        <p>
+                            We start with a basis $\{\bf{x}_1,\dots,\bf{x}_k\}$ of $U\cap W$.
+                            On one hand, since $\{\bf{x}_1,\dots,\bf{x}_k\}$ is linearly independent in $U$,
+                            there exist vectors $\bf{y}_1,\,\dots,\,\bf{y}_{n-k}\in U$ such that $\{\bf{x}_1,\dots,\bf{x}_k,\bf{y}_1,\dots,\bf{y}_{n-k}\}$ is a basis of $U$.
+                            On the other hand, for the exact same reason there exist vectors $\bf{z}_1,\,\dots,\,\bf{z}_{m-k}\in W$ such that $\{\bf{x}_1,\dots,\bf{x}_k,\bf{z}_1,\dots,\bf{z}_{m-k}\}$ is a basis of $W$.
+                        </p>
+                        <p>
+                            We claim that the set
+                            \[
+                                \{\bf{x}_1,\dots,\bf{x}_k,\bf{y}_{1},\dots,\bf{y}_{n-k},\bf{z}_1,\dots,\bf{z}_{m-k}\}
+                            \]
+                            is a basis of $U+W$.
+                            From the definition of $U+W$, it is clear that the above set is a spanning set for $U+W$.
+                            We thus are left with showing that it is linearly independent.
+                        </p>
+                        <p>
+                            Let us suppose that we have a linear combination of the above vectors that yields zero:
+                            \[
+                            a_1\bf{x}_1+\cdots+a_k\bf{x}_k
+                            +
+                            b_1\bf{y}_1+\cdots+b_{n-k}\bf{y}_{n-k}
+                            +
+                            c_1\bf{z}_1+\cdots+c_{m-k}\bf{z}_{m-k}
+                            =
+                            \bf{0}.
+                            \]
+                            We have to prove that all the coefficients in this combination vanish.
+                            To do this, observe that the above equation implies that
+                            \[
+                            a_1\bf{x}_1+\cdots+a_k\bf{x}_k
+                            +
+                            b_1\bf{y}_1+\cdots+b_{n-k}\bf{y}_{n-k}
+                            =
+                            -c_1\bf{z}_1-\cdots-c_{m-k}\bf{z}_{m-k}.
+                            \]
+                        </p>
+                        <p>
+                            Let $\bf{v}$ be the vector that is equal to any of the sides of the above equation.
+                            The expression in the left hand side shows that $\bf{v}\in U$, whereas the expression in the right hand side says that $\bf{v}\in W$.
+                            Therefore, $\bf{v}\in U\cap W$, so it has to be a linear combination of the $\bf{x}_i$.
+                            As $\{\bf{x}_1,\dots,\bf{x}_k,\bf{y}_1,\dots,\bf{y}_{n-k}\}$ is linearly independent, this yields $b_1=\cdots=b_{n-k}=0$.
+                            Thus, the first equation becomes
+                            \[
+                            a_1\bf{x}_1+\cdots+a_k\bf{x}_k
+                            +
+                            c_1\bf{z}_1+\cdots+c_{m-k}\bf{z}_{m-k}
+                            =
+                            \bf{0},
+                            \]
+                            and because $\{\bf{x}_1,\dots,\bf{x}_k,\bf{z}_1,\dots,\bf{z}_{m-k}\}$ is linearly independent it follows that $a_1=\cdots=a_k=c_1=\cdots=c_{m-k}$.
+                            We conclude that the set in question is linearly independent, and thus a basis of $U+W$.
+                        </p>
+                        <p>
+                            To conclude, note that the dimension of $U+W$ is the number of elements in the basis, namely,
+                            \[
+                                \dim (U+V)=k+(n-k)+(m-k)=n+m-k=\dim U + \dim W - \dim (U\cap W).
+                            \]
+                            This finishes the proof.
+                        </p>
+                    </details>
+
+                </section>
+
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
