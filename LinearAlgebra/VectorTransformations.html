@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Linear Transformations: Examples and Elementary Properties</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="linear-algebra.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <main>
+            <main>
+                <h1 class="center">
+                    Chapter 7: Linear Transformations
+                </h1>
+
+                <h1>
+                    7.1 Examples and Elementary Properties
+                </h1>
+
+                <p>
+                    In this chapter we study linear transformations between (abstract) vector spaces.
+                </p>
+
+                <section id="linear-transformations">
+                <h2>Linear Transformations and Examples</h2>
+
+                <p>
+                    Just as how we defined linear transformations $T\colon \RR^n\to \RR^m$, we can
+                    define linear transformations between vector spaces.
+                </p>
+
+                <div class="definition-box">
+                    Let $V$ and $W$ be two vector spaces.
+                    We say that a transformation $T\colon V \to W$ is a <b>linear transformation</b> if
+                    it satisfies the following two conditions:
+                    <ol>
+                        <li>
+                            $T(\bf{x}+\bf{y})=T(\bf{x})+T(\bf{y})$ for all $\bf{x},\,\bf{y}\in V$
+                            (we say that $T$ <em>preserves vector addition</em>).
+                        </li>
+                        <li>
+                            $T(a\bf{x})=aT(\bf{x})$ for all $\bf{x}\in V$ and $a\in \RR$
+                            (we say that $T$ <em>preserves scalar multiplication</em>).
+                        </li>
+                    </ol>
+                </div>
+
+                <p>
+                    Let us go through some examples of linear transformations.
+                </p>
+
+                <div class="example-box">
+                    If $V$ is any vector space, then the following transformations are linear:
+                    <ol>
+                        <li>
+                            The <b>identity transformation</b> $1_V\colon V\to V$ given by $1_V(\bf{v})=\bf{v}$.
+                        </li>
+                        <li>
+                            The <b>zero transformation</b> $0\colon V\to V$ given by $0(\bf{v})=\bf{0}$.
+                        </li>
+                        <li>
+                            The <b>scalar transformation</b> $a\colon V\to V$ (where $a\in\RR$)
+                            given by $a(\bf{v})=a\bf{v}$.
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="example-box">
+                    As we already saw in <a href=LinearTransformations.html>Section 2.6</a>,
+                    the linear transformations $T\colon\RR^n\to\RR^m$ are precisely the matrix transformations.
+                    In other words, if $T\colon\RR^n\to\RR^m$ is linear, then $T=T_A$
+                    for some $m\times n$ matrix $A$.
+                </div>
+
+                <div class="example-box">
+                    The transposition map $R\colon \bf{M}_{mn}\to\bf{M}_{nm}$ given by $R(A)=A^T$ is linear
+                    (because of the properties of matrix transposes).
+                </div>
+
+                <div class="example-box">
+                    The trace $\operatorname{tr}\colon \bf{M}_{nn}\to\RR$ is a linear transformation.
+                    Recall that the trace of a matrix was defined by
+                    \[
+                        \tr(A)=a_{11}+\cdots+a_{nn}, \quad \textsf{where } A=[a_{ij}].
+                    \]
+                </div>
+
+                <details>
+                    <summary>Proof that $\tr$ is linear.</summary>
+                    <p>
+                        Suppose $A=[a_{ij}]$ and $B=[b_{ij}]$ are two $n\times n$ matrices.
+                        Then we have
+                        \[
+                            \begin{aligned}
+                                \tr(A+B)
+                                &=
+                                \tr[a_{ij}+b_{ij}]
+                                =
+                                (a_{11}+b_{11})+\cdots+(a_{nn}+b_{nn})\\[1em]
+                                &=
+                                (a_{11}+\dots+a_{nn})+\cdots+(b_{11}+\cdots+b_{nn})
+                                =
+                                \tr(A)+\tr(B).
+                            \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                        Similarly, if $A=[a_{ij}]$ is in $\bf{M}_{nn}$ and $a\in\RR$, we have
+                        \[
+                            \tr(aA)
+                            =
+                            \tr[aa_{ij}]
+                            =
+                            aa_{11}+\cdots+aa_{nn}
+                            =
+                            a(a_{11}+\cdots+a_{nn})
+                            =
+                            a\tr(A).
+                        \]
+                    </p>
+                    <p>
+                        We conclude that $\tr$ is a linear transformation.
+                    </p>
+                </details>
+
+                <div class="warning-box">
+                    The determinant $\det\colon\bf{M}_{nn}\to\RR$ is <b>not</b> linear
+                    (except in the exceptional case $n=1$).
+                </div>
+
+                <div class="example-box">
+                    Suppose $a\in \RR$ is a scalar.
+                    Then we can define two linear transformations on polynomials:
+                    <ul>
+                        <li>
+                            The <b>evaluation</b> (at $a$) $E_a\colon\bf{P}_n\to\RR$ given by $E_a(p(x))=p(a)$.
+                            Explicitly:
+                            \[
+                                E_a(a_0+a_1x+a_2x^2+\cdots+a_nx^n)=
+                                a_0+a_1a+a_2a^2+\cdots+a_na^n.
+                            \]
+                        </li>
+                        <li>
+                            The <b>shift</b> (by $a$) $S_a\colon \bf{P}_n\to\bf{P}_n$ given by $S_a(p(x))=p(x+a)$.
+                            Explicitly:
+                            \[
+                                S_a(a_0+a_1x+a_2x^2+\cdots+a_nx^n)=
+                                a_0+a_1(x+a)+a_2(x+a)^2+\cdots+a_n(x+a)^n.
+                            \]
+                        </li>
+                    </ul>
+                </div>
+
+                <details>
+                    <summary>Proof that $E_a$ and $S_a$ are linear.</summary>
+
+                    <p>
+                        Firstly, assume $p(x)$ and $q(x)$ are two polynomials in $\bf{P}_n$.
+                        Then we have
+                        \[
+                            \begin{aligned}
+                                E_a((p+q)(x))
+                                &=
+                                (p+q)(a)
+                                =
+                                p(a)+q(a)
+                                =
+                                E_a(p(x))+E_a(q(x)), \\[1em]
+                                S_a((p+q)(x))
+                                &=
+                                (p+q)(x+a)
+                                =
+                                p(x+a)+q(x+a)
+                                =
+                                S_a(p(x))+S_a(q(x)).
+                            \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                        Similarly, if $p(x)\in\bf{P}_n$ and $c\in \RR$, then we get
+                        \[
+                            \begin{aligned}
+                                E_a((cp)(x))
+                                &=
+                                (cp)(a)
+                                =
+                                cp(a)
+                                =
+                                cE_a(p(x)),\\[1em]
+                                S_a((cp)(x))
+                                &=
+                                (cp)(x+a)
+                                =
+                                cp(x+a)
+                                =
+                                cS_a(p(x)).
+                            \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                        Therefore, both $E_a$ and $S_a$ are linear transformations.
+                    </p>
+                </details>
+
+                <div class="example-box">
+                    The <b>derivative</b> $D\colon\bf{P}_n\to\bf{P}_{n-1}$ given by $D(p(x))=p'(x)$ is a linear transformation.
+                </div>
+
+                <details>
+                    <summary>Proof that $D$ is linear.</summary>
+                    <p>
+                        Suppose $p(x)$ and $q(x)$ are two polynomials of degree at most $n$.
+                        Then we have
+                        \[
+                            D((p+q)(x))
+                            =
+                            (p+q)'(x)
+                            =
+                            p'(x)+q'(x)
+                            =
+                            D(p(x))+D(q(x)).
+                        \]
+                    </p>
+                    <p>
+                        In addition, if $p(x)\in\bf{P}_n$ and $a\in\RR$ is a constant, we see that
+                        \[
+                            D((ap)(x))
+                            =
+                            (ap)'(x)
+                            =
+                            ap'(x)
+                            =
+                            aD(p(x)).
+                        \]
+                    </p>
+                    <p>
+                        In conclustion, $D$ is a linear transformation.
+                    </p>
+                </details>
+                </section>
+
+                <section id="linear-transformations-properties">
+                    <h2>Properties of Linear Transformations</h2>
+                    
+                    <p>
+                        We now explore some of the main features of linear transformations.
+                        More importantly, we will see that it is possible to completely determine
+                        a linear transformation $T\colon V \to W$ by looking only at the images of a basis of $V$.
+                    </p>
+
+                    <div class="theorem-box" id="thm-linear-combinations">
+                        Suppose $T\colon V\to W$ is any linear transformation.
+                        Then the following identities are true:
+                        <ol>
+                            <li>
+                                $T(\bf{0})=\bf{0}$.
+                            </li>
+                            <li>
+                                If $\bf{x}\in V$, then $T(\bf{x})=-\bf{x}$.
+                            </li>
+                            <li>
+                                If $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k$ are vectors in $V$ and
+                                $a_1,\,a_2,\,\dots,\,a_k\in\RR$ are scalars, then
+                                \[
+                                    T(a_1\bf{x}_1+a_2\bf{x}_2+\cdots+a_k\bf{x}_k)
+                                    =
+                                    a_1T(\bf{x}_1)+a_2T(\bf{x}_2)+\cdots+a_kT(\bf{x}_k).
+                                \]
+                            </li>
+                        </ol>
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            The proof of the third equation is exactly the same as <a href=LinearTransformations.html#thm-linear-combinations>in the case of linear transformations $T\colon\RR^n\to\RR^m$</a>.
+                            Thus, we only have to focus on the first two identities.
+                        </p>
+                        <p>
+                            For the first identity, note that 
+                            \[
+                                T(\bf{0})=T(0\,\bf{0})=0\,T(\bf{0})=\bf{0}.
+                            \]
+                            For the second one, we can prove it as follows:
+                            \[
+                                T(-\bf{v})=T((-1)\bf{v})=(-1)T(\bf{v})=-T(\bf{v}).
+                            \]
+                        </p>
+                    </details>
+
+                    <p>
+                        The last identity on <a href=#thm-linear-combinations>the previous theorem</a>
+                        must be understood as follows.
+                        Suppose we are given a linear transformation $T\colon V\to W$ and vectors
+                        $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k\in V$.
+                        If we know the images $T(\bf{x}_1),\,T(\bf{x}_2),\,\dots,\,T(\bf{x}_k)$,
+                        then we can automatically determine $T(\bf{v})$ when $\bf{v}$ is a linear combination
+                        of the vectors $\bf{x}_1,\,\bf{x}_2,\,\dots,\,\bf{x}_k$
+                        (that is, when $\bf{v}$ is in the subspace $\vecspan\{\bf{x}_1,\bf{x}_2,\dots,\,\bf{x}_k\}$).
+                    </p>
+
+                    <p>
+                        Let's make this idea more precise.
+                        Suppose that $T,\,S\colon V\to W$ are transformations (they do not have to be linear).
+                        Then we say that $T$ and $S$ are <b>equal</b> and we write $T=S$ if
+                        $T(\bf{x})=S(\bf{x})$ for all $\bf{x}\in V$.
+                    </p>
+
+                    <p>
+                        Having this in mind, we obtain the following result:
+                    </p>
+
+                    <div class="theorem-box" id="thm-uniqueness">
+                        Let $T,\,S\colon V\to W$ be two linear transformations and suppose that
+                        $\{\bf{x}_1,\,\dots,\,\bf{x}_k\}$ is a spanning set for $V$.
+                        If $T(\bf{x}_i)=S(\bf{x}_i)$ for all $i$, then $T=S$.
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            Let $\bf{x}$ be any vector in $V$.
+                            We need to show that $T(\bf{x})=S(\bf{x})$.
+                        </p>
+                        <p>
+                            Since $\bf{x}\in V =\vecspan\{\bf{x}_1,\dots,\bf{x}_k\}$, we can write
+                            \[
+                                \bf{x}=a_1\bf{x}_1+\cdots+a_k\bf{x}_k.
+                            \]
+                            Thus, applying $T$ we see that
+                            \[
+                                T(\bf{x})
+                                =
+                                a_1T(\bf{x}_1)+\cdots+a_kT(\bf{x}_k)
+                                =
+                                a_1S(\bf{x}_1)+\cdots+a_kS(\bf{x}_k)
+                                =
+                                S(\bf{x}).
+                            \]
+                        </p>
+                        <p>
+                            Because $\bf{x}$ was any vector in $V$, we deduce that $T=S$.
+                        </p>
+                    </details>
+
+                    <p>
+                        Now we present a result on the existence and uniqueness of linear transformations
+                        by means on how they act on a basis.
+                    </p>
+
+                    <div class="theorem-box" id="thm-existence-uniqueness">
+                        Suppose $V$ and $W$ are vector spaces, and let $\{\bf{e}_1,\dots,\bf{e}_n\}$
+                        be a basis of $W$.
+                        If $\bf{w}_1,\,\dots,\,\bf{w}_n\in W$ are vectors in $W$ (they need not be a spanning set
+                        or independent), then there exists a unique linear transformation $T\colon V\to W$
+                        satisfying $T(\bf{e}_i)=\bf{w}_i$ for all $i$.
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            Let us first prove that the transformation $T$ exists by
+                            <em>explicitly</em> defining it.
+                            Suppose $\bf{x}\in V$ is any vector.
+                            Then, since $\{\bf{e}_1,\dots,\bf{e}_n\}$ is a basis of $V$,
+                            there exist unique constants $a_1,\,\dots,\,a_n\in\RR$ that satisfy
+                            \[
+                                \bf{x}=a_1\bf{x}_1+\cdots+a_n\bf{x}_n.
+                            \]
+                            Then, we define $T(\bf{x})$ by the equation
+                            \[
+                                T(\bf{x})=a_1\bf{w}_1+\cdots+a_n\bf{w}_n.
+                            \]
+                            Since the constants $a_1,\,\dots,\,a_n$ are unique, the above definition
+                            can be made without any risk of ambiguity.
+                            Now, it is clear that $T(\bf{e}_i)=\bf{w}_i$ for all $i$ because
+                            of how the transformation $T$ was defined.
+                        </p>
+                        <p>
+                            To show uniqueness, suppose that $S\colon V\to W$ is another linear transformation
+                            such that $S(\bf{x}_i)=\bf{w}_i=T(\bf{x}_i)$ for all $i$.
+                            Since a basis of $V$ is in particular a spanning set,
+                            we obtain that $S=T$ by <a href=#thm-uniqueness>the preceding theorem</a>.
+                            therefore, $T$ is unique.
+                        </p>
+                    </details>
+
+                    <p>
+                        The <a href=#thm-existence-uniqueness>existence and uniqueness theorem</a> asserts that in order
+                        to define any linear transformation $T\colon V \to W$, it suffices to determine the image
+                        under $T$ of the elements in any basis of our choice.
+                    </p>
+
+                    <div class="example-box">
+                        The set $\{1+x,2x-x^2,3x^2\}$ is a basis of $\bf{P}_2$.
+                        Find a linear transformation $T\colon \bf{P}_2\to \RR^2$ that satisfies
+                        \[
+                            T(1+x)=(0,2),\qquad T\big(2x-x^2\big)=(-2,7),\qquad T\big(3x^2\big)=(0,-9).
+                        \]
+                    </div>
+                    <details>
+                        <summary>Proof.</summary>
+                        <p>
+                            To find $T$, we need to know the image of any polynomial under $T$.
+                        </p>
+                        <p>
+                            Let $p(x)=a+bx+cx^2$ be a polynomial in $\bf{P}_2$.
+                            We have to write $p(x)$ as a linear combination of $1+x$, $2x-x^2$ and $3x^2$.
+                            To do this, we write
+                            \[
+                                a+bx+cx^2
+                                =
+                                \alpha(1+x)
+                                +
+                                \beta\big(2x-x^2\big)
+                                +
+                                \gamma\big(3x^2\big)
+                                =
+                                \alpha
+                                +
+                                (\alpha+2\beta)x
+                                +
+                                (-\beta+3\gamma)x^2,
+                            \]
+                            where $\alpha,\,\beta,\,\gamma\in\RR$ are constants to be determined.
+                            From the equation above, we see that these constant satisfy the system
+                            \[
+                            \left\{
+                                \begin{array}{ccccccc}
+                                    \alpha & & & & & = & a \\
+                                    \alpha & + & 2\beta & & &  = & b \\
+                                    & - & \beta & + & 3\gamma & = & c
+                                \end{array}
+                            \right.
+                            \]
+                            We see that the only solution to the above system is
+                            \[
+                                \alpha = a,
+                                \qquad
+                                \beta = \frac{b-a}{2},
+                                \qquad
+                                \gamma = \frac{-a+b+2c}{6}.
+                            \]
+                            So we have that
+                            \[
+                                p(x)
+                                =
+                                a(1-x)
+                                +
+                                \frac{b-a}{2}\big(2x-x^2\big)
+                                +
+                                \frac{-a+b+2c}{6}\big(3x^2\big).
+                            \]
+                        </p>
+                        <p>
+                            Then, we deduce from the <a href=#thm-existence-uniqueness>existence and uniqueness theorem</a> that
+                            \[
+                                T(p(x))
+                                =
+                                a(0,2)
+                                +
+                                \frac{b-a}{2}(-2,7)
+                                +
+                                \frac{-a+b+2c}{6}(0,-9)
+                                =(a-b,2b-3c).
+                            \]
+                        </p>
+                        <p>
+                            In conclusion, the transformation $T$ is given by
+                            \[
+                                T\big(a+bx+cx^2\big)
+                                =
+                                (a-b,2b-3c).
+                            \]
+                        </p>
+                    </details>
+
+                </section>
+
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
