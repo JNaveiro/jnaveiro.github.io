@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Kernel and Image of a Linear Transformation</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="linear-algebra.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 class="center">
+                7.2 Kernel and Image of a Linear Transformation
+            </h1>
+            <p>
+                Recall from <a href=RnSubspaces.html>Section 5.1</a> that to an
+                $m\times n$ matrix $A$ we can associate two vector subspaces:
+                the null space $\null A\subseteq \RR^m$ and the image space
+                $\im A \subseteq \RR^n$.
+                In this section we define and study analogues of these subspaces
+                that are defined for linear transformations between general vector spaces.
+            </p>
+            <p>
+                All the vector spaces that we consider here are assumed to be finite dimensional.
+            </p>
+            <section id="kernel-image">
+            <h2>Kernel and Image</h2>
+            <div class="definition-box">
+                Let $V$ and $W$ be vector spaces and $T\colon V\to W$ a linear transformation.
+                Then we define the <b>kernel</b> of $T$ as the set
+                \[
+                \ker T = \big\{\bf{x}\in V\mid T(\bf{x})=\bf{0}\big\}\subseteq V.
+                \]
+                In addition, we define the <b>image</b> of $T$ to be the set
+                \[
+                \im T = \big\{T(\bf{x})\mid\bf{x}\in V\big\}\subseteq W.
+                \]
+            </div>
+            <p>
+                As expected, the notions of kernel, image, nullity and rank extend the notions of null space, image space, nullity and rank of a matrix:
+            </p>
+            <div class="example-box">
+                Let $T\colon\RR^n\to\RR^m$ be a linear transformation.
+                Then there exists an $m\times n$ matrix $A$ such that $T=T_A$ is the matrix
+                transformation induced by $A$.
+                As a consequence, we have
+                \[
+                    \begin{aligned}
+                    \ker T ={}& \{\bf{x}\in \RR^n\mid T(\bf{x})=\bf{0}\} = \{\bf{x}\in \RR^n\mid A\bf{x}=\bf{0}\} = \null A, \\[1em]
+                    \im T ={}& \{T(\bf{x})\mid \bf{x}\in\RR^n\} = \{A\bf{x}\mid \bf{x}\in\RR^n\}=\im A.
+                    \end{aligned}
+                \]
+            </div>
+
+            <div class="theorem-box">
+                Let $T\colon V\to W$ be a linear transformation.
+                Then:
+                <ol>
+                    <li>
+                        $\ker T$ is a subspace of $V$ and $\im T$ is a subspace of $W$.
+                    </li>
+                    <li>
+                        If $\{\bf{x}_1,\dots,\bf{x}_k\}$ is a spanning set for $V$, then
+                        $\im T = \vecspan \{T(\bf{x}_1),\dots,T(\bf{x}_k)\}$.
+                    </li>
+                </ol>
+            </div>
+            <details>
+                <summary>Proof.</summary>
+                <p>
+                    The first assertion is proved in the same way as how we proved that <a href=RnSubspaces.html#thm-null-image-spaces>the null space and the image space of a matrix are subspaces</a>.
+                    Therefore, we only have to focus on the second assertion.
+                </p>
+                <p>
+                    Let us show that $\im T\subseteq \vecspan\{T(\bf{x}_1),\dots,T(\bf{x}_k)\}$.
+                    To see this, let $\bf{y}\in \im T$.
+                    Then $\bf{y}=T(\bf{x})$ for some vector $\bf{x}\in V$.
+                    Now, because $\{\bf{x}_1,\dots,\bf{x}_k\}$ is a spanning set for $V$,
+                    we may write $\bf{x}$ as a linear combination of $\bf{x}_1,\,\dots,\,\bf{x}_k$:
+                    \[
+                    \bf{x}=a_1\bf{x}_1+\cdots+a_k\bf{x}_k.
+                    \]
+                    Because $T$ is linear,
+                    \[
+                    \bf{y}=T(\bf{x})=a_1T(\bf{x}_1)+\cdots+a_kT(\bf{x}_k)\in\vecspan\{T(\bf{x}_1),\dots,T(\bf{x}_k)\}.
+                    \]
+                    Therefore, the first inclusion is proved.
+                    The second inclusion is a consequence of the <a href=VectorSubspaces.html#thm-span-theorem>span theorem</a> and the fact that $T(\bf{x}_1),\,\dots,\,T(\bf{x}_k)\in \im T$.
+                </p>
+            </details>
+
+            <p>
+                Because the kernel and image of a linear transformation are subspaces,
+                we can talk about their dimension.
+                More precisely, suppose $T\colon V\to W$ is a linear transformation.
+                Then:
+            </p>
+
+            <ol>
+                <li>
+                    The dimension $\dim(\ker T)$ is called the <b>nullity</b> of $T$.
+                </li>
+                <li>
+                    The dimension $\dim(\im T)$ is called the <b>rank</b> of $T$.
+                    We also write $\operatorname{rank}(T)=\dim(\im T)$.
+                </li>
+            </ol>
+            </section>
+
+            <section id="rank-nullity">
+                <h2>The Dimension Theorem</h2>
+                <p>
+                    Let $A$ be an $m\times n$ matrix.
+                    Then the <a href=MatrixRank.html#thm-rank-nullity>rank-nullity theorem</a> asserts that
+                    \[
+                        \dim(\null A)+\operatorname{rank} A = m.
+                    \]
+                    We can consider the corresponding matrix transformation $T_A\colon \RR^m\to\RR^n$,
+                    so that the above formula can be restated as
+                    \[
+                    \dim(\ker T_A)+\operatorname{rank} T_A = \dim \RR^m.
+                    \]
+                    This remarkable formula is actually true for any linear transformation between
+                    any two vector spaces.
+                    This fact is known as the <b>dimension theorem</b>:
+                </p>
+                <div class="theorem-box" id="thm-dimension">
+                    Let $T\colon V\to W$ be a linear transformation between two vector spaces.
+                    Then the rank and nullity of $T$ are related by the equation
+                    \[
+                        \dim(\ker T)+\operatorname{rank} T = \dim V.
+                    \]
+                </div>
+                <p>
+                    The proof of the above formula is exactly the same as the proof of the <a href=MatrixRank.html#thm-rank-nullity>rank-nullity theorem</a>.
+                </p>
+                <div class="example-box">
+                    Consider the linear transformation $T\colon \bf{M}_{22}\to\bf{P}_2$ defined by the formula
+                    \[
+                        T\left(
+                            \begin{bmatrix}
+                                a & b\\
+                                c & d
+                            \end{bmatrix}
+                        \right)
+                            =
+                            a+2b+(a-b-c)x+(-3a-6b)x^2.
+                    \]
+                    Compute a basis and the dimension of $\ker T$.
+                    Do the same for $\im T$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let us take an arbitrary matrix
+                        \[
+                            A
+                            =
+                            \begin{bmatrix}
+                                a & b \\
+                                c & d
+                            \end{bmatrix}\in\bf{M}_{22}.
+                        \]
+                        Then $A\in\ker T$ if and only if $T(A)=a+2b+(a-b-c)x+(-3a-6b)x^2=0$.
+                        Using Gaussian elimination, one sees that this is equivalent to $A$
+                        being of the form
+                        \[
+                            \begin{bmatrix}
+                                -2b & b \\
+                                -3b & d
+                            \end{bmatrix}
+                            =
+                            b \begin{bmatrix}
+                                -2 & 1 \\
+                                -3 & 0
+                            \end{bmatrix}
+                            +
+                            d \begin{bmatrix}
+                                0 & 0 \\
+                                0 & 1
+                            \end{bmatrix}, \quad b,\,d\in\RR.
+                        \]
+                        This means that the set
+                        \[
+                        \left\{
+                            \begin{bmatrix}
+                                -2 & 1 \\
+                                -3 & 0
+                            \end{bmatrix}
+                            ,
+                            \begin{bmatrix}
+                                0 & 0 \\
+                                0 & 1
+                            \end{bmatrix}
+                        \right\}
+                        \]
+                        is a spanning set for $\ker T$.
+                        It is also linearly independent (check this as an exercise!),
+                        so we conclude that the above set is a basis for $\ker T$ and
+                        the nullity of $T$ is $\dim \ker T = 2$.
+                    </p>
+                    <p>
+                        We now compute a basis for $\im T$.
+                        On the one hand, the <a href=#thm-dimension>dimension theorem</a> implies that
+                        \[
+                            \dim(\im T)=\operatorname{rank}(T)=\dim \bf{M}_{22}-\dim (\ker T)=4-2=2.
+                        \]
+                        On the other hand, we can give a first description of $\im T$ as follows:
+                        \[
+                            \begin{aligned}
+                            \im T
+                            &=
+                            \vecspan
+                            \left\{
+                                T
+                                \left(
+                                    \begin{bmatrix}
+                                        1 & 0 \\
+                                        0 & 0
+                                    \end{bmatrix}
+                                \right),
+                                T
+                                \left(
+                                    \begin{bmatrix}
+                                        0 & 1 \\
+                                        0 & 0
+                                    \end{bmatrix}
+                                \right),
+                                T
+                                \left(
+                                    \begin{bmatrix}
+                                        0 & 0 \\
+                                        1 & 0
+                                    \end{bmatrix}
+                                \right),
+                                T
+                                \left(
+                                    \begin{bmatrix}
+                                        0 & 0 \\
+                                        0 & 1
+                                    \end{bmatrix}
+                                \right)
+                            \right\}\\[1em]
+                            &=
+                            \vecspan
+                            \big\{ 1+x-3x^2, 2-x-6x^2, -x, 0 \big\}.
+                            \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                    Since $\im T$ has dimension $2$, the spanning set $\big\{ 1+x-3x^2, 2-x-6x^2, -x, 0 \big\}$ contains a basis of $\im T$, and such a basis must have two elements.
+                    For instance, $\big\{1+x-3x^2,-x\big\}$ serves as a basis, since it is a lineary
+                    independent set with two elements.
+                    We conclude that 
+                    \[
+                    \big\{1+x-3x^2,-x\big\}
+                    \]
+                    is a basis of $\im T$.
+                    </p>
+                </details>
+            </section>
+
+            <section id="oneone-onto">
+                <h2>One-to-One and Onto Transformations</h2>
+                <div class="definition-box">
+                    Suppose $T\colon V \to W$ is a linear transformation.
+                    <ol>
+                        <li>We say that $T$ is <b>one-to-one</b> if whenever $T(\bf{x})=T(\bf{y})$ for $\bf{x},\,\bf{y}\in V$, then $\bf{x}=\bf{y}$.</li>
+                        <li>We say that $T$ is <b>onto</b> if $\im T = W$.</li>
+                    </ol>
+                </div>
+                <p>
+                    The condition of $T$ being one-to-one essentially means that whenever we have two different vectors $\bf{x},\,\bf{y}\in V$, their images $T(\bf{x})$ and $T(\bf{y})$ are also different.
+                    In addition, $T$ being onto is the same as saying that for every element $\bf{z}\in W$ the equation $\bf{z}=T(\bf{x})$ has at least one solution $\bf{x}\in V$.
+                </p>
+                <div class="example-box">
+                    If $V$ is a vector space, then the identity map $1_V\colon V \to V$ is one-to-one and onto.
+                </div>
+                <p>
+                    There is actually a simple way of checking if a linear transformation is one-to-one:
+                </p>
+                <div class="theorem-box">
+                    Let $T\colon V\to W$ be a linear transformation between two vector spaces.
+                    Then $T$ is one-to-one if and only if $\ker T = \{\bf{0}\}$.
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        Firstly, suppose that $T$ is one-to-one, and let us check that $\ker T = \{\bf{0}\}$.
+                    </p>
+                    <p>
+                        Suppose $\bf{x}\in \ker T$, so that $T(\bf{x})=\bf{0}$.
+                        Since $T(\bf{0})=\bf{0}$ as well and $T$ is one-to-one, we deduce that $\bf{x}=\bf{0}$.
+                        Thus $\ker T$ is the zero subspace.
+                    </p>
+                    <p>
+                        Secondly, let us check that $T$ is one-to-one if $\ker T = \{\bf{0}\}$.
+                    </p>
+                    <p>
+                        Suppose $\bf{x},\,\bf{y}\in V$ are two vectors such that $T(\bf{x})=T(\bf{y})$.
+                        Then we have
+                        \[
+                        T(\bf{x}-\bf{y})=T(\bf{x})-T(\bf{y})=\bf{0}\implies \bf{x}-\bf{y}\in \ker T = \{\bf{0}\}.
+                        \]
+                        Consequently, $\bf{x}-\bf{y}=\bf{0}$, so that $\bf{x}=\bf{y}$.
+                        Since $\bf{x}$ and $\bf{y}$ were arbitrary, we conclude that $T$ is one-to-one.
+                    </p>
+                </details>
+                <p>
+                    Similarly, note that a linear transformation $T\colon V \to W$ is onto if and only if
+                    $\im T = W$.
+                    Now, $\im T \subseteq W$ is a subspace, so $\im T = W$ is equivalent to
+                    $\dim (\im T)=\dim W$.
+                    This means that:
+                </p>
+                <div class="theorem-box">
+                    A linear transformation $T\colon V \to W$ is onto if and only if $\operatorname{rank} T = \dim W$.
+                </div>
+
+                <div class="example-box">
+                    Consider the linear transformation $T\colon \RR^2 \to \RR^3$ given by the formula
+                    \[
+                        T(x,y)=(x+y,x-y,x), \quad (x,y)\in\RR^w.
+                    \]
+                    Is $T$ one-to-one? Is it onto?
+                </div>
+                <p>
+                    We present two possible ways of solving this problem:
+                </p>
+                <details>
+                    <summary>Solution 1.</summary>
+                    <p>
+                        We first check if $T$ is one-to-one by computing $\ker T$.
+                    </p>
+                    <p>
+                        Suppose $(x,y)\in\RR^2$ is any vector.
+                        Then $(x,y)\in \ker T$ if and only if $T(x,y)=(x+y,x-y,x)=(0,0,0)$,
+                        but this is equivalent to $x=y=0$.
+                        We obtain that $\ker T = \{(0,0)\}$, so $T$ is one-to-one.
+                    </p>
+                    <p>
+                        To check if $T$ is onto, we can compute the rank of $T$ using
+                        the <a href=#thm-dimension>dimension theorem</a>:
+                        \[
+                            \operatorname{rank} T = \dim \RR^2 - \dim (\ker T) = 2 - 0 = 2 \neq \dim \RR^3 .
+                        \]
+                        Since $\operatorname{rank} T \neq \dim \RR^3$, we have $\im T \neq \RR^3$, so $T$ is not onto.
+                    </p>
+                </details>
+                <details>
+                    <summary>Solution 2.</summary>
+                    <p>
+                        Since $T$ is linear, we have $T=T_A$ for the matrix
+                        \[
+                            A
+                            =
+                            \begin{bmatrix}
+                            T(\bf{e}_1) & T(\bf{e}_2)
+                            \end{bmatrix}
+                            =
+                            \begin{bmatrix}
+                                1 & 1 \\
+                                1 & -1 \\
+                                1 & 0
+                            \end{bmatrix}.
+                        \]
+                        This matrix has rank $2$, as can be seen by using Gaussian elimination,
+                        so
+                        \[
+                        \operatorname{rank} T_A = \dim (\im T_A) = \dim (\im A) = \operatorname{rank} A = 2 \neq \dim \RR^3.
+                        \]
+                        We conclude that $T=T_A$ is not onto because its rank is not $3$.
+                    </p>
+                    <p>
+                        Now, we can compute $\dim (\ker T_A)$ as follows:
+                        \[
+                        \dim (\ker T_A)=\dim (\null A)=2-\operatorname{rank} A = 2-2 = 0.
+                        \]
+                        This means that $\ker T_A = \{\bf{0}\}$, so $T_A$ is one-to-one.
+                    </p>
+                </details>
+                <div class="example-box">
+                    Consider the linear transformation $S\colon \bf{P}_2\to\bf{P}_2$
+                    defined by the equation
+                    \[
+                        S(p(x))=p(x)-p'(x), \quad p(x)\in\bf{P}_2.
+                    \]
+                    Show that $S$ is both one-to-one and onto.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let us check if $S$ is one-to-one by computing its kernel.
+                    </p>
+                    <p>
+                        Suppose $p(x)=a+bx+cx^2$ is a polynomial in $\bf{P}_2$.
+                        Then we have
+                        \[
+                            S(p(x))=\big(a+bx+cx^2\big)-(b+2cx)=(a-b)+(b-2c)x+cx^2.
+                        \]
+                        Thus, $p(x)\in \ker T$ if and only if $S(p(x))=0$, which amounts to the system
+                        \[
+                            \left\{
+                            \begin{array}{ccccccc}
+                                a & - & b & & & = & 0 \\
+                                 & & b & - & 2c & = & 0\\
+                                 & & & & c & = & 0
+                            \end{array}
+                            \right.
+                        \]
+                        The above system only has the trivial solution $a=b=c=0$, so we deduce that $p(x)=0$.
+                        Consequently, we have $\ker S = \{\bf{0}\}$, so $S$ is an one-to-one transformation.
+                    </p>
+                    <p>
+                        A quick way to check if $S$ is onto is to apply the <a href=#thm-dimension>dimension theorem</a>.
+                        Indeed, we have
+                        \[
+                            \operatorname{rank} S=\dim \bf{P}_2 - \dim \ker S = 3 - 0 = 3 = \dim \bf{P}_2,
+                        \]
+                        so $\im S = \bf{P}_2$, implying that $S$ is an onto transformation.
+                    </p>
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
