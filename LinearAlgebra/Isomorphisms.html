@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Isomorphisms and Composition</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="linear-algebra.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1>Isomorphisms and Composition</h1>
+
+            <p>
+                As you may have noticed, even though vector spaces can "look" different
+                from the space $\RR^n$, the practical computations that we have
+                done in these spaces end up reducing to computations with vectors in $\RR^n$.
+                This is because, in practice, the elements of the vector spaces that we have been
+                working with can be "identified" with vectors in $\RR^n$.
+            </p>
+            <p>
+                For instance, let us consider the vector space $\bf{P}_3$.
+                Its elements are polynomials of the form
+                \[
+                    a+bx+cx^2+dx^3, \qquad a,\,b,\,c,\,d\in\RR.
+                \]
+                Notice that we can identify polynomials in $\bf{P}_3$ with vectors in $\RR^4$
+                by sending
+                \[
+                    a+bx+cx^2+dx^3 \to (a,b,c,d)
+                \]
+                In addition, polynomial addition and scalar multiplication correspond to vector
+                addition and scalar multiplication under this identification.
+                This means that, in some sense, the space $\bf{P}_3$ is the same as the space $\RR^4$.
+                In this section, we make this idea of "being the same" precise.
+                In addition, we will see that every vector space can be identified with $\RR^n$ for
+                an adequate value of $n$.
+            </p>
+
+            <section id="isomorphisms">
+                <h2>Isomorphisms between Vector Spaces</h2>
+
+                <div class="definition-box">
+                    Let $V$ and $W$ be two vector spaces.
+                    We say that a linear transformation $T\colon V\to W$ is an <b>isomorphism</b>
+                    if it is both one-to-one and onto.
+                    Moreover, we say that $V$ and $W$ are <b>isomorphic</b> (denoted $V\cong W$)
+                    if there exists an isomorphism $T\colon V\to W$.
+                </div>
+
+                <p>
+                    Let us go through some examples:
+                </p>
+
+                <div class="example-box">
+                    If $V$ is a vector space, then the identity transformation $1_V\colon V\to V$
+                    is an isomorphism.
+                </div>
+
+                <div class="example-box">
+                    The transposition $T\colon\bf{M}_{mn}\to\bf{M}_{nm}$ (given by $T(A)=A^t$) is an isomorphism, so
+                    $\bf{M}_{mn}\cong\bf{M}_{nm}$.
+                </div>
+
+                <div class="example-box">
+                    The space $\bf{P}_3$ is isomorphic to $\RR^4$.
+                    Indeed, the transformation $T\colon \bf{P}_3\to \RR^4$ given by
+                    \[
+                        T\big(a+bx+cx^2+dx^3\big)=(a,b,c,d)
+                    \]
+                    is an isomorphism.
+                    Observe that $T(1)=\bf{e}_1$, $T(x)=\bf{e}_2$, $T\big(x^2\big)=\bf{e}_3$ and
+                    $T\big(x^3\big)=\bf{e}_4$, so that $T$ sends the basis $\big\{1,x,x^2,x^3\big\}$
+                    to the standard basis of $\RR^4$.
+                </div>
+
+                <p>
+                    The existence of a vector space isomorphism $T\colon V\to W$ implies that we can work
+                    with vectors of $V$ or $W$ indistinctively.
+                    That is because each vector $\bf{v}\in V$ can be uniquely identified with $T(\bf{v})\in W$.
+                    Therefore, isomorphic vector spaces are <em>identical in practice</em>.
+                </p>
+
+                <p>
+                    In general, how do we determine if two vector spaces are isomorphic?
+                    It all comes down to checking their dimension:
+                </p>
+
+                <div class="theorem-box" id="thm-isomorphism-bases">
+                    Let $V$ and $W$ be two finite-dimensional vector spaces, $T\colon V \to W$ a linear
+                    transformation and $\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$ a basis for $V$.
+                    Then the following conditions are equivalent:
+                    <ol>
+                        <li>
+                            $T\colon V\to W$ is an isomorphism.
+                        </li>
+                        <li>
+                            The set $\{T(\bf{e}_1),T(\bf{e}_2),\dots,T(\bf{e}_n)\}$ is a basis of $W$.
+                        </li>
+                    </ol>
+                </div>
+
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        Suppose $T$ is an isomorphism, and let us prove that
+                        $B=\{T(\bf{e}_1,),T(\bf{e}_2),\dots,T(\bf{e}_n)\}$ is a basis of $W$.
+                    </p>
+                    <p>
+                        Firstly, $B$ is a spanning set for $W$.
+                        Indeed, since $\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$ is a spanning set for $V$,
+                        we have 
+                        \[
+                            \im T
+                            =
+                            \vecspan\{T(\bf{e}_1),T(\bf{e}_2),\dots,T(\bf{e}_n)\}
+                            =
+                            \vecspan\, B.
+                        \]
+                        Secondly, $B$ is linearly independent.
+                        Indeed, suppose we have a linear combination
+                        \[
+                            a_1T(\bf{e}_1)+a_2T(\bf{e}_2)+\cdots+a_nT(\bf{e}_n)=\bf{0}
+                        \]
+                        Then, since $T$ is linear, we have
+                        \[
+                            T(a_1\bf{e}_1+a_2\bf{e}_2+\cdots+a_n\bf{e}_n)=\bf{0},
+                        \]
+                        so the expression in parenthesis lives in $\ker T = \{\bf{0}\}$ (since
+                        $T$ is one-to-one).
+                        Therefore,
+                        \[
+                            a_1\bf{e}_1+a_2\bf{e}_2+\cdots+a_n\bf{e}_n=\bf{0},
+                        \]
+                        and since $\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$ is a basis of $V$, this gives
+                        $a_1=a_2=\cdots=a_n=0$, showing that $B$ is linearly independent.
+                        We conclude that $B$ is a basis of $W$.
+                    </p>
+                    <p>
+                        Now, suppose $B=\{T(\bf{e}_1),T(\bf{e_2}),\dots,T(\bf{e}_n)\}$ is a basis for $W$,
+                        and let us prove that $T$ is an isomorphism.
+                    </p>
+                    <p>
+                        To see if $T$ is one-to-one, we compute $\ker T$.
+                        Suppose $\bf{x}\in \ker T$, and let us write
+                        \[
+                            \bf{x}=a_1\bf{e}_1+a_2\bf{e}_2+\cdots+a_n\bf{e}_n.
+                        \]
+                        Then $T(\bf{x})=\bf{0}$, so
+                        \[
+                            a_1T(\bf{e}_1)+a_2T(\bf{e}_2)+\cdots+a_nT(\bf{e}_n)=\bf{0},
+                        \]
+                        and the fact that $B$ is independent gives $a_1=a_2=\cdots=a_n=0$.
+                        Consequently, $\bf{x}=\bf{0}$, so $\ker T = \{\bf{0}\}$.
+                    </p>
+                    <p>
+                        The transformation $T$ is also onto, since
+                        \[
+                            \im T = \vecspan \{T(\bf{e})_1,T(\bf{e}_2),\dots,T(\bf{e}_n)\}=W.
+                        \]
+                        We conclude that $T$ is an isomorphism.
+                    </p>
+                </details>
+
+                <div class="theorem-box" id="thm-isomorphism-dimension">
+                    If $V$ and $W$ are two finite-dimensional vector spaces, then $V$ and $W$
+                    are isomorphic if and only if they have the same dimension: $\dim V = \dim W$.
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        Because of <a href=#thm-isomorphism-bases>the previous theorem</a>, two
+                        isomorphic vector spaces must have the same dimension.
+                        We have to prove the converse assertion.
+                    </p>
+                    <p>
+                        Assume $V$ and $W$ have the same dimension $\dim V = \dim W = n$.
+                        We choose a basis $\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$ of $V$ and a
+                        basis $\{\bf{u}_1,\bf{u}_2,\dots,\bf{u}_n\}$ of $W$.
+                        Because of the <a href=VectorTransformations.html#thm-existence-uniqueness>existence and uniqueness theorem</a>,
+                        there exists a linear transformation $T\colon V\to W$ such that $T(\bf{e}_i)=\bf{u}_i$
+                        for each $i$.
+                        This transformation takes a basis of $V$ to a basis of $W$ by design,
+                        so it is an isomorphism due to <a href=#thm-isomorphism-bases>the previous theorem</a>.
+                    </p>
+                </details>
+
+                <p>
+                    An important consequence of this theorem is that every vector space can be identified with
+                    some $\RR^n$:
+                </p>
+
+                <div class="corollary-box">
+                    Let $V$ be a finite dimensional vector space and $n=\dim V$.
+                    Then we have $V\cong \RR^n$.
+                </div>
+
+                <p>
+                    Now, we know that in order for an isomorphism $T\colon V \to W$ to even exist, we must
+                    have $\dim V = \dim W$.
+                    Therefore, if we are given a transformation $T\colon V \to W$ and we want to check
+                    if $T$ is an isomorphism, a first thing to look at is if $\dim V = \dim W$.
+                </p>
+
+                <p>
+                    Using the <a href=KernelImage.html#thm-dimension>dimension theorem</a>, we can simplify the process of determining if a linear
+                    transformation is an isomorphism.
+                </p>
+
+                <div class="theorem-box">
+                    Let $V$ and $W$ be vector spaces of the same dimension and $T\colon V \to W$ a linear
+                    transformation.
+                    Then the following statements are equivalent:
+                    <ol>
+                        <li>
+                            $T\colon V \to W$ is one-to-one.
+                        </li>
+                        <li>
+                            $T\colon V \to W$ is onto.
+                        </li>
+                        <li>
+                            $T\colon V \to W$ is an isomorphism.
+                        </li>
+                    </ol>
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        Recall that $\dim (\ker T) + \dim (\im T)=\dim V$ by the 
+                        <a href=KernelImage.html#thm-dimension>dimension theorem</a>.
+                        Therefore, we get
+                        \[
+                            \begin{aligned}
+                            T\textsf{ is one-to-one} &\iff \ker T = \{\bf{0}\}
+                            \iff \dim (\ker T) = 0
+                            \iff
+                            \dim (\im T) = \dim V = \dim W \\
+                            &\iff
+                            \im T = W
+                            \iff
+                            T\textsf{ is onto.}
+                            \end{aligned}
+                        \]
+                        This proves that the three assertions are equivalent.
+                    </p>
+                </details>
+
+                <div class="example-box">
+                    Consider the linear transformation $T\colon \bf{M}_{22}\to\RR^4$ given by
+                    \[
+                        T
+                        \begin{bmatrix}
+                            a & b \\
+                            c & d
+                        \end{bmatrix}
+                        =
+                        (a+b,d,c,a-b).
+                    \]
+                    Check if $T$ is an isomorphism.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Since $\bf{M}_{22}$ and $\RR^4$ both have dimension $4$, it is enough
+                        to check if $T$ is one-to-one or onto.
+                    </p>
+                    <p>
+                        Let us check if $T$ is one-to-one by seeing if $\ker T = \{\bf{0}\}$.
+                        For this, take any matrix
+                        \[
+                            A
+                            =
+                            \begin{bmatrix}
+                                a & b \\
+                                c & d
+                            \end{bmatrix}\in\bf{M}_{22}.
+                        \]
+                        Then $A\in\ker T$ if $T(A)=(a+b,d,c,a-b)=(0,0,0,0)$, which is the same as
+                        the coefficients $a,\,b,\,c,\,d$ satisfying the homogeneous linear system
+                        \[
+                        \left\{
+                            \begin{array}{*{9}{c}}
+                                a & + & b &   &   &   &   & = & 0 \\
+                                  &   &   &   &   &   & d & = & 0 \\
+                                  &   &   &   & c &   &   & = & 0 \\
+                                a & - & b &   &   &   &   & = & 0    
+                            \end{array}
+                        \right.
+                        \]
+                    </p>
+                    <p>
+                        This system only has the trivial solution $a=b=c=d=0$, so we see that $A=0$.
+                        Therefore, $\ker T = \{\bf{0}\}$, which shows that $T$ is one-to-one.
+                        Using the fact that $\dim\bf{M}_{22}=\dim\RR^4=4$, we deduce that
+                        $T$ is an isomorphism.
+                    </p>
+                </details>
+
+                <div class="example-box">
+                    Is the subspace
+                    \[
+                        U
+                        =
+                        \big\{p(x)\in\bf{P}_4\mid p(2)=0 \big\}\subseteq \bf{P}_4
+                    \]
+                    isomorphic to $\bf{M}_{22}$?
+                    If so, find an isomorphism $T\colon \bf{M}_{22} \to U$.
+                </div>
+
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        As we had seen in <a href=FiniteDimension.html#example-root>a previous example</a>, $\dim U=4$ and the set
+                        \[
+                            \left\{x-2,x^2-4,x^3-8,x^4-16\right\}
+                        \]
+                        is a basis of $U$.
+                        Since $\dim\bf{M}_{22}=4$ as well, we conclude that $U$ and $\bf{M}_{22}$ are isomorphic.
+                    </p>
+                    <p>
+                        To find an isomorphism $T\colon U \to \bf{M}_{22}$, recall that the set
+                        \[
+                        \left\{
+                            \begin{bmatrix}
+                                1 & 0 \\
+                                0 & 0
+                            \end{bmatrix},
+                            \begin{bmatrix}
+                                0 & 1 \\
+                                0 & 0
+                            \end{bmatrix},
+                            \begin{bmatrix}
+                                0 & 0 \\
+                                1 & 0
+                            \end{bmatrix},
+                            \begin{bmatrix}
+                                0 & 0 \\
+                                0 & 1
+                            \end{bmatrix}
+                        \right\}
+                        \]
+                        is a basis of $\bf{M}_{22}$, and the <a href=VectorTransformations.html#thm-existence-uniqueness>existence and uniqueness theorem</a> states that there exists a unique linear transformation $T\colon \bf{M}_{22} \to U$ that satisfies
+                        \[
+                            \begin{aligned}
+                            T
+                            \left(
+                            \begin{bmatrix}
+                                1 & 0 \\
+                                0 & 0
+                            \end{bmatrix}
+                            \right)
+                            &=
+                            x-2,
+                            &
+                            T
+                            \left(
+                            \begin{bmatrix}
+                                0 & 1 \\
+                                0 & 0
+                            \end{bmatrix}
+                            \right)
+                            &=
+                            x^2-4,
+                            \\[1em]
+                            T
+                            \left(
+                            \begin{bmatrix}
+                                0 & 0 \\
+                                1 & 0
+                            \end{bmatrix}
+                            \right)
+                            &=
+                            x^3-8,
+                            &
+                            T
+                            \left(
+                            \begin{bmatrix}
+                                0 & 0 \\
+                                0 & 1
+                            \end{bmatrix}
+                            \right)
+                            &=
+                            x^4-16,
+                            \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                        Explicitly, this transformation is given by
+                        \[
+                            \begin{aligned}
+                            T\left(
+                            \begin{bmatrix}
+                                a & b \\
+                                c & d
+                            \end{bmatrix}
+                            \right)
+                            &=
+                            a(x-2)+b\big(x^2-4\big)+c\big(x^3-8\big)+d\big(x^4-16\big)
+                            \\[1em]
+                            &=
+                            dx^4+cx^3+bx^2-(2a+4b+8c+16d).
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
