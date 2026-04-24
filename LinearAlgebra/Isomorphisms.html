@@ -412,8 +412,221 @@
                         \]
                     </p>
                 </details>
-                
             </section>
+
+            <section id="composition">
+                <h2>Composition of Linear Transformations</h2>
+                <p>
+                    Suppose $U,\,V$ and $W$ are vector spaces and we are given transformations
+                    $T\colon U\to V$ and $S\colon V\to W$.
+                    Then, for each vector $\bf{u}\in U$, we can apply $T$ to obtain a vector
+                    $T(\bf{u})\in V$, and we can now apply $S$ to this vector to obtain a vector
+                    $S(T(\bf{u}))\in W$.
+                    This leads to the notion of <em>composing transformations</em>:
+                </p>
+                <div class="definition-box">
+                    Suppose $T\colon U\to V$ and $S\colon V\to W$ are transformations between
+                    vector spaces.
+                    The <b>composite</b> of $T$ and $S$ is the transformation $ST\colon U \to W$
+                    given by the formula
+                    \[
+                        ST(\bf{u})=S(T(\bf{u})), \qquad \bf{u}\in U.
+                    \]
+                </div>
+            </section>
+            <div class="warning-box">
+                Not all pairs of transformations can be composed.
+                For instance, if we have two linear transformations $T\colon \RR^2\to\RR^3$ and
+                $S\colon \RR^3 \to \RR^4$, then $ST$ exists and is a transformation from $\RR^2$ to
+                $\RR^4$, whereas $TS$ does not exist because we cannot apply $T$ to vectors in
+                $\RR^4$.<br>
+                In addition, even if both $ST$ and $TS$ exist, it may be the case that $ST\neq TS$,
+                as we have already seen in the case of matrix transformations.
+            </div>
+            <div class="example-box">
+                Consider the matrix
+                \[
+                    J
+                    =
+                    \begin{bmatrix}
+                        0 & -1 \\
+                        1 & 0
+                    \end{bmatrix}.
+                \]
+                We define $T\colon\bf{M}_{22}\to\bf{M}_{22}$ by $T(A)=A^t$ and
+                $S\colon \bf{M}_{22}\to\bf{M}_{22}$ by $S(A)=AJ$.
+                Compute $ST$ and $TS$.
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <p>
+                    The transformation $ST$ is given by
+                    \[
+                        ST
+                        \begin{bmatrix}
+                            a & b \\
+                            c & d
+                        \end{bmatrix}
+                        =
+                        S
+                        \left(
+                        \begin{bmatrix}
+                            a & c \\
+                            b & d
+                        \end{bmatrix}
+                        \right)
+                        =
+                        \begin{bmatrix}
+                            a & c \\
+                            b & d
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                            0 & -1 \\
+                            1 & 0
+                        \end{bmatrix}
+                        =
+                        \begin{bmatrix}
+                            c & -a \\
+                            d & -b
+                        \end{bmatrix}
+                    \]
+                </p>
+                <p>
+                    Meanwhile, the transformation $TS$ is given by
+                    \[
+                        TS
+                        \begin{bmatrix}
+                            a & b \\
+                            c & d
+                        \end{bmatrix}
+                        =
+                        T
+                        \left(\begin{bmatrix}
+                            a & b \\
+                            c & d
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                            0 & -1 \\
+                            1 & 0
+                        \end{bmatrix}
+                        \right)
+                        =
+                        T
+                        \begin{bmatrix}
+                            b & -a \\
+                            d & -c
+                        \end{bmatrix}
+                        =
+                        \begin{bmatrix}
+                            b & d \\
+                            -a & -c
+                        \end{bmatrix}.
+                    \]
+                </p>
+                <p>
+                    Note how $ST\neq TS$ in this example.
+                </p>
+            </details>
+            <p>
+                The main properties of composite transformations are collected below.
+                It is a good exercise to prove them.
+            </p>
+            <div class="theorem-box">
+                Suppose we are given three transformations $T\colon U \to V$, $S\colon V\to W$
+                and $R\colon W\to X$, where $U,\,V,\,W$ and $X$ are vector spaces.
+                <ol>
+                    <li>
+                        $(RS)T=R(ST)$ (that is, composition is <b>associative</b>).
+                    </li>
+                    <li>
+                        $R1_{V}=1_WR=R$.
+                    </li>
+                    <li>
+                        If $T$ and $S$ are linear, then $ST$ is linear
+                        (that is, the composite of linear transformations is also linear).
+                    </li>
+                </ol>
+            </div>
+            
+            <p>
+                The relationship between isomorphisms and composite transformations is that
+                the linear transformations that admit an <em>inverse</em> (with respect to composition)
+                are precisely the ones that are isomorphisms.
+            </p>
+            <div class="theorem-box">
+                Let $T\colon V\to W$ be a linear transformation between finite dimensional spaces.
+                Then the following statements are equivalent:
+                <ol>
+                    <li>
+                        $T\colon V\to W$ is an isomorphism.
+                    </li>
+                    <li>
+                        There exists a transformation $S\colon W\to V$ such that $ST=1_V$ and $TS=1_W$.
+                    </li>
+                </ol>
+                In addition, in this case $S$ is also an isomorphism, it is unique, and it can be computed
+                as follows:
+                for each $\bf{w}\in W$, $S(\bf{w})$ is the unique solution to the equation $T(\bf{x})=\bf{w}$.
+            </div>
+            <details>
+                <summary>Proof.</summary>
+                <p>
+                    Let us first assume that $T$ is an isomorphism.
+                    If we choose a basis $\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$ of $V$, then the set
+                    $\{T(\bf{e}_1),T(\bf{e}_2),\dots,T(\bf{e}_n)\}$ is also a basis of $W$ because
+                    <a href=#thm-isomorphism-bases>$T$ carries bases of $V$ to bases of $W$</a>.
+                    Now, we can use the
+                    <a href=VectorTransformations.html#thm-existence-uniqueness>existence and uniqueness theorem</a>
+                    to guarantee that there exists a linear transformation $S\colon W \to V$ such that
+                    \[
+                        S(T(\bf{e}_i))=\bf{e}_i \qquad \textsf{for all } i.
+                    \]
+                    Note that $ST=1_V$ because
+                    <a href=VectorTransformations.html#thm-existence-uniqueness>they agree on a basis of $V$</a>.
+                    To check that $TS=1_W$, we note that
+                    \[
+                        TS(T(\bf{e}_i))=T((ST)(\bf{e}_i))=T(\bf{e}_i) \qquad \textsf{for all } i.
+                    \]
+                    Therefore, $TS=1_{W}$ because
+                    <a href=VectorTransformations.html#thm-existence-uniqueness>they agree on a basis of $W$</a>.
+                    Also, observe that $S$ is an isomorphism because
+                    <a href=#thm-isomorphism-bases>it carries a basis of $W$ to a basis of $V$</a>.
+                </p>
+                <p>
+                    We check that the transformation $S$ defined above is unique and defined by the condition
+                    that we described above.
+                    Take any $\bf{w}\in W$, and consider the equation $T(\bf{x})=\bf{w}$ (with unknown $\bf{x}\in V$).
+                    Then $\bf{x}=S(\bf{w})$ is a solution because $T(S(\bf{w}))=\bf{w}$.
+                    In addition, if $\bf{y}\in V$ is another solution (that is, $T(\bf{y})=\bf{w}$), we see that
+                    \[
+                        \bf{y}=ST(\bf{y})=S(T(\bf{y}))=S(\bf{w}).
+                    \]
+                    Thus, the equation $T(\bf{x})=\bf{w}$ has the unique solution $\bf{x}=S(\bf{w})$,
+                    which also shows that $S$ is unique.
+                </p>
+                <p>
+                    We now prove the converse:
+                    assume $T$ admits a transformation $S\colon W\to V$ with $ST=1_V$ and $TS=1_W$,
+                    and let us show that $T$ is an isomorphism.
+                </p>
+                <p>
+                    Firstly, $T$ is one-to-one.
+                    Indeed, if $\bf{x}\in \ker T$, then we have
+                    \[
+                        \bf{x}=ST(\bf{x})=S(T(\bf{x}))=S(\bf{0})=\bf{0},
+                    \]
+                    so $\ker T =\{\bf{0}\}$, which implies that $T$ is one-to-one.
+                </p>
+                <p>
+                    Secondly, $T$ is onto.
+                    This is because if $\bf{w}\in W$ is any vector, then $\bf{w}=T(S(\bf{w}))$, so $\bf{w}\in \im T$,
+                    which yields $\im T = W$.
+                </p>
+                <p>
+                    We thus conclude that $T$ is an isomorphism.
+                </p>
+
+            </details>
         </main>
     </body>
     <script src="code.js"></script>
