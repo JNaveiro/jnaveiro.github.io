@@ -18,7 +18,7 @@
 
     <body>
         <main>
-            <h1>Isomorphisms and Composition</h1>
+            <h1>7.3 Isomorphisms and Composition</h1>
 
             <p>
                 As you may have noticed, even though vector spaces can "look" different
@@ -553,7 +553,7 @@
                 the linear transformations that admit an <em>inverse</em> (with respect to composition)
                 are precisely the ones that are isomorphisms.
             </p>
-            <div class="theorem-box">
+            <div class="theorem-box" id="thm-inverse">
                 Let $T\colon V\to W$ be a linear transformation between finite dimensional spaces.
                 Then the following statements are equivalent:
                 <ol>
@@ -627,6 +627,72 @@
                 </p>
 
             </details>
+
+            <p>
+                Given an isomorphism $T\colon V \to W$, we have just seen that there is a unique
+                linear transformation $T^{-1}\colon W \to V$ that satisfies $T^{-1}T=1_V$
+                and $TT^{-1}=1_W$.
+                This transformation is called the <b>inverse</b> of $T$.
+                Moreover, <a href=#thm-inverse>the preceding theorem</a> gives us a way to
+                compute the inverse $T^{-1}$.
+            </p>
+
+            <div class="example-box">
+                Consider the linear transformation $T\colon\bf{P}_{2}\to\bf{P}_{2}$ defined by the condition
+                \[
+                    T(p(x))=p(x)-p'(x).
+                \]
+                Knowing that $T$ is an isomorphism,
+                find a formula for the inverse $T^{-1}\colon \bf{P}_2\to\bf{P}_{2}$.
+            </div>
+            <details>
+                <summary>Solution.</summary>
+
+                <p>
+                    Suppose $p(x)=a+bx+cx^2$ is a polynomial in $\bf{P}_2$.
+                    Then the polynomial $T^{-1}(p(x))$ is
+                    <a href=#thm-inverse>the unique solution $q(x)$ to the equation $T(q(x))=p(x)$</a>.
+                    Let us solve this equation.
+                </p>
+                <p>
+                    Write now $q(x)=T^{-1}(p(x))=\alpha + \beta x + \gamma x^2$.
+                    Then the equation $T(q(x))=p(x)$ becomes
+                    \[
+                        \alpha+\beta x +\gamma x^2 - \beta - 2\gamma x = a + bx + c x ^2.
+                    \]
+                    This polynomial equation is equivalent to the linear system
+                    \[
+                    \left\{
+                        \begin{array}{*{7}{cc}}
+                            \alpha & - & \beta & & & = & a \\
+                             & & \beta & - & 2\gamma & = & b \\
+                             &  & & & \gamma & = & c 
+                        \end{array}
+                    \right.
+                    \]
+                </p>
+                <p>
+                    This system has a unique solution, namely,
+                    \[
+                        \alpha=a+b+2c, \qquad \beta=b+2c, \qquad \gamma=c.
+                    \]
+                </p>
+                <p>
+                    Thus, we conclude that
+                    \[
+                        T^{-1}\big(a+bx+cx^2\big)=a+b+2c+(b+2c)x+cx^2.
+                    \]
+                </p>
+                <p>
+                    The above formula is enough to determine $T^{-1}$.
+                    However, it is curious to note that the formula for $T^{-1}$ can be
+                    rewritten as
+                    \[
+                        T^{-1}(p(x))=p(x)+p'(x)+p''(x).
+                    \]
+                </p>
+            </details>
+
         </main>
     </body>
     <script src="code.js"></script>

@@ -6,6 +6,7 @@ window.MathJax = {
             CC: "{\\mathbb{C}}",
             null: "{\\operatorname{null}\\,}",
             im: "{\\operatorname{im}\\,}",
+            rank: "{\\operatorname{rank}\\,}",
             row: "{\\operatorname{row}\\,}",
             col: "{\\operatorname{col}\\,}",
             vecspan: "{\\operatorname{span}}",

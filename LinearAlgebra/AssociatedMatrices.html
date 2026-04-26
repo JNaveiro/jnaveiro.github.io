@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Isomorphisms and Composition</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="linear-algebra.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="text-align: center;">Chapter 9: Change of Basis</h1>
+            <h1>9.1 The Matrix of a Linear Transformation</h1>
+
+            <p>
+                Recall that linear transformations between $\RR^n$ and $\RR^m$ can be
+                described by means of $m\times n$ matrices.
+                More precisely, if $T\colon \RR^n \to \RR^m$ is a linear transformation,
+                then there exists a unique $m\times n$ matrix $A$ such that
+                \[
+                T(\bf{x})=A\bf{x}, \qquad \textsf{for all } \bf{x}\in\RR^n.
+                \]
+                Thus, the process of working with linear transformations $\RR^n\to\RR^m$ 
+                is completely reduced to working with matrices.
+            </p>
+            <p>
+                The purpose of this section is to develop an approach to treat linear transformations
+                between (finite-dimensional) vector spaces purely by means of matrices,
+                so that we have a computationally effective way to understand these transformations.
+            </p>
+            <p>
+                To get some inspiration, consider a linear transformation $T\colon \RR^n \to \RR^m$.
+                To obtain is matrix we considered the standard basis $\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$
+                of $\RR^n$, and then its matrix would be
+                \[
+                    A=
+                    \begin{bmatrix}
+                    T(\bf{e}_1) & T(\bf{e}_2) & \cdots & T(\bf{e}_n)
+                    \end{bmatrix}.
+                \]
+            </p>
+            <p>
+                Let's try to repeat this procedure in general.
+                We are now given two (finite-dimensional) vector spaces $V$ and $W$, together
+                with a linear transformation $T\colon V\to W$.
+                Let's say that $n=\dim V$ and $m=\dim W$, so that we have bases
+                $\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$ and $\{\bf{u}_1,\bf{u}_2,\dots,\bf{u}_m\}$
+                of $V$ and $W$ respectively.
+            </p>
+            <p>
+                Of course, unless $W=\RR^m$, the vectors $T(\bf{e}_1),\,T(\bf{e}_2),\,\dots,\,T(\bf{e}_n)$
+                are not column vectors, so we cannot really arrange them in a matrix.
+                However, there is a way to produce column vectors with them.
+                Since $\{\bf{u}_1,\bf{u}_2,\dots,\bf{u}_m\}$ is a basis of $W$, we know that
+                each of the vectors $T(\bf{e}_j)$ can be written <em>uniquely</em> as a linear
+                combination
+                \[
+                    T(\bf{e}_j)=a_{1j}\bf{u}_1+a_{2j}\bf{u}_2+\cdots+a_{mj}\bf{u}_m.
+                \]
+                These coefficients can be used to create column vectors, so that the matrix
+                that we will associate to $T$ will be the $m\times n$ matrix.
+                \[
+                    A=
+                    \begin{bmatrix}
+                    a_{11} & a_{12} & \cdots & a_{1n} \\
+                    a_{21} & a_{22} & \cdots & a_{2n} \\
+                    \vdots & \vdots & \ddots & \vdots \\
+                    a_{m1} & a_{m2} & \cdots & a_{mn} \\
+                    \end{bmatrix}.
+                \]
+            </p>
+            <p>
+                Here we will describe this process in more detail and apply it to study linear
+                transformations.
+            </p>
+            <section id="coordinates">
+                <h2>Coordinates of a Vector; Associated Matrices</h2>
+                <p>
+                    The first thing we will do is to establish a way to identify vectors
+                    in a vector space $V$ with column vectors in $\RR^n$, where $n=\dim V$.
+                </p>
+                <div class="definition-box">
+                    Let $V$ be a (finite-dimensional) vector space $V$ and
+                    $B=\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$ a basis of $V$.
+                    For each $\bf{v}\in V$, we define the <b>coordinates</b> of $\bf{v}$
+                    relative to the basis $B$ as the unique constants $a_1,\,a_2,\,\dots,\,a_n$
+                    that satisfy
+                    \[
+                    \bf{v}=a_1\bf{e}_1+a_2\bf{e}_2+\cdots+a_n\bf{e}_n.
+                    \]
+                    In addition, the <b>coordinate vector</b> of $\bf{v}$ relative to the basis
+                    $B$ is the vector
+                    \[
+                        [\bf{v}]_B =
+                        \begin{bmatrix}
+                            a_1 \\ a_2 \\ \vdots \\ a_n
+                        \end{bmatrix}
+                    \]
+                </div>
+                <div class="warning-box">
+                    The coordinate vector $[\bf{v}]_B$ depends on the chosen basis for $V$.
+                    Indeed, if $B$ and $C$ are different bases of $V$, then $[\bf{v}]_B$ and
+                    $[\bf{v}]_C$ can be different.
+                </div>
+                <div class="example-box">
+                    Consider $V=\RR^3$, and denote by $B$ the standard basis of $\RR^3$.
+                    Then the vector $\bf{v}=(2,1,3)$ satisfies
+                    \[
+                    [\bf{v}]_B=
+                    \begin{bmatrix}
+                        2 \\ 1 \\ 3
+                    \end{bmatrix}
+                    \]
+                    However, if we consider the alternative basis
+                    \[
+                    C=\{(1,1,0),(1,0,1),(0,1,1)\},
+                    \]
+                    we have
+                    \[
+                    [\bf{v}]_C
+                    =
+                    \begin{bmatrix}
+                        0 \\ 2 \\ 1
+                    \end{bmatrix}.
+                    \]
+                </div>
+
+                <p>
+                    Using the tools from <a href=Isomorphisms.html>Section 7.3</a>, it is not hard to check
+                    that
+                </p>
+                <div class="theorem-box">
+                    If $V$ is a finite-dimensional vector space and $B=\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$
+                    is a basis of $V$, then the transformation $C_B\colon V\to \RR^n$ given by $C_B([\bf{v}])=[\bf{v}]_B$ is an isomorphism.
+                    In addition, its inverse $C_B^{-1}\colon\RR^n\to V$ is given by
+                    \[
+                    C_{B}^{-1}
+                    \begin{bmatrix}
+                        a_1 \\ a_2 \\ \vdots \\ a_n
+                    \end{bmatrix}
+                    =
+                    a_1\bf{e}_1+a_2\bf{e}_2 + \cdots + a_n\bf{e}_n.
+                    \]
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        The proof fact that $C_B$ is linear is left as an exercise.
+                        Note that we have
+                        \[
+                            C_B(\bf{e}_1)
+                            =
+                            \begin{bmatrix}
+                                1 \\ 0 \\ \vdots \\ 0
+                            \end{bmatrix},\quad
+
+                            C_B(\bf{e}_2)
+                            =
+                            \begin{bmatrix}
+                                0 \\ 1 \\ \vdots \\ 0
+                            \end{bmatrix},\quad
+                            \cdots,\quad
+
+                            C_B(\bf{e}_n)
+                            =
+                            \begin{bmatrix}
+                                0 \\ 0 \\ \vdots \\ 1
+                            \end{bmatrix},
+                        \]
+                        so $C_B$ sends $B$ to the standard basis of $\RR^n$,
+                        which readily implies that $C_B$ is an isomorphism.
+                    </p>
+                    <p>
+                        Let us construct the inverse $C_B^{-1}$.
+                        We know that for each vector $\bf{x}=(a_1,a_2,\dots,a_n)\in\RR^n$,
+                        $C_B^{-1}(\bf{x})$ is the unique vector $\bf{v}\in V$ such that $C_B(\bf{v})=\bf{x}$.
+                        Since
+                        \[
+                            C_B(a_1\bf{e}_1+a_2\bf{e}_2 + \cdots + a_n\bf{e}_n)
+                            =
+                            \begin{bmatrix}
+                                a_1 \\ a_2 \\ \vdots \\ a_n
+                            \end{bmatrix}
+                            =
+                            \bf{x},
+                        \]
+                        we deduce that $C_{B}^{-1}(\bf{x})=a_1\bf{e}_1+a_2\bf{e}_2 + \cdots + a_n\bf{e}_n$,
+                        as desired.
+                    </p>
+                </details>
+
+                <p>
+                    With this in mind, we can now define the matrix of a linear transformation
+                    in full generality.
+                </p>
+
+                <div class="definition-box">
+                    Let $T\colon V\to W$ be a linear transformation between two
+                    finite-dimensional vector spaces $V$ and $W$.
+                    Suppose that $n=\dim V$ and $m=\dim W$, and take a basis $B=\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$ of $V$ together
+                    with a basis $C$ of $W$.
+                    Then we define the <b>matrix</b> of the transformation $T$ relative to the bases $B$ and
+                    $C$ as the $m\times n$ matrix
+                    \[
+                        [T]_{BC}=
+                        \begin{bmatrix}
+                        [T(\bf{e}_1)]_C &
+                        [T(\bf{e}_2)]_C &
+                        \cdots &
+                        [T(\bf{e}_n)]_C
+                        \end{bmatrix}.
+                    \]
+                </div>
+                <div class="warning-box">
+                    Similarly to the case of coordinate vectors, the matrix of a linear transformation
+                    $T\colon V\to W$ depends on the bases of $V$ and $W$ that we choose.
+                </div>
+
+                <p>
+                    The key behind introducing the matrix of a linear transformation
+                    is that it allows us to understand the action of any linear transformation
+                    on any vector by means of matrix-vector multiplication.
+                </p>
+                <div class="theorem-box">
+                    Let $T\colon V \to W$ be a linear transformation between two finite-dimensional
+                    vector spaces $V$ and $W$.
+                    Choose a basis $B$ of $V$ and a basis $C$ of $W$.
+                    Then, for any vector $\bf{v}\in V$ we have
+                    \[
+                        [T(\bf{v})]_C = [T]_{BC}[\bf{v}]_B.
+                    \]
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        Suppose that $B=\{\bf{e}_1,\bf{e}_2,\dots,\bf{e}_n\}$ is our basis
+                        for $V$.
+                        Then we can write
+                        \[
+                        \bf{v}=a_1\bf{v}_1+a_2\bf{v}_2+\cdots+a_n\bf{v}_n,
+                        \quad
+                        \textsf{so}
+                        \quad
+                        [\bf{v}]_{B}
+                        =
+                        \begin{bmatrix}
+                            a_1 \\ a_2 \\ \vdots \\ a_n
+                        \end{bmatrix}.
+                        \]
+                    </p>
+                    <p>
+                        Because $T$ is linear, we have
+                        \[
+                        T(\bf{v})=a_1T(\bf{e}_1)+a_2T(\bf{e}_2)+\cdots+a_nT(\bf{e}_n).
+                        \]
+                    </p>
+                    <p>
+                        If we now apply $C_C\colon W\to \RR^m$, which is linear, we deduce that
+                        \[
+                            \begin{aligned}
+                            [T(\bf{v})]_C
+                            =
+                            a_1[T(\bf{e}_1)]_C+a_2[T(\bf{e}_2)]_C+\cdots+a_n[T(\bf{e}_n)]_C
+                            =
+                            [T]_{BC}[\bf{v}]_B.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+
+                <div class="example-box">
+                    If $V$ and $W$ are finite-dimensional vector spaces with bases $B$ and $C$
+                    respectively, we have
+                    <ol>
+                        <li>$[1_V]_{BB}=I$.</li>
+                        <li>$[0]_{BC}=0$.</li>
+                    </ol>
+                </div>
+
+                <div class="example-box">
+                    Consider the linear transformation $T\colon \bf{P}_3\to\bf{M}_{22}$
+                    defined by the equation
+                    \[
+                        T(p(x))=
+                        \begin{bmatrix}
+                            p(0) & p'(0) \\
+                            p(1) & p'(1)
+                        \end{bmatrix}.
+                    \]
+                    Compute the matrix $[T]_{BC}$ of $T$ relative to the bases
+                    \[
+                        B=\big\{1,x,x^2,x^3\big\} \textsf{ of } \bf{P}_3
+                    \]
+                    and
+                    \[
+                    C=\left\{
+                        \begin{bmatrix}
+                            1 & 0 \\
+                            0 & 0
+                        \end{bmatrix},
+                        \begin{bmatrix}
+                            0 & 1 \\
+                            0 & 0
+                        \end{bmatrix},
+                        \begin{bmatrix}
+                            0 & 0 \\
+                            1 & 0
+                        \end{bmatrix},
+                        \begin{bmatrix}
+                            0 & 0 \\
+                            0 & 1
+                        \end{bmatrix}
+                        \right\} \textsf{ of } \bf{M}_{22}.
+                    \]
+                    Use the matrix $[T]_{BC}$ to find $T(1-2x+x^2)$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We have that
+                        \[
+                            \begin{aligned}
+                            T(1)
+                            &=
+                            \begin{bmatrix}
+                                1 & 0 \\
+                                1 & 0
+                            \end{bmatrix}\Rightarrow
+                            [T(1)]_{C}
+                            =
+                            \begin{bmatrix}
+                                1 \\ 0 \\ 1 \\ 0
+                            \end{bmatrix},
+                            &
+                            T(x)
+                            &=
+                            \begin{bmatrix}
+                                0 & 1 \\
+                                1 & 1
+                            \end{bmatrix}\Rightarrow
+                            [T(x)]_{C}
+                            =
+                            \begin{bmatrix}
+                                0 \\ 1 \\ 1 \\ 1
+                            \end{bmatrix},
+                            \\
+                            T(x^2)
+                            &=
+                            \begin{bmatrix}
+                                0 & 0 \\
+                                1 & 2
+                            \end{bmatrix}\Rightarrow
+                            [T(x^2)]_{C}
+                            =
+                            \begin{bmatrix}
+                                0 \\ 0 \\ 1 \\ 2
+                            \end{bmatrix},
+                            &
+                            T(x^3)
+                            &=
+                            \begin{bmatrix}
+                                0 & 0 \\
+                                1 & 3
+                            \end{bmatrix}\Rightarrow
+                            [T(x^3)]_{C}
+                            =
+                            \begin{bmatrix}
+                                0 \\ 0 \\ 1 \\ 3
+                            \end{bmatrix},
+                            \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                        so the matrix of $T$ relative to $B$ and $C$ is
+                        \[
+                        [T]_{BC}
+                        =
+                        \begin{bmatrix}
+                            1 & 0 & 0 & 0 \\
+                            0 & 1 & 0 & 0 \\
+                            1 & 1 & 1 & 1 \\
+                            0 & 1 & 2 & 3
+                        \end{bmatrix}.
+                        \]
+                    </p>
+                    <p>
+                        To find $T(1-2x+x^2)$, note that $[1-2x+x^2]_B=(1,-2,1,0)$, so
+                        \[
+                            [T(1-2x+x^2)]_C
+                            =
+                        \begin{bmatrix}
+                            1 & 0 & 0 & 0 \\
+                            0 & 1 & 0 & 0 \\
+                            1 & 1 & 1 & 1 \\
+                            0 & 1 & 2 & 3
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                            1 \\
+                            -2 \\
+                            1 \\
+                            0
+                        \end{bmatrix}
+                        =
+                        \begin{bmatrix}
+                            1 \\ -2 \\ 0 \\ 0
+                        \end{bmatrix},
+                        \]
+                    </p>
+                    <p>
+                        which yields
+                        \[
+                            T(1-2x+x^2)
+                            =
+                            \begin{bmatrix}
+                                1 & -2 \\
+                                0 & 0
+                            \end{bmatrix}.
+                        \]
+                    </p>
+                </details>
+
+            </section>
+
+            <section id="applications">
+                <h2>Applications</h2>
+                <p>
+                    Here we explain how to use the associated matrix of a linear transformation
+                    $T\colon V\to W$ to extract information from $T$.
+                </p>
+            
+            <h3>Application 1: finding $\ker T$ and $\im T$.</h3>
+
+            <div class="theorem-box">
+                Let $T\colon V\to W$ be a linear transformation between two finite-dimensional
+                vector spaces.
+                If $B$ is a basis of $V$ and $C$ is a basis of $W$, then we have:
+                <ol>
+                    <li>$\ker T = \{\bf{v}\in V\mid [\bf{v}]_B\in\null [T]_{BC}\}$.</li>
+                    <li>A subset $\{\bf{v}_1,\dots,\bf{v}_k\}$ of $\ker T$ is a basis of $\ker T$ if and
+                        only if $\{[\bf{v}_1]_B,\dots,[\bf{v}_k]_B\}$ is a basis of $\null [T]_{BC}$.</li>
+                    <li>$\im T = \{\bf{w}\in W\mid [\bf{w}]_C\in\im [T]_{BC}\}$.</li>
+                    <li>A subset $\{\bf{w}_1,\dots,\bf{w}_k\}$ of $\im T$ is a basis of $\im T$ if and
+                        only if $\{[\bf{w}_1]_C,\dots,[\bf{w}_k]_C\}$ is a basis of $\im [T]_{BC}$.</li>
+                    <li>$\rank T = \rank [T]_{BC}$.</li>
+                </ol>
+            </div>
+            <details>
+                <summary>Proof.</summary>
+                <p>
+                    Let us prove the first equality.
+                    We have for each $\bf{v}\in V$ that
+                    \[
+                        \begin{aligned}
+                        \bf{v}\in \ker T \iff T(\bf{v})=\bf{0} \iff [T(\bf{v})]_C=[\bf{0}]_C=\bf{0}
+                        \iff [T]_{BC}[\bf{v}]_B = \bf{0} \iff [\bf{v}]_B \in \null [T]_{BC}.
+                        \end{aligned}
+                    \]
+                </p>
+                <p>
+                    This proves the first equality.
+                    In addition, because of this equality, the coordinate transformation
+                    $C_B\colon V \to \RR^n$ sends $\ker T$ to $\null [T]_{BC}$, so we deduce that
+                    the restricted transformation $C_B\colon \ker T \to \null [T]_{BC}$ is an isomorphism.
+                    Because isomorphisms carry bases to bases, the second assertion now follows.
+                </p>
+                <p>
+                    We now go with the last three assertions.
+                    Observe that the equation $[T(\bf{v})]_C=[T]_{BC}[\bf{v}]_B$ already implies the
+                    formula from the third statement.
+                    Consequently, the coordinate transformation $C_C\colon W\to \RR^m$ takes
+                    $\im T$ to $\im [T]_{BC}$, so arguing as in the previous paragraph we conclude that
+                    $C_C$ takes bases of $\im T$ to bases of $\im [T]_{BC}$.
+                    This also shows that $\rank T$ and $\rank [T]_{BC}$ are the same.
+                </p>
+            </details>
+
+            <div class="example-box">
+                Consider the linear transformation $T\colon \bf{P}_2\to\RR_2$ given by
+                \[
+                    T(a+bx+cx^2)=(a+c,2b).
+                \]
+                Compute the matrix of $T$ with respect to the bases
+                $B=\{1,x,x^2\}$ of $\bf{P}^2$ and $C=\{(1,0),(0,1)\}$ of $\RR^2$.
+                Use that matrix to find bases of $\ker T$ and $\im T$.
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <p>
+                    Let us first compute $[T]_{BC}$.
+                    We have
+                    \[
+                        \begin{aligned}
+                            T(1)&=(1,0)
+                            \Rightarrow
+                            [T(1)]_C
+                            =
+                            \begin{bmatrix}
+                                1 \\ 0
+                            \end{bmatrix},
+                            \\
+                            T(x)&=(0,2)
+                            \Rightarrow
+                            [T(x)]_C
+                            =
+                            \begin{bmatrix}
+                                0 \\ 2
+                            \end{bmatrix},
+                            \\
+                            T\big(x^2\big)&=(1,0)
+                            \Rightarrow
+                            [T\big(x^2\big)]_C
+                            =
+                            \begin{bmatrix}
+                                1 \\ 0
+                            \end{bmatrix},
+                        \end{aligned}
+                    \]
+                    so we deduce that
+                    \[
+                    [T]_{BC}
+                    =
+                    \begin{bmatrix}
+                        1 & 0 & 1 \\
+                        0 & 2 & 0 
+                    \end{bmatrix}.
+                    \]
+                </p>
+                <p>
+                    Observe that the reduced row-echelon form of $[T]_{BC}$ is
+                    \[
+                        \begin{bmatrix}
+                            1 & 0 & 1 \\
+                            0 & 1 & 0
+                        \end{bmatrix},
+                    \]
+                    so a basis of $\null [T]_{BC}$ is given by
+                    \[
+                        \left\{
+                            \begin{bmatrix}
+                                1 \\0 \\ -1
+                            \end{bmatrix}
+                        \right\}
+                    \]
+                    whereas a basis of $\im [T]_{BC}$ is
+                    \[
+                        \left\{
+                            \begin{bmatrix}
+                                1 \\0
+                            \end{bmatrix},
+                            \begin{bmatrix}
+                                0 \\ 2
+                            \end{bmatrix}
+                        \right\}
+                    \]
+                </p>
+                <p>
+                    We conclude from this that a basis of $\ker T$ is
+                    \[
+                    \big\{1-x^2\big\},
+                    \]
+                    and a basis of $\im T$ is
+                    \[
+                    \{(1,0),(0,2)\}.
+                    \]
+                    Observe that $\im T=\RR^2$, so any basis of $\RR^2$ is a basis of $\im T$.
+                </p>
+            </details>
+
+            <h3>Application 2: Composition of Linear Transformations</h3>
+            <div class="theorem-box">
+                Let $T\colon U\to V$ and $S\colon V\to W$ be two linear transformations
+                between finite-dimensional vector spaces.
+                If $B$ is a basis of $V$, $C$ is a basis of $V$ and $D$ is a basis of $W$,
+                then the matrix of $ST\colon V\to W$ with respect to the bases $B$ and $D$
+                is
+                \[
+                    [ST]_{BD}=[S]_{CD}[T]_{BC}.
+                \]
+            </div>
+            <details>
+                <summary>Proof.</summary>
+                <p>
+                    Suppose $\bf{x}$ is any vector in $\RR^n$, where $n=\dim V$.
+                    Then there exists a vector $\bf{v}\in V$ such that $\bf{x}=[\bf{v}]_{B}$
+                    (we can just take $\bf{v}=C_B^{-1}(\bf{x})$).
+                    We obtain:
+                    \[
+                    [ST]_{BD}\bf{x}=[ST]_{BD}[\bf{v}]_B=[(ST)\bf{v}]_{D}=[S(T\bf{v})]_D
+                    =[S]_{CD}[T(\bf{v})]_{C}=[S]_{CD}[T]_{BC}[\bf{v}]_C=([S]_{CD}[T]_{BC})\bf{x}.
+                    \]
+                    Since $\bf{x}$ was arbitrary, we conclude that
+                    $[ST]_{BD}=[S]_{CD}[T]_{BC}$, as desired.
+                </p>
+            </details>
+
+            </section>
+
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
