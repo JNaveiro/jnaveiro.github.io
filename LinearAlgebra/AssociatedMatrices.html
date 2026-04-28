@@ -575,7 +575,7 @@
                 </p>
             </details>
 
-            <h3>Application 2: Composition of Linear Transformations</h3>
+            <h3>Application 2: Composition and Inverses</h3>
             <div class="theorem-box">
                 Let $T\colon U\to V$ and $S\colon V\to W$ be two linear transformations
                 between finite-dimensional vector spaces.
@@ -602,6 +602,260 @@
                 </p>
             </details>
 
+            <p>
+                A nice application of this result is that a linear transformation is
+                an isomorphism precisely when its matrix (with respect to any pair of bases)
+                is an invertible matrix:
+            </p>
+
+            <div class="theorem-box">
+                Let $V$ and $W$ be vector spaces, $B$ a basis of $V$ and $C$ a basis of $W$.
+                If $T\colon V\to W$ is a linear transformation,
+                the following conditions are equivalent:
+                <ol>
+                    <li>
+                        The transformation $T\colon V\to W$ is an isomorphism.
+                    </li>
+                    <li>
+                        The matrix $[T]_{BC}$ is invertible.
+                    </li>
+                </ol>
+                In addition, when $T$ is invertible, the matrix of $T^{-1}\colon W\to V$
+                with respect to the bases $C$ and $B$ is
+                \[
+                \big[T^{-1}\big]_{CB}=[T]_{BC}^{-1}.
+                \]
+            </div>
+            <details>
+                <summary>Proof.</summary>
+                <p>
+                    Firstly, suppose $T$ is an isomorphism and consider the inverse
+                    $T^{-1}\colon W\to V$.
+                    Since $T^{-1}T=1_V$ and $TT^{-1}=1_W$, we have
+                    \[
+                        \begin{aligned}
+                        \big[T^{-1}\big]_{CB}[T]_{BC}&=\big[T^{-1}T\big]_{BB}=[1_V]_{BB}=I,\\[1em]
+                        [T]_{BC}\big[T^{-1}\big]_{CB}&=\big[TT^{-1}\big]_{CC}=[1_W]_{C}=I,
+                        \end{aligned}
+                    \]
+                    so $[T]_{BC}$ is invertible with inverse $\big[T^{-1}\big]_{CB}$.
+                </p>
+                <p>
+                    Secondly, assume $A=[T]_{BC}$ is an invertible matrix and consider
+                    its inverse $A^{-1}$.
+                    We define the linear transformation $S\colon W\to V$ whose
+                    matrix with respect to the bases $B$ and $C$ is
+                    $[S]_{CB}=A^{-1}$.
+                    Then we have
+                    \[
+                        \begin{aligned}
+                            [ST]_{BB}&=[S]_{CB}[T]_{BC}=A^{-1}A=I=[1_V]_{BB}, \\
+                            [TS]_{CC}&=[T]_{BC}[S]_{CB}=AA^{-1}=I=[1_W]_{CC}, \\
+                        \end{aligned}
+                    \]
+                    so we deduce $ST=1_V$ and $TS=1_W$, meaning that $S$ is the
+                    inverse of $T$.
+                    In particular, $T$ is an isomorphism.
+                </p>
+            </details>
+
+            <div class="example-box">
+                Consider the linear transformation $T\colon\bf{M}_{22}\to\RR^4$
+                defined by the formula
+                \[
+                    T
+                    \begin{bmatrix}
+                        a & b \\
+                        c & d
+                    \end{bmatrix}
+                    =
+                    (a+b+c,b+c,c,d).
+                \]
+                Show that $T$ is an isomorphism and compute $T^{-1}$.
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <p>
+                    Let $B$ and $C$ be the standard bases of $\bf{M}_{22}$ and $\RR^4$,
+                    respectively.
+                    The matrix of $T$ relative to $B$ and $C$ is
+                    \[
+                        [T]_{BC}
+                        =
+                        \begin{bmatrix}
+                            1 & 1 & 1 & 0 \\
+                            0 & 1 & 1 & 0 \\
+                            0 & 0 & 1 & 0 \\
+                            0 & 0 & 0 & 1
+                        \end{bmatrix}.
+                    \]
+                    Note that $\det [T]_{BC}=1\neq 0$, so $[T]_{BC}$ is an invertible
+                    matrix, which implies that $T$ is an isomorphism.
+                </p>
+                <p>
+                    Now, the matrix of $T^{-1}$ with respect to the bases $C$ and $B$
+                    is
+                    \[
+                        \big[T^{-1}\big]_{CB}
+                        =[T]_{BC}^{-1}=
+                        \begin{bmatrix}
+                            1 &-1 &  0 & 0 \\
+                            0 & 1 & -1 & 0 \\
+                            0 & 0 &  1 & 0 \\
+                            0 & 0 &  0 & 1 
+                        \end{bmatrix}.
+                    \]
+                </p>
+                <p>
+                Now, if $\bf{x}=(a,b,c,d)$ is any vector in $\RR^4$, we have
+                    \[
+                    \big[T^{-1}(\bf{x})\big]_{B}=\big[T^{-1}\big]_{CB}[\bf{x}]_{C}
+                    =
+                        \begin{bmatrix}
+                            1 &-1 &  0 & 0 \\
+                            0 & 1 & -1 & 0 \\
+                            0 & 0 &  1 & 0 \\
+                            0 & 0 &  0 & 1 
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                            a \\ b \\ c \\ d
+                        \end{bmatrix}
+                        =
+                        \begin{bmatrix}
+                            a-b \\ b-c \\ c \\ d
+                        \end{bmatrix},
+                    \]
+                    from which we conclude that
+                    \[
+                    T^{-1}(a,b,c,d)
+                    =
+                    \begin{bmatrix}
+                        a-b & b-c \\
+                        c & d
+                    \end{bmatrix}\qquad
+                    \textsf{for all } (a,b,c,d)\in\RR^4.
+                    \]
+                </p>
+            </details>
+
+            <h3>Application 3: Change of Basis</h3>
+
+            <p>
+                We can use also use the matrix of the identity transformation
+                to find the coordinates of a vector with respect to a basis.
+                The key is that if $V$ is a vector space and $\bf{x}\in V$
+                is a vector, then
+                \[
+                1_V(\bf{x})=\bf{x},
+                \]
+                and from this we obtain:
+            </p>
+            <div class="theorem-box">
+                Let $V$ be a vector space and $B$, $C$ two bases of $V$.
+                If $\bf{x}\in V$ is any vector, then
+                \[
+                    [\bf{x}]_C=[1_V]_{BC}[\bf{x}]_B.
+                \]
+            </div>
+
+            <div class="example-box">
+                Write the coordinates of the vector $\bf{x}=(1,1,1)$ 
+                with respect to the basis
+                \[
+                    B=\{(1,0,1),(0,2,5),(1,1,4)\}
+                \]
+                of $\RR^3$.
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <p>
+                    Let us consider the standard basis $C$ of $\RR^3$.
+                    Then the coordinate vector of $\bf{x}$ with
+                    respect to $C$ are given by the coordinate vector
+                    \[
+                    [\bf{x}]_C=
+                    \begin{bmatrix}
+                        1 \\ 1 \\1
+                    \end{bmatrix}.
+                    \]
+                </p>
+                <p>
+                    We can compute the coordinate vector $[\bf{x}]_B$
+                    by using the formula $[\bf{x}]_B=[1_{\RR^3}]_{CB}[\bf{x}]_C$.
+                    The issue here is that computing $[1_{\RR^3}]_{CB}$ is not
+                    immediate.
+                    Fortunately, the matrix $[1_{\RR^3}]_{BC}$ is straightforward to
+                    compute: it is
+                    \[
+                        [1_{\RR^3}]_{BC}
+                        =
+                        \begin{bmatrix}
+                            1 & 0 & 1 \\
+                            0 & 2 & 1 \\
+                            1 & 5 & 4
+                        \end{bmatrix}.
+                    \]
+                </p>
+                <p>
+                    Since $1_{\RR^3}^{-1}=1_{\RR^3}$, we can compute the matrix
+                    $[1_{\RR^3}]_{CB}$ as
+                    \[
+                    [1_{\RR^3}]_{CB}=[1_{\RR^3}]_{BC}^{-1}
+                    =
+                    \begin{bmatrix}
+                            1 & 0 & 1 \\
+                            0 & 2 & 1 \\
+                            1 & 5 & 4
+                    \end{bmatrix}^{-1}
+                    =
+                    \begin{bmatrix}
+                        3 & 5 & -2 \\
+                        1 & 3 & -1 \\
+                        -2 & -5 & 2
+                    \end{bmatrix}
+                    \]
+                </p>
+                <p>
+                    We conclude that the coordinate vector $[\bf{x}]_B$ is
+                    \[
+                    [\bf{x}]_{B}=
+                    [1_{\RR^3}]_{CB}[\bf{x}]_C
+                    =
+                    \begin{bmatrix}
+                        3 & 5 & -2 \\
+                        1 & 3 & -1 \\
+                        -2 & -5 & 2
+                    \end{bmatrix}
+                    \begin{bmatrix}
+                        1 \\ 1 \\ 1
+                    \end{bmatrix}
+                    =
+                    \begin{bmatrix}
+                        3 \\ 3 \\ -5
+                    \end{bmatrix}
+                    \]
+                </p>
+            </details>
+            <p>
+                This technique is also useful to "change bases" in determining the
+                matrix of a linear transformation.
+                Indeed, the idea is to use that if $T\colon V\to W$ is a linear transformation,
+                then
+                \[
+                    T=1_W\,T\,1_V.
+                \]
+                From this, it is straightforward to prove the following (very useful!) result:
+            </p>
+            <div class="theorem-box">
+                Let $V$ and $W$ be vector spaces.
+                Suppose that $B$ and $B'$ are bases of $V$, whereas
+                $C$ and $C'$ are bases of $W$.
+                Then the matrices $[T]_{BC}$ and $[T]_{B'C'}$ are related by the
+                following formula:
+                \[
+                [T]_{B'C'}=[1_W]_{CC'}[T]_{BC}[1_V]_{B'B}.
+                \]
+            </div>
             </section>
 
         </main>
