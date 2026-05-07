@@ -1,7 +1,7 @@
 html {
     font-family: Lato;
     font-size: 120%;
-    background-color: #8839ef;
+    /*background-color: #8839ef;*/
     /**color: #4c4f69; **/
     color: black;
 }
@@ -16,10 +16,10 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #eff1f5;
+    /*background-color: #eff1f5;*/
     padding: 1% 2% 0 2%;
     line-height: 1.5;
-    box-shadow: 0 0 10px 5px rgb(0,0,0,0.3);
+    /*box-shadow: 0 0 10px 5px rgb(0,0,0,0.3);*/
 }
 
 p {
