@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Functions of Several Variables</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="text-align: center;">Partial Derivatives</h1>
+
+            <p>
+                In this chapter we introduce functions of several variables.
+                In previous Calculus courses, we have worked with functions that
+                depend on a <b>single</b> variable.
+            </p>
+            <p>
+                To be more precise, we already know how to work with a function of
+                the form $y=f(x)$.
+                The function $f$ establishes a relationship in which the value of the
+                variable $x$
+                (the <em>independent</em> variable)
+                completely determines the value of the variable $y$
+                (the <em>dependent</em> variable).
+                The main focus of this course will be to deal with functions
+                that depend on more than one independent variable.
+                For instance, the function $z=x+y$ gives a relationship in which
+                the values of the variables $x$ and $y$ determine the value of
+                the variable $z$.
+            </p>
+            <p>
+                In this course, we will extend all of the techniques that
+                we know from single variable calculus to the case of several variables.
+                Most importantly, we will learn how to take (partial) derivatives
+                and integrals of functions of several variables.
+            </p>
+
+            <h1>Functions of Several Variables</h1>
+
+            <div class="definition-box">
+                Suppose $n$ is a natural number.
+                A <b>function of $n$ variables</b> is a rule $f\colon D\to\RR$ that assigns
+                to each $n$-tuple $(x_1,\dots,x_n)$ in a subset $D$ of $\RR^n$
+                a unique number $f(x_1,\dots,x_n)$.
+            </div>
+
+            <p>
+                For the purposes of this course, we will mostly work with functions
+                of two variables (that is, $z=f(x,y)$), as well as with functions of
+                three variables (that is, $u=f(x,y,z)$).
+            </p>
+
+            <div class="example-box">
+                Suppose $D=\{(x,y)\in\RR^2\mid y\neq x\}$.
+                Then the function $f\colon D\to\RR$ given by
+                \[f(x,y)=\frac{x^2}{y-x}\]
+                is a function of two variables.
+            </div>
+
+            <p>
+                We also make the following definitions:
+                <ul>
+                    <li>
+                        The set $D$ is called the <b>domain</b> of $f$.
+                        We also denote the domain of $f$ by $\dom (f)$.
+                    </li>
+                    <li>
+                        The <b>range</b> of $f$ is the set of all the values that
+                        $f$ takes on $D$.
+                        More explicitly, the range of $f$ is
+                        \[\{f(x_1,\dots,x_n)\mid (x_1,\dots,x_n)\in D\}.\]
+                    </li>
+                    <li>
+                        The variables $x_1,\,\dots,\,\,x_n$ are the <b>independent variables</b>.
+                        In addition, if we write $z=f(x_1,\dots,x_n)$, then
+                        $z$ is the <b>dependent variable</b>.
+                    </li>
+                </ul>
+            </p>
+
+            <p>
+                In the case that we are given a function $f(x_1,\dots,x_n)$ in terms of its formula,
+                without specifying its domain, then we will understand that the domain
+                of $f$ is the set of all $n$-tuples $(x_1,\dots,x_n)$ for which the expression
+                $f(x_1,\dots,x_n)$ is defined.
+            </p>
+
+            <div class="example-box">
+                Find the value of the following functions at $(1,-1)$.
+                In addition, compute and sketch their corresponding domains:
+                <ol>
+                    <li>$f(x,y)=\frac{\sqrt{2x-y+6}}{2x-4}$.</li>
+                    <li>$g(x,y)=e^x\ln(x-y^3)$.</li>
+                </ol>
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <p>
+                    We start with $f$.
+                    We have that
+                    \[
+                    f(1,-1)=\frac{\sqrt{2+1+6}}{-2-4}=\frac{3}{-6}=-\frac12.
+                    \]
+                    Now, to compute the domain of $f$ we need to understand when the fraction
+                    \[
+                        \frac{\sqrt{2x-y+6}}{2x-4}
+                    \]
+                    is defined.
+                    This happens precisely when the denominator $2x-4$ is different from zero
+                    (which amounts to $x\neq 2$)
+                    and the inside of the square root ($2x-y+6$) is nonnegative
+                    (that is, $y\leq 2x+6$).
+                    Therefore, the domain of $f$ is
+                    \[
+                        \dom(f)=\big\{(x,y)\in\RR^2\mid x\neq 2,\,y\leq 2x+6\big\}.
+                    \]
+                </p>
+                <p>
+                    We now deal with the function $g$.
+                    Firstly,
+                    \[
+                        g(1,-1)=e\ln(1+3)=e\ln(4).
+                    \]
+                    To find $\dom(g)$, we need to know when the formula $e^x\ln(x-y^3)$
+                    is defined.
+                    Because the natural logarithm is defined only on positive numbers, we see that
+                    $g(x,y)$ exists precisely when $x-y^3>0$, so the domain of $g$ is
+                    \[
+                    \dom(g)=\big\{(x,y)\in\RR^2\mid x>y^3\big\}.
+                    \]
+                </p>
+            </details>
+
+            <div class="example-box">
+                Find the domain and range of the function $f(x,y)=\sqrt{4-x^2-y^2}$.
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <p>
+                    To compute $\dom(f)$, we need to see when the expression
+                    $\sqrt{4-x^2-y^2}$ is defined.
+                    This happens precisely when the argument inside the square root
+                    is greater than or equal to zero.
+                    Therefore, the domain of $f$ is
+                    \[
+                        \dom(f)=\{(x,y)\in\RR^2\mid x^2+y^2\leq 4\}.
+                    \]
+                    This is a closed disk centered around the origin and with radius $2$.
+                    <div class="image-container">
+                        <img src="Pictures/Disk.png" alt="A disk in two dimensions" style="width: 30%;">
+                    </div>
+                </p>
+                <p>
+                    The range of $f$ is
+                    \[
+                        \{z\mid z=\sqrt{4-x^2-y^2}\}.
+                    \]
+                    Since $z$ is a square root, we have $z\geq 0$.
+                    In addition, observe that $z=\sqrt{4-x^2-y^2}\leq \sqrt{4}=2$,
+                    which means that the range of $f$ is a subset of the interval $[0,2]$.
+                    In fact, the range of $f$ is precisely the interval $[0,2]$,
+                    because (for instance) the points $(t,0)$ with $0\leq t\leq 2$
+                    lie in the domain of $f$ and satisfy
+                    $f(t,0)=\sqrt{4-t^2}$.
+                    As $t$ goes from $0$ to $2$, we see that $f(t,0)$ goes from $2$ to $0$,
+                    so every number inside $[0,2]$ falls in the range of $f$.
+                </p>
+            </details>
+            <section id="graphs">
+                <h2>Graphs</h2>
+                <p>
+                    Recall that for a single variable function $y=f(x)$, we could
+                    sketch its graph, which is the set of all points of the form
+                    $(x,f(x))$ (where $x$ lies in the domain of $f$).
+                    For functions of several variables, we can also define
+                    their graph:
+                </p>
+                <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
+                <div class="definition-box">
+                    Let $D$ be a subset of $\RR^n$.
+                    If $f\colon D\to\RR$ is a function, then the <b>graph</b> of $f$
+                    is defined to be the set
+                    \[
+                    \big\{(x_1,x_2,\dots,x_n,f(x_1,x_2,\dots,x_n))\mid (x_1,x_2,\dots,x_n)\in D\big\}.
+                    \]
+                    In other words, the graph of $f$ is the set of all points
+                    $(x_1,\dots,x_n,x_{x+1})$ that satisfy the equation 
+                    \[x_{n+1}=f(x_1,\dots,x_n).\]
+                </div>
+                <div class="image-container" style="width: 50%;">
+                    <img src="Pictures/graph.jpg" alt="The graph of a function of two variables" style="width: 100%;">
+                </div>
+                </div>
+                <div class="remark-box">
+                    Note that if $f$ is a function of $n$ variables, then
+                    the graph of $f$ is a subset of $\RR^{n+1}$.
+                </div>
+                <div class="example-box">
+                    Sketch the graph of the function $f(x,y)=x^2+y^2$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        The graph of $f$ is the set of solutions to the equation
+                        \[z=x^2+y^2,\]
+                        which is precisely a paraboloid.
+                    </p>
+                    <div class="image-container">
+                        <img src=Pictures/paraboloid.png alt="A paraboloid in three dimensions" style="width: 30%;">
+                    </div>
+                </details>
+                <p>
+                    A particular class of functions with relatively easy graphs are
+                    linear functions.
+                    We say that a function $f(x_1,\dots,x_n)$ is <b>linear</b> if it is
+                    of the form
+                    \[
+                        f(x_1,\dots,x_n)=a_1 x_1+\cdots+a_n x_n+c,
+                    \]
+                    for some constants $a_1,\,\dots,\,a_n,\,c$.
+                </p>
+                <p>
+                    For instance, if $f(x,y)=ax+by+c$ is a linear function of two
+                    variables, then its graph is a plane in three-dimensional space.
+                </p>
+                <div class="example-box">
+                    Sketch the graph of $f(x,y)=x-2y$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        To get an idea on what the graph of $f$ looks like, we
+                        are going to take a look at the cross-sections of this graph
+                        with the planes $x=0$ and $y=0$.
+                    </p>
+                    <p>
+                        Firstly, the cross-section of the graph with the plane $x=0$
+                        is the set of solutions to the system of equations
+                        \[
+                            x=0,\qquad z=x-2y=-2y.
+                        \]
+                        Thus, this cross-section is just the line $z=-2y$ in the $yz$-plane.
+                    </p>
+                    <p>
+                        Secondly, the cross-section of the graph with the plane $y=0$
+                        is given by the system of equations
+                        \[
+                            y=0,\qquad z=x-2y=x,
+                        \]
+                        so this is simply the line $z=x$ in the $xz$-plane.
+                    </p>
+                    <p>
+                        In conclusion, the graph of $f$ is precisely the only plane that
+                        contains the two lines above, so its graph looks as follows:
+                    </p>
+                    <div class="image-container">
+                        <img src=Pictures/plane.png alt="A paraboloid in three dimensions" style="width: 30%;">
+                    </div>
+                </details>
+                <div class="example-box">
+                    Sketch the graph of the function
+                    \[
+                    f(x,y)=\sqrt{4-x^2-y^2}.
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        The graph of $f$ is the set of solutions to the equation
+                        \[
+                            z=\sqrt{4-x^2-y^2}.
+                        \]
+                        If we square both sides, we obtain
+                        \[
+                            z^2=4-x^2-y^2\implies x^2+y^2+z^2=4.
+                        \]
+                        This is the equation of the sphere centered around the origin with radius
+                        $2$.
+                        However, note that the points $(x,y,z)$ in this graph must have $z\geq 0$,
+                        since $z$ is a square root.
+                        Therefore, the graph of $f$ is actually the top half of the sphere
+                        centered around the origin and of radius $2$:
+                    </p>
+                    <div class="image-container">
+                        <img src="Pictures/sphere.png" alt="The top half of a sphere" style="width: 30%;">
+                    </div>
+                </details>
+            </section>
+            <section id="level-sets">
+                <h2>Level sets and contour maps</h2>
+                <p>
+                    While it is possible to sketch the graph of a function $z=f(x,y)$ that
+                    depends on two variables, we cannot sketch the graph of a function of three
+                    variables because it is a subset of a four-dimensional space.
+                    However, there is an alternative way to visualize functions that will also
+                    allow us to interpret functions of three variables graphically:
+                </p>
+                <div class="definition-box">
+                    Let $f\colon D\to \RR$ be a function of $n$ variables.
+                    The <b>level sets</b> of $f$ are the subsets of $D$ given by the equations
+                    \[
+                        f(x_1,\dots,x_n)=k,
+                    \]
+                    where $k$ is any real constant.
+                    In addition, a collection of level sets of $f$ is called a <b>contour map</b>
+                    of $f$.
+                </div>
+                <div class="remark-box">
+                    If $f(x,y)$ is a function of two variables, then its level sets are also
+                    called the <b>level curves</b> of $f$.
+                    Similarly, if $g(x,y,z)$ is a function of three variables, then its level sets
+                    are known as the <b>level surfaces</b> of $g$.
+                </div>
+                <div class="image-container">
+                    <img src="Pictures/level-set.jpg" alt="A level curve of a paraboloid" style="width: 30%;">
+                </div>
+                <div class="example-box">
+                    Find and sketch the level sets of the function $f(x,y)=x+2y-4$ for $k=-4,\,-2,\,0,\,2$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        If $k$ is any number, then the level curve of $f(x,y)$ corresponding
+                        to $k$ is the set of solutions to the equation
+                        \[
+                            x+2y-4=k.
+                        \]
+                        Solving for $y$, we obtain
+                        \[
+                        y=-\frac{1}{2}x+\frac{k}{2}+2.
+                        \]
+                        This means that the level curves of $f$ are straight lines with slope
+                        $-\tfrac12$ and $y$-intercept $\tfrac{k}{2}+2$.
+                        By setting $k$ to be $-4$, $-2$, $0$ and $2$ respectively, we
+                        obtain that the level sets are the lines
+                        \[
+                        y=-\frac12 x,\quad y=-\frac12 x+1,\quad y=-\frac12 x+2,\quad
+                        y=-\frac12 x+3,
+                        \]
+                        respectively.
+                    </p>
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
