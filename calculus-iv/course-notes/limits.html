@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Limits and Continuity</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1>Limits and Continuity</h1>
+
+            <p>
+                In this section we introduce the notion of limit for a function of several variables.
+                To make things easier, we will discuss this concept for functions of two variables,
+                although all of the considerations that we will make here are valid for functions
+                of any number of variables.
+            </p>
+
+            <section id="limits">
+                <h2>Limits of Functions of Two Variables</h2> 
+                <p>
+                    Let's start by giving an intuitive definition of the limit of a function of
+                    two variables.
+                </p>
+                <div class="definition-box">
+                    Let $f\colon D\to \RR$ be a function of two variables and $(a,b)$ a point
+                    in the plane $\RR^2$.
+                    We say that the <b>limit of $f(x,y)$ as $(x,y)$ approaches $(a,b)$</b>
+                    is equal to $L$ if we can make the values of $f(x,y)$ as close to $L$
+                    as we want by taking $(x,y)$ to be sufficiently close to (but not equal to)
+                    $(a,b)$.
+                    When this is the case, we write
+                    \[
+                    \lim_{(x,y)\to(a,b)} f(x,y)=L
+                    \qquad \textsf{or} \qquad
+                    \lim_{x\to a \\y\to b} f(x,y)=L.
+                    \]
+                </div>
+                <p>
+                    While this definition will be good enough for our purposes, it is worth
+                    mentioning that there is a more formal version of the above definition,
+                    which reads as follows:
+                </p>
+                <div class="definition-box">
+                    Let $f\colon D\to \RR$ be a function of two variables and $(a,b)$ a point
+                    in the plane $\RR^2$.
+                    We say that the <b>limit of $f(x,y)$ as $(x,y)$ approaches $(a,b)$</b>
+                    is equal to $L$ if for every $\varepsilon > 0$ there exists a corresponding
+                    $\delta > 0$ such that for every $(x,y)$ in $D$ that satisfies
+                    \[
+                      0 <\sqrt{(x-a)^2+(y-b)^2}<\delta,
+                    \]
+                    the number $f(x,y)$ satisfies
+                    \[
+                        \lvert f(x,y)-L \rvert < \varepsilon.
+                    \]
+                </div>
+                <p>
+                    For functions of several variables, there are not many techniques that allow us
+                    to compute their limits in general.
+                    For the purposes of this course, it will be enough to discuss the most elementary
+                    properties of limits (that is, the <em>limit laws</em>) and to learn techniques
+                    to show when a limit does not exist.
+                </p>
+            </section>
+            <section id="limits-along-paths">
+                <h2>Limits along Paths</h2>
+                <p>
+                    Recall from single variable calculus that, if $f(x)$ is a function of one variable,
+                    then the limit $\lim_{x\to a}f(x)$ exists and is equal to $L$ if and only if
+                    the one-sided limits $\lim_{x\to a^+}f(x)$ and $\lim_{x\to a^-} f(x)$ both exist
+                    and are equal.
+                    The reason for this is that, in the real line, you can either approach a number $a$
+                    from the left or from the right.
+                    However, in two (or more) dimensions, the situation becomes more complicated, as there
+                    are infinitely many ways to approach a point $(a,b)$ in the plane.
+                    To make this idea more precise, we need to introduce the notion of path.
+                </p>
+                <div class="definition-box">
+                    A <b>path</b> in the plane $\RR^2$ is a function $c\colon I\to \RR^2$ that
+                    assigns to each real number $t$ in an interval $I$ a point $c(t)=(x(t),y(t))$
+                    in the plane.
+                </div>
+                <p>
+                    Note that working with a path in $\RR^2$ is essentially the same as working
+                    with two single-variable functions at the same time.
+                    One can also define the concept of path in $\RR^n$ (for any $n$) accordingly.
+                </p>
+                <div class="definition-box">
+                    If $c(t)=(x(t),y(t))$ is a path in $\RR^2$ and $a$ is a real number, then we
+                    say that the <b>limit</b> of $c(t)$ as $t$ approaches $a$ exists if both
+                    \[
+                    \lim_{t \to a} x(t) \qquad \textsf{and} \qquad
+                    \lim_{t \to a} y(t) 
+                    \]
+                    exist.
+                    In that case, the limit of $c(t)$ as $t$ approaches $a$ is defined to be
+                    \[
+                        \lim_{t \to a} c(t) = \bigg( \lim_{t \to a} x(t),\, \lim_{t \to a} y(t)\bigg).
+                    \]
+                </div>
+                <div class="example-box">
+                    The path $c_1(t)=(t,mt)$ describes the line $y=mx$, whereas the path
+                    $c_2(t)=(t,t^2)$ describes the parabola $y=x^2$.
+                    Observe that
+                    \[
+                        \lim_{t \to 0} c_1(t) = \lim_{t \to 0} c_2(t) = (0,0). 
+                    \]
+                </div>
+                <p>
+                    Now, we can also define the concept of the values of a function along a path:
+                </p>
+                <div class="definition-box">
+                    Let $f\colon D\to \RR$ be a function of two variables and $c(t)$ a path
+                    in $\RR^2$.
+                    We say that the function $f(x,y)$ <b>along</b> the path $c(t)$ is the
+                    function (of a single variable) $f(c(t))$.
+                </div>
+                <p>
+                    Now, suppose that $f(x,y)$ is a function of two variables, $(a,b)$ is a point,
+                    and that
+                    \[
+                        \lim_{(x,y) \to (a,b)} f(x,y) = L.
+                    \]
+                    Then, if $c(t)$ is a path in $\RR^2$ that approaches $(a,b)$ as $t$ approaches
+                    some number $t_0$, that means that the values of $f(c(t))$ have to get as close
+                    as we want to $L$ as $t$ approaches $t_0$.
+                    In other words,
+                    \[
+                        \lim_{t \to t_0} f(c(t)) = L.
+                    \]
+                    Since the limit of a function (if it exists) is unique, this gives us
+                    a criterion to determine when a function does <em>not</em> have a limit.
+                </p>
+                <div class="theorem-box">
+                    Suppose $f\colon D\to \RR$ is a function of two variables, $(a,b)$ is a point
+                    in $\RR^2$ and $c_1(t),\,c_2(t)$ are two paths in $\RR^2$ that approach $(a,b)$
+                    as $t$ approaches some number $t_0$.
+                    If the limits
+                    \[
+                        \lim_{t \to t_0} f(c_1(t)) \qquad \textsf{and} \qquad
+                        \lim_{t \to t_0} f(c_1(t))
+                    \]
+                    are different, then the limit
+                    \[
+                        \lim_{(x,y) \to (a,b)} f(x,y)
+                    \]
+                    does not exist.
+                </div>
+                <div class="example-box">
+                    Show that the limit
+                    \[
+                        \lim_{(x,y) \to (0,0)} \frac{xy^3}{x^4+y^4} 
+                    \]
+                    does not exist.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let us consider first the values of the function
+                        \[
+                            f(x,y)=\frac{xy^3}{x^4+y^4}
+                        \]
+                        along the $x$-axis.
+                        Since the $x$-axis can be described by the path $c_1(t)=(t,0)$,
+                        we see that the function $f(x,y)$ along the $x$-axis is given by
+                        \[
+                            f(t,0)=\frac{0}{t^4}=0.
+                        \]
+                        We now approach $(0,0)$, which amounts to letting $t\to 0$, to obtain
+                        \[
+                            \lim_{t \to 0} f(t,0)=0.
+                        \]
+                        Now, we look at the values of $f$ along the line $y=x$.
+                        We can trace this line by means of the path $c_2(t)=(t,t)$.
+                        In this case, the function $f(x,y)$ along this line becomes
+                        \[
+                            f(t,t)=\frac{t^4}{t^4+t^4}=\frac{t^4}{2t^4}=\frac{1}{2}.
+                        \]
+                        As we approach $(0,0)$ by letting $t\to 0$, we get
+                        \[
+                            \lim_{t\to 0} f(t,t)=\frac12.
+                        \]
+                    </p>
+                    <p>
+                        Because we have obtained two different limits of $f(x,y)$ by moving
+                        along two different paths, we conclude that the limit
+                        \[
+                            \lim_{(x,y) \to (0,0)} \frac{xy^3}{x^4+y^4} 
+                        \]
+                        does not exist.
+                    </p>
+                    <div class="image-container">
+                        <img src="Pictures/discont1.png" alt="Graph of a function" style="width: 30%;">
+                    </div>
+                </details>
+                <div class="example-box">
+                    Determine whether the limit
+                    \[
+                        \lim_{(x,y) \to (0,0)} \frac{xy^2}{x^2+y^4} 
+                    \]
+                    exists or not.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let
+                        \[
+                            g(x,y)=\frac{xy^2}{x^2+y^4}.
+                        \]
+                        We can try to compute the values of $g(x,y)$ along
+                        any line of the form $c_1(t)=(t,mt)$.
+                        In this case, we see that
+                        \[
+                            g(t,mt)=\frac{m^2t^3}{t^2+m^4t^4}=\frac{m^2t}{1+m^4t^2},
+                        \]
+                        which approaches $0$ as $t\to 0$.
+                    </p>
+                    <p>
+                        The above argument shows that $g(x,y)$ approaches $0$ along any line
+                        that passes through $(0,0)$, except for the $y$-axis.
+                        However, it is also easy to show that $g(x,y)$ approaches $0$ along
+                        the $y$-axis as well.
+                        At any rate, this is not enough to conclude that the limit in question
+                        exists.
+                        Indeed, if we take the path $c_2(t)=(t^2,t)$, we see that
+                        $g(x,y)$ along the path $c_2(t)$ is given by
+                        \[
+                            g(t,t^2)=\frac{y^4}{2y^4}=\frac{1}{2},
+                        \]
+                        which approaches $\frac{1}{2}$ as $t\to 0$.
+                        We conclude that the limit $\lim_{(x,y) \to (0,0)} g(x,y)$ does not exist.
+                    </p>
+                    <div class="image-container">
+                        <img src="Pictures/discont2.png" alt="Graph of a function" style="width: 30%;">
+                    </div>
+                </details>
+            </section>
+            <section id="limit-laws">
+                <h2>Limit Laws</h2> 
+                <p>
+                    In this section we present the basic laws of limits.
+                    These laws are essentially the same as those that we already know from
+                    functions of a single variable.
+                </p>
+                <div class="theorem-box">
+                    Let $f(x,y)$ and $g(x,y)$ be two functions of two variables and $(a,b)$
+                    a point in $\RR^2$.
+                    Suppose that
+                    \[
+                        \lim_{(x,y) \to (a,b)} f(x,y)=L_1
+                        \qquad\textsf{and}\qquad
+                        \lim_{(x,y) \to (a,b)} g(x,y)=L_2.
+                    \]
+                    Then, the following equations hold:
+                    <ol>
+                        <li>
+                            (Sum law)
+                            \[
+                                \lim_{(x,y) \to (a,b)} f(x,y)+g(x,y) = L_1+L_2.
+                            \]
+                        </li>
+                        <li>
+                            (Difference law)
+                            \[
+                                \lim_{(x,y) \to (a,b)} f(x,y)-g(x,y) = L_1-L_2.
+                            \]
+                        </li>
+                        <li>
+                            (Product law)
+                            \[
+                                \lim_{(x,y) \to (a,b)} f(x,y)g(x,y) = L_1L_2.
+                            \]
+                        </li>
+                        <li>
+                            (Quotient law)
+                            \[
+                                \lim_{(x,y) \to (a,b)} \frac{f(x,y)}{g(x,y)} = \frac{L_1}{L_2},
+                            \]
+                            provided that $L_2\neq 0$.
+                        </li>
+                    </ol>
+                    In addition, if $c$ is a real constant, then the following equations are true:
+                    \[
+                        \lim_{(x,y) \to (a,b)} c = c, \qquad
+                        \lim_{(x,y) \to (a,b)} x = a, \qquad
+                        \lim_{(x,y) \to (a,b)} y = b.
+                    \]
+                </div>
+                <p>
+                    Let us see an application of these laws.
+                    A <b>polynomial</b> in two variables is a sum of functions of the form
+                    $cx^ny^m$, where $c$ is a constant.
+                    Due to the sum and product laws, we see that if $p(x,y)$ is
+                    a polynomial, then
+                    \[
+                        \lim_{(x,y) \to (a,b)} p(x,y)=p(a,b).
+                    \]
+                    Similarly, a <b>rational function</b> is a quotient of two polynomials.
+                    Thus, if $f(x,y)=\tfrac{p(x,y)}{q(x,y)}$ is a rational function,
+                    then
+                    \[
+                    \lim_{(x,y) \to (a,b)} f(x,y)=f(a,b) \quad\textsf{whenever}\quad q(a,b)\neq 0.
+                    \]
+                    This is a consequence of the sum, product and quotient laws.
+                </p>
+                <div class="example-box">
+                    \[
+                        \lim_{(x,y) \to (2,1)} \frac{xy^3}{x^2+y^2+1}
+                        =
+                        \frac{2\cdot 1^3}{2^2+1^2+1}=\frac{1}{3}
+                    \]
+                    because the function
+                    \[
+                        f(x,y)=\frac{xy^3}{x^2+y^2+1}
+                    \]
+                    is a rational function.
+                </div>
+            </section>
+            <section id="continuity">
+                <h2>Continuity</h2>
+                <p>
+                    Suppose $f\colon D\to \RR$ is a function of a single variable.
+                    If $a$ is an element of $D$, recall that $f$ is continuous at $a$
+                    if it satisfies $\lim_{x \to a} f(x)=f(a)$.
+                    This definition can also be extrapolated to functions of two (or more)
+                    variables
+                </p>
+                <div class="definition-box">
+                    Let $f\colon D\to \RR$ be a function of two variables and $(a,b)$
+                    a point in $D$.
+                    We say that the function $f$ is <b>continuous</b> at $(a,b)$ if
+                    \[
+                        \lim_{(x,y) \to (a,b)} f(x,y)=f(a,b).
+                    \]
+                    Moreover, we say that $f$ is <b>continuous</b> on $D$ if it is continuous
+                    at every $(a,b)$ in $D$.
+                </div>
+                <p>
+                    Because of the limit laws, we can immediately establish the following fact:
+                </p>
+                <div class="theorem-box">
+                    If $f(x,y)$ and $g(x,y)$ are functions of two variables that are continuous
+                    at $(a,b)$, then:
+                    <ol>
+                        <li>
+                            The function $f+g$ given by \[(f+g)(x,y)=f(x,y)+g(x,y)\] is
+                            also continuous at $(a,b)$.
+                        </li>
+                        <li>
+                            The function $f-g$ given by \[(f-g)(x,y)=f(x,y)-g(x,y)\] is
+                            also continuous at $(a,b)$.
+                        </li>
+                        <li>
+                            The function $fg$ given by \[(fg)(x,y)=f(x,y)g(x,y)\] is
+                            also continuous at $(a,b)$.
+                        </li>
+                        <li>
+                            If $g(a,b)\neq 0$, then the function $\frac{f}{g}$
+                            given by \[\left(\frac{f}{g}\right)(x,y)=\frac{f(x,y)}{g(x,y)}\]
+                            is also continuous at $(a,b)$.
+                        </li>
+                    </ol>
+                </div>
+                <div class="example-box">
+                    If $f(x,y)$ is a polynomial or a rational function, then $f$ is
+                    continuous at every point of its domain.
+                </div>
+                <p>
+                    We can also compose a function of two (or more) variables with a
+                    function of a single variable.
+                    If $f(x,y)$ is a function of two variables and $g(t)$ is a function of one
+                    variable, we define the <b>composite function</b> $g\circ f$ to be
+                    the function defined by the equation
+                    \[
+                        (g\circ f)(x,y)=g(f(x,y)).
+                    \]
+                </p>
+                <div class="example-box">
+                    Let $f(x,y)=x^2+y^3$ and $g(t)=\sqrt{t}$.
+                    Then the composite function $g(f(x,y))$ is given by
+                    $g(f(x,y))=\sqrt{x^2+y^3}$.
+                </div>
+                <div class="warning-box">
+                    If $f(x,y)$ is a function of two variables and $g(t)$ is a function
+                    of one variable, the composite $f\circ g$ <b>does not exist</b>!
+                </div>
+                <p>
+                    It turns out that taking the composite of two continuous functions
+                    also yields a continuous function:
+                </p>
+                <div class="theorem-box">
+                    Suppose $f(x,y)$ is a function of two variables and $g(t)$ is a function
+                    of one variable.
+                    If $f(x,y)$ is continuous at $(a,b)$ and $g(t)$ is continuous at $f(a,b)$,
+                    then $(g\circ f)(x,y)$ is continuous at $(a,b)$.
+                </div>
+                <div class="example-box">
+                    Where is the function
+                    \[f(x,y)=\ln(x^2+y^2-1)\]
+                    continuous?
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        First we need to know the domain of $f$.
+                        Since the natural logarithm is only defined for positive real
+                        numbers, the formula $\ln(x^2+y^2-1)$ gives a well-defined
+                        number if and only if $x^2+y^2-1>0$.
+                        Therefore, the domain of $f$ is
+                        \[
+                            \dom(f)
+                            =
+                            \big\{(x,y)\mid x^2+y^2-1>0\big\}
+                            =
+                            \big\{(x,y)\mid x^2+y^2>1\big\},
+                        \]
+                        which is the outside of the unit circle in the plane.
+                    </p>
+                    <p>
+                        We now decide whether $f(x,y)$ is continuous on its domain.
+                        Note that $f(x,y)$ can be viewed as the composition of the
+                        functions $g(x,y)=x^2+y^2-1$ (which is continuous everywhere)
+                        and $h(t)=\ln(t)$ (which is continuous at every positive number).
+                        Therefore, $f=h \circ g$ is continuous because it is the composition
+                        of two continuous functions.
+                    </p>
+                    <p>
+                        In conclusion, the function $f(x,y)$ is continuous on the set
+                        \[
+                            \big\{(x,y)\mid x^2+y^2>1\big\}.
+                        \]
+                    </p>
+                    <div class="image-container">
+                        <img src="Pictures/log.png" alt="Graph of a function" style="width: 30%;">
+                    </div>
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
