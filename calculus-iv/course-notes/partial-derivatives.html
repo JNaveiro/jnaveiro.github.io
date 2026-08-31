@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Partial Derivatives</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1>Partial Derivatives</h1>
+
+            <p>
+                The purpose of this section is to define and interpret the concept of partial derivatives
+                of functions of several variables.
+                The key behind is that, given a function $z=f(x_1,\dots,x_n)$,
+                we will understand how the variable $z$ changes when we only modify one of the
+                variables (while leaving the others unchanged).
+            </p>
+
+            <div class="definition-box">
+                Let $z=f(x_1,\dots,x_n)$ be a function of several variables and
+                $(a_1,\dots,a_n)$ a point in the domain of $f$.
+                We define the <b>partial derivative</b> of $f$ with respect to the variable
+                $x_i$ as the limit
+                \[
+                    f_{x_i}(a_1,\dots,a_n)
+                    =
+                    \lim_{h \to 0} \frac{f(a_1,...,a_{i-1},a_{i}+h,a_{i+1},\dots,a_n)-f(a_1,\dots,a_n)}{h},
+                \]
+                provided that it exists.
+            </div>
+            <p>
+                While the above formula may seem complicated at first, the good news is that
+                computing a partial derivative is done in the same way as we compute usual
+                derivatives for functions of one variable.
+                Let us discuss why this is the case.
+            </p>
+            <p>
+                Suppose, as before, that $z=f(x_1,\dots,x_n)$ is a function and $(a_1,\dots,a_n)$
+                is a point in the domain of $f$.
+                We define a new function of one variable $t$, given by
+                \[
+                    g(t)=f(a_1,\dots,a_{i-1},t,a_{i+1},\dots,a_n).
+                \]
+                In other words, we are keeping all variables except $x_i$ fixed.
+                The derivative of $g$ at $t=a_i$ is
+                \[
+                    g'(t)=\lim_{h \to 0} \frac{g(a_i+h)-g(a_i)}{h}
+                    =
+                    \lim_{h \to 0} \frac{f(a_1,...,a_{i-1},a_{i}+h,a_{i+1},\dots,a_n)-f(a_1,\dots,a_n)}{h},
+                    =
+                    f_{x_i}(a_1,\dots,a_n).
+                \]
+                The above equation says that, in order to compute the partial derivative of
+                $f$ with respect to a variable $x_i$, we only need to view all other variables as
+                constants and differentiate $f(x_1,\dots,x_n)$ with respect to $x_i$.
+            </p>
+            <div class="example-box">
+                Compute the partial derivatives $f_x(x,y,z)$, $f_y(x,y,z)$ and $f_z(x,y,z)$
+                of the function
+                \[
+                    f(x,y,z)=x^2y-3yz+x^3z^2.
+                \]
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <p>
+                    The partial derivative $f_x(x,y,z)$ is
+                    \[
+                        f_x(x,y,z)=2xy+3x^2z^2.
+                    \]
+                    As for $f_y(x,y,z)$, we get
+                    \[
+                        f_y(x,y,z)=x^2-3z.
+                    \]
+                    Finally, $f_z(x,y,z)$ satisfies
+                    \[
+                        f_z(x,y,z)=-3y+2x^3z.
+                    \]
+                </p>
+            </details>
+            <div class="remark-box">
+                There are several notations for partial derivatives.
+                The most common are the following:
+                For a function $z=f(x_1,\dots,x_n)$, we use
+                \[
+                    f_{x_i}(x_1,\dots,x_n)
+                    =
+                    D_if(x_1,\dots,x_n)
+                    =
+                    \frac{\partial f}{\partial x_i}(x_1,\dots,x_n)
+                    =
+                    \frac{\partial}{\partial x_i}f(x_1,\dots,x_n)
+                    =
+                    \frac{\partial z}{\partial x_i}.
+                \]
+                Note that we use the symbol $\partial$ instead of
+                the symbol $d$ (usually reserved for derivatives of functions
+                of one variable).
+            </div>
+            <div class="example-box">
+                Compute the partial derivatives of the function
+                \[
+                    g(x,y)=\ln\bigg(\frac{1}{x-4y}\bigg).
+                \]
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <p>
+                    Using the Chain Rule, we obtain
+                    \[
+                    \frac{\partial g}{\partial x}=-\frac{1}{(x-4y)^2}\frac{1}{\frac{1}{x-4y}}
+                    =
+                    \frac{-1}{x-4y}.
+                    \]
+                    Similarly,
+                    \[
+                    \frac{\partial g}{\partial y}=-\frac{-4}{(x-4y)^2}\frac{1}{\frac{1}{x-4y}}
+                    =
+                    \frac{4}{x-4y}.
+                    \]
+                </p>
+            </details>
+            <section id="partial-interpretation">
+                <h2>Interpretations of Partial Derivatives</h2>
+                <p>
+                    Recall that the derivative of a function $f(x)$ at a number $a$
+                    could be interpreted in two ways:
+                    <ol>
+                        <li>
+                            Geometrically, as the slope of the tangent line of the curve $y=f(x)$
+                            at the point $(a,f(a))$, or
+                        </li>
+                        <li>
+                            As the rate of change of the variable $y=f(x)$
+                            with respect to $x$.
+                        </li>
+                    </ol>
+                    We can make similar considerations for partial derivatives
+                    of functions of several variables.
+                </p>
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <p style="width: 70%;">
+                    Firstly, let us start with a geometric interpretation.
+                    Consider a function $z=f(x,y)$ of two variables, and suppose $(a,b)$
+                    is a point in its domain.
+                    We will interpret the partial derivative $f_y(a,b)$.
+                    To do this, consider the cross-section of the graph of $f$ with
+                    the plane $x=a$.
+                    This cross-section can be seen as the graph of the function
+                    $g(t)=f(a,t)$.
+                    This is precisely the curve $C$ (in blue) in the picture on the right.
+                    If we take a look at the tangent line of $C$ at the point $(a,b,f(a,b))$,
+                    we know that its slope is given by
+                    \[
+                    g'(b)=\frac{\partial f}{\partial y}(a,b).
+                    \]
+                </p>
+                <div class="image-container" style="width: 30%;">
+                    <img src="Pictures/tangent-line.png" alt="A tangent line to a graph"
+                    style="width: 100%;">
+                </div>
+                </div>
+                <p>
+                    In conclusion, the partial derivative $f_y(a,b)$ is precisely the slope
+                    of the tangent line at $(a,b,f(a,b))$ to the cross-section of the graph
+                    of $f$ with the plane $x=a$.
+                </p>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
