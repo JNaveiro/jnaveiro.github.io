@@ -150,6 +150,7 @@
                     We can make similar considerations for partial derivatives
                     of functions of several variables.
                 </p>
+                <h3>Partial Derivatives as Slopes of Tangent Lines</h3>
                 <div style="display: flex; flex-direction: row; justify-content: space-between;">
                 <p style="width: 70%;">
                     Firstly, let us start with a geometric interpretation.
@@ -177,6 +178,212 @@
                     of the tangent line at $(a,b,f(a,b))$ to the cross-section of the graph
                     of $f$ with the plane $x=a$.
                 </p>
+                <div class="example-box">
+                    Let
+                    \[
+                        f(x,y)=x^4+2y^4-2.
+                    \]
+                    Compute the partial derivatives $f_x(1,-1)$ and $f_y(1,-1)$.
+                    Interpret these partial derivatives as slopes of tangent lines.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let us start with $f_x(1,-1)$.
+                        Since $f_x(x,y)=4x^3$, we see that
+                        \[
+                            f_x(1,-1)=4.
+                        \]
+                        To interpret this number, we have to take the cross-section
+                        of the graph of $f$ (i.e. the set $z=x^4+2y^4-2$) with the plane
+                        $y=-1$.
+                        This curve (let's call it $C_1$) is given by the equations
+                        \[
+                            \begin{cases}
+                                y=-1, \\
+                                z=x^4+2y^4-2=x^4.
+                            \end{cases}
+                        \]
+                        The slope of the tangent line to $C_1$ at $(1,-1,f(1,-1))=(1,-1,1)$
+                        is equal to $f_x(1,-1)=4$.
+                    </p>
+                    <p style="padding-bottom: 5%;">
+                        We now proceed with the partial derivative $f_y(1,-1)$.
+                        As $f_y(x,y)=8y^3$, we see that
+                        \[
+                            f_y(1,-1)=8.
+                        \]
+                        In this case, we take the cross-section $C_2$ of the graph of $f$
+                        with the plane $x=1$, which is given by the equations
+                        \[
+                            \begin{cases}
+                                x=1,\\
+                                z=x^4+2y^4-2=2y^4-1.
+                            \end{cases}
+                        \]
+                        The slope of the tangent line of $C_2$ at $(1,-1,1)$ in this case
+                        is equal to $f_y(1,-1)=8$.
+                    </p>
+                    <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+                        <div class="image-container" style="width: 20%;">
+                            <img src="Pictures/tangent-x.png" alt="A tangent line" style="width: 100%;">
+                        </div>
+                        <div class="image-container" style="width: 20%;">
+                            <img src="Pictures/tangent-y.png" alt="A tangent line" style="width: 100%;">
+                        </div>
+                    </div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+                </details>
+                <h3>Partial Derivatives as Rates of Change</h3>
+                <p>
+                    We can also understand partial derivatives as (infinitesimal) rates of change
+                    of a dependent variable with respect to any of its independent variables.
+                    Indeed, if we are given independent variables $x_1,\,\dots,\,x_n$ and a
+                    dependent variable $z$ that is related to the independent variables by
+                    a function $f$ (that is, if $z=f(x_1,\dots,x_n)$),
+                    then the partial derivative $f_{x_i}$ represents the rate of change
+                    of $z$ with respect to $x_i$ while the remaining variables are fixed.
+                </p>
+                <div class="example-box">
+                    The temperature at a point $(x,y,z)$ inside a square room is given by the function
+                    \[
+                        T(x,y,z)=60+2x^2+3y-z^2,
+                    \]
+                    where $T$ is measured in $°\text{F}$ and $x,\,y,\,z$ are measured in meters.
+                    Find the rate of change of temperature with respect to distance
+                    at the point $(1,-2,3)$ in the $z$-direction and explain the result.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Because $\tfrac{\partial T}{\partial z}=-2z$, we see that
+                        \[
+                        \frac{\partial T}{\partial z}(1,-2,3)=-6 \;°\text{F}/\text{m}.
+                        \]
+                        This means that, if we start at the point $(1,-2,3)$ in our room
+                        and increase our elevation a small amount (say 1 meter),
+                        then the temperature at our new location will decrease by
+                        around $6°\text{F}$.
+                    </p>
+                </details>
+            </section>
+            <section id="higher-order">
+                <h2>Higher Derivatives</h2>
+                <p>
+                    Recall that we can take higher order derivatives of a function
+                    of a single variable.
+                    This is also possible for functions of more than one variable.
+                    For instance, if $u=f(x,y,z)$ is a function of three variables,
+                    then the partial derivatives $f_x$, $f_y$ and $f_z$ are
+                    also functions of three variables, so we may take partial
+                    derivatives of these.
+                    The partial derivatives of either $f_x,\,f_y$ or $f_z$ are
+                    known as the <b>second partial derivatives</b> of $f$.
+                </p>
+                <p>
+                    For example, if we first differentiate with respect to $x$
+                    and then with respect to $z$, we use the following notation
+                    to refer to this function:
+                    \[
+                    (f_x)_z=f_{xz}=\frac{\partial}{\partial z}\left(\frac{\partial f}{\partial x}\right)
+                    =
+                    \frac{\partial^2 f}{\partial z\partial x}
+                    =
+                    \frac{\partial^2 u}{\partial z\partial x}.
+                    \]
+                    If we differentiate with respect to the same variable twice (for example,
+                    with respect to $y$), we write
+                    \[
+                    (f_y)_y=f_{yy}=\frac{\partial}{\partial y}\left(\frac{\partial f}{\partial y}\right)
+                    =
+                    \frac{\partial^2 f}{\partial y^2}=
+                    \frac{\partial^2 u}{\partial y^2}.
+                    \]
+                </p>
+                <p>
+                    We can also consider partial derivatives of higher order.
+                </p>
+                <div class="example-box">
+                    Find the second partial derivatives of
+                    \[
+                        f(x,y)=3x^4-2x^3y+5x^2y^2-7xy^3.
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Since the second derivatives of $f$ are obtained by
+                        differentiating the (first) partial derivatives, let us
+                        start with those.
+                        These are
+                        \[
+                            \begin{aligned}
+                                f_x(x,y)&=12x^3-6x^2y+10xy^2-7y^3.\\
+                                f_y(x,y)&=-2x^3+10x^2y-21xy^2.
+                            \end{aligned}
+                        \]
+                        Thus, the second partial derivatives are
+                        \[
+                            \begin{aligned}
+                                f_{xx}(x,y)&=36x^2-12xy+10y^2, &
+                                f_{xy}(x,y)&=-6x^2+20xy-21y^2, \\
+                                f_{yx}(x,y)&=-6x^2+20xy-21y^2, &
+                                f_{yy}(x,y)&=10x^2-42xy.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                <p>
+                    An interesting observation is that, for the previous example,
+                    the partial derivatives $f_{xy}$ and $f_{yx}$ are equal.
+                    In reality, this phenomenon is quite common, as every function
+                    that is <em>nice enough</em> will have this property.
+                    A result that confirms this is the following theorem,
+                    known as <b>Clairaut's theorem</b> of <b>Schwarz's theorem</b>:
+                </p>
+                <div class="theorem-box">
+                    Let $f(x,y)$ be a function of two variables that is defined on a
+                    disk containing $(a,b)$.
+                    If $f_{xy}$ and $f_{yx}$ are both continuous on $D$, then
+                    \[
+                        f_{xy}(a,b)=f_{yx}(a,b).
+                    \]
+                </div>
+                <p>
+                    Essentially, Clauraut's theorem states that the order in which
+                    we take derivatives of a function is not important for nice functions.
+                </p>
+                <div class="example-box">
+                    Compute the partial derivatives $g_{zxx}$ and $g_{xzx}$ for the function
+                    \[
+                        g(x,y,z)=\cos(xy-z^2).
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We start by computing $g_{zxx}$:
+                        \[
+                            \begin{aligned}
+                            g_z&=2z\sin(xy-z^2),\\
+                            g_{zx}&=2zy\cos(xy-z^2),\\
+                            g_{zxx}&=-2zy^2\sin(xy-z^2).
+                            \end{aligned}
+                        \]
+                        Now, we calculate $g_{xzx}$:
+                        \[
+                            \begin{aligned}
+                                g_x&=-y\sin(xy-z^2),\\
+                                g_{xz}&=2yz\cos(xy-z^2),\\
+                                g_{xzx}&=-2y^2z\sin(xy-z^2).
+                            \end{aligned}
+                        \]
+                        Observe that these two derivatives are the same.
+                        The reason for this is Clairaut's theorem once again, since
+                        \[
+                        g_{zxx}=(g_{zx})_x=(g_{xz})_x=g_{xzx}.
+                        \]
+                    </p>
+                </details>
             </section>
         </main>
     </body>
