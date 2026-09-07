@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Tangent Planes and Linear Approximations</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1>Tangent Planes and Linear Approximations</h1>
+            <p>
+                Let $y=f(x)$ be a function of a single variable and $a$ a real
+                number in its domain.
+                If the derivative $f'(a)$ of $f$ at $a$ exists, then the graph
+                of $f$ near $(a,f(a))$ can be approximated by a straight line $L$,
+                usually known as the <em>tangent line</em> of the curve $y=f(x)$ at
+                $(a,f(a))$.
+                This line was characterized by two conditions:
+            </p>
+                <ul>
+                    <li>
+                        $L$ passes through the point $(a,f(a))$, and
+                    </li>
+                    <li>
+                        The slope of $L$ is equal to $f'(a)$.
+                    </li>
+                </ul>
+            <p>
+                In addition, the tangent line $L$ is given by the equation
+                \[
+                    y-f(a)=f'(a)(x-a).
+                \]
+            </p>
+            <p>
+                In this section, we will consider an analog of the tangent line
+                for functions of two variables, known as the <em>tangent plane</em>
+                of a function $z=f(x,y)$ at a point $(a,b,f(a,b))$.
+                This plane will give us an approximation of the surface $z=f(x,y)$
+                near $(a,b,f(a,b))$.
+            </p>
+            <section id="tangent-planes">
+                <h2>Tangent Planes</h2>
+                <div style="display: flex; flex-direction: row; width: 100%;">
+                <div class="definition-box" style="width: 70%;">
+                    Let $z=f(x,y)$ be a function whose partial derivatives $f_x$ and
+                    $f_y$ are continuous, and consider a point $(a,b)$ in the domain
+                    of $f$.
+                    Consider the cross-sections $C_x$ and $C_y$ of the graph of $f$
+                    with the planes $y=b$ and $x=a$, respectively.<br>
+                    If $L_x$ and $L_y$ denote the tangent lines of the curves $C_x$
+                    and $C_y$ at the point $p=(a,b,f(a,b))$, then we define
+                    the <b>tangent plane</b> of the surface $z=f(x,y)$ at the point $p$
+                    as the plane that contains the tangent lines $L_x$ and $L_y$.
+                </div>
+                <div class="image-container" style="width: 30%;">
+                    <img src="Pictures/tangent-plane.png" alt="The graph of a function and its tangent plane" style="width: 100%;">
+                </div>
+                </div>
+                <p>
+                    Let us start by finding an equation for the tangent plane.
+                    We know that the equation of a general plane in $\RR^3$ is of the form
+                    \[
+                        \alpha x+\beta y+\gamma z=\delta,
+                    \]
+                    where $\alpha,\,\beta,\,\gamma$ and $\delta$ are real constants.
+                    If the above equation represents the tangent plane of the surface $z=f(x,y)$ at
+                    $(a,b,f(a,b))$, then this equation must satisfy the following properties:
+                </p>
+                <ol>
+                    <li>
+                        $\alpha a+\beta b+\gamma f(a,b) = \delta$, since $p=(a,b,f(a,b))$ belongs
+                        to the tangent plane.
+                    </li>
+                    <li>
+                        The cross-section of the tangent plane with the plane $y=b$ is the tangent
+                        line $T_x$.
+                        In other words, the line
+                        \[
+                            \begin{cases}
+                                y = b,\\
+                                \delta = \alpha x + \beta y +\gamma z=\alpha x+\beta b+\gamma z
+                            \end{cases}
+                        \]
+                        has slope equal to $-\alpha/\gamma=f_x(a,b)$.
+                    </li>
+                    <li>
+                        The cross-section of the tangent plane with the plane $x=a$ is the tangent
+                        line $T_y$.
+                        In other words, the line
+                        \[
+                            \begin{cases}
+                                x = a,\\
+                                \delta = \alpha x + \beta y +\gamma z=\alpha a+\beta y+\gamma z
+                            \end{cases}
+                        \]
+                        has slope equal to $-\beta/\gamma=f_y(a,b)$.
+                    </li>
+                </ol>
+                <p>
+                    Using all of the above equations, we arrive at the following formula
+                    for the tangent plane of $z=f(x,y)$ at $p$:
+                    \[
+                        -\gamma f_x(a,b)x-\gamma f_y(a,b)y+\gamma z = -\gamma f_x(a,b) -\gamma f_y(a,b) b+\gamma f(a,b).
+                    \]
+                    Dividing by $\gamma$, sending the $z$ terms to the left hand side, and sending all remaining
+                    terms to the right hand side, we conclude that the tangent plane of $z=f(x,y)$
+                    is given by
+                    \[
+                        z-f(a,b)=f_x(a,b)(x-a)+f_y(a,b)(y-b).
+                    \]
+                    Summarizing:
+                </p>
+                <div class="theorem-box" id="tangent-plane-equation">
+                    Let $z=f(x,y)$ be a function of two variables whose partial derivatives are
+                    continuous and $(a,b)$ a point in the domain of $f$.
+                    The equation of the tangent line to the surface $z=f(x,y)$ at the point
+                    $p=(a,b,f(a,b))$ is
+                    \[
+                        z-f(a,b)=f_x(a,b)(x-a)+f_y(a,b)(y-b).
+                    \]
+                </div>
+                <div class="example-box">
+                    Compute the tangent plane to the surface
+                    \[
+                        z=\ln(x+2y)
+                    \]
+                    at the point $(-1,1,0)$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let us define the function $g(x,y)=\ln(x+2y)$.
+                        Then $g(-1,1)=0$ (which confirms that $(-1,1,0)$ is in the graph of $g$)
+                        and the partial derivatives $g_x(-1,1)$, $g_y(-1,1)$ may be computed as follows:
+                        \[
+                            \begin{aligned}
+                                g_x(x,y)&=\frac{1}{x+2y}\implies g_x(-1,1)=1,\\
+                                g_y(x,y)&=\frac{2}{x+2y}\implies g_y(-1,1)=2.
+                            \end{aligned}
+                        \]
+                        Consequently, the equation of the tangent plane of the surface $z=\ln(x+2y)$
+                        at the point $(-1,1,0)$ is
+                        \[
+                            z=(x+1)+2(y-1) \iff x+2y-z=1.
+                        \]
+                    </p>
+                    <div class="image-container" style="width: 100%;">
+                        <img src="Pictures/tangent-log.png" alt="A tangent plane" style="width: 30%;"> 
+                    </div>
+                </details>
+            </section>
+            <section id="linear-approximations">
+                <h2>Linear Approximations</h2>
+                <p>
+                    As we have seen in the above pictures, it seems that the tangent
+                    plane of a surface of the form $z=f(x,y)$ near the point
+                    $(a,b,f(a,b))$ gives a good approximation of the surface for
+                    points that are sufficiently close to $(a,b,f(a,b))$.
+                    Moreover, we can regard said tangent plane as the graph of
+                    a function.
+                    Indeed, if we solve for $z$ in the
+                    <a href="#tangent-plane-equation">equation for the tangent plane</a>,
+                    we obtain
+                    \[
+                        z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b).
+                    \]
+                    Therefore, the (linear!) function
+                    \[
+                        L(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)
+                    \]
+                    provides a good approximation of $f(x,y)$ near $(a,b)$.
+                    The function $L(x,y)$ is called the <b>linearization</b>
+                    of $f$ at $(a,b)$, and the approximation
+                    \[
+                        f(x,y)\approx f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)
+                    \]
+                    is called the <b>linear approximation</b> of $f$ at $(a,b)$.
+                </p>
+                <p>
+                    We can now ask ourselves: when does the linearization of
+                    a function $f(x,y)$ at a point $(a,b)$ provide a good approximation
+                    of the function $f$ itself near $(a,b)$?
+                    As always, we will find inspiration to answer this question
+                    by looking at the case of functions of one variable.
+                </p>
+                <p>
+                    Suppose $y=f(x)$ is a function of a single variable and
+                    $a$ is in the domain of $f$.
+                    In order for the graph of $f$ to have a tangent line
+                    at $(a,f(a))$, we need the derivative $f'(a)$ to exist.
+                    Now,
+                    \[
+                        f'(a)=\lim_{x\to a} \frac{f(x)-f(a)}{x-a}.
+                    \]
+                    so if we write
+                    \[
+                    \varepsilon(x)=\frac{f(x)-f(a)}{x-a} \quad \textsf{for all}
+                    \quad x\neq a,
+                    \]
+                    we see that
+                    \[
+                    f(x)=f(a)+f'(a)(x-a)+\varepsilon(x)(x-a), \quad \textsf{where}
+                    \quad \varepsilon(x)\to 0\textsf{ as }x\to a.
+                    \]
+                </p>
+                <p>
+                    In other words, if $f'(a)$ exists, then for any number $x$
+                    sufficiently close to $a$ the number $f(x)$ is
+                    given by its linear approximation $f(a)+f'(a)(x-a)$
+                    together with an error term $\varepsilon(x)(x-a)$ that tends
+                    to zero as $x$ approaches $a$.
+                </p>
+                <p>
+                    Motivated by the above, we establish the following
+                    definition:
+                </p>
+                <div class="definition-box" id="definition-differentiable">
+                    Let $z=f(x,y)$ be a function of two variables and $(a,b)$
+                    a point in its domain.
+                    We say that $f$ is <b>differentiable</b> at $(a,b)$ if
+                    there exist two functions $\varepsilon_1(x,y)$ and $\varepsilon_2(x,y)$
+                    (defined near $(a,b)$) such that
+                    \[
+                        f(x,y)=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)
+                        +\varepsilon_1(x,y)(x-a)+\varepsilon_2(x,y)(y-b),
+                    \]
+                    and the limits
+                    \[
+                        \lim_{(x,y) \to (a,b)} \varepsilon_1(x,y)
+                        =\lim_{(x,y) \to (a,b)} \varepsilon_2(x,y)
+                        =0.
+                    \]
+                </div>
+                <p>
+                    In essence, a function $f(x,y)$ is differentiable at $(a,b)$
+                    if the values of $f(x,y)$ (for $(x,y)$ sufficiently close to $(a,b)$)
+                    are governed by its linear approximation $L(x,y)$ at $(a,b)$,
+                    together with two error terms that go to zero as $(x,y)$
+                    approaches $(a,b)$.
+                </p>
+                <p>
+                    The following criterion gives us an easy way to determine when
+                    a function is differentiable at a point.
+                </p>
+                <div class="theorem-box">
+                    Let $z=f(x,y)$ be a function and $(a,b)$ a point in its domain.
+                    If the partial derivatives $f_x$ and $f_y$ exist near $(a,b)$
+                    and are continuous at $(a,b)$, then $f$ is differentiable at $(a,b)$.
+                </div>
+                <div class="example-box">
+                    Consider the function
+                    \[
+                        h(x,y)=e^x\cos(x^2y).
+                    \]
+                    Show that $h$ is differentiable at $(1,\pi)$ and compute
+                    its linearization at said point.
+                    Use the linearization to estimate $h(1.1,3)$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let us compute the partial derivatives of $h$.
+                        These are
+                        \[
+                        \frac{\partial h}{\partial x}=e^x\cos(x^2y)-2xe^x\sin(x^2y),
+                        \qquad
+                        \frac{\partial h}{\partial y}=-x^2e^x\sin(x^2y).
+                        \]
+                        Both of these functions are continuous, so $h$ is
+                        differentiable at every point, including $(1,\pi)$.
+                    </p>
+                    <p>
+                        To compute the linearization of $h$ at $(1,\pi)$,
+                        we first evaluate the partial derivatives of $h$ at said point:
+                        \[
+                        \frac{\partial h}{\partial x}(1,\pi)=-e,
+                        \qquad
+                        \frac{\partial h}{\partial y}(1,\pi)=0.
+                        \]
+                        Thus, the linearization of $h$ at $(1,\pi)$ is
+                        \[
+                            L(x,y)=h(1,\pi)+\frac{\partial h}{\partial x}(1,\pi)(x-1)
+                            +\frac{\partial h}{\partial y}(y-\pi)
+                            =-e-e(x-1)=-ex,
+                        \]
+                        and the corresponding linear approximation is
+                        \[
+                            e^x\cos(x^2y)\approx -ex.
+                        \]
+                        Consequently,
+                        \[
+                            h(1.1,3)\approx -1.1\cdot e\approx -2.99011.
+                        \]
+                        Compare this with the exact value:
+                        \[
+                            h(1.1,3)=e^{1.1}\cos(3.63)\approx -2.65292.
+                        \]
+                    </p>
+                </details>
+            </section>
+            <section id="differentials">
+                <h2>Differentials</h2>
+                <p>
+                    Suppose $z=f(x,y)$ is a differentiable function of two variables and $(a,b)$
+                    is in $\dom(f)$.
+                    We will introduce a tool (known as the differential of $z$) that
+                    will allow us to estimate the change in $z$ when we move from $(a,b)$
+                    to a nearby point $(x,y)$ in the domain of $f$.
+                </p>
+                <p>
+                    Let us write $\Delta x=x-a$, $\Delta y=y-b$ and $\Delta z=f(x,y)-f(a,b)$.
+                    Then the <a href="#definition-differentiable">differentiability</a> of $f$ at $(a,b)$ says that
+                    \[
+                        \Delta z = f_x(a,b)\Delta x + f_y(a,b)\Delta y
+                        +\varepsilon_1(x,y)\Delta x
+                        +\varepsilon_2(x,y)\Delta y,
+                    \]
+                    where the functions $\varepsilon_1$ and $\varepsilon_2$ approach zero
+                    as $(x,y)\to (a,b)$.
+                </p>
+                <p>
+                    Now take two small changes in $x$ and $y$ (say, $dx$ and $dy$ respectively),
+                    and let us compare $f(a+dx,b+dy)$ with $f(a,b)$.
+                    The two last terms in the above equation may be ignored (as they are
+                    close to zero), so that
+                    \[
+                        \Delta z\approx f_x(a,b)dx+f_y(a,b)dy.
+                    \]
+                </p>
+                <div class="definition-box">
+                    Let $z=f(x,y)$ be a function that is differentiable at $(a,b)$.
+                    We define the <b>differential</b> of $z$ (or of $f$) at $(a,b)$
+                    as the function $dz$ of the variables $dx$ and $dy$ defined via
+                    \[
+                        dz=df=f_x(a,b)dx+f_y(a,b)dy
+                        =\frac{\partial f}{\partial x}(a,b)dx+\frac{\partial f}{\partial y}(a,b)dy.
+                    \]
+                </div>
+                <div class="example-box">
+                    We are given a cylinder whose base has a radius of 3 inches and
+                    whose height is 15 inches.
+                    Assuming that these measurements have a possible error of up to
+                    $\varepsilon$ inches, estimate the maximum possible error in the
+                    calculated volume of the cylinder.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        The volume of a cylinder is given by the formula $V=\pi r^2h$,
+                        where $r$ is the radius of its base and $h$ is its height.
+                        Consequently, the differential of $V$ is
+                        \[
+                            dV=\frac{\partial V}{\partial r}dr
+                            +\frac{\partial V}{\partial h}dh
+                            =
+                            2\pi rh\,dr+\pi r^2\,dh.
+                        \]
+                        Since the error in each measurement is at most $\varepsilon$ inches,
+                        we can estimate the maximum possible error $\Delta V\approx dV$ in
+                        $V$ by taking $dr=\varepsilon$ and $dh=\varepsilon$, together with $r=3$
+                        and $h=15$.
+                        This yields
+                        \[
+                            dV=2\pi\cdot 3\cdot 15\varepsilon+\pi\cdot 3^2\cdot\varepsilon
+                            =99\pi\varepsilon.
+                        \]
+                        Thus, the maximum possible error in the computed volume is
+                        aprroximately equal to $99\pi\varepsilon$ inches.
+                    </p>
+                </details>
+            </section>
+            <section id="more-variables">
+                <h2>Linear Approximations of Functions of Several Variables</h2>
+                <p>
+                    The notions of linear approximation and differential of a function
+                    can be extended to functions of any amount of variables.
+                </p>
+                <div class="definition-box">
+                    Suppose $u=f(x_1,\dots,x_n)$ is a function of $n$ variables
+                    and $(a_1,\dots,a_n)$ is a point in its domain.
+                    If all partial derivatives of $f$ at $(a_1,\dots,a_n)$ exist,
+                    we define the <b>linearization</b> of $f$ at $(a_1,\dots,a_n)$
+                    to be the function
+                    \[
+                    L(x_1,\dots,x_n)=f(a_1,\dots,a_n)+f_{x_1}(a_1,\dots,a_n)(x_1-a_1)
+                    +
+                    \cdots
+                    +
+                    f_{x_n}(a_1,\dots,a_n)(x_n-a_n).
+                    \]
+                    The corresponding <b>linear approximation</b> is
+                    \[
+                    f(x_1,\dots,x_n)\approx f(a_1,\dots,a_n)+f_{x_1}(a_1,\dots,a_n)(x_1-a_1)
+                    +
+                    \cdots
+                    +
+                    f_{x_n}(a_1,\dots,a_n)(x_n-a_n).
+                    \]
+                    The function $f$ is <b>differentiable</b> at $(a_1,\dots,a_n)$ if we can
+                    write it as
+                    \[
+                        f(x_1,\dots,x_n)=L(x_1,\dots,x_n)+\varepsilon_1(x_1,\dots,x_n)(x_1-a_1)
+                        +\cdots+
+                        \varepsilon_n(x_1,\dots,x_n)(x_n-a_n),
+                    \]
+                    where the functions $\varepsilon_1,\,\dots,\,\varepsilon_n$ are defined
+                    near $(a_1,\dots,a_n)$ and approach zero as $(x_1,\dots,x_n)$ approaches
+                    $(a_1,\dots,a_n)$.<br>
+                    Moreover, the <b>differential</b> of $f$ (or of $u$) at $(a_1,\dots,a_n)$ is
+                    the function of the variables $dx_1,\,\dots,\,dx_n$ given by
+                    \[
+                        du=f_{x_1}(a_1,\dots,a_n)dx_1
+                            +
+                            \cdots
+                            +
+                            f_{x_n}(a_1,\dots,a_n)dx_n.
+                    \]
+                </div>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
