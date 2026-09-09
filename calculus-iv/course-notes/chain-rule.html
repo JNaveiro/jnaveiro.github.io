@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>The Chain Rule</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1>The Chain Rule</h1>
+            <p>
+                Recall that the Chain Rule for functions of one variable allows us
+                to take the derivative of composite functions.
+                Precisely, the Chain Rule says that if $f(x)$ is differentiable at $a$
+                and $g(x)$ is differentiable at $f(a)$, then $(g\circ f)(x)=g(f(x))$
+                is differentiable at $a$, with
+                \[
+                    (g\circ f)'(a)=f'(a)g'(f(a)).
+                \]
+                In other words, if we are given variables $x,\,y$ and $z$ such that
+                $y=y(x)$ depends on $x$ and $z=z(y)$ depends on $y$, then
+                \[
+                    \frac{dz}{dx}=\frac{dz}{dy}\frac{dy}{dx}.
+                \]
+                The objective of this section is to develop a version of the Chain Rule
+                that applies to functions of several variables.
+            </p>
+            <section id="chain-rule-1">
+                <h2>The Chain Rule: First Version</h2>
+                <p>
+                    We start with a "simple case" to see what a multi-dimensional
+                    Chain Rule should look like.
+                    Take a differentiable function $z=f(x,y)$ of two variables, and assume that
+                    the variables $x$ and $y$ depend on some variable $t$.
+                    In other words, $x=x(t)$ and $y=y(t)$.
+                    We suppose that both $x$ and $y$ are differentiable functions of $t$.
+                    We want to compute the derivative
+                    \[
+                        \frac{dz}{dt}=\frac{d}{dt}f(x(t),y(t)).
+                    \]
+                    To compute this, consider an increment $\Delta t$ of the variable $t$.
+                    We also write $\Delta x=x(t+\Delta t)$, $\Delta y=y(t+\Delta t)-y(t)$
+                    and $\Delta z=f(x(t+\Delta t),y(t+\Delta t))-f(x(t),y(t))$.
+                    Since <a href=tangent-planes.html#definition-differentiable>$f$ is differentiable at $(x(t),y(t))$</a>, we have
+                    \[
+                        \Delta z=\frac{\partial f}{\partial x}\Delta x
+                        +\frac{\partial f}{\partial y}\Delta y
+                        +\varepsilon_1 \Delta x + \varepsilon_2 \Delta y,
+                    \]
+                    where $\varepsilon_1$ and $\varepsilon_2$ go to zero as we approach
+                    $(x(t),y(t))$.
+                    Dividing by $\Delta t$, we obtain
+                    \[
+                        \frac{\Delta z}{\Delta t}=\frac{\partial f}{\partial x}\frac{\Delta x}{\Delta t}
+                        +\frac{\partial f}{\partial y}\frac{\Delta y}{\Delta t}
+                        +\varepsilon_1 \frac{\Delta x}{\Delta t} + \varepsilon_2 \frac{\Delta y}{\Delta t}.
+                    \]
+                    Now, as $\Delta t\to 0$, so do $\Delta x$ and $\Delta y$, so that $\varepsilon_1$
+                    and $\varepsilon_2$ also tend to zero.
+                    This means that the last two terms in the above equation go to zero as $\Delta t\to 0$,
+                    and we conclude that
+                    \[
+                        \frac{dz}{dt}=\lim_{\Delta t \to 0} \frac{\Delta z}{\Delta t}
+                        =
+                        \frac{\partial f}{\partial x}\frac{d x}{d t}
+                        +\frac{\partial f}{\partial y}\frac{d y}{d t}.
+                    \]
+                </p>
+                <p>
+                    In conclusion:
+                </p>
+                <div class="theorem-box">
+                    If $z=f(x,y)$ is a function of two variables $x$ and $y$,
+                    and both $x=x(t)$ and $y=y(t)$ depend on a single variable $t$,
+                    then the derivative of $z$ with respect to $t$ is
+                    \[
+                    \frac{dz}{dt}=\frac{\partial z}{\partial x}\frac{dx}{dt}
+                    +\frac{\partial z}{\partial y}\frac{dy}{dt}.
+                    \]
+                </div>
+                <div class="example-box">
+                    If $z=\ln(2x-y^3)$, $x=\cos t$ and $y=\sin^2 t$, find
+                    $\frac{dz}{dt}$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Using the Chain Rule, we obtain
+                        \[
+                            \begin{aligned}
+                                \frac{dz}{dt}
+                                &=
+                                \frac{\partial z}{\partial x}\frac{dx}{dt}
+                                +\frac{\partial z}{\partial y}\frac{dy}{dt}
+                                =
+                                \frac{2}{2x-y^3}\big(-\sin t\big)
+                                +\frac{-3y^2}{2x-y^3}\cdot 2\sin(t)\cos(t)
+                                \\
+                                &=
+                                \frac{-2\sin t-6y^2\sin (t)\cos (t)}{2x-y^3}.
+                            \end{aligned}
+                        \]
+                        Recalling that $x=\cos t$ and $y=\sin^2 t$, we arrive at
+                        \[
+                            \frac{dz}{dt}
+                            =
+                            \frac{-2\sin t-6\sin t\cos^5 t}{2 \cos t-\sin^6 t}.
+                        \]
+                    </p>
+                </details>
+                <p>
+                    The above version of the Chain Rule can also be generalized
+                    to functions of more than two variables as follows:
+                </p>
+                <div class="theorem-box" id="chain-rule-first-version">
+                    Suppose $z=f(x_1,\dots,x_n)$ is a differentiable function of the
+                    variables $x_1,\,\dots,\,x_n$ and each of the variables
+                    $x_1,\,\dots,\,x_n$ is a function of the variable $t$.
+                    Then,
+                    \[
+                        \frac{dz}{dt}
+                        =
+                        \frac{\partial z}{\partial x_1}\frac{dx_1}{dt}
+                        +\cdots+
+                        \frac{\partial z}{\partial x_n}\frac{dx_n}{dt}.
+                    \]
+                </div>
+                <div class="example-box">
+                    Suppose $f(x,y,z)$ is a differentiable function such that
+                    $f(2,1,0)=-2$, $f_x(2,1,0)=-3$, $f_y(2,1,0)=1$ and $f_z(2,1,0)=1$.
+                    If $h(t)=f(2t,e^{t-1},\sin(\pi t))$, compute $h'(1)$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        In this case, we have $x=2t$, $y=e^{t-1}$ and $z=\sin(\pi t)$,
+                        so the Chain Rule yields that
+                        \[
+                            \begin{aligned}
+                                \frac{dh}{dt}
+                                &=
+                                \frac{\partial f}{\partial x}\frac{dx}{dt}
+                                +\frac{\partial f}{\partial y}\frac{dy}{dt}
+                                +\frac{\partial f}{\partial z}\frac{dz}{dt}
+                                =
+                                2 \frac{\partial f}{\partial x}
+                                +e^{t-1} \frac{\partial f}{\partial y}
+                                +\pi \cos(\pi t) \frac{\partial f}{\partial z}.
+                            \end{aligned}
+                        \]
+                        Now, put $t=1$, so $x=2$, $y=1$ and $z=0$.
+                        Since
+                        \[
+                            \begin{aligned}
+                                \frac{\partial f}{\partial x}(2,1,0)=-3,\quad
+                                \frac{\partial f}{\partial y}(2,1,0)=1,\quad
+                                \frac{\partial f}{\partial z}(2,1,0)=1,
+                            \end{aligned}
+                        \]
+                        we deduce that
+                        \[
+                            \frac{dh}{dt}(1)=2\cdot(-3)+1\cdot 1+\pi\cdot(-1)\cdot 1
+                            =-5-\pi.
+                        \]
+                    </p>
+                </details>
+                <section id="chain-rule-general">
+                    <h2>The Chain Rule: General Version</h2>
+                    <p>
+                        So far, we know how to differentiate the composition of a function
+                        of $n$ variables with $n$ functions of one variable.
+                        Here we will make use of this fact to find the partial derivatives
+                        of the composition of a function of $n$ variables together with
+                        $n$ functions of $m$ variables.
+                    </p>
+                    <p>
+                        Let's set the stage first.
+                        Consider a differentiable function $u=f(x_1,\dots,x_n)$ that depends on $n$ variables
+                        $x_1,\,\dots,\,x_n$.
+                        Furthermore, suppose that each of the variables $x_1,\,\dots,\,x_n$
+                        depends differentiably (i.e. are differentiable functions)
+                        on $m$ variables $t_1,\,\dots,\,t_m$.
+                        In other words, we have
+                        \[
+                            x_1=x_1(t_1,\dots,t_m),\quad
+                            x_2=x_2(t_1,\dots,t_m),\quad\dots,\quad
+                            x_n=x_n(t_1,\dots,t_m).
+                        \]
+                        Then, we can view $u$ as a function of the variables $t_1,\,\dots,\,t_m$:
+                        \[
+                            u=u(x_1(t_1,\dots,t_m),\dots,x_n(t_1,\dots,t_m)).
+                        \]
+                        We usually say that $u$ is the <b>dependent variable</b>,
+                        $x_1,\,\dots,\,x_n$ are the <b>intermediate variables</b>,
+                        and $t_1,\,\dots,\,t_m$ are the <b>independent variables</b>.
+                    </p>
+                    <p>
+                        Our objective will be to compute the partial derivative of $u$ with
+                        respect to the variable $t_i$.
+                        To make the argument easier, we will assume that $t_i=t_1$
+                        (but the argument is valid in general).
+                        To do this, consider the function
+                        \[
+                            h(t)=u(x_1(t,t_2,\dots,t_m),\dots,x_n(t,t_2,\dots,t_m)).
+                        \]
+                        Then by definition, we have
+                        \[
+                            h'(t_1)=\frac{\partial u}{\partial t_1},
+                        \]
+                        and by using the <a href="#chain-rule-first-version">first version of the Chain Rule</a>,
+                        we see that
+                        \[
+                            \begin{aligned}
+                                h'(t_1)
+                                &=
+                                \frac{\partial u}{\partial x_1}\frac{d}{dt}x_1(t,t_2,\dots,t_m)
+                                +
+                                \cdots
+                                +
+                                \frac{\partial u}{\partial x_n}\frac{d}{dt}x_n(t,t_2,\dots,t_m)
+                                =
+                                \frac{\partial u}{\partial x_1}\frac{\partial x_1}{\partial t_1}
+                                +
+                                \cdots
+                                +
+                                \frac{\partial u}{\partial x_n}\frac{\partial x_n}{\partial t_1}.
+                            \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                        Our conclusion is thus that
+                        \[
+                            \frac{\partial u}{\partial t_1}
+                            =
+                            \frac{\partial u}{\partial x_1}\frac{\partial x_1}{\partial t_1}
+                            +
+                            \cdots
+                            +
+                            \frac{\partial u}{\partial x_n}\frac{\partial x_n}{\partial t_1}.
+                        \]
+                        With this in mind, we can now state the general version of the Chain Rule:
+                    </p>
+                    <div class="theorem-box" id="chain-rule-2">
+                        Suppose $u=u(x_1,\dots,x_n)$ is a differentiable function of the variables
+                        $x_1,\,\dots,\,x_n$ and each of the variables $x_1,\,\dots,\,x_n$ is
+                        a differentiable function of the variables $t_1,\,\dots,\,t_m$.
+                        Then $u$ is a function of $t_1,\,\dots,\,t_m$ and
+                        \[
+                            \frac{\partial u}{\partial t_i}
+                            =
+                            \frac{\partial u}{\partial x_1}\frac{\partial x_1}{\partial t_i}
+                            +
+                            \cdots
+                            +
+                            \frac{\partial u}{\partial x_n}\frac{\partial x_n}{\partial t_i}
+                        \]
+                        for each variable $t_i$.
+                    </div>
+                    <div class="example-box">
+                        Suppose $f(x,y)$ is a differentiable function.
+                        If $x=r \cos \theta$ and $y=r\sin\theta$, compute the partial derivatives
+                        \[
+                        \frac{\partial f}{\partial r} \quad\textsf{and}\quad
+                        \frac{\partial f}{\partial \theta}.
+                        \]
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Using the <a href="#chain-rule-2">general version of the Chain Rule</a>,
+                            we obtain
+                            \[
+                                \begin{aligned}
+                                    \frac{\partial f}{\partial r}
+                                    &=
+                                    \frac{\partial f}{\partial x}
+                                    \frac{\partial x}{\partial r}
+                                    +
+                                    \frac{\partial f}{\partial y}
+                                    \frac{\partial y}{\partial r}
+                                    =
+                                    \cos \theta \frac{\partial f}{\partial x}
+                                    +
+                                    \sin \theta \frac{\partial f}{\partial y}\\
+                                    \frac{\partial f}{\partial \theta},
+                                    &=
+                                    \frac{\partial f}{\partial x}
+                                    \frac{\partial x}{\partial \theta}
+                                    +
+                                    \frac{\partial f}{\partial y}
+                                    \frac{\partial y}{\partial \theta}
+                                    =
+                                    -r \sin \theta \frac{\partial f}{\partial x}
+                                    +
+                                    r \cos \theta \frac{\partial f}{\partial y}.
+                                \end{aligned}
+                            \]
+                        </p>
+                    </details>
+                    <div class="example-box">
+                        Let $f(x,y)$ be a differentiable function and $g(t)$, $h(t)$
+                        two differentiable functions.
+                        Compute the partial derivatives $F_y$ and $F_z$
+                        of
+                        \[
+                            F(x,y,z)=f(g(x+y),h(y+z)).
+                        \]
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            If we write $u=g(x+y)$ and $v=h(y+z)$, then the <a href="#chain-rule-2">general version of the Chain Rule</a> gives
+                            \[
+                                F_y
+                                =
+                                \frac{\partial f}{\partial u}\frac{\partial u}{\partial y}
+                                +
+                                \frac{\partial f}{\partial v}\frac{\partial v}{\partial y}
+                                =
+                                g'(x+y)\frac{\partial f}{\partial u}
+                                +
+                                h'(y+z)\frac{\partial f}{\partial v}.
+                            \]
+                            Similarly,
+                            \[
+                                F_z
+                                =
+                                \frac{\partial f}{\partial u}\frac{\partial u}{\partial z}
+                                +
+                                \frac{\partial f}{\partial v}\frac{\partial v}{\partial z}
+                                =
+                                h'(y+z)\frac{\partial f}{\partial v}.
+                            \]
+                        </p>
+                    </details>
+                    <div class="example-box">
+                        If $u=x^3y-xz^2$, where $x=r+se^t$, $y=s^2e^{-t}$ and $z=r\cos t$,
+                        Find the partial derivatives
+                        \[
+                            \frac{\partial u}{\partial r}\quad\textsf{and}\quad
+                            \frac{\partial u}{\partial t}
+                        \]
+                        when $r=1$, $s=2$ and $t=0$.
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            Using the chain rule, we have
+                            \[
+                                \begin{aligned}
+                                    \frac{\partial u}{\partial r}
+                                    &=
+                                    \frac{\partial u}{\partial x}
+                                    \frac{\partial x}{\partial r}+
+                                    \frac{\partial u}{\partial y}
+                                    \frac{\partial y}{\partial r}+
+                                    \frac{\partial u}{\partial z}
+                                    \frac{\partial z}{\partial r}
+                                    =
+                                    \big(3x^2y-z^2\big)\cdot 1+x^3\cdot 0-2zx\cos t
+                                    \\&=
+                                    3x^2y-z^2-2zx\cos t.
+                                \end{aligned}
+                            \]
+                            Now, if $r=1$, $s=2$ and $t=0$, then $x=3$, $y=4$ and $z=1$,
+                            so
+                            \[
+                                    \frac{\partial u}{\partial r}
+                                    =
+                                    3\cdot 9\cdot 4-1^2-2\cdot 1\cdot 3\cdot \cos 0=101.
+                            \]
+                        </p>
+                        <p>
+                            We now compute $\partial u/\partial t$.
+                            In this case, we have
+                            \[
+                                \begin{aligned}
+                                    \frac{\partial u}{\partial t}
+                                    &=
+                                    \frac{\partial u}{\partial x}
+                                    \frac{\partial x}{\partial t}+
+                                    \frac{\partial u}{\partial y}
+                                    \frac{\partial y}{\partial t}+
+                                    \frac{\partial u}{\partial z}
+                                    \frac{\partial z}{\partial t}
+                                    =
+                                    \big(3x^2y-z^2\big)\cdot se^t+x^3\cdot \big(-s^2e^{-t}\big)
+                                    -2zx\big(-r\sin t\big).
+                                \end{aligned}
+                            \]
+                            Substituting when $r=1$, $s=2$ and $t=0$, we obtain
+                            \[
+                                    \frac{\partial u}{\partial t}
+                                    =
+                                    \big(3\cdot 9\cdot 4 - 1\big)\cdot 2+27\cdot \big(-4\big)
+                                    =
+                                    106.
+                            \]
+                        </p>
+                    </details>
+                    <div class="example-box">
+                        Suppose $u=f(x,y)$ for a differentiable function $f$ that has
+                        continuous partial derivatives of order $2$,
+                        If $x=r\cos\theta$ and $y=r\sin\theta$,
+                        Compute
+                        \[
+                            \frac{\partial^2 u}{\partial\theta\,\partial r}.
+                        \]
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            We start by taking the (first) partial derivative:
+                            \[
+                                \begin{aligned}
+                                    \frac{\partial u}{\partial r}
+                                    =
+                                    \frac{\partial u}{\partial x}
+                                    \frac{\partial x}{\partial r}
+                                    +
+                                    \frac{\partial u}{\partial y}
+                                    \frac{\partial y}{\partial r}
+                                    =
+                                    \cos \theta
+                                    \frac{\partial f}{\partial x}
+                                    +
+                                    \sin\theta
+                                    \frac{\partial f}{\partial y}.
+                                \end{aligned}
+                            \]
+                            Now we differentiate the above expression with respect to $\theta$,
+                            applying the chain rule to the partial derivatives of $f$ and
+                            <a href="partial-derivatives.html#clairaut">Clairaut's theorem</a>.
+                            \[
+                                \begin{aligned}
+                                    \frac{\partial^2 u}{\partial\theta\,\partial r}
+                                    =&
+                                    -\sin \theta \frac{\partial f}{\partial x}
+                                    +\cos \theta \frac{\partial^2 f}{\partial x^2}\frac{\partial x}{\partial \theta}
+                                    +
+                                    \cos \theta \frac{\partial^2 f}{\partial y\,\partial x}\frac{\partial y}{\partial \theta}
+                                    +\cos\theta \frac{\partial f}{\partial y}
+                                    +
+                                    \sin\theta \frac{\partial^2 f}{\partial x\,\partial y}\frac{\partial x}{\partial \theta}
+                                    +
+                                    \sin\theta \frac{\partial^2 f}{\partial y^2}\frac{\partial y}{\partial \theta}\\
+                                    =&
+                                    -\sin \theta \frac{\partial f}{\partial x}
+                                    -r\sin\theta\cos \theta \frac{\partial^2 f}{\partial x^2}
+                                    +
+                                    r\cos^2 \theta \frac{\partial^2 f}{\partial x\,\partial y}
+                                    +\cos\theta \frac{\partial f}{\partial y}
+                                    -r\sin^2\theta \frac{\partial^2 f}{\partial x\,\partial y}
+                                    \\
+                                    &+r\sin\theta\cos\theta \frac{\partial^2 f}{\partial y^2}\frac{\partial y}{\partial \theta}\\
+                                \end{aligned}
+                            \]
+                        </p>
+                    </details>
+                </section>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
