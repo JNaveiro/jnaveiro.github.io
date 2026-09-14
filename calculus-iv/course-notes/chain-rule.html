@@ -81,7 +81,7 @@
                     In conclusion:
                 </p>
                 <div class="theorem-box">
-                    If $z=f(x,y)$ is a function of two variables $x$ and $y$,
+                    If $z=f(x,y)$ is a differentiable function of two variables $x$ and $y$,
                     and both $x=x(t)$ and $y=y(t)$ depend on a single variable $t$,
                     then the derivative of $z$ with respect to $t$ is
                     \[
@@ -115,7 +115,7 @@
                         \[
                             \frac{dz}{dt}
                             =
-                            \frac{-2\sin t-6\sin t\cos^5 t}{2 \cos t-\sin^6 t}.
+                            \frac{-2\sin t-6\sin^5 t\cos t}{2 \cos t-\sin^6 t}.
                         \]
                     </p>
                 </details>
@@ -468,6 +468,54 @@
                             \]
                         </p>
                     </details>
+                </section>
+                <section id="implicit-differentiation">
+                    <h2>A Word on Implicit Differentiation</h2>
+                    <p>
+                        In some instances, it may be the case that a function is defined
+                        <em>implicitly</em>.
+                        By this we mean that, instead of having a formula that
+                        explicitly describes the dependent variable in terms of the
+                        independent variables, we may be given an equation that relates the
+                        dependent and independent variables.
+                    </p>
+                    <p>
+                        An example of this is the following:
+                        consider the equation
+                        \[
+                            y^2+xz+z^2-e^z=-4.
+                        \]
+                        This equation defines $z$ <em>implicitly</em> as a function
+                        of $x$ and $y$.
+                        However, solving the above equation for $z$ is not feasible.
+                    </p>
+                    <p>
+                        Despite this, we can still compute the partial derivatives of $z$
+                        with respect to $x$ and $y$.
+                    </p>
+                    <p>
+                        Let us first compute $\tfrac{\partial z}{\partial x}$.
+                        To do this, we differentiate the above equation with respect to
+                        $x$ to obtain
+                        \[
+                            z+x \frac{\partial z}{\partial x}+2z \frac{\partial z}{\partial x}
+                            -e^z \frac{\partial z}{\partial x}=0.
+                        \]
+                        This allows us to compute $\tfrac{\partial z}{\partial x}$ by simply
+                        solving the above equation:
+                        \[
+                            \frac{\partial z}{\partial x}
+                            =
+                            \frac{z}{e^z-x-2z}.
+                        \]
+                        Differentiating the original equation with respect to $y$ and
+                        solving for $\tfrac{\partial z}{\partial y}$, we also obtain
+                        \[
+                            \frac{\partial z}{\partial y}
+                            =
+                            \frac{2y}{e^z-x-2z}.
+                        \]
+                    </p>
                 </section>
             </section>
         </main>

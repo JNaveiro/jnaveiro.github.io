@@ -12,6 +12,7 @@ window.MathJax = {
             vecspan: "{\\operatorname{span}}",
             tr: "{\\operatorname{tr}}",
             dom: "{\\operatorname{Dom}}",
+            grad: "{\\operatorname{grad}\\,}",
             bf: ["{\\mathbf{#1}}", 1]
         }
     }
