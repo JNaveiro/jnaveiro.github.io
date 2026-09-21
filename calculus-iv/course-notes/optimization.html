@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Optimization</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1>Optimization</h1>
+            <p>
+                The purpose of this section is to showcase how we can use
+                partial derivatives in order to compute the (local) maximum
+                and minimum values of a function of two variables.
+                More precisely, we will see how Fermat's theorem and the
+                Second Derivative Test for functions of a single variable can
+                be translated to the case of functions of several variables.
+            </p>
+            <section id="local">
+                <h2>Local Maximum and Minimum Values</h2>
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                    <div class="definition-box" style="width: 65%;">
+                        Let $f(x,y)$ be a function of two variables and $(a,b)$
+                        a point in the domain of $f$.
+                        We say that $f$ has:
+                        <ul>
+                            <li style="padding-bottom: 4%;">
+                                a <b>local maximum</b> at $(a,b)$
+                                if for any $(x,y)$ sufficiently close to $(a,b)$ we have
+                                $f(a,b)\geq f(x,y)$.
+                            </li>
+                            <li>
+                                a <b>local minimum</b>
+                                at $(a,b)$ if for any $(x,y)$ sufficiently close to $(a,b)$
+                                we have $f(a,b)\leq f(x,y)$.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/wave.png" alt="A function with local maxima and minima"
+                        style="width: 100%;">
+                    </div>
+                </div>
+                <p>
+                    Recall that if $f(x)$ is a function of a single variable which
+                    has a local maximum or minimum at $x=a$, then $f'(x)=0$.
+                    This result is known as Fermat's Theorem.
+                    For functions of several variables, the situation is very similar:
+                </p>
+                <div class="theorem-box" id="fermat">
+                    Let $f(x,y)$ be a function of two variables and $(a,b)$ a point
+                    in its domain.
+                    If $f$ has a local maximum (or minimum) at $(a,b)$ and the
+                    partial derivatives of $f$ at $(a,b)$ exist, then
+                    \[
+                        \frac{\partial f}{\partial x}(a,b)
+                        =
+                        \frac{\partial f}{\partial y}(a,b)
+                        =
+                        0.
+                    \]
+                    In other words,
+                    \[
+                        \nabla f(a,b)=0.
+                    \]
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        For instance, let us show that $f_x(a,b)=0$.
+                        The case of $f_y(a,b)$ is very similar.
+                    </p>
+                    <p>
+                        Consider the function $g(t)=f(t,b)$.
+                        By considering the function $g$, we are looking at the
+                        values of the function $f$ along the horizontal
+                        line $y=b$.
+                        Since $f$ has a local maximum at $(a,b)$, we see
+                        that $g$ has a local maximum at $a$.
+                        Hence, by Fermat's theorem:
+                        \[
+                            g'(a)=f_x(a,b)=0.
+                        \]
+                    </p>
+                </details>
+                <p>
+                    Following the terminology for functions of a single
+                    variable, we can also establish the notion of critical points.
+                </p>
+                <div class="definition-box">
+                    Let $f(x,y)$ be a function of two variables.
+                    We say that $(a,b)$ is a <b>critical point</b> of $f$ if
+                    either:
+                    <ul>
+                        <li>
+                            at least one of the partial derivatives $f_x(a,b)$
+                            of $f_y(a,b)$ does not exist, or
+                        </li>
+                        <li>
+                            both partial derivatives $f_x(a,b)$ and $f_y(a,b)$ exist
+                            and are zero (that is, $\nabla f(p)=0$).
+                        </li>
+                    </ul>
+                </div>
+                <p>
+                    Consequently, <a href="#fermat">the above theorem</a> can be reinterpreted
+                    as saying that if $f(x,y)$ has a local maximum (or minimum) at $(a,b)$,
+                    then $(a,b)$ is a critical point of $f$.
+                </p>
+                <div class="warning-box">
+                    Just as in the case of functions of one variable, not every critical
+                    point of a function gives rise to a maximum or minimum value, as we
+                    will see with the following example.
+                </div>
+                <div class="example-box">
+                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                        <p style="width: 65%;">
+                        Consider the function
+                        \[
+                        f(x,y)=x^2-y^2.
+                        \]
+                        Since the gradient of $f$ is $\nabla f(x,y)=\langle 2x,2y\rangle$,
+                        the only critical point of $f$ is $(0,0)$.
+                        However, $f$ does not have a maximum or minimum value at $(0,0)$,
+                        because for any small value of $t$ we have
+                        \[
+                        -t^2 = f(0,t) < f(0,0) = 0 < f(t,0) = t^2.
+                        \]
+                        </p>
+                    <div class="image-container" style="width: 30%; display: flex; align-items: center;">
+                        <img src="Pictures/pringle.png" alt="The graph of y^2-x^2" style="width: 100%; height: auto;">
+                    </div>
+                    </div>
+                </div>
+                <p>
+                    Motivated by this example, we establish the following definition:
+                </p>
+                <div class="definition-box">
+                    Let $f(x,y)$ be a function of two variables and $(a,b)$ a critical point
+                    of $f$.
+                    We say that $(a,b)$ is a <b>saddle point</b> of $f$ if
+                    $f$ does not have a local a maximum or a local minimum at $f$.
+                </div>
+                <p>
+                    How can we check if a function $f(x,y)$ achieves a local extreme
+                    value at a point $(a,b)$?
+                    As always, we look for inspiration in the case of functions of one
+                    variable.
+                </p>
+                <p>
+                    Let $f(x)$ be a function of one variable and $x=a$ a critical point
+                    of $f$.
+                    The Second Derivative Test allows us to discuss whether $f$ achieves
+                    a local maximum or minimum value at $x=a$ by looking at the sign of
+                    $f''(a)$:
+                </p>
+                <ul>
+                    <li>
+                        If $f''(a)>0$, then $f$ has a local minimum at $x=a$.
+                    </li>
+                    <li>
+                        If $f''(a)<0$, then $f$ has a local maximum at $x=a$.
+                    </li>
+                    <li>
+                        If $f''(a)=0$, then the test is inconclusive: $f$ can have
+                        a local maximum, a local minimum, or neither at $x=a$.
+                    </li>
+                </ul>
+                <p>
+                    Now, suppose that $f(x,y)$ is a function of two variables and
+                    $(a,b)$ is a critical point of $f$.
+                    In this case, $f$ will have four partial derivatives of second order
+                    at $(a,b)$, which are $f_{xx}(a,b)$, $f_{xy}(a,b)=f_{yx}(a,b)$
+                    (this equality is due to <a href="partial-derivatives.html#clairaut">Clairaut's theorem</a>)
+                    and $f_{yy}(a,b)$.
+                    Thus, the condition $f''(a)>0$ will transform into a condition that
+                    involves the second order partial derivatives of $f$:
+                </p>
+                <div class="theorem-box" id="second-derivative-test">
+                    Let $f(x,y)$ be a function of two variables that has continuous
+                    partial derivatives of order two.
+                    Suppose $(a,b)$ is a critical point of $f$, and define
+                    \[
+                        D
+                        =
+                        \left|
+                        \begin{array}{cc}
+                            f_{xx}(a,b) & f_{xy}(a,b) \\
+                            f_{yx}(a,b) & f_{yy}(a,b) \\
+                        \end{array}
+                        \right|
+                        =
+                        f_{xx}(a,b)f_{yy}(a,b)-f_{xy}(a,b)^2.
+                    \]
+                    Then the following assertions hold:
+                    <ul>
+                        <li>
+                            If $f_{xx}(a,b)>0$ and $D>0$, then $f$ has a local
+                            minimum at $(a,b)$.
+                        </li>
+                        <li>
+                            If $f_{xx}(a,b)<0$ and $D>0$, then $f$ has a local
+                            maximum at $(a,b)$.
+                        </li>
+                        <li>
+                            If $D<0$, then $f$ has a saddle point at $(a,b)$.
+                        </li>
+                        <li>
+                            If $D=0$, then the test is inconclusive:
+                            $f$ can have a local maximum, a local minimum, or
+                            a saddle point at $(a,b)$.
+                        </li>
+                    </ul>
+                </div>
+                <div class="example-box">
+                    Find the local maximum values, the local minimum values, and
+                    the saddle points of the function
+                    \[
+                        f(x,y)=2x^2+y^2+x^2y.
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We first look for the critical points of the function $f$.
+                        The gradient of $f$ is
+                        \[
+                            \nabla f = \langle 4x+2xy,2y+x^2 \rangle.
+                        \]
+                        Thus, the critical points of $f$ are the points $(x,y)$ that
+                        satisfy the system of equations
+                        \[
+                            \left\{
+                            \begin{array}{rcl}
+                                4x+2xy & = & 0, \\
+                                2y+x^2 & = & 0,
+                            \end{array}
+                            \right.
+                        \]
+                        From the equation $4x+2xy=2x(2+y)=0$ we obtain that either
+                        $x=0$ or $y=-2$.
+                    </p>
+                    <p>
+                        If $x=0$, then the second equation becomes $2y=0$, so $y=0$
+                        and we obtain that $(0,0)$ is a critical point of $f$.
+                    </p>
+                    <p>
+                        If $y=-2$, then the second equation says $-4+x^2=0$, so that
+                        $x=\pm 2$.
+                        This gives us two critical points: $(0,0)$, $(2,-2)$ and $(-2,-2)$.
+                    </p>
+                    <p>
+                        Now that we know the critical points of $f$, we have to look at
+                        the partial derivatives of order two.
+                        We have
+                        \[
+                            f_{xx}(x,y)=4+2y, \qquad
+                            f_{xy}(x,y)=2x, \qquad
+                            f_{yy}(x,y)=2,
+                        \]
+                        Hence, we obtain
+                        \[
+                            D
+                            =
+                            2(4+2y)-4x^2
+                            =
+                            8+4y-4x^2.
+                        \]
+                    </p>
+                    <p>
+                        We now examine each of the critical points that
+                        we found for $f$:
+                    </p>
+                    <ul>
+                        <li>
+                            At $(0,0)$, we have $f_{xx}(0,0)=4>0$ and
+                            $D(0,0)=8>0$, so $f$ has a local minimum value at
+                            $(0,0)$, and this value is $f(0,0)=0$.
+                        </li>
+                        <li>
+                            At $(2,-2)$, we see that $D(2,-2)=-16<0$, so $(2,-2)$
+                            is a saddle point of $f$.
+                        </li>
+                        <li>
+                            At $(-2,-2)$, we have $D(-2,-2)=-16<0$, so $(-2,-2)$ is
+                            also a saddle point of $f$.
+                        </li>
+                    </ul>
+                    <p>
+                        Since we already covered all critical points, we also deduce
+                        that $f$ does not achieve a local maximum.
+                    </p>
+                </details>
+                <div class="example-box">
+                    Find the dimensions of the parallelepiped whose volume is $27\,\text{in}^3$
+                    and has minimal surface area.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        The dimensions of a parallelepiped are its length $l$, its width
+                        $w$ and its height $h$.
+                        For the sake of convenience, we will measure these dimensions in inches.
+                    </p>
+                    <p>
+                        Since the volume of a parallelepiped is $V=lwh$, we see that
+                        \[
+                            lwh=27.
+                        \]
+                        This equation allows us to solve for one of the variables in terms
+                        of the other two, for instance, we can solve for the length to obtain
+                        \[
+                            l=\frac{27}{wh}.
+                        \]
+                        In addition, the surface area of the parallelepiped is equal to
+                        \[
+                            2lw+2wh+2lh=\frac{54}{h}+2wh+\frac{54}{w}.
+                        \]
+                        Therefore, in order to find the dimensions of the parallelepiped
+                        that encloses the minimum possible surface area, we have to minimize
+                        the function
+                        \[
+                            g(h,w)=\frac{54}{h}+2wh+\frac{54}{w}.
+                        \]
+                        The gradient of $g$ is
+                        \[
+                            \nabla g(h,w)
+                            =
+                            \bigg\langle
+                            -\frac{54}{h^2}+2w,
+                            2h-\frac{54}{w^2}
+                            \bigg\rangle,
+                        \]
+                        so finding the critical points of $g$ amounts to solving the system
+                        \[
+                        \left\{
+                        \begin{array}{ccc}
+                            2w-\frac{54}{h^2}&=&0,\\
+                            2h-\frac{54}{w^2}&=&0,
+                        \end{array}
+                        \right.
+                        \]
+                        This system has a unique solution, which is $h=3$ and $w=3$, so the
+                        only critical point of $g$ is $(3,3)$.
+                    </p>
+                    <p>
+                        We now apply the <a href="#second-derivative-test">Second derivative test</a>:
+                        The second partial derivatives of $g$ are
+                        \[
+                            g_{hh}=\frac{108}{h^3},\quad
+                            g_{hw}=g_{wh}=2,\quad
+                            g_{ww}=\frac{108}{w^3}.
+                        \]
+                        Therefore, at $(3,3)$ we get
+                        \[
+                            g_{hh}(3,3)=4,\quad
+                            g_{hw}(3,3)=g_{wh}=2,\quad
+                            g_{ww}(3,3)=4,
+                        \]
+                        so $g_{hh}(3,3)>0$ and $D(3,3)=4^2-2^2=12>0$.
+                        This shows that $g$ achieves a local minimum at $(3,3)$.
+                    </p>
+                    <p>
+                        In conclusion, the only parallelepiped that encloses a volume of
+                        $27\,\text{in}^3$ while having the least possible surface area is
+                        the one whose height and width are $3\,\text{in}$, and whose
+                        length is
+                        \[
+                            l=\frac{27}{3\cdot 3}=3\,\text{in}.
+                        \]
+                    </p>
+                </details>
+            </section>
+            <section id="absolute">
+                <h2>Absolute Maximum and Minimum Values</h2>
+                <p>
+                    Here we extend both the Extreme Value Theorem and the
+                    Closed Interval Method to functions of two variables.
+                    First we need to establish that it means for a function
+                    to have an absolute extreme value.
+                </p>
+                <div class="definition-box">
+                    Let $f(x,y)$ be a function of two variables with domain $D$
+                    and $(a,b)$ any point in $D$.
+                    Then:
+                    <ul>
+                        <li>
+                            We say that $f(a,b)$ is the <b>absolute maximum value</b>
+                            of $f$ on $D$ if $f(a,b)\geq f(x,y)$ for any point
+                            $(x,y)$ in $D$.
+                        </li>
+                        <li>
+                            We say that $f(a,b)$ is the <b>absolute minimum value</b>
+                            of $f$ on $D$ if $f(a,b)\leq f(x,y)$ for any point
+                            $(x,y)$ in $D$.
+                        </li>
+                    </ul>
+                </div>
+                    <p>
+                        The Extreme Value Theorem asserts that any continuous
+                        function $f\colon [a,b]\to \RR$ defined on a closed interval
+                        has a maximum and a minimum values.
+                        In addition, the Closed Interval Method allows us to find those values
+                        as follows:
+                    </p>
+                    <ol>
+                        <li>
+                            Compute the critical points of $f$ in $(a,b)$ and the
+                            values of $f$ at said critical points.
+                        </li>
+                        <li>
+                            Calculate the numbers $f(a)$ and $f(b)$.
+                        </li>
+                        <li>
+                            The absolute maximum value of $f$ is the maximum of
+                            all the numbers obtained in the previous two steps.
+                            <br>
+                            Similarly, the absolute minimum value of $f$ is the minimum
+                            of all the numbers obtained in the previous two steps.
+                        </li>
+                    </ol>
+                    <p>
+                        The Extreme Value Theorem will also be true for functions of two variables.
+                        However, in order to understand how this result works in this context,
+                        we first need to understand which subsets of $\RR^2$ will play the
+                        role of closed intervals.
+                    </p>
+                    <p>
+                        Let $D$ be a subset of $\RR^2$.
+                        A point $(a,b)$ is called a <em>boundary point</em> of $D$ if any disk centered around
+                        $D$ contains points inside $D$ and points outside $D$.
+                        Intuitively, we can think of the boundary points of $D$ as those in
+                        the <em>border</em> of $D$.
+                    </p>
+                    <div class="definition-box">
+                        A subset $D$ of $\RR^2$ is:
+                        <ul>
+                            <li>
+                                <em>Closed</em> if it contains all its boundary points.
+                            </li>
+                            <li>
+                                <em>Bounded</em> if it is contained in a disk.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="remark-box">
+                        If $D$ is a subset of the plane, then the notion of $D$ being bounded
+                        means that $D$ does not possess points that can go arbitrarily far away
+                        from a given position.
+                    </div>
+                    <div class="example-box">
+                        Let us consider the sets
+                        \[
+                            D=\{(x,y)\mid 0\leq x <1,\,0\leq y\leq 1\},\qquad
+                            E=\{(x,y)\mid 0\leq x \leq1,\,0\leq y\leq 1\}.
+                        \]
+                         Looking at the pictures below, we see that the boundary of $D$ is the
+                         square whose vertices are $(0,0)$, $(1,0)$, $(0,1)$ and $(1,1)$.
+                         The same is true for $E$.
+                         However, $D$ is not closed because it does not contain some of its
+                         boundary points (more precisely, those in the line from $(1,0)$ to $(1,1)$),
+                         whereas $E$ is closed because all of its boundary points are contained in $E$.
+                         <div style="display: flex; flex-direction: row; justify-content: space-evenly;">
+                            <div class="image-container" style="width: 20%;">
+                                <img src="Pictures/non-closed.png" alt="A non-closed set" style="width: 100%;">
+                            </div>
+                            <div class="image-container" style="width: 20%;">
+                                <img src="Pictures/closed.png" alt="A closed set" style="width: 100%;">
+                            </div>
+                         </div>
+                    </div>
+                    <p>
+                        We can now formulate the Extreme Value Theorem for functions of two variables.
+                    </p>
+                    <div class="theorem-box">
+                        Let $D$ be a closed and bounded set and $f(x,y)$ a function that
+                        is continuous on $D$.
+                        Then $f$ achieves both an absolute maximum value and an absolute minimum value
+                        in $D$.
+                    </div>
+                    <p>
+                        Because of <a href="#fermat">Fermat's theorem</a>, if $f$ achieves an
+                        absolute extreme value at the point $(a,b)$, then either $(a,b)$ is a critical
+                        point of $f$ or it is in the boundary of $D$.
+                        Consequently, we can give the following extension of the Closed Interval Method
+                        for functions of two variables:
+                    </p>
+                    <p>
+                        Consider a function $f(x,y)$ that is continuous on the closed
+                        bounded set $D$.
+                        Then in order to find the absolute extreme values of $f$,
+                        we can follow the steps below:
+                    </p>
+                    <ol>
+                        <li>
+                            Compute the critical points of $f$ inside $D$ and the values of
+                            $f$ at said critical points.
+                        </li>
+                        <li>
+                            Find the extreme values of $f$ along the boundary of $D$.
+                        </li>
+                        <li>
+                            The absolute maximum value of $f$ is the largest number obtained
+                            in the two previous steps.
+                            Similarly, the absolute minimum value of $f$ is the smallest
+                            number obtained in the two previous steps.
+                        </li>
+                    </ol>
+                    <div class="example-box">
+                        Find the absolute maximum and absolute minimum of the function
+                        \[
+                            f(x,y)=x^2+y^2-2y
+                        \]
+                        on the closed triangular region $D$ whose vertices are $(0,2)$, $(2,0)$
+                        and $(-2,0)$.
+                        <div class="image-container" style="flex-direction: row;">
+                            <img src="Pictures/optimization-domain.png" alt="A graph" style="width: 30%;">
+                        </div>
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            We follow the steps detailed above.
+                        </p>
+                        <p>
+                            First, we find the critical points of $f$ in $D$.
+                            In order to do this, we compute the gradient of $f$:
+                            \[
+                                \nabla f(x,y)=\langle 2x,2y-2\rangle.
+                            \]
+                            By solving the equation $\nabla f(x,y)=0$, we see that the only critical
+                            point of $f$ is $(0,1)$, which is contained in $D$.
+                            The value of $f$ at $(0,1)$ is $f(0,1)=-1$.
+                        </p>
+                        <p>
+                            Now we have to study the values of $f$ along the boundary
+                            of $D$.
+                            Notice that this boundary is comprised of three lines, which are
+                            labelled by $L_1$, $L_2$ and $L_3$ in the picture.
+                            We will find the maximum and minimum values of $f$ along
+                            each of these lines separately.
+                        </p>
+                        <p>
+                            Firstly, let us look at the values of $f$ along $L_1$.
+                            Note that the line $L_1$ has equation $y=x+2$, where $x$
+                            lies in $[-2,0]$.
+                            Therefore, the function $f$ along $L_1$ becomes
+                            \[
+                                f(x,x+2)=2x^2+2x, \qquad -2\leq x\leq 0.
+                            \]
+                            The derivative
+                            \[
+                                \frac{d}{dt}(2x^2+2x)=4x+2
+                            \]
+                            is zero precisely when $x=-\tfrac12$
+                            (so $-\tfrac12$ is a critical number of $f(x,x+2)$ in
+                            $(-2,0)$).
+                            Since $f(-2,0)=4$, $f\big(-\tfrac12,\tfrac32\big)=-\tfrac12$ and $f(0,2)=0$,
+                            we conclude that the absolute maximum value of $f$ along $L_1$
+                            is $f(-2,0)=4$ and the absolute minimum value of $f$ along $L_1$
+                            is $f\big(-\tfrac12,\tfrac32\big)=-\tfrac12$.
+                        </p>
+                        <p>
+                            Now we look at the values of $f$ along $L_2$.
+                            The points in $L_2$ are given by the equation $y=-x+2$, where $x$
+                            is in $[0,2]$, so the function $f$ along $L_2$ becomes
+                            \[
+                                f(x,-x+2)=2x^2-2x, \qquad 0\leq x\leq 2.
+                            \]
+                            In this case, the derivative
+                            \[
+                                \frac{d}{dx}(2x^2-2x)=4x-2
+                            \]
+                            is zero when $x=\tfrac12$, which is again in $(0,2)$.
+                            Since $f(0,2)=0$, $f\big(\tfrac12,\tfrac32\big)=-\tfrac12$
+                            and $f(2,0)=4$, we see that the absolute maximum value of $f$ along $L_2$
+                            is $f(2,0)=4$, whereas the minumum maximum value of $f$ along $L_2$ is
+                            $f\big(\tfrac12,\tfrac32\big)=-\tfrac12$.
+                        </p>
+                        <p>
+                            Finally, we look at the values of $f$ along the line $L_3$.
+                            This line has equation $y=0$, wheras $x$ is in $[-2,2]$.
+                            Thus, the values of $f$ along $L_3$ are given by
+                            \[
+                                f(x,0)=x^2.
+                            \]
+                            Using the Closed Interval Method (or simply the graph of $x^2$)
+                            we see that the absolute maximum value of $f$ along $L_3$
+                            is $f(-2,0)=f(2,0)=4$, whereas the absolute minimum value of $f$ along $L_3$
+                            is $f(0,0)=0$.
+                        </p>
+                        <p>
+                            Gathering our calculations, we see that the absolute maximum value of $f$ along
+                            the boundary of $D$ is $4$ (achieved at the points $(-2,0)$ and $(2,0)$),
+                            and the absolute minimum value of $f$ along the boundary of $D$
+                            is $-\tfrac12$ (achieved at the points $\big(\tfrac12,\tfrac32\big)$
+                            and $\big(-\tfrac12,\tfrac32\big)$).
+                        </p>
+                        <p>
+                            Now that we know the value of $f$ at all critical points and
+                            the absolute maximum and minimum values of $f$ at the boundary
+                            of $D$, we can conclude that:
+                        </p>
+                        <ul>
+                            <li>
+                                The absolute maximum value of $f$ in $D$ is
+                                $4$, and it is achieved at $(-2,0)$ and $(2,0)$.
+                            </li>
+                            <li>
+                                The absolute minimum value of $f$ in $D$ is $-1$, and
+                                it is achieved at $(0,1)$.
+                            </li>
+                        </ul>
+                        <div class="image-container">
+                            <img src="Pictures/optimization-triangle.png" alt="A graph" style="width: 30%;">
+                        </div>
+                    </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html>
