@@ -83,7 +83,7 @@ li {
     margin-left: 2%;
 }
 
-details, .theorem-box, .example-box, .proposition-box, .definition-box, .warning-box, .corollary-box {
+details, .theorem-box, .example-box, .proposition-box, .definition-box, .warning-box, .corollary-box, .generic-box {
     border: solid rgb(180, 180, 180) 1px;
     border-radius: 10px;
     border-left-width: 5px;
@@ -95,7 +95,7 @@ summary {
     font-weight: bold;
 }
 
-.theorem-box, .proposition-box, .corollary-box {
+.theorem-box, .proposition-box, .corollary-box, .generic-box {
     border-left-color: #85c1dc;
 }
 
