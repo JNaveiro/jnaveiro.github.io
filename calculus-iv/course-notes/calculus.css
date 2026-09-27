@@ -135,6 +135,13 @@ details {
     background-color: #1f1f28;
 }
 
+.columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
 mjx-container {
     overflow-x: auto;
     overflow-y: hidden;

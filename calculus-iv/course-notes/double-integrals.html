@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Double Integrals</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="text-align: center;">Multiple Integrals</h1>
+
+            <p>
+                The purpose of this chapter is to introduce integration for functions
+                of several variables.
+                The geometric motivation behind the integral will be essentially
+                a higher-dimensional version of the integral of a function $y=f(x)$
+                as <em>the area under the curve $y=f(x)$</em>.
+                Moreover, we will see that computing the integral of a function
+                of several variables amounts to finding "iterated integrals",
+                so that once again using the techniques from single
+                variable calculus will be instrumental for performing
+                integrals in more variables.
+            </p>
+
+            <h1>Double Integrals</h1>
+
+            <p>
+                In this section we focus on constructing the integral of a function
+                $z=f(x,y)$ of two variables over a rectangle of the form
+                \[
+                    [a,b]\times [c,d]
+                    =
+                    \big\{
+                    (x,y)\mid
+                    a\leq x\leq b,\,c\leq y\leq d
+                    \big\}.
+                \]
+            </p>
+            <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-between;">
+                <div style="width: 50%;">
+                    <p>
+                    Suppose $z=f(x,y)$ is a function defined on the rectangle
+                    $R=[a,b]\times [c,d]$, and that $f(x,y)\geq 0$ for all points
+                    $(x,y)$ in $R$.
+                    Our objective is to find the volume of the solid
+                    $S$ that lies in between $R$ and the graph of $S$.
+                    </p> 
+                    <p>
+                    In order to estimate the volume of $S$, we consider a partition
+                    of $R$ into subrectangles.
+                    To do this, we break the interval $[a,b]$ into subintervals
+                    of the form $[x_{i-1},x_{i}]$, where $i=1,\,\dots,\,n$
+                    and $ a=x_0 < x_1 < \cdots < x_{n-1} < x_n=b $.
+                     Similarly, we break $[c,d]$ into the subintervals
+                     of the form $[y_{i-1},y_{i}]$, where $i=1,\,\dots,\,m$
+                     and $ c=y_0 < y_1 < \cdots < y_{n-1} < y_m=d $.
+                     Then, $R$ is decomposed into the subrectangles
+                     $R_{ij}=[x_{i-1},x_{i}]\times [y_{j-1},y_j]$.
+                    </p>
+                    <p>
+                    Now, for each subrectangle $R_{ij}$ choose a point
+                    $p_{ij}$ inside it.
+                    The part of $S$ that lies above $R_{ij}$ can be estimated with
+                    a prism whose base is $R_{ij}$ and whose height is $f(p_{ij})$.
+                    Moreover, the volume of this prism is
+                    \[
+                        V_{ij}=f(p_{ij})(x_{i}-x_{i-1})(y_j-y_{j-1}).
+                    \]
+                    </p>
+                </div>
+                <div style="display: flex; flex-direction: column; width: 30%;">
+                    <div class="image-container">
+                        <img src="Pictures/no-int.png" alt="A function" style="width: 100%;">
+                    </div>
+                    <div class="image-container">
+                        <img src="Pictures/riemann-sum.gif" alt="Riemann sums" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            <p>
+                In conclusion, the volume of $S$ (the solid lying above $R$ and below the graph
+                of $S$) can be estimated by
+                \[
+                V\approx\sum_{i=1}^n\sum_{j=1}^{m}V_{ij}
+                =\sum_{i=1}^n\sum_{j=1}^{m}f(p_{ij})(x_{i}-x_{i-1})(y_j-y_{j-1}).
+                \]
+                Intuitively, these estimates of the volume become more accurate
+                as we take more refined partitions of $R$ (that is, as we make $n$ and $m$ large).
+                Motivated by this, we establish the following definition:
+            </p>
+            <div class="definition-box">
+                Let $R=[a,b]\times [c,d]$ be a rectangle and $f\colon R\to \RR$ a function
+                defined on $R$.
+                The <b>double integral</b> of $f$ over $R$ is the limit
+                \[
+                    \iint_R f(x,y)dA
+                    =
+                    \iint_R f(x,y)dxdy
+                    =
+                    \lim_{m,n\to\infty}
+                    \sum_{i=1}^n\sum_{j=1}^{m}f(p_{ij})(x_{i}-x_{i-1})(y_j-y_{j-1}),
+                \]
+                provided that this limit exists.
+                In addition, if the above limit exists, we say that $f$ is <b>integrable</b>.
+            </div>
+            <p>
+                For instance, the function in the above pictures is integrable, and most of
+                the functions that we will be working with are integrable.
+                This is due to the following fact.
+            </p>
+            <div class="theorem-box">
+                If $f(x,y)$ is continuous on the rectangle $R$ (or if it is discontinuous
+                only at a finite number of points), then $f$ is integrable on $R$.
+            </div>
+            <p>
+                Some double integrals can be evaluated directly by simply knowing the
+                volume of certain solids in three-dimensions.
+            </p>
+            <div class="example-box">
+                If $R=[0,2]\times [0,2]$, compute the double integral
+                \[
+                \iint_R (3-x) \,dxdy.
+                \]
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <div style="width: 60%;">
+                <p>
+                    In the graph from the right, we see that the region
+                    between the graph of $f$ and the rectangle $R$ is the union
+                    of two solids:
+                </p>
+                <ul>
+                    <li>
+                    a parallelepiped whose dimensions are $2$, $2$ and $1$,
+                    and thus its volume is $2\cdot 2\cdot 1=4$,
+                    </li>
+                    <li>
+                    and a prism of width $2$ whose side faces are right triangles
+                    whose base and height are $2$ and $2$, so its volume is
+                    $\tfrac12 \cdot 2\cdot 2=2$.
+                    </li>
+                </ul>
+                <p>
+                    Therefore, the desired integral is just the added volume of
+                    these two solids:
+                    \[
+                        \iint_R (3-x)\,dxdy=4+2=6.
+                    \]
+                </p>
+                </div>
+                <div class="image-container" style="width: 30%;">
+                    <img src="Pictures/lin.png" alt="The graph of 3-x" style="width: 100%;">
+                </div>
+                </div>
+            </details>
+            <section id="fubini">
+                <h2>Iterated Integrals: Fubini's Theorem</h2>
+                <p>
+                    While the definition of the double integral is useful to get a geometric
+                    intuition of its meaning, it is hardly useful for computing
+                    double integrals in practice.
+                    Here we will see how we can reduce the calculation of a double
+                    integral into that of two single-variable integrals.
+                </p>
+                <div class="columns">
+                    <div style="width: 60%;">
+                        <p>
+                            Suppose $f(x,y)$ is a function defined on the rectangle
+                            \[
+                                R=[a,b]\times [c,d].
+                            \]
+                            For each $x$ in $[a,b]$, the integral
+                            \[
+                                A(x)=\int_{c}^d f(x,y)\,dy
+                            \]
+                            is defined to be the integral of the function
+                            $f_x\colon [c,d]\to \RR$ given by $f_x(y)=f(x,y)$.
+                            In other words, the above integral is the result
+                            of integrating $f(x,y)$ with respect to $y$ while treating
+                            $x$ as a constant.
+                        </p> 
+                    </div>
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/fubini.gif" alt="Fubini's theorem" style="width: 100%;">
+                    </div>
+                </div>
+                <p>
+                    Geometrically, $A(x)$ represents the area under the curve given by $f_x$
+                    on the interval $[c,d]$.
+                </p>
+                <p>
+                    Now, $A(x)$ is itself a function on the interval $[a,b]$, so we can
+                    consider the integral
+                    \[
+                    \int_a^b A(x)\,dx
+                    =
+                    \int_a^b\Bigg(\int_c^df(x,y)\,dy\Bigg)\,dx.
+                    \]
+                    Usually we write this integral simply as
+                    \[
+                        \int_a^b\int_c^df(x,y)\,dy\,dx.
+                    \]
+                    This integral is usually known as an <b>iterated integral</b>.
+                    Doing the appropriate changes, one can also define the
+                    iterated integral
+                    \[
+                        \int_c^d\int_a^bf(x,y)\,dx\,dy
+                        =\int_c^d\Bigg(\int_a^bf(x,y)\,dx\Bigg)\,dy.
+                    \]
+                </p>
+                <div class="example-box">
+                    Find the iterated integrals
+                    \[
+                        \int_0^2\int_{-1}^1 (x^2-xy)\,dy\,dx
+                        \qquad\textsf{and}\qquad
+                        \int_{-1}^1\int_0^2 (x^2-xy)\,dx\,dy.
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        The first iterated integral is
+                        \[
+                        \int_0^2\int_{-1}^1 (x^2-xy)\,dy\,dx
+                        =
+                        \int_0^2\bigg[x^2y-\frac12xy^2\bigg]_{-1}^1\,dx
+                        =
+                        \int_0^22x^2\,dx
+                        =
+                        \bigg[\frac23x^3\bigg]_0^2
+                        =
+                        \frac{16}{3}.
+                        \]
+                        The second iterated integral gives
+                        \[
+                        \int_{-1}^1\int_0^2 (x^2-xy)\,dx\,dy
+                        =
+                        \int_{-1}^1\bigg[\frac13x^3-\frac12x^2y\bigg]_0^2\,dy
+                        =
+                        \int_{-1}^1\bigg(\frac83-2y\bigg)\,dy
+                        =
+                        \bigg[\frac83y-y^2\bigg]_{-1}^1
+                        =
+                        \frac{16}{3}.
+                        \]
+                    </p>
+                </details>
+                <p>
+                    Interestingly, both iterated integrals give the same number
+                    independently of the chosen order of integration.
+                    What is more important is that both iterated integrals actually
+                    coincide with the double integral
+                    \[
+                    \iint_R (x^2-xy)\,dA\qquad\textsf{where}
+                    \qquad R=[0,2]\times[-1,1].
+                    \]
+                    This fact is true for all continuous functions, and it is
+                    known as Fubini's theorem:
+                </p>
+                <div class="generic-box">
+                    <b>Fubini's Theorem.</b>
+                    Let $R=[a,b]\times [c,d]$ be a rectangle in $\RR^2$
+                    and $f\colon R\to \RR$ a continuous function.
+                    Then, $f$ is integrable and
+                    \[
+                        \iint_Rf(x,y)\,dA
+                        =
+                        \int_a^b\int_c^df(x,y)\,dy\,dx
+                        =
+                        \int_c^d\int_a^bf(x,y)\,dx\,dy.
+                    \]
+                </div>
+                <p>
+                    Although Fubini's theorem is hard to prove, it lends itself to the
+                    intuitive idea that the volume of a solid is obtained by
+                    integrating the area of it's-cross sections.
+                </p>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
