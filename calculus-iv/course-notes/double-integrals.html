@@ -60,13 +60,16 @@
                     In order to estimate the volume of $S$, we consider a partition
                     of $R$ into subrectangles.
                     To do this, we break the interval $[a,b]$ into subintervals
-                    of the form $[x_{i-1},x_{i}]$, where $i=1,\,\dots,\,n$
+                    of the form $[x_{i-1},x_{i}]$, where
+                    <br>
+                    $i=1,\,\dots,\,n$
                     and $ a=x_0 < x_1 < \cdots < x_{n-1} < x_n=b $.
-                     Similarly, we break $[c,d]$ into the subintervals
-                     of the form $[y_{i-1},y_{i}]$, where $i=1,\,\dots,\,m$
-                     and $ c=y_0 < y_1 < \cdots < y_{n-1} < y_m=d $.
-                     Then, $R$ is decomposed into the subrectangles
-                     $R_{ij}=[x_{i-1},x_{i}]\times [y_{j-1},y_j]$.
+                    <br>
+                    Similarly, we break $[c,d]$ into the subintervals
+                    of the form $[y_{i-1},y_{i}]$, where $i=1,\,\dots,\,m$
+                    and $ c=y_0 < y_1 < \cdots < y_{n-1} < y_m=d $.
+                    Then, $R$ is decomposed into the subrectangles
+                    $R_{ij}=[x_{i-1},x_{i}]\times [y_{j-1},y_j]$.
                     </p>
                     <p>
                     Now, for each subrectangle $R_{ij}$ choose a point
@@ -150,14 +153,14 @@
                     <li>
                     and a prism of width $2$ whose side faces are right triangles
                     whose base and height are $2$ and $2$, so its volume is
-                    $\tfrac12 \cdot 2\cdot 2=2$.
+                    $\tfrac12 \cdot 2\cdot 2\cdot 2=4$.
                     </li>
                 </ul>
                 <p>
                     Therefore, the desired integral is just the added volume of
                     these two solids:
                     \[
-                        \iint_R (3-x)\,dxdy=4+2=6.
+                        \iint_R (3-x)\,dxdy=4+4=8.
                     \]
                 </p>
                 </div>
@@ -270,7 +273,7 @@
                     This fact is true for all continuous functions, and it is
                     known as Fubini's theorem:
                 </p>
-                <div class="generic-box">
+                <div class="generic-box" id="fubini-theorem">
                     <b>Fubini's Theorem.</b>
                     Let $R=[a,b]\times [c,d]$ be a rectangle in $\RR^2$
                     and $f\colon R\to \RR$ a continuous function.
@@ -288,6 +291,219 @@
                     intuitive idea that the volume of a solid is obtained by
                     integrating the area of it's-cross sections.
                 </p>
+                <p>
+                    Let's put Fubini's theorem in practice to compute integrals.
+                </p>
+                <div class="example-box">
+                    Find the double integral
+                    \[
+                        \iint_R (x^3-y^2-xy)\,dA,
+                        \qquad\textsf{where}\quad
+                        R=[0,2]\times [0,1].
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We have
+                        \[
+                            \begin{aligned}
+                                \iint_R (x^3-y^2-xy)\,dA
+                                =&
+                                \int_0^2\int_0^1(x^3-y^2-xy)\,dy\,dx
+                                =
+                                \int_0^2\bigg[x^3y-\frac{y^3}{3}-\frac{xy^2}{2}\bigg]_0^1\,dx
+                                \\
+                                =&
+                                \int_0^2\bigg(x^3-\frac13-\frac{x}{2}\bigg)\,dx
+                                =
+                                \bigg[\frac{x^4}{4}-\frac{x}{3}-\frac{x^2}{4}\bigg]_0^2
+                                =
+                                \frac73.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                <div class="example-box">
+                    Evaluate the integral
+                    \[
+                        \iint_R y\cos(xy)\,dA,
+                        \qquad\textsf{where}\qquad
+                        R=[1,3]\times\bigg[\frac{\pi}{2},\pi\bigg].
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We have
+                        \[
+                            \begin{aligned}
+                                \iint_R y\cos(xy)\,dA
+                                =&
+                                \int_{\frac{\pi}{2}}^{\pi}\int_1^3y\cos(xy)\,dx\,dy
+                                =
+                                \int_{\frac{\pi}{2}}^\pi
+                                [\sin(xy)]_1^3\,dy
+                                =
+                                \int_{\frac{\pi}{2}}^\pi(\sin(3y)-\sin(y))\,dy
+                                \\
+                                =&
+                                \bigg[-\frac13\cos(3y)+\cos(y)\bigg]_{\frac{\pi}{2}}^\pi
+                                =-\frac23.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                <div class="warning-box">
+                    Note that if you choose the order of integration
+                    \[
+                    \iint_R y\cos(xy)\,dA
+                    =
+                    \int_1^3\int_{\frac{\pi}{2}}^{\pi}y\cos(xy)\,dy\,dx,
+                    \]
+                    the resulting integral that you have to perform requires
+                    integration by parts.
+                    Thus, when evaluating double integrals you should always
+                    decide first which order of integration will result
+                    in easier single-variable integrals.
+                </div>
+                <div class="example-box">
+                    Find the volume of the solid $S$ bounded by the elliptic
+                    paraboloid $x^2+2y^2+z=10$, the plane $x=-1$, the plane $x=1$,
+                    the plane $y=0$, the plane $y=2$ and the plane $z=0$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div class="columns" style="width: 100%;">
+                        <div style="width: 60%;">
+                            <p>
+                                From the picture on the right, we see that
+                                the solid $S$ is precisely the
+                                solid that lies below the graph of the
+                                function \[f(x,y)=10-x^2-2y^2\] and above the
+                                rectangle \[R=[-1,1]\times [0,2].\]
+                                Therefore, the volume of $S$ is equal to
+                                \[
+                                \begin{aligned}
+                                    \iint_R (10-x^2-2y^2)\,dx\,dy
+                                    ={}&
+                                    \int_{-1}^1\int_0^2(10-x^2-2y^2)\,dy\,dx
+                                    \\={}&
+                                    \int_{-1}^1\bigg[10y-yx^2-\frac23y^3\bigg]_0^2\,dy
+                                    \\={}&
+                                    \int_{-1}^1\bigg(\frac{44}{3}-2x^2\bigg)\,dy
+                                    \\={}&
+                                    \bigg[\frac{44}{3}x-\frac{2}{3}x^3\bigg]_{-1}^1
+                                    \\={}&
+                                    28.
+                                \end{aligned}
+                                \]
+                            </p>
+                        </div>
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/paraboloid-integral.png" alt="A solid in three dimensions"
+                            style="width: 100%;">
+                        </div>
+                    </div>
+                </details>
+                <div class="example-box">
+                    Compute the integral
+                    \[
+                        \iint_R \sin^2x\cos^2y\,dA,
+                        \qquad\textsf{where}\qquad
+                        R=[0,\pi]\times\bigg[0,\frac{\pi}{2}\bigg].
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        By <a href="#fubini-theorem">Fubini's theorem</a>, we have
+                        \[
+                            \iint_R \sin^2x\cos^2y\,dA
+                            =
+                            \int_0^\pi\int_0^{\frac{\pi}{2}}\sin^2x\cos^2y\,dy\,dx.
+                        \]
+                        Note that in the inner integral, the term $\sin^2x$ is regarded
+                        as a constant, so we can take it out of the integral:
+                        \[
+                            \int_0^\pi\int_0^{\frac{\pi}{2}}\sin^2x\cos^2y\,dy\,dx.
+                            =
+                            \int_0^\pi\sin^2x\int_0^{\frac{\pi}{2}}\cos^2y\,dy\,dx.
+                        \]
+                        Similarly, the term $\int_0^{\frac{\pi}{2}}\cos^2y\,dy$ is now
+                        a constant in the outer integral, so we can take it out.
+                        This gives
+                        \[
+                            \int_0^\pi\int_0^{\frac{\pi}{2}}\sin^2x\cos^2y\,dy\,dx.
+                            =
+                            \int_0^\pi\sin^2x\int_0^{\frac{\pi}{2}}\cos^2y\,dy\,dx.
+                            =
+                            \bigg(\int_0^\pi\sin^2x\,dx\bigg)\bigg(\int_0^{\frac{\pi}{2}}\cos^2y\,dy\bigg).
+                        \]
+                    </p>
+                    <p>
+                        Let us compute the two integrals in the right hand side.
+                        To do this, the formulas
+                        \[
+                        \cos^2\alpha=\frac{1+\cos(2\alpha)}{2},\qquad
+                        \sin^2\alpha=\frac{1-\cos(2\alpha)}{2}
+                        \]
+                        will be useful.
+                    </p>
+                    <p>
+                        Firstly,
+                        \[
+                        \int_0^{\pi}\sin^2x\,dx
+                        =
+                        \frac12\int_0^{\pi}(1-\cos(2x))\,dx
+                        =
+                        \frac12\bigg[x-\frac12\sin(2x)\bigg]_0^{\pi}
+                        =
+                        \frac{\pi}2.
+                        \]
+                        Secondly,
+                        \[
+                        \int_0^{\frac{\pi}2}\cos^2y\,dy
+                        =
+                        \frac12\int_0^{\frac{\pi}2}(1+\cos(2y))\,dy
+                        =
+                        \frac12\bigg[y+\frac12\sin(2y)\bigg]_0^{\frac{\pi}2}
+                        =
+                        \frac{\pi}4.
+                        \]
+                        Therefore, the double integral is
+                        \[
+                            \iint_R\sin^2x\cos^2y\,dA
+                            =
+                            \frac{\pi}2\cdot\frac{\pi}4
+                            =
+                            \frac{\pi^2}{8}.
+                        \]
+                    </p>
+                </details>
+                <p>
+                    The above reasoning works with a large family of functions.
+                    Indeed, if $f(x,y)=g(x)h(y)$ for two single variable functions
+                    $g$ and $h$, and $R=[a,b]\times [c,d]$ is any rectangle, we have
+                    \[
+                        \iint_R f(x,y)\,dA
+                        =
+                        \int_a^b\int_c^d g(x)h(y)\,dy\,dx
+                        =
+                        \int_a^bg(x)\bigg(\int_c^dh(y)\,dy\bigg)\,dx
+                        =
+                        \bigg(\int_a^bg(x)\,dx\bigg)
+                        \bigg(\int_c^dh(y)\,dy\bigg).
+                    \]
+                </p>
+                <div class="warning-box">
+                    Not all functions of two variables can be written as $g(x)h(y)$
+                    for two functions of one variable $g$ and $h$, so the above
+                    equation is not valid for all functions of two variables.
+                    <br>
+                    For example, the function $f(x,y)=x+y$ is not a product of two
+                    single variable functions.
+                </div>
             </section>
         </main>
     </body>
