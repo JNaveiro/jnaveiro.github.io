@@ -336,6 +336,254 @@
                         \]
                     </p>
                 </details>
+                <div class="generic-box">
+                    <div class="columns">
+                        <div style="width: 60%;">
+                        <b>
+                            Example.
+                        </b>
+                        Find the volume of the solid $S$ that is enclosed above the cone
+                        \[z=\sqrt{x^2+y^2}\] and below the sphere \[x^2+y^2+z^2=4.\]
+                        </div style="width: 60%;">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/intersection.png" alt="A solid in three dimensions">
+                        </div class="image-container" style="width: 30%;">
+                    </div>
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        As we see on the above picture, the sphere and the cone
+                        intersect in a circle.
+                        Let us start by finding said circle.
+                    </p>
+                    <p>
+                        Since the top part of the sphere is given by the equation
+                        $z=\sqrt{4-x^2-y^2}$, the points $(x,y)$ on which these two
+                        surfaces intersect are given by the equation
+                        \[
+                            \sqrt{4-x^2-y^2}=\sqrt{x^2+y^2},
+                        \]
+                        which, after rearranging, becomes
+                        \[
+                            x^2+y^2=2.
+                        \]
+                        This means that the two surfaces intersect at the circle
+                        centered at the origin with radius $\sqrt{2}$.
+                    </p>
+                    <p>
+                        Now, let us compute the volume of $S$.
+                        This volume can be obtained by subtracting:
+                        <ul>
+                            <li>
+                                the volume of the solid enclosed between the sphere
+                                $z=\sqrt{4-x^2-y^2}$ and the disk $D$ centered
+                                at the origin and with radius $\sqrt{2}$,
+                            </li>
+                            <li>
+                                and the volume of the solid enclosed between the cone
+                                $z=\sqrt{x^2+y^2}$ and the same disk $D$.
+                            </li>
+                        </ul>
+                        Note that, in polar coordinates,
+                        \[
+                        D=\big\{(r,\theta)\mid 0\leq r\leq \sqrt{2},\,0\leq\theta\leq 2\pi \big\}.
+                        \]
+                        Thus, the first volume is
+                        \[
+                        \begin{aligned}
+                            \iint_D\sqrt{4-x^2-y^2}\,dA
+                            =&
+                            \int_0^{2\pi}\int_0^{\sqrt{2}}r\sqrt{4-r^2}\,dr\,d\theta
+                            =
+                            2\pi\int_0^{\sqrt{2}}r\sqrt{4-r^2}\,dr
+                            =
+                            -\pi\int_4^2\sqrt{u}\,du
+                            \\=&
+                            -\frac{2\pi}{3}\big[u^{\frac32}\big]_{u=4}^{u=2}
+                            =
+                            \frac{2\pi}{3}(8-2\sqrt{2}),
+                        \end{aligned}
+                        \]
+                        where we have used the substitution $u=4-r^2$,
+                        whereas the second volume is
+                        \[
+                        \begin{aligned}
+                            \iint_D\sqrt{x^2+y^2}\,dA
+                            =&
+                            \int_0^{2\pi}\int_0^{\sqrt{2}}r^2\,dr\,d\theta
+                            =
+                            2\pi\int_0^{\sqrt{2}}r^2\,dr
+                            =
+                            \frac{2\pi}{3}\big[r^3\big]_{r=0}^{r=2}
+                            =
+                            \frac{4\sqrt{2}\pi}{3}.
+                        \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                        In conclusion, the volume of $S$ is
+                        \[
+                            \frac{2\pi}{3}(8-2\sqrt{2})
+                            -
+                            \frac{4\sqrt{2}\pi}{3}
+                            =
+                            \frac{(16-8\sqrt{2})\pi}{3}.
+                        \]
+                    </p>
+                </details>
+                <div class="columns">
+                    <div style="width: 60%">
+                        <p>
+                        When integrating in polar coordinates, one can also consider
+                        regions of integration that are not polar rectangles.
+                        For example, the analogues of the
+                        <a href="general-regions.html#type-i">regions of Type I</a>
+                        and
+                        <a href="general-regions.html#type-ii">regions of Type II</a>
+                        are the polar regions of the form
+                        \[
+                            D
+                            =
+                            \big\{(r,\theta)\mid \alpha\leq \theta\leq \beta,\,
+                            g_1(\theta)\leq r\leq g_2(\theta)\big\},
+                        \]
+                        where $g_1$ and $g_2$ are continuous functions of $\theta$.
+                        </p>
+                        <p>
+                            For these regions, the change of variables formula
+                            takes a similar form as in regions of Type I or Type II:
+                        </p>
+                    </div style="width: 60%">
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/polar-general.png" alt="A polar region" style="width: 100%;">
+                    </div>
+                </div>
+                <div class="theorem-box">
+                    Consider a polar region of the form
+                    \[
+                        D
+                        =
+                        \big\{(r,\theta)\mid \alpha\leq \theta\leq \beta,\,
+                        g_1(\theta)\leq r \leq g_2(\theta)\big\},.
+                    \]
+                    If $f\colon D\to \RR$ is a continuous function, then the double
+                    integral of $f$ over $D$ is
+                    \[
+                        \iint_D f\,dA
+                        =
+                        \int_\alpha^\beta\int_{g_1(\theta)}^{g_2(\theta)}
+                        rf(r\cos\theta,r\sin\theta)\,dr\,d\theta.
+                    \]
+                </div>
+                <div class="generic-box">
+                    <div class="columns">
+                        <div style="width: 60%;">
+                        <b>
+                            Example.
+                        </b>
+                        The three-leaved rose is the curve given by
+                        the equation \[r=\cos(3\theta)\] in polar coordinates.
+                        Find the area enclosed by one of its leaves.
+                        </div style="width: 60%;">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/three-leaves.png" alt="The rose of three leaves">
+                        </div class="image-container" style="width: 30%;">
+                    </div>
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let us focus on the leaf of the rose that lies to the
+                        right of the $y$-axis (that is, where $-\tfrac{\pi}2\leq \theta\
+                        \leq \tfrac{\pi}2$).
+                        Note that the solutions to $\cos(3\theta)=0$ in the interval
+                        $\big[-\tfrac{\pi}2,\tfrac{\pi}2\big]$ are $\pm\tfrac{\pi}6$ and
+                        $\pm\tfrac{\pi}2$, so the leaf in question can be described
+                        as the polar region
+                        \[
+                        D=\bigg\{(r,\theta)\mid -\frac{\pi}6\leq\theta\leq\frac{\pi}6,\,0\leq r\leq \cos(3\theta)\bigg\}.
+                        \]
+                    </p>
+                    <p>
+                        Consequently, the area of this leaf is
+                        \[
+                            \begin{aligned}
+                                A(D)
+                                =&
+                                \iint_D 1\,dA
+                                =
+                                \int_{-\frac{\pi}6}^{\frac{\pi}6}\int_0^{\cos(3\theta)}r\,dr\,d\theta
+                                =
+                                \frac12\int_{-\frac{\pi}6}^{\frac{\pi}6}\cos^2(3\theta)\,d\theta
+                                =
+                                \frac14\int_{-\frac{\pi}6}^{\frac{\pi}6}(1+\cos(6\theta))\,d\theta
+                                \\
+                                =&
+                                \frac14\bigg[\theta+\frac16\sin(6\theta)\bigg]_{\theta=-\frac{\pi}6}^{\theta=\frac{\pi}6}
+                                =
+                                \frac{\pi}{12}.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                <div class="generic-box">
+                    <div class="columns">
+                        <div style="width: 60%;">
+                        <b>
+                            Example.
+                        </b>
+                        Find the area of the region $D$ that lies outside the <em>cardioid</em>
+                        \[
+                            r=2+2\sin\theta
+                        \]
+                        and inside the circle
+                        \[
+                            r=6\sin\theta.
+                        \]
+                        </div style="width: 60%;">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/cardioid.png" alt="Two curves in the plane">
+                        </div class="image-container" style="width: 30%;">
+                    </div>
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let us describe $D$ as a polar region.
+                        To do this, we first need to see when the two given curves intersect.
+                        We have
+                        \[
+                            6\sin\theta = 2+2\sin\theta \iff \sin\theta=\frac12\iff
+                            \theta=\frac{\pi}6\textsf{ or }\theta=\frac{5\pi}{6},
+                        \]
+                        since the angles of intersection lie between $0$ and $\pi$.
+                        Therefore, we can write $D$ in polar coordinates as
+                        \[
+                            D=
+                            \bigg\{(r,\theta)\mid \frac{\pi}6\leq \theta\leq \frac{5\pi}{6},\,
+                            2+2\sin\theta\leq r\leq 6\sin\theta\bigg\}.
+                        \]
+                    </p>
+                    <p>
+                        We conclude that the area of $D$ is
+                        \[
+                            \begin{aligned}
+                                A(D)
+                                =&
+                                \iint_D1\,dA
+                                =
+                                \int_{\frac{\pi}6}^{\frac{5\pi}6}\int_{2+2\sin\theta}^{6\sin\theta}
+                                dr\,d\theta
+                                =
+                                \int_{\frac{\pi}6}^{\frac{5\pi}6}(4\sin\theta-2)\,d\theta
+                                =
+                                \bigg[-4\cos\theta-2\theta\bigg]_{\theta=\frac{\pi}6}^{\theta=\frac{5\pi}6}
+                                \\={}&4 \sqrt{3}-\frac{4 \pi }{3}.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
             </section>
         </main>
     </body>
