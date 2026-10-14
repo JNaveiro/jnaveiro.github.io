@@ -96,7 +96,7 @@
                     is conceptually useful, it is not practical for actually computing integrals.
                     However, Fubini's theorem still applies in this case:
                 </p>
-                <div class="generic-box">
+                <div class="generic-box" id="fubini">
                     <b>Fubini's Theorem for Triple Integrals.</b>
                     <p>
                         Suppose $R=[a,b]\times[c,d]\times[r,s]$ is a box and $f\colon R\to \RR$
@@ -266,7 +266,366 @@
                         \]
                     </p>
                 </details>
+                <p>
+                    We can also define two more types of solid regions on which
+                    integration looks similar to the case of regions of Type I:
+                </p>
+                <div class="generic-box">
+                    <div class="columns">
+                        <div style="width: 60%;">
+                            <p>
+                            <b>Definition.</b>
+                            A solid region $E$ is said to be of <b>Type II</b>
+                            if it is of the form
+                            \[
+                            E=\big\{(x,y,z)\mid (y,z)\in D,\, g_1(y,z)\leq x\leq g_2(y,z)\big\},
+                            \]
+                            where $D$ is a region in the plane.
+                            </p>
+                            <p>
+                            In other words, $E$ is a region of Type II if it is enclosed
+                            between two functions of $y$ and $z$.
+                            </p>
+                        </div>
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/type-2-3d.png" alt="A region of Type II">
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    If $f\colon E\to \RR$ is a continuous function, then the integral
+                    of $f$ over $E$ is
+                    \[
+                        \iiint_E f(x,y,z)\,dV
+                        =
+                        \iint_D \int_{g_1(y,z)}^{g_2(y,z)}f(x,y,z)\,dx\,dA.
+                    \]
+                </p>
+                <div class="generic-box">
+                    <div class="columns">
+                        <div style="width: 60%;">
+                            <p>
+                            <b>Definition.</b>
+                            A solid region $E$ is said to be of <b>Type III</b>
+                            if it is of the form
+                            \[
+                            E=\big\{(x,y,z)\mid (x,z)\in D,\, g_1(x,z)\leq y\leq g_2(x,z)\big\},
+                            \]
+                            where $D$ is a region in the plane.
+                            </p>
+                            <p>
+                            In other words, $E$ is a region of Type III if it is enclosed
+                            between two functions of $x$ and $z$.
+                            </p>
+                        </div>
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/type-3-3d.png" alt="A region of Type III">
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    In this case, the integral of a continuous function $f\colon E\to \RR$
+                    over $E$ is equal to
+                    \[
+                        \iiint_E f(x,y,z)\,dV
+                        =
+                        \iint_D \int_{g_1(x,z)}^{g_2(x,z)}f(x,y,z)\,dy\,dA.
+                    \]
+                </p>
+                <div class="generic-box">
+                    <div class="columns">
+                        <div style="width: 70%;">
+                            <b>Example.</b>
+                    Find the integral
+                    \[
+                    \iiint_E\sqrt{x^2+z^2}\,dV,
+                    \]
+                    where $E$ is the region bounded by the cone $y=\sqrt{x^2+z^2}$ and the plane $y=3$.
+                        </div style="width: 60%;">
+                        <div class="image-container" style="width: 20%;">
+                            <img src="Pictures/cone-problem.png" alt="A piece of a cone">
+                        </div>
+                    </div>
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We can present the region $E$ as a region of Type III.
+                        Indeed, if we let
+                        \[
+                        D=\{(x,z)\mid x^2+z^2\leq 9\}
+                        \]
+                        be the disk of center $(0,0)$ and radius $3$ in the $xz$-plane,
+                        then
+                        \[
+                        E=\big\{(x,y,z)\mid (x,z)\in D,\,\sqrt{x^2+z^2}\leq y\leq 3\big\}.
+                        \]
+                    </p>
+                    <p>
+                        Therefore, the integral of $\sqrt{x^2+z^2}$ on $E$ is
+                        \[
+                            \iiint_E\sqrt{x^2+z^2}\,dV
+                            =
+                            \iint_D\int_{\sqrt{x^2+z^2}}^3\sqrt{x^2+z^2}\,dy\,dA
+                            =
+                            \iint_D\sqrt{x^2+z^2}\big(3-\sqrt{x^2+z^2}\big)\,dA.
+                        \]
+                    </p>
+                    <p>
+                        To continue, we can use polar coordinates, since the region
+                        $D$ in polar coordinates is given by
+                        \[
+                        \big\{(r,\theta)\mid 0\leq r\leq 3,\,0\leq \theta\leq 2\pi\big\}.
+                        \]
+                        This gives us
+                        \[
+                            \begin{aligned}
+                            \iint_D\sqrt{x^2+z^2}\big(3-\sqrt{x^2+z^2}\big)\,dA
+                            =&
+                            \int_0^{2\pi}\int_0^3r\sqrt{r^2\cos^2\theta+r^2\sin^2\theta}
+                            \big(3-\sqrt{r^2\cos^2\theta+r^2\sin^2\theta}\big)\,dr\,d\theta
+                            \\
+                            =&\int_0^{2\pi}\int_0^3r^2(3-r)\,dr\,d\theta
+                            =
+                            \int_0^{2\pi}\int_0^3(3r^2-r^3)\,dr\,d\theta
+                            \\
+                            =&
+                            \int_0^{2\pi}\bigg[r^3-\frac{r^4}4\bigg]_{r=0}^{r=3}
+                            =
+                            \int_0^{2\pi}\frac{27}4\,d\theta
+                            =
+                            \frac{27\pi}2.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                <div class="warning-box">
+                    We could have chosen a different order of integration
+                    by noticing that $E$ is also a region of Type I.
+                    Indeed, if we take
+                    \[
+                    D=\big\{(x,y)\mid 0\leq x\leq 3,\,-x\leq y\leq x\big\},
+                    \]
+                    then
+                    \[
+                        E=\big\{(x,y,z)\mid (x,y)\in D,\,-\sqrt{y^2-x^2}\leq z\leq\sqrt{y^2-x^2}\big\},
+                    \]
+                    and
+                    \[
+                    \iiint_E\sqrt{x^2+z^2}\,dV
+                    =
+                    \iint_D\int_{-\sqrt{y^2-x^2}}^{\sqrt{y^2-x^2}}\sqrt{x^2+z^2}\,dz\,dA
+                    =
+                    \int_0^3\int_{-x}^x\int_{-\sqrt{y^2-x^2}}^{\sqrt{y^2-x^2}}\sqrt{x^2+z^2}\,dz\,dy\,dx
+                    \]
+                    This integral is significantly more complicated to evaluate than the
+                    one that we obtained.
+                    Therefore, it is important to always search for the order of integration
+                    that makes the integral easier to evaluate.
+                </div>
             </section>
+                <section id="order-change">
+                    <h2>Changing the Order of Integration</h2>
+                    <p>
+                        Because of
+                        <a href=#fubini>Fubini's Theorem</a>,
+                        whenever we express a triple integral as an
+                        iterated integral, we are free to choose the order
+                        of integration as we wish.
+                        In this case, since there are three variables,
+                        we have six possible orders to choose.
+                    </p>
+                    <div class="example-box">
+                        Consider the iterated integral
+                        \[
+                        I=\int_0^1\int_0^{x^2}\int_0^{\sqrt{y}}f(x,y,z)\,dz\,dy\,dx,
+                        \]
+                        where $f(x,y,z)$ is a continuous function.
+                        <ol>
+                            <li>
+                                Write the above integral as a triple integral
+                                over a solid region $E$.
+                            </li>
+                            <li>
+                                Write the five possible iterated integrals
+                                that result from changing the order of integration.
+                            </li>
+                        </ol>
+                    </div>
+                    <details>
+                        <summary>Solution.</summary>
+                        <p>
+                            The outer integral says that the $x$ variable
+                            is ranging between $0$ and $1$.
+                            The intermediate integral says that $y$ is moving
+                            between $0$ and $x^2$.
+                            Finally, the inner integral states that $z$
+                            ranges between $0$ and $\sqrt{y}$.
+                            Therefore, we can view $I$ as the integral
+                            $\iiint_Ef(x,y,z)\,dV$ over the set
+                            \[
+                            E=\big\{(x,y,z)\mid 0\leq x\leq 1,\,0\leq y\leq x^2,\,0\leq z\leq \sqrt{y}\big\}.
+                            \]
+                        </p>
+                        <div class="columns">
+                            <div style="width: 70%;">
+                                <p>
+                                    On the right we have an animation showing
+                                    the region of integration $E$.
+                                    The original integral $I$ may be recovered as
+                                    an integral on $E$ (as a region of Type I).
+                                    Indeed, if
+                                    \[
+                                    D=\big\{(x,y)\mid 0\leq x\leq 1,\,0\leq y\leq x^2\big\},
+                                    \]
+                                    then $E$ is the region enclosed between the functions
+                                    $g_1(x,y)=0$ and <br>$g_2(x,y)=\sqrt{y}$ on $D$.
+                                </p>
+                            </div style="width: 60%;">
+                            <div class="image-container" style="width: 20%;">
+                                <img src="Pictures/fubini-region.gif" alt="The region of integration">
+                            </div>
+                        </div>
+                        <p>
+                            Now, note that $D$ can also be presented as
+                            \[
+                            D=\big\{(x,y)\mid 0\leq y\leq 1,\,\sqrt{y}\leq x\leq 1\big\},
+                            \]
+                            so we have
+                            \[
+                            I=\iint_D\int_0^{\sqrt{y}}f(x,y,z)\,dz\,dA
+                            =
+                            \int_0^1\int_{\sqrt{y}}^1\int_0^{\sqrt{y}}f(x,y,z)\,dz\,dx\,dy.
+                            \]
+                        </p>
+                        <p>
+                            Now, let us view $E$ as a region of Type II.
+                            To do this, we first find the projection of $E$
+                            onto the $yz$-plane.
+                            This projection is
+                            \[
+                            D'=\big\{(y,z)\mid 0\leq y\leq 1,\,0\leq z\leq \sqrt{y}\big\}.
+                            \]
+                            Indeed, note that for the points in $E$ we have
+                            $0\leq y\leq x^2\leq 1$ and $0\leq z\leq \sqrt{y}$.
+                            Now, due to the first two inequalities
+                            that define $E$, the variable $x$ is ranging
+                            between $\sqrt{y}$ and $1$, so
+                            \[
+                            I=\iint_{D'}\int_{\sqrt{y}}^1f(x,y,z)\,dx\,dA
+                            =\int_0^1\int_0^{\sqrt{y}}\int_{\sqrt{y}}^1f(x,y,z)\,dx\,dz\,dy.
+                            \]
+                        </p>
+                        <p>
+                            Now, the region $D'$ could also have been written as
+                            \[
+                            D'=\big\{(y,z)\,0\leq z\leq 1,z^2\leq y\leq 1\big\},
+                            \]
+                            and therefore
+                            \[
+                            I=\iint_{D'}\int_{\sqrt{y}}^1f(x,y,z)\,dx\,dA
+                            =\int_0^1\int_{z}^{1}\int_{\sqrt{y}}^1f(x,y,z)\,dx\,dy\,dz.
+                            \]
+                        </p>
+                        <p>
+                            Finally, we may present $E$ as a region of Type III.
+                            Indeed, the projection of $E$ onto the $xz$-plane is
+                            \[
+                            D''=\big\{(x,z)\mid 0\leq x\leq 1,0\leq z\leq x\big\},
+                            \]
+                            and (on $E$) $y$ would be bounded between the functions $0$
+                            and $x^2$ on $D''$.
+                            This gives
+                            \[
+                            I=\iint_{D''}\int_0^{x^2}f(x,y,z)\,dy\,dA
+                            =
+                            \int_0^1\int_0^x\int_0^{x^2}f(x,y,z)\,dy\,dz\,dx.
+                            \]
+                        </p>
+                        <p>
+                            However, we could also have written
+                            \[
+                            D''=\big\{(x,z)\mid 0\leq z\leq 1,\,z\leq x\leq 1\big\},
+                            \]
+                            and therefore
+                            \[
+                            I=\iint_{D''}\int_0^{x^2}f(x,y,z)\,dy\,dA
+                            =
+                            \int_0^1\int_z^1\int_0^{x^2}f(x,y,z)\,dy\,dx\,dz.
+                            \]
+                        </p>
+                        <p>
+                            We have thus obtained all possible iterated integrals
+                            representing $I$.
+                        </p>
+                    </details>
+                </section>
+                <section id="properties">
+                    <h2>Properties of Triple Integrals</h2>
+                    <p>
+                        We finish this section stating the main properties
+                        of triple integrals, which are essentially the same
+                        as those of double integrals.
+                    </p>
+                    <div class="theorem-box">
+                        If $E$ is a solid region in space, $f(x,y,z)$ and $g(x,y,z)$
+                        are functions defined on $E$ and $a$ is a real constant,
+                        then we have:
+                        <ol>
+                            <li>
+                                Additivity of the integral:
+                                \[
+                                    \iiint_E (f(x,y,z)+g(x,y,z))\,dV
+                                    =
+                                    \iiint_E f(x,y,z)\,dV
+                                    +
+                                    \iiint_E g(x,y,z)\,dV.
+                                \]
+                            </li>
+                            <li>
+                                Homogeneity of the integral:
+                                \[
+                                    \iiint_E af(x,y,z)\,dV
+                                    =
+                                    a\iiint_E f(x,y,z)\,dV.
+                                \]
+                            </li>
+                            <li>
+                                Monotonicity of the integral:
+                                if $f(x,y,z)\geq g(x,y,z)$ for all $(x,y,z)$ in $E$,
+                                then
+                                \[
+                                    \iiint_E f(x,y,z)\,dV
+                                    \geq
+                                    \iiint_E g(x,y,z)\,dV.
+                                \]
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="theorem-box">
+                        Consider a function $f(x,y,z)$ of three variables and a solid region $E$
+                        in space.
+                                <p>
+                                If $E=E_1\cup E_2$ is the union of two regions
+                                that do not intersect (except possibly at their boundaries),
+                                then
+                                \[
+                                    \iiint_E f(x,y)\,dV
+                                    =
+                                    \iiint_{E_1} f(x,y)\,dV+
+                                    \iiint_{E_2} f(x,y)\,dV.
+                                \]
+                                </p>
+                    </div>
+                    <div class="theorem-box">
+                        If $E$ is a solid region in space, then its volume is given by
+                        \[
+                            V(D)
+                            =
+                            \iiint_D 1\,dV.
+                        \]
+                    </div>
+                </section>
         </main>
     </body>
     <script src="code.js"></script>
