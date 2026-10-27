@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Integration in Cylindrical Coordinates</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1>Integration in Cylindrical Coordinates</h1>
+            <p>
+                Recall that some double integrals may be evaluated more easily by
+                switching to polar coordinates.
+                Because of this, it would be interesting to develop a three-dimensional
+                analogue of the polar coordinate system that may allow us to simplify
+                some triple integrals.
+                Basically, there are two main "polar coordinate systems" that one can
+                consider in $\RR^3$, known as <em>cylindrical coordinates</em>
+                and <em>spherical coordinates</em>.
+                The purpose of this section is to introduce the cylindrical coordinate system
+                in $\RR^3$ and discuss how to evaluate triple integrals by switching to
+                cylindrical coordinates.
+            </p>
+            <section id="cylindrical-coordinates">
+                <h2>The Cylindrical Coordinate System</h2>
+                <p>
+                    Let $p=(x,y,z)$ be a point in $\RR^3$.
+                    Essentially, the cylindrical coordinates of $p$ are computed by taking
+                    the point $(x,y)$ (which is the projection of $p$ onto the $xy$-plane)
+                    and switching it by its polar coordinates $(r,\theta)$.
+                    The $z$-coordinate remains unchanged.
+                </p>
+                <div class="definition-box">
+                    Let $p=(x,y,z)$ be a point in $\RR^3$, where $x,\,y$ and $z$ denote
+                    the Cartesian coordinates of $p$.
+                    The <b>cylindrical coordinates</b> of $p$ are $(r,\theta,z)$, where
+                    $(r,\theta)$ are polar coordinates of $(x,y)$.
+                </div>
+                <div class="columns">
+                    <div style="width: 60%;">
+                        <p>
+                            Given a point $p$ in space, we can relate its Cartesian coordinates
+                            $(x,y,z)$ and its cylindrical coordinates $(r,\theta,z)$ by the equations
+                            \[
+                                x=r\cos \theta,\qquad y=r\sin\theta,\qquad z=z.
+                            \]
+                            Moreover,
+                            \[
+                                r^2=x^2+y^2.
+                            \]
+                            In addition, note that $(r,\theta+2\pi,z)$ are also cylindrical coordinates
+                            of the point $p$.
+                            Thus, adding or subtracting a multiple of $2\pi$ to $\theta$ still
+                            gives us cylindrical coordinates for the point $p$.
+                        </p>
+                    </div style="width: 60%;">
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/cylindrical-coordinates.png" alt="Cylindrical coordinates">
+                    </div>
+                </div>
+                <div class="example-box">
+                    Find cylindrical coordinates for the point $p=(-2,2,3)$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let's find cylindrical coordinates $(r,\theta,z)$ for $(-2,2,3)$.
+                        Observe that $z=3$ and
+                        \[
+                            r^2=x^2+y^2=4+4=8,
+                        \]
+                        so $r=\sqrt{8}=2\sqrt{2}$.
+                        To find $\theta$, we see that
+                        \[
+                        2\sqrt{2}\cos\theta = -2, \qquad
+                        2\sqrt{2}\sin\theta = 2.
+                        \]
+                        Consequently, $\cos\theta=\tfrac{-1}{\sqrt{2}}$ and $\sin\theta=\tfrac{1}{\sqrt{2}}$,
+                        so $\theta=\frac{3\pi}4$ (we could also add any multiple of $2\pi$).
+                        In conclusion, a set of cylindrical coordinates for $p$ is
+                        \[
+                        \bigg(2\sqrt{2},\frac{3\pi}4,3\bigg).
+                        \]
+                    </p>
+                </details>
+                <div class="example-box">
+                    Find the rectangular coordinates of the point $q$ whose cylindrical coordinates
+                    are $(4,\tfrac{\pi}3,2)$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        In this case, we have $(r,\theta,z)=(4,\tfrac{\pi}3,2)$, which yields
+                        \[
+                            \begin{aligned}
+                                x={}&r\cos\theta=4\cos\frac{\pi}3=\frac42=2,\\
+                                y={}&r\sin\theta=4\sin\frac{\pi}3=\frac{4\sqrt{3}}2=2\sqrt{3},\\
+                                z={}&2.
+                            \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                    Thus, the rectangular coordinates of $q$ are $\big(2,2\sqrt{3},2\big)$.
+                    </p>
+                </details>
+                <p>
+                    To get a better intuition of cylindrical coordinates, let us try to
+                    plot some surfaces in space defined via
+                    cylindrical coordinates.
+                </p>
+                <p>
+                    A good starting point is to consider the equations of the form $r=c$,
+                    $\theta=c$ and $z=c$.
+                    We have:
+                </p>
+                <ul>
+                    <li>
+                        $r=c$ is equivalent (in Cartesian coordinates) to $x^2+y^2=c^2$,
+                        so the surface of radius $c$ is merely a cylinder centered around
+                        the $z$-axis and of radius $c$.
+                        This is why these coordinates are called cylindrical coordinates.
+                    </li>
+                    <li>
+                        $\theta = c$ is a vertical plane that makes an angle of $c$
+                        radians with respect to the $x$-axis.
+                    </li>
+                    <li>
+                        $z=c$ is a plane perpendicular to the $z$-axis that is placed
+                        at height $z$.
+                    </li>
+                </ul>
+                <div class="columns" style="align-items: center;">
+                    <div class="image-container" style="width: 25%;">
+                        <img src="Pictures/cylinder.png" alt="A cylinder" style="width: 100%;">
+                    </div class="image-container" style="width: 25%;">
+                    <div class="image-container" style="width: 25%;">
+                        <img src="Pictures/theta-plane.png" alt="A vertical plane" style="width: 100%;">
+                    </div class="image-container" style="width: 25%;">
+                    <div class="image-container" style="width: 25%;">
+                        <img src="Pictures/z-plane.png" alt="A horizontal plane" style="width: 100%;">
+                    </div class="image-container" style="width: 25%;">
+                </div>
+                <div class="example-box">
+                    Describe and sketch the surface $S$ whose equation in cylindrical coordinates
+                    is $z=r$.
+                    Do the same for the surface $S'$ with equation $z=r^2$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                    Let's start with the surface $S$ of equation $z=r$.
+                    In this case, using the fact that $r^2=x^2+y^2$, we see that
+                    $S$ can be described in Cartesian coordinates by the equation
+                    \[
+                    z=\sqrt{x^2+y^2}.
+                    \]
+                    This means that $S$ is a cone around the $z$-axis.
+                    </p>
+                    <div class="image-container">
+                        <img src="Pictures/cone-cylindrical.png" alt="A cone" style="width: 30%;">
+                    </div>
+                    <p>
+                    Now, let us work on the surface $S'$.
+                    Here, we have $z=r^2=x^2+y^2$, so $S'$ is a paraboloid
+                    centered around the $z$-axis.
+                    </p>
+                    <div class="image-container">
+                        <img src="Pictures/paraboloid-cylindrical.png" alt="A paraboloid" style="width: 30%;">
+                    </div>
+                </details>
+            </section>
+            <section id="change-variables">
+                <h2>Integration in Cylindrical Coordinates</h2>
+                <div class="columns">
+                    <div style="width: 60%;">
+                        <p>
+                        Here we develop a change of variables formula that will allow us
+                        to compute integrals in cylindrical coordinates.
+                        </p>
+                        <p>
+                        Consider a solid region $E$ in space that is of
+                        <a href=triple-integrals.html#type-i-3d>Type I</a>.
+                        This meant that there is some plane region $D$ in the $xy$-plane
+                        and two continuous functions $g_1$ and $g_2$ of $x$ and $y$
+                        so that
+                        \[
+                        E=\big\{(x,y,z)\mid (x,y)\in D,\, g_1(x,y)\leq z\leq g_2(x,y) \big\}.
+                        \]
+                        In addition, suppose that $D$ is a polar region of the form
+                        \[
+                        D=\big\{(r,\theta)\mid \alpha\leq \theta\leq \beta,\,h_1(\theta)\leq r
+                        \leq h_2(\theta)\big\}.
+                        \]
+                        </p>
+                    </div style="width: 60%;">
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/cylindrical-region.png" alt="A region in cylindrical coordinates">
+                    </div class="image-container" style="width: 30%;">
+                </div>
+                <p>
+                In cylindrical coordinates, we can describe $E$ as
+                \[
+                E=\big\{(r,\theta,z)\mid \alpha\leq \theta\leq \beta,\,h_1(\theta)\leq r
+                \leq h_2(\theta),\, g_1(x,y)\leq z\leq g_2(x,y) \big\}.
+                \]
+                </p>
+                <p>
+                    Now, suppose that $f\colon E\to \RR$ is a continuous function.
+                    Since $E$ is a region of Type I,
+                    \[
+                    \iiint_E f(x,y,z)\,dV=\iint_D \int_{g_1(x,y)}^{g_2(x,y)}f(x,y,z)\,dz\,dA.
+                    \]
+                    Moreover, if we change to polar coordinates in the inner integral, we obtain
+                    \[
+                        \iiint_E f(x,y,z)\,dV
+                        =\int_\alpha^\beta \int_{h_1(\theta)}^{h_2(\theta)} \int_{g_1(r\cos\theta,r\sin\theta)}^{g_2(r\cos\theta,r\sin\theta)}r f(r\cos\theta,r\sin\theta,z)\,dz\,dr\,d\theta.
+                    \]
+                </p>
+                <p>
+                    We have thus arrived at the following change of variables formula:
+                </p>
+                <div class="generic-box">
+                    <b>Change of Variables Formula for Cylindrical Coordinates.</b>
+                    Let $E$ be a solid region that can be described in cylindrical coordinates as
+                    \[
+                    E=\big\{(r,\theta,z)\mid \alpha\leq \theta\leq \beta,\,h_1(\theta)\leq r
+                    \leq h_2(\theta),\, g_1(x,y)\leq z\leq g_2(x,y) \big\}.
+                    \]
+                    with $0\leq\beta-\alpha\leq 2\pi$,
+                    and $h_1,\,h_2,\,g_1,\,g_2$ continuous functions.
+                    If $f\colon E\to \RR$ is a continuous function, then the integral of $f$
+                    on $E$ is
+                    \[
+                        \iiint_E f(x,y,z)\,dV
+                        =\int_\alpha^\beta \int_{h_1(\theta)}^{h_2(\theta)} \int_{g_1(r\cos\theta,r\sin\theta)}^{g_2(r\cos\theta,r\sin\theta)}r f(r\cos\theta,r\sin\theta,z)\,dz\,dr\,d\theta.
+                    \]
+                </div>
+                <div class="generic-box">
+                    <b>Remark.</b>
+                    In general, switching to cylindrical coordinates is a good idea
+                    if the region of integration is symmetric around the $z$-axis.
+                </div>
+                <div class="example-box">
+                    Find the integral
+                    \[
+                        \iiint_E xz\,dV,
+                    \]
+                    where $E$ is the solid region that lies below the cone $z=3-\sqrt{x^2+y^2}$
+                    and the plane $z=0$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div class="columns" style="align-items: center;">
+                        <div style="width: 60%;">
+                            <p>
+                                In cylindrical coordinates, the cone $z=3-\sqrt{x^2+y^2}$ can be written
+                                as $z=3-r$.
+                                In addition, this cone meets the $xy$-plane when $r=3$, so that the
+                                intersection of these two surfaces is the disk $D$ centered at the origin
+                                with radius $3$.
+                            </p>
+                            <p>
+                                The projection of $E$ onto the $xy$-plane is precisely the disk $D$,
+                                so in cylindrical coordinates,
+                                \[
+                                E=\big\{(r,\theta,z)\mid 0\leq \theta\leq 2\pi,\,0\leq r\leq 3,\,0\leq z\leq 3-x \big\}.
+                                \]
+                            </p>
+                        </div style="width: 60%;">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/cone-integral.png" alt="A cone">
+                        </div>
+                    </div>
+                    <p>
+                        Consequently, if we change to cylindrical coordinates, we obtain
+                        \[
+                        \begin{aligned}
+                            \iiint_E xz\,dV
+                            =&
+                            \int_0^{2\pi}\int_0^3\int_0^{3-r}r^2z\cos\theta\,dz\,dr\,d\theta
+                            =
+                            \int_0^{2\pi}\int_0^3\bigg[\frac{r^2z^2\cos\theta}{2}\bigg]_{z=0}^{z=3-r}\,dr\,d\theta
+                            \\
+                            =&
+                            \int_0^{2\pi}\int_0^3\frac{r^2(3-r)^2\cos\theta}{2}\,dr\,d\theta
+                            =
+                            \frac12\int_0^{2\pi}\cos\theta\,d\theta\int_0^3r^2(3-r)^2\,dr.
+                        \end{aligned}
+                        \]
+                        Note that
+                        \[
+                        \int_0^{2\pi}\cos\theta\,d\theta=[\sin\theta]_{0}^{2\pi}=0,
+                        \]
+                        so we conclude that
+                        \[
+                            \iiint_E xz\,dV = 0.
+                        \]
+                    </p>
+                </details>
+                <div class="example-box">
+                    Find the iterated integral
+                    \[
+                    I=
+                    \int_{-3}^3\int_{-\sqrt{9-x^2}}^{\sqrt{9-x^2}}\int_{2x^2+2y^2}^{20}\sqrt{x^2+y^2}\,dz\,dx\,dy
+                    \]
+                    by converting it into a triple integral and switching to cylindrical coordinates.
+                </div>
+                <details>
+                    <summary>Solution</summary>
+                    <p>
+                        Firstly, let us recognize the region of integration.
+                        Looking at the bounds of the integral, we see that the region
+                        is
+                        \[
+                            E=
+                            \Big\{(x,y,z)\mid -3\leq y\leq 3,\,-\sqrt{9-y^2}\leq x\leq\sqrt{9-y^2},\,2x^2+2y^2\leq z\leq 20 \Big\}.
+                        \]
+                    </p>
+                    <div class="columns" style="align-items: center;">
+                        <div style="width: 60%;">
+                            <p>
+                                This is a region of Type I whose projection onto the $xy$-plane is
+                                the disk centered at the origin and with radius $3$, whereas $z$
+                                is enclosed between the functions $2x^2+2y^2$ and $20$.
+                            </p>
+                            <p>
+                                In cylindrical coordinates, this region becomes
+                                \[
+                                E=\big\{(r,\theta,z)\mid 0\leq\theta\leq 2\pi,\,0\leq r\leq 3,\,2r^2\leq z\leq 20\big\}.
+                                \]
+                            </p>
+                        </div>
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/cylindrical-integral-1.png" alt="A regionin cylindrical coordinates" style="width: 70%;">
+                        </div>
+                    </div>
+                    <p>
+                        Consequently, by changing to cylindrical coordinates we see that
+                        \[
+                            \begin{aligned}
+                                I
+                                =&
+                                \iiint_E \sqrt{x^2+y^2}\,dV
+                                =
+                                \int_0^{2\pi}\int_0^3\int_{2r^2}^{20}r\cdot r\,dz\,dr\,d\theta
+                                =
+                                \int_0^{2\pi}\int_0^3\int_{2r^2}^{20}r^2\,dz\,dr\,d\theta
+                                \\
+                                =&
+                                \int_0^{2\pi}\int_0^3r^2\big(20-r^2\big)\,dr\,d\theta
+                                =
+                                \int_0^{2\pi}\int_0^3\big(20r^2-r^4\big)\,dr\,d\theta
+                                =
+                                \int_0^{2\pi}d\theta\int_0^3\big(20r^2-r^4\big)\,dr
+                                \\
+                                ={}&
+                                2\pi\cdot\frac{657}{5}
+                                =
+                                \frac{1314\pi}5.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
