@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Integration in Spherical Coordinates</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1>Integration in Spherical Coordinates</h1>
+            <p>
+                In this section we continue the study of polar coordinates
+                in three dimensions.
+                We will discuss the system of spherical coordinates
+                and develop a formula for computing triple integrals in this system.
+            </p>
+            <section id="spherical-coordinates">
+                <div class="definition-box">
+                    Let $p=(x,y,z)$ be a point in space.
+                    We define the <b>spherical coordinates</b> of $p$
+                    to be the numbers $(\rho,\theta,\phi)$, where
+                    <ul>
+                        <li>
+                            $\rho$ is the distance between $p$
+                            and the origin.
+                        </li>
+                        <li>
+                            $\theta$ is the angle that the line joining $(0,0,0)$
+                            and $(x,y,0)$ makes with the $x$-axis.
+                        </li>
+                        <li>
+                            $\phi$ is the angle (between $0$ and $\pi$) that the line
+                            joining $(0,0,0)$ and $(x,y,z)$ makes with the $z$-axis.
+                        </li>
+                    </ul>
+                </div>
+                <div class="columns">
+                    <div style="width: 60%;">
+                        <p>
+                            Using elementary trigonometry, we can derive the following
+                            relations between the Cartesian coordinates
+                            $(x,y,z)$ and the spherical coordinates $(\rho,\theta,\phi)$
+                            of a point $p$:
+                            \[
+                                \left\{
+                                    \begin{aligned}
+                                        x={}&\rho\,\sin\phi\,\cos\theta,\\
+                                        y={}&\rho\,\sin\phi\,\sin\theta,\\
+                                        z={}&\rho\,\cos\phi.
+                                    \end{aligned}
+                                \right.
+                            \]
+                            Moreover,
+                            \[
+                                \rho=\sqrt{x^2+y^2+z^2}.
+                            \]
+                        </p>
+                    </div style="width: 60%;">
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/spherical-coordinates.png" alt="Spherical coordinates">
+                    </div>
+                </div>
+                <div class="example-box">
+                    Find spherical coordinates for the point $p=\left(-\frac{9}{4},\frac{3
+                    \sqrt{3}}{4},\frac{3}{2}\right)$
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        If $(\rho,\theta,\phi)$ denote spherical coordinates for $p$, then we have
+                        \[
+                        \rho=\sqrt{\frac{81}{16}+\frac{27}{16}+\frac{9}4}=\sqrt{9}=3.
+                        \]
+                        In addition, since $z=\frac32>0$, we know that $\phi$ lies between $0$ and
+                        $\frac{\pi}2$.
+                        Now, $3\cos\phi=\frac32$, so
+                        \[
+                            \cos\phi=\frac12 \implies \phi=\frac{\pi}3.
+                        \]
+                        To find $\theta$, we use the fact that
+                        \[
+                        \left\{
+                        \begin{aligned}
+                        -\frac94 ={} & 3\sin\frac{\pi}3\,\cos\theta = \frac{3\sqrt{3}}{2}\cos\theta
+                        \implies \cos\theta=-\frac{\sqrt{3}}{2},\\
+                        \frac{3\sqrt{3}}{4} ={} & 3\sin\frac{\pi}3\,\sin\theta = \frac{3\sqrt{3}}{2}\sin\theta
+                        \implies \sin\theta=\frac{1}{2}.\\
+                        \end{aligned}
+                        \right.
+                        \]
+                        This gives $\theta=\frac{5\pi}6$, so a set of spherical coordinates of $p$ is
+                        \[
+                            \left(3,\frac{5\pi}6,\frac{\pi}3\right).
+                        \]
+                    </p>
+                </details>
+                <div class="example-box">
+                    Find the Cartesian coordinates of the point $q$ whose spherical coordinates are
+                    $\left(1,\frac{\pi}{4},-\frac{2\pi}{3}\right)$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We can find the rectangular coordinates $(x,y,z)$ of $q$ by using the formulas
+                        \[
+                        \left\{
+                            \begin{aligned}
+                                x={}&1 \cdot\sin\frac{-2\pi}{3}\cdot\cos\frac{\pi}{4}
+                                = -\frac{\sqrt{3}}2 \cdot \frac{1}{\sqrt{2}}
+                                = -\frac{\sqrt{3}}{2\sqrt{2}},\\
+                                y={}&1 \cdot\sin\frac{-2\pi}{3}\cdot\sin\frac{\pi}{4}
+                                = -\frac{\sqrt{3}}2 \cdot \frac{1}{\sqrt{2}}
+                                = -\frac{\sqrt{3}}{2\sqrt{2}},\\
+                                z={}&1\cdot \cos\frac{-2\pi}{3}=-\frac12.
+                            \end{aligned}
+                        \right.
+                        \]
+                        Therefore, $(x,y,z)=\left(-\frac{\sqrt{3}}{2\sqrt{2}},-\frac{\sqrt{3}}{2\sqrt{2}},-\frac12\right)$.
+                    </p>
+                </details>
+                <p>
+                    Just as in the case of cylindrical coordinates, we can get a better intuition
+                    of the spherical coordinate system by plotting the surfaces corresponding
+                    to simple equations involving the coordinates $(\rho,\theta,\phi)$.
+                </p>
+                <ul>
+                    <li>
+                        The surface $\rho = c$ is a sphere centered at the origin with radius $c$.
+                        <div class="image-container">
+                            <img src="Pictures/spherical-rho.png" alt="A sphere" style="width: 40%;">
+                        </div class="image-container">
+                    </li>
+                    <li>
+                        The surface $\theta = c$ is a vertical half-plane that makes an angle
+                        of $\theta$ radians with respect to the $x$-axis.
+                        <div class="image-container">
+                            <img src="Pictures/theta-plane.png" alt="A half-plane" style="width: 20%; padding: 2% 0;">
+                        </div class="image-container">
+                    </li>
+                    <li>
+                        The surface $\phi = c$ is a cone when $c\neq \frac{\pi}{2}$.
+                        This cone branches upward when \(0< c <\frac{\pi}{2}\), and it branches
+                        downward when $\frac{\pi}{2}< c <\pi$.
+                        In the case that $c=\frac{\pi}{2}$, this surface is merely the $xy$-plane.
+                        <div class="columns" style="justify-content: space-evenly;">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/spherical-phi-1.png" alt="A cone">
+                        </div class="image-container">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/spherical-phi-2.png" alt="A cone">
+                        </div class="image-container">
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section id="integration">
+                <h2>Integration in Spherical Coordinates</h2>
+                <p>
+                    Here we will give a formula that will allow us to switch to
+                    spherical coordinates when performing a triple integral.
+                </p>
+                <p>
+                    Suppose that we are given a solid region $E$ whose description in
+                    spherical coordinates is
+                    \[
+                        E
+                        =
+                        \big\{(\rho,\theta,\phi)\mid \alpha\leq \theta\leq \beta,\,
+                        \gamma\leq\phi\leq\delta,\,
+                        g_1(\theta,\phi)\leq\rho\leq g_2(\theta,\phi)\big\}.
+                    \]
+                    Using a method similar to the one that we employed
+                    to obtain the
+                    <a href=polar-integration.html#polar-formula>
+                    change of variables formula for polar coordinates
+                    </a>
+                    , it is possible to derive a formula for integrating any
+                    continuous function $f\colon E\to\RR$.
+                </p>
+                <div class="generic-box">
+                    <b>Change of Variables Formula for Spherical Coordinates.</b>
+                    If $E$ is a solid region in space that can be described
+                    in spherical coordinates as above, then for any continuous
+                    function $f\colon E\to\RR$ we have
+                    \[
+                        \iiint_E f(x,y,z)\,dV
+                        =
+                        \int_{\gamma}^{\delta}\int_{\alpha}^{\beta}\int_{g_1(\theta,\phi)}^{g_2(\theta,\phi)}
+                        \rho^2\sin\phi\, f(\rho \sin\phi\,\cos\theta,\rho\sin\phi\,\sin\theta,\rho\cos\phi)
+                        d\rho\,d\theta\,d\phi.
+                    \]
+                </div>
+                <div class="warning-box">
+                    In this case, apart from changing from rectangular coordinates to
+                    spherical coordinates in the integrand and bounds, we have to multiply
+                    the whole integrand by $\rho^2\sin\phi$ in order for this formula to work.
+                </div>
+                <div class="example-box">
+                    Show that the volume of the sphere of radius $R$ is $\frac43\pi R^3$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Let us take $E$ to be the sphere of radius $R$ centered at the
+                        origin.
+                        In spherical coordinates, the sphere is given by
+                        \[
+                            E
+                            =
+                            \big\{(\rho,\theta,\phi)\mid 0\leq\rho\leq R,\,
+                            0\leq \theta\leq 2\pi,\,0\leq\phi\leq\pi \big\}.
+                        \]
+                        Consequently, the volume of $E$ is
+                        \[
+                            \begin{aligned}
+                                V(E)
+                                ={}&
+                                \iiint_E 1\,dV
+                                =
+                                \int_{0}^{2\pi}\int_0^\pi\int_0^R \rho^2\sin\phi\,d\rho
+                                \,d\phi\,d\theta
+                                =
+                                \int_0^{2\pi}\int_0^\pi
+                                \bigg[\frac{\rho^3\sin\phi}{3}\bigg]_{\rho=0}^{\rho=R}d\phi\,d\theta
+                                \\={}&
+                                \int_0^{2\pi}\int_0^\pi
+                                \frac{R^3\sin\phi}{3}d\phi\,d\theta
+                                =
+                                \int_0^{2\pi}\bigg[-\frac{R^3\cos\phi}{3}\bigg]_{\phi=0}^{\phi=\pi}\,d\theta
+                                =
+                                \int_0^{2\pi}\frac{2R^3}{3}d\theta
+                                =
+                                \frac{4}{3}\pi R^3.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                <div class="example-box">
+                    Find the volume of the solid region $E$ that lies above the cone of equation
+                    $z=\sqrt{x^2+y^2}$ and the sphere of equation $x^2+y^2+z^2=z$.
+                    You may use as a hint that the sphere has center $(0,0,\frac12)$ and radius
+                    $\frac12$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div class="columns">
+                        <div style="width: 60%;">
+                        <p>
+                            First of all, note that the equation of the cone in spherical
+                            coordinates becomes $\rho\cos\phi=\rho^2$, which is equivalent to
+                            $\rho=\cos\phi$.
+                        </p>
+                        <p>
+                            As for the cone, its equation in spherical coordinates
+                            becomes
+                            \[
+                                \begin{aligned}
+                                    \rho\cos\phi
+                                    ={}&
+                                    \sqrt{\rho^2\sin^2\phi\big(\cos^2\theta+\sin^2\theta\big)}
+                                    =
+                                    \rho\sin\phi.
+                                \end{aligned}
+                            \]
+                            Consequently, $\cos\phi=\sin\phi$, which is only possible if
+                            $\phi=\frac{\pi}4$.
+                            This means that, in spherical coordinates, the region $E$ is given by
+                            \[
+                                0\leq \theta\leq 2\pi,\quad
+                                0\leq \phi\leq \frac{\pi}4,\quad
+                                0\leq \rho\leq \cos\phi.
+                            \]
+                        </p>
+                        </div style="width: 60%;">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/ice-cream.png" alt="An ice cream shape">
+                        </div>
+                    </div>
+                    <p>
+                        Therefore,
+                        \[
+                            \begin{aligned}
+                                V(E)
+                                ={}&
+                                \iiint_E 1\,dV
+                                =
+                                \int_0^{2\pi}\int_0^{\frac{\pi}4}\int_0^{\cos\phi}
+                                \rho^2\sin\phi\,d\rho\,d\phi\,d\theta
+                                =
+                                \frac13\int_0^{2\pi}\int_0^{\frac{\pi}4}\cos^3\phi\,\sin\phi\,d\phi\,d\theta.
+                                \\
+                                ={}&
+                                -\frac{1}{12}\int_0^{2\pi}\big[\cos^4\phi\big]_{\phi=0}^{\phi=\frac{\pi}4}\,d\theta
+                                =
+                                -\frac{1}{12}\int_0^{2\pi}\frac{-3}{4}d\theta
+                                =
+                                \frac{\pi}8.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                <div class="example-box">
+                    Find the integral
+                    \[
+                        \iiint_E(x+z)\,dV,
+                    \]
+                    where $E$ is the solid region in the first octant enclosed by the sphere
+                    centered at the origin with radius $2$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        In spherical coordinates, the region $E$ is
+                        \[
+                            E
+                            =
+                            \left\{(\rho,\theta,\phi)\mid 0\leq \theta\leq\frac{\pi}2,\,
+                            0\leq\phi\leq\frac{\pi}2,\,0\leq\rho\leq 2\right\}.
+                        \]
+                        Thus, changing to spherical coordinates, we get
+                        \[
+                            \begin{aligned}
+                                \iiint_E (x+z)\,dV
+                                ={}&
+                                \int_0^{\frac{\pi}2}\int_{0}^{\frac{\pi}2}\int_0^2
+                                (\rho\sin\phi\,\cos\theta+\rho\cos\phi)\rho^2\sin\phi\,
+                                d\rho\,d\phi\,d\theta\\
+                                ={}&
+                                \int_0^{\frac{\pi}2}\int_{0}^{\frac{\pi}2}\int_0^2
+                                \rho^3(\sin\phi\,\cos\theta+\cos\phi)\sin\phi\,
+                                d\rho\,d\phi\,d\theta
+                                \\
+                                ={}&
+                                4\int_{0}^{\frac{\pi}2}\int_0^{\frac{\pi}2}
+                                \big(\sin^2\phi\,\cos\theta+\sin\phi\cos\phi\big)\,d\phi\,d\theta.
+                            \end{aligned}
+                        \]
+                        This integral splits into the integrals
+                        \[
+                            \begin{aligned}
+                                4\int_{0}^{\frac{\pi}2}\int_0^{\frac{\pi}2}
+                                \sin^2\phi\,\cos\theta\,d\phi\,d\theta
+                                =
+                                4\int_{0}^{\frac{\pi}2}\sin^2\phi\,d\phi \cdot
+                                \int_0^{\frac{\pi}2}\cos\theta\,d\theta
+                                =
+                                \pi
+                            \end{aligned}
+                        \]
+                        and
+                        \[
+                            \begin{aligned}
+                                4\int_0^{\frac{\pi}2}\int_0^{\frac{\pi}2}\sin\phi\cos\phi\,d\phi\,d\theta
+                                ={}&
+                                4\int_0^{\frac{\pi}2}\bigg[\frac{\sin^2\phi}2\bigg]_{\phi=0}^{\phi=\frac{\pi}2}\,d\theta
+                                =
+                                4\int_0^{\frac{\pi}2}\frac12\,d\theta
+                                =
+                                \pi,
+                            \end{aligned}
+                        \]
+                        so we can conclude that
+                        \[
+                            \iiint_E (x+z)\,dV=2\pi.
+                        \]
+                    </p>
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
