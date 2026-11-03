@@ -66,14 +66,14 @@
                                 \rho=\sqrt{x^2+y^2+z^2}.
                             \]
                         </p>
-                    </div style="width: 60%;">
+                    </div>
                     <div class="image-container" style="width: 30%;">
                         <img src="Pictures/spherical-coordinates.png" alt="Spherical coordinates">
                     </div>
                 </div>
                 <div class="example-box">
                     Find spherical coordinates for the point $p=\left(-\frac{9}{4},\frac{3
-                    \sqrt{3}}{4},\frac{3}{2}\right)$
+                    \sqrt{3}}{4},\frac{3}{2}\right)$.
                 </div>
                 <details>
                     <summary>Solution.</summary>
@@ -95,7 +95,7 @@
                         -\frac94 ={} & 3\sin\frac{\pi}3\,\cos\theta = \frac{3\sqrt{3}}{2}\cos\theta
                         \implies \cos\theta=-\frac{\sqrt{3}}{2},\\
                         \frac{3\sqrt{3}}{4} ={} & 3\sin\frac{\pi}3\,\sin\theta = \frac{3\sqrt{3}}{2}\sin\theta
-                        \implies \sin\theta=\frac{1}{2}.\\
+                        \implies \sin\theta=\frac{1}{2}.
                         \end{aligned}
                         \right.
                         \]
@@ -107,7 +107,7 @@
                 </details>
                 <div class="example-box">
                     Find the Cartesian coordinates of the point $q$ whose spherical coordinates are
-                    $\left(1,\frac{\pi}{4},-\frac{2\pi}{3}\right)$.
+                    $\left(1,\frac{\pi}{4},\frac{2\pi}{3}\right)$.
                 </div>
                 <details>
                     <summary>Solution.</summary>
@@ -116,17 +116,17 @@
                         \[
                         \left\{
                             \begin{aligned}
-                                x={}&1 \cdot\sin\frac{-2\pi}{3}\cdot\cos\frac{\pi}{4}
-                                = -\frac{\sqrt{3}}2 \cdot \frac{1}{\sqrt{2}}
-                                = -\frac{\sqrt{3}}{2\sqrt{2}},\\
-                                y={}&1 \cdot\sin\frac{-2\pi}{3}\cdot\sin\frac{\pi}{4}
-                                = -\frac{\sqrt{3}}2 \cdot \frac{1}{\sqrt{2}}
-                                = -\frac{\sqrt{3}}{2\sqrt{2}},\\
-                                z={}&1\cdot \cos\frac{-2\pi}{3}=-\frac12.
+                                x={}&1 \cdot\sin\frac{2\pi}{3}\cdot\cos\frac{\pi}{4}
+                                = \frac{\sqrt{3}}2 \cdot \frac{1}{\sqrt{2}}
+                                = \frac{\sqrt{3}}{2\sqrt{2}},\\
+                                y={}&1 \cdot\sin\frac{2\pi}{3}\cdot\sin\frac{\pi}{4}
+                                = \frac{\sqrt{3}}2 \cdot \frac{1}{\sqrt{2}}
+                                = \frac{\sqrt{3}}{2\sqrt{2}},\\
+                                z={}&1\cdot \cos\frac{2\pi}{3}=-\frac12.
                             \end{aligned}
                         \right.
                         \]
-                        Therefore, $(x,y,z)=\left(-\frac{\sqrt{3}}{2\sqrt{2}},-\frac{\sqrt{3}}{2\sqrt{2}},-\frac12\right)$.
+                        Therefore, $(x,y,z)=\left(\frac{\sqrt{3}}{2\sqrt{2}},\frac{\sqrt{3}}{2\sqrt{2}},-\frac12\right)$.
                     </p>
                 </details>
                 <p>
@@ -139,14 +139,14 @@
                         The surface $\rho = c$ is a sphere centered at the origin with radius $c$.
                         <div class="image-container">
                             <img src="Pictures/spherical-rho.png" alt="A sphere" style="width: 40%;">
-                        </div class="image-container">
+                        </div>
                     </li>
                     <li>
                         The surface $\theta = c$ is a vertical half-plane that makes an angle
-                        of $\theta$ radians with respect to the $x$-axis.
+                        of $c$ radians with respect to the $x$-axis.
                         <div class="image-container">
                             <img src="Pictures/theta-plane.png" alt="A half-plane" style="width: 20%; padding: 2% 0;">
-                        </div class="image-container">
+                        </div>
                     </li>
                     <li>
                         The surface $\phi = c$ is a cone when $c\neq \frac{\pi}{2}$.
@@ -156,10 +156,10 @@
                         <div class="columns" style="justify-content: space-evenly;">
                         <div class="image-container" style="width: 30%;">
                             <img src="Pictures/spherical-phi-1.png" alt="A cone">
-                        </div class="image-container">
+                        </div>
                         <div class="image-container" style="width: 30%;">
                             <img src="Pictures/spherical-phi-2.png" alt="A cone">
-                        </div class="image-container">
+                        </div>
                         </div>
                     </li>
                 </ul>
@@ -184,8 +184,8 @@
                     to obtain the
                     <a href=polar-integration.html#polar-formula>
                     change of variables formula for polar coordinates
-                    </a>
-                    , it is possible to derive a formula for integrating any
+                    </a>,
+                    it is possible to derive a formula for integrating any
                     continuous function $f\colon E\to\RR$.
                 </p>
                 <div class="generic-box">
@@ -197,7 +197,7 @@
                         \iiint_E f(x,y,z)\,dV
                         =
                         \int_{\gamma}^{\delta}\int_{\alpha}^{\beta}\int_{g_1(\theta,\phi)}^{g_2(\theta,\phi)}
-                        \rho^2\sin\phi\, f(\rho \sin\phi\,\cos\theta,\rho\sin\phi\,\sin\theta,\rho\cos\phi)
+                        \rho^2\sin\phi\, f(\rho \sin\phi\,\cos\theta,\rho\sin\phi\,\sin\theta,\rho\cos\phi)\,
                         d\rho\,d\theta\,d\phi.
                     \]
                 </div>
@@ -232,14 +232,14 @@
                                 \,d\phi\,d\theta
                                 =
                                 \int_0^{2\pi}\int_0^\pi
-                                \bigg[\frac{\rho^3\sin\phi}{3}\bigg]_{\rho=0}^{\rho=R}d\phi\,d\theta
+                                \bigg[\frac{\rho^3\sin\phi}{3}\bigg]_{\rho=0}^{\rho=R}\,d\phi\,d\theta
                                 \\={}&
                                 \int_0^{2\pi}\int_0^\pi
-                                \frac{R^3\sin\phi}{3}d\phi\,d\theta
+                                \frac{R^3\sin\phi}{3}\,d\phi\,d\theta
                                 =
                                 \int_0^{2\pi}\bigg[-\frac{R^3\cos\phi}{3}\bigg]_{\phi=0}^{\phi=\pi}\,d\theta
                                 =
-                                \int_0^{2\pi}\frac{2R^3}{3}d\theta
+                                \int_0^{2\pi}\frac{2R^3}{3}\,d\theta
                                 =
                                 \frac{4}{3}\pi R^3.
                             \end{aligned}
@@ -248,7 +248,7 @@
                 </details>
                 <div class="example-box">
                     Find the volume of the solid region $E$ that lies above the cone of equation
-                    $z=\sqrt{x^2+y^2}$ and the sphere of equation $x^2+y^2+z^2=z$.
+                    $z=\sqrt{x^2+y^2}$ and inside the sphere of equation $x^2+y^2+z^2=z$.
                     You may use as a hint that the sphere has center $(0,0,\frac12)$ and radius
                     $\frac12$.
                 </div>
@@ -257,7 +257,7 @@
                     <div class="columns">
                         <div style="width: 60%;">
                         <p>
-                            First of all, note that the equation of the cone in spherical
+                            First of all, note that the equation of the sphere in spherical
                             coordinates becomes $\rho\cos\phi=\rho^2$, which is equivalent to
                             $\rho=\cos\phi$.
                         </p>
@@ -282,7 +282,7 @@
                                 0\leq \rho\leq \cos\phi.
                             \]
                         </p>
-                        </div style="width: 60%;">
+                        </div>
                         <div class="image-container" style="width: 30%;">
                             <img src="Pictures/ice-cream.png" alt="An ice cream shape">
                         </div>
@@ -298,12 +298,12 @@
                                 \int_0^{2\pi}\int_0^{\frac{\pi}4}\int_0^{\cos\phi}
                                 \rho^2\sin\phi\,d\rho\,d\phi\,d\theta
                                 =
-                                \frac13\int_0^{2\pi}\int_0^{\frac{\pi}4}\cos^3\phi\,\sin\phi\,d\phi\,d\theta.
+                                \frac13\int_0^{2\pi}\int_0^{\frac{\pi}4}\cos^3\phi\,\sin\phi\,d\phi\,d\theta
                                 \\
                                 ={}&
                                 -\frac{1}{12}\int_0^{2\pi}\big[\cos^4\phi\big]_{\phi=0}^{\phi=\frac{\pi}4}\,d\theta
                                 =
-                                -\frac{1}{12}\int_0^{2\pi}\frac{-3}{4}d\theta
+                                -\frac{1}{12}\int_0^{2\pi}\frac{-3}{4}\,d\theta
                                 =
                                 \frac{\pi}8.
                             \end{aligned}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Vector Fields</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="text-align: center;">Vector Calculus</h1>
+            <p>
+                The objective of this chapter is to study vector fields and how to perform
+                differential and integral calculus on them.
+                Essentially, a vector field is a function of several variables whose
+                output is a vector, instead of a number.
+                Vector fields may be integrated along curves and surfaces, so we will
+                develop the necessary tools to do so.
+                Finally, we will cover some multidimensional versions of the
+                Fundamental Theorem of Calculus, known as Green's Theorem,
+                Stokes' Theorem and the Divergence Theorem.
+            </p>
+            <section id="vector-fields">
+                <h2>Vector Fields</h2>
+                <p>
+                    The main objects that we will be working with throughout this
+                    chapter are <em>vector fields</em>:
+                </p>
+                <div class="definition-box">
+                    Let $E$ be a subset of $\RR^n$.
+                    A <b>vector field</b> on $E$ is a function $\bf{F}\colon E\to\RR^n$
+                    that assigns to each point $p\in E$ an $n$-dimensional vector
+                    $\bf{F}(p)\in\RR^n$.
+                </div>
+                <div class="warning-box">
+                    Sometimes we will identify a point $p=(x_1,\dots,x_n)$ with its
+                    <b>position vector</b> $\bf{x}=\langle x_1,\dots,x_n\rangle$, so we
+                    may interpret that a vector field $\bf{F}$ takes either a point or
+                    a vector as an input.
+                    We will write $\bf{F}(\bf{x})$ instead of $\bf{F}(p)$ when we want
+                    to make this interpretation.
+                </div>
+                <p>
+                    Here, we will only be considering vector fields on $\RR^2$ and $\RR^3$,
+                    but one can work with vector fields in any dimension.
+                    Moreover, although we have already been working with functions of
+                    several variables during this course, they also go by a different
+                    name in the context of vector calculus.
+                </p>
+                <div class="definition-box">
+                    A real number $a\in\RR$ is called a <b>scalar</b>.
+                    If $E$ is a subset of $\RR^n$, then a <b>scalar field</b> on $E$
+                    is a <br> function $f\colon E\to\RR$.
+                </div>
+                <p>
+                    In practice, working with a vector $\bf{v}=\langle v_1,\dots,v_n\rangle$ in $\RR^n$
+                    is the same as working with the $n$ numbers $v_1,\,\dots,\,v_n$.
+                    This also happens with vector fields:
+                </p>
+                <p>
+                    Consider a vector field $\bf{F}$ on $\RR^2$.
+                    Then, for each $(x,y)$ in the domain of $\bf{F}$, the vector
+                    $\bf{F}(x,y)$ has two components, which we may call
+                    $P(x,y)$ and $Q(x,y)$.
+                    In other words, we have
+                    \[
+                    \bf{F}(x,y)=\langle P(x,y),Q(x,y)\rangle
+                    =
+                    P(x,y)\bf{i}+Q(x,y)\bf{j}.
+                    \]
+                    Recall that, here, $\bf{i}=\langle 1,0\rangle$ and $\bf{j}=\langle 0,1\rangle$.
+                    Sometimes we shorten the above equation by just writing
+                    $\bf{F}=P\,\bf{i}+Q\,\bf{j}$.
+                    The scalar fields $P$ and $Q$ are called the <b>component fields</b>
+                    of $\bf{F}$.
+                </p>
+                <p>
+                    Similar considerations can be made with vector fields on $\RR^3$.
+                    Suppose $\bf{F}$ is a vector field on $E$, where $E$ is a subset of $\RR^3$.
+                    Then, for each $(x,y,z)$ in $E$, we can write
+                    \[
+                    \bf{F}(x,y,z)
+                    =
+                    \langle P(x,y,z),Q(x,y,z),R(x,y,z)\rangle
+                    =
+                    P(x,y,z)\bf{i}+Q(x,y,z)\bf{j}+R(x,y,z)\bf{k},
+                    \]
+                    where $\bf{i}=\langle 1,0,0\rangle$, $\bf{j}=\langle 0,1,0\rangle$
+                    and $\bf{k}=\langle 0,0,1\rangle$.
+                    The scalar fields $P$, $Q$ and $R$ are known as the
+                    <b>component fields</b> of $\bf{F}$.
+                </p>
+                <div class="columns">
+                    <div style="width: 60%;">
+                        <p>
+                            Vector fields can be plotted as follows:
+                            if $\bf{F}$ is a vector field on $E$, then for every $p\in E$
+                            we draw an arrow representing the vector $\bf{F}(p)$ starting at $p$.
+                            While these pictures can be useful, if the length of the vectors $\bf{F}(p)$
+                            changes drastically as we change $p$, this representation can become
+                            cluttered with vectors of different lengths.
+                            Thus, a common practice is to draw all of these vectors with the
+                            same length (only paying attention to their direction)
+                            and use colors to represent the actual length of these vectors.
+                            For example, the picture on the right is a representation
+                            of the vector field $\bf{F}(x,y)=\langle x,y\rangle$.
+                        </p>
+                    </div>
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/position.png" alt="The position vector field">
+                    </div>
+                </div>
+                <p>
+                    Below are some more examples of vector fields on $\RR^2$:
+                </p>
+                <div class="columns images-with-caption">
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/poly-vector.png" alt="A vector field">
+                        </div>
+                        <p class="center">
+                            $\bf{F}(x,y)=\langle y^2,x^3\rangle$
+                        </p>
+                    </div>
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/log-vector.png" alt="A vector field">
+                        </div>
+                        <p class="center">
+                            $\bf{F}(x,y)=\langle xy,\ln(x^2+1)\rangle$
+                        </p>
+                    </div>
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/trig-vector.png" alt="A vector field">
+                        </div>
+                        <p class="center">
+                            $\bf{F}(x,y)=\langle \sin y, x\rangle$
+                        </p>
+                    </div>
+                </div>
+                <p>
+                    Using the exact same procedure, we can represent vector fields in
+                    three dimensions.
+                    Here are some examples of vector fields in $\RR^3$ with their corresponding
+                    graphical representations.
+                </p>
+                <div class="columns images-with-caption">
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/example-1-3d.png" alt="A vector field">
+                        </div>
+                        <p class="center">
+                            $\bf{F}(x,y,z)=\langle z,y,x\rangle$
+                        </p>
+                    </div>
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/example-2-3d.png" alt="A vector field">
+                        </div>
+                        <p class="center">
+                            $\bf{F}(x,y,z)=\langle 1/x,y,z\rangle$
+                        </p>
+                    </div>
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/example-3-3d.png" alt="A vector field">
+                        </div>
+                        <p class="center">
+                            $\bf{F}(x,y,z)=\langle z, y, -x \rangle$
+                        </p>
+                    </div>
+                </div>
+                <p>
+                    In practice, these representations are always made with a computer,
+                    as drawing vector fields by hand can be extremely hard.
+                    However, for simple vector fields it is possible to give a rough
+                    sketch of their representations.
+                </p>
+                <div class="example-box">
+                    Sketch the vector field $\bf{F}(x,y)=\langle -y,x\rangle$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div style="display: flex; flex-direction: row; justify-content: center;">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/spin.png" alt="A vector field">                        
+                        </div>
+                    </div>
+                </details>
+                <div class="example-box">
+                    Sketch the vector field $\bf{F}(x,y,z)=z\,\bf{j}$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div style="display: flex; flex-direction: row; justify-content: center;">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/example-4-3d.png" alt="A vector field"> 
+                        </div>
+                    </div>
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
