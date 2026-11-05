@@ -66,9 +66,7 @@
                     In practice, working with a vector $\bf{v}=\langle v_1,\dots,v_n\rangle$ in $\RR^n$
                     is the same as working with the $n$ numbers $v_1,\,\dots,\,v_n$.
                     This also happens with vector fields:
-                </p>
-                <p>
-                    Consider a vector field $\bf{F}$ on $\RR^2$.
+                    Consider a vector field $\bf{F}$ on a subset $E$ of $\RR^2$.
                     Then, for each $(x,y)$ in the domain of $\bf{F}$, the vector
                     $\bf{F}(x,y)$ has two components, which we may call
                     $P(x,y)$ and $Q(x,y)$.
@@ -182,7 +180,7 @@
                     </div>
                 </div>
                 <p>
-                    In practice, these representations are always made with a computer,
+                    In practice, these representations are almost always made with a computer,
                     as drawing vector fields by hand can be extremely hard.
                     However, for simple vector fields it is possible to give a rough
                     sketch of their representations.
@@ -208,6 +206,204 @@
                             <img src="Pictures/example-4-3d.png" alt="A vector field"> 
                         </div>
                     </div>
+                </details>
+                <div class="example-box">
+                    <div class="columns">
+                        <div style="width: 60%;">
+                            A common example of a vector field is a so-called <em>velocity field</em>.
+                            Suppose that we have a fluid that is flowing along a pipe.
+                            We may model this pipe as a solid region $E\subseteq\RR^3$ and,
+                            for each point $(x,y,z)$ in the interior of $E$, we may take
+                            $\bf{V}(x,y,z)$ to be the velocity vector of the fluid at the point
+                            $(x,y,z)$.
+                            Then, the vector field $\bf{V}$ is called a <b>velocity field</b>.
+                        </div>
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/pipe.png" alt="Flow along a pipe">
+                        </div>
+                    </div>
+                </div>
+                <div class="example-box">
+                    Suppose that $k$ is a positive number, and consider the vector field
+                    \[
+                        \bf{F}(\bf{x})=\frac{-k\,\bf{x}}{\lvert\bf{x}\rvert^3},
+                    \]
+                    defined for all vectors in $\RR^3$ except for the zero vector.
+                    This vector field appears frequently in physics as a force field.
+                    For example, suppose that we have an object of mass $M$ placed at
+                    the origin.
+                    Given an object of mass $m$ at the point $p=(x,y,z)$, with
+                    corresponding position vector $\bf{x}=\langle x,y,z\rangle$, Newton's
+                    Universal Law of Gravitation states that the force that the former
+                    object exerts on the latter is given by
+                    \[
+                    \bf{F}(\bf{x})=-\frac{G\cdot M\cdot m}{\lvert \bf{x}\rvert^3}\bf{x},
+                    \]
+                    where $G$ is the universal gravitational constant.
+                    Note that this vector field is the same as the one from the beginning, with $k=GMm$.
+                    <br>
+                    The picture below gives a representation of the vector field
+                    \[
+                        \bf{F}(\bf{x})=-\frac{\bf{x}}{\lvert\bf{x}\rvert^3}.
+                    \]
+                    <div style="display: flex; flex-direction: row; justify-content: center;">
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/force.png" alt="A force field"> 
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="gradient-fields">
+                <h2>Gradient Fields and Potential Functions</h2>
+                <p>
+                    Given a differentiable function $f(x_1,\dots,x_n)$ of $n$ variables,
+                    recall that the <a href="directional-derivatives.html#definition-gradient">gradient</a>
+                    of $f$ at a point $p$ is the vector $\nabla f(p)$ whose components
+                    are the partial derivatives of $f$ at $p$.
+                    In particular, the function $\nabla f$ that takes each $p$ to $\nabla f(p)$ is
+                    a vector field.
+                </p>
+                <div class="definition-box">
+                    Let $f\colon E\to \RR$ be a differentiable function defined on a
+                    subset $E$ of $\RR^n$.
+                    The vector field $\nabla f\colon E\to\RR^n$ is called the
+                    <b>gradient vector field</b> of $f$.
+                </div>
+                <div class="example-box">
+                    Sketch the gradient vector field of the function
+                    \[
+                    f(x,y)=ye^{-x},
+                    \]
+                    as well as some level curves of $f$.
+                    What is the relationship between the two?
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div class="columns">
+                        <div style="width: 60%;">
+                            The picture on the right represents some level curves of the function
+                            $f(x,y)=ye^{-x}$ (for evenly spaced values of $c$), together with the gradient vector field
+                            \[\nabla f(x,y)=\langle -ye^{-x},e^{-x}\rangle.\]
+                            As expected from the general properties of the gradient,
+                            we see that $\nabla f$ is perpendicular to the level curves of $f$
+                            and it points in the direction that maximizes the directional derivative.
+                        </div>
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/exponential.png" alt="Level curves and the gradient">
+                        </div>
+                    </div>
+                    <p>
+                        In addition, we note that the length of $\nabla f$ is larger at the regions
+                        where the level curves are closer to each other.
+                        This is because for every $p\in\RR^2$ the length $\lvert \nabla f(p)\rvert$
+                        coincides with the directional derivative of $f$ at $p$ in the direction of
+                        $\nabla f(p)$.
+                        Therefore, at regions where the level curves are closer, this directional derivative
+                        has to be higher, and hence the length of $\nabla f$ is greater.
+                    </p>
+                </details>
+                <p>
+                    In general, not every vector field on $\RR^n$ will be the gradient
+                    of a function of $n$ variables.
+                    This motivates the following definition.
+                </p>
+                <div class="definition-box">
+                    We say that a vector field $\bf{F}\colon E\to\RR^n$ is <b>conservative</b>
+                    if there exists a differentiable function $f\colon E\to \RR$ such that $\bf{F}=\nabla f$ on $E$.
+                    In this case, we will say that $f$ is a <b>potential function</b> for $\bf{F}$.
+                </div>
+                <div class="example-box">
+                    Consider the vector field
+                    \[
+                        \bf{F}(x,y)=\langle xy,1\rangle.
+                    \]
+                    We claim that $\bf{F}$ is not conservative.
+                    Indeed, if $\bf{F}=\nabla f$ for a function $f$, then we have
+                    \[
+                        \frac{\partial f}{\partial x}=xy,
+                        \qquad
+                        \frac{\partial f}{\partial y}=1.
+                    \]
+                    If we differentiate the first equation with respect to $y$, we get
+                    \[
+                        \frac{\partial^2 f}{\partial y\,\partial x}=x,
+                    \]
+                    and by differentiating the second equation with respect to $x$ we obtain
+                    \[
+                        \frac{\partial^2 f}{\partial x\,\partial y}=0.
+                    \]
+                    Since these mixed partial derivatives are continuous, <a href="partial-derivatives.html#clairaut">Clairaut's theorem</a>
+                    asserts that
+                    \[
+                        x
+                        =
+                        \frac{\partial^2 f}{\partial y\,\partial x}
+                        =
+                        \frac{\partial^2 f}{\partial x\,\partial y}
+                        =
+                        0,
+                    \]
+                    which is false at every point $(x,y)$ with $x\neq 0$.
+                    Thus, the function $f$ cannot exist, so $\bf{F}$ is not conservative.
+                </div>
+                <div class="example-box">
+                    Show that the vector field
+                    \[
+                    \bf{F}(\bf{x})=-\frac{k\, \bf{x}}{\lvert x\rvert^3}
+                    \]
+                    on $E=\big\{\bf{x}\in\RR^3\mid \bf{x}\neq\bf{0}big\}$ is conservative
+                    and the function
+                    \[
+                        f(\bf{x})=\frac{k}{\lvert \bf{x}\rvert}
+                    \]
+                    is a potential function for $\bf{F}$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Note that, as a function of three variables, we have
+                        \[
+                        f(x,y,z)=\frac{k}{\sqrt{x^2+y^2+z^2}}=k\big(x^2+y^2+z^2\big)^{-\frac12}.
+                        \]
+                        Let us compute $\nabla f$.
+                        For instance, we have
+                        \[
+                                \frac{\partial f}{\partial x}
+                                =
+                                -\frac12 k\cdot 2x\big(x^2+y^2+z^2\big)^{-\frac32}
+                                =
+                                \frac{-k\, x}{\left(\sqrt{x^2+y^2+z^2}\right)^3}
+                                =
+                                \frac{-k\, x}{\lvert \bf{x}\rvert^3}.
+                        \]
+                        Similarly,
+                        \[
+                                \frac{\partial f}{\partial y}
+                                =
+                                \frac{-k\, y}{\lvert \bf{x}\rvert^3},
+                                \qquad
+                                \frac{\partial f}{\partial z}
+                                =
+                                \frac{-k\, z}{\lvert \bf{x}\rvert^3},
+                        \]
+                        hence the gradient of $f$ is
+                        \[
+                            \nabla f(\bf{x})
+                            =
+                            -\frac{k\,x}{\lvert \bf{x}\rvert^3}\,\bf{i}
+                            -\frac{k\,y}{\lvert \bf{x}\rvert^3}\,\bf{j}
+                            -\frac{k\,z}{\lvert \bf{x}\rvert^3}\,\bf{k}
+                            =
+                            -\frac{k}{\lvert\bf{x}\rvert^3}(x\,\bf{i}+y\,\bf{j}+z\,\bf{k})
+                            =
+                            -\frac{k\,\bf{x}}{\lvert \bf{x}\rvert^3}
+                            =
+                            \bf{F}(\bf{x}),
+                        \]
+                        so $\bf{F}=\nabla f$.
+                        This shows that $\bf{F}$ is conservative and $f$ is a potential
+                        function for $\bf{F}$.
+                    </p>
                 </details>
             </section>
         </main>
