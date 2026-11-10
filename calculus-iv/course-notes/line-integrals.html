@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Line Integrals</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="text-align: center;">Line Integrals</h1>
+            <p>
+                In this section we will discuss how to integrate scalar fields and
+                vector fields over curves in $\RR^n$.
+                These will have a geometric interpretation that is similar
+                to that of integrals of functions of one or several variables.
+            </p>
+            <section id="line-integrals-scalar-fields">
+                <h2>Line Integrals of Scalar Fields</h2>
+                <p>
+                    Firstly, we are interested in integrating functions of several
+                    variables along curves.
+                    Recall that a <em>curve</em> $C$ in $\RR^n$ is a subset that
+                    can be parametrized by a function
+                    $c\colon [a,b]\to\RR^n$,
+                    where $[a,b]$ is an interval in $\RR$.
+                </p>
+                <p>
+                    We can split a curve $c\colon [a,b]\to\RR^n$ into its components
+                    \[
+                        c(t)=(x_1(t),\dots,x_n(t)),\qquad t\in [a,b],
+                    \]
+                    so that the components $x_1(t),\,\dots,\,x_n(t)$ are functions
+                    of a single variable on $[a,b]$.
+                    In addition, we can identify the points in the curve with their
+                    position vectors
+                    \[
+                        \bf{r}(t)=\langle x_1(t),\dots,x_n(t)\rangle, \qquad t\in [a,b].
+                    \]
+                    Moreover, recall that if $c$ is <em>smooth</em>, that is, differentiable, then the <em>length</em> of the curve $C$ is given
+                    by the formula
+                    \[
+                    \mathscr{L}(C)=\int_a^b\lvert\bf{r}'(t)\rvert \,dt
+                    =
+                    \int_a^b\sqrt{x_1'(t)^2+\cdots+x_n'(t)^2}\,dt.
+                    \]
+                </p>
+                <p>
+                    With this in mind, we can now define the integral of a scalar field
+                    on a curve $C$:
+                </p>
+                <div class="definition-box">
+                    Let $f\colon E\to\RR$ be a scalar field defined on a subset $E$ of
+                    $\RR^n$, and $C$ a differentiable curve contained in $E$ that is parametrized
+                    by $\bf{r}(t)=\langle x_1(t),\dots,x_n(t)\rangle$ for $t\in[a, b]$.
+                    We define the <b>line integral</b> of $f$ along $C$ as the number
+                    \[
+                        \int_C f(x_1,\dots,x_n)\,ds
+                        =
+                        \int_a^bf(\bf{r}(t))\lvert\bf{r}'(t)\rvert\,dt
+                        =
+                        \int_a^bf(x_1(t),\dots,x_n(t))\sqrt{x_1'(t)^2+\cdots+x_n'(t)^2}\,dt.
+                    \]
+                </div>
+                <div class="generic-box">
+                    <b>Remark.</b>
+                    The expression $ds$ in the above integral refers to the <em>arc length
+                    parameter</em> $s$.
+                    More precisely, for each $t\in [a,b]$ we define $s(t)$ to be the length
+                    of $C$ between the points $c(a)$ and $c(t)$.
+                    That is,
+                    \[
+                        s(t)=\int_a^t\lvert\bf{r}'(u)\rvert\,du.
+                    \]
+                    By the Fundamental Theorem of Calculus, $s'(t)=\lvert \bf{r}'(t)\rvert$,
+                    so one can remember the formula for a line integral by writing it
+                    in terms of $t$ and recalling that
+                    \[
+                    ds=\lvert\bf{r}'(t)\rvert\,dt.
+                    \]
+                </div>
+                <div class="example-box">
+                    Find the line integral
+                    \[
+                        \int_C\big(x^2+y^2+z\big)\,ds,
+                    \]
+                    where $C$ is the helix parametrized by $\bf{r}(t)=\langle \cos t,\sin t,t\rangle$,
+                    for $0\leq t\leq 2\pi$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div class="columns">
+                        <div style="width: 70%;">
+                            Since $\bf{r}'(t)=\langle -\sin t,\cos t, 1\rangle$,
+                            we see that $\lvert \bf{r}'(t)\rvert =\sqrt{2}$.
+                            Therefore, we see that
+                            \[
+                                \begin{aligned}
+                                    \int_C\big(x^2+y^2+z\big)\,ds
+                                    ={}&
+                                    \int_0^{2\pi}\big(\cos^2 t+\sin^2t+t\big)\,\sqrt{2}\,dt
+                                    \\={}&
+                                    \int_0^{2\pi}\sqrt{2}(1+t)\,dt
+                                    =
+                                    \sqrt{2}\bigg[t+\frac{t^2}{2}\bigg]_{t=0}^{t=2\pi}
+                                    \\={}&
+                                    2\sqrt{2}\pi(1+\pi).
+                                \end{aligned}
+                            \]
+                        </div>
+                        <div class="image-container" style="width: 20%;">
+                            <img src="Pictures/helix.png" alt="A helix">
+                        </div>
+                    </div>
+                </details>
+                <h3>Geometric Interpretation of Line Integrals</h3>
+                <div class="columns">
+                    <div style="width: 60%;">
+                        <p>
+                            It is possible to give a geometric interpretation of line integrals
+                            for functions of two variables.
+                            Suppose that we are given a curve $C$ in the plane,
+                            given by $c(t)=(x(t),y(t))$.
+                            If $f(x,y)$ is a nonnegative function that is defined along $C$,
+                            we can consider the space curve $\bar{C}$ in $\RR^3$ described by
+                            \[
+                                \overline{c}(t)=(x(t),y(t),f(x(t),y(t))).
+                            \]
+                        </p>
+                        <p>
+                            Then, the line integral $\int_Cf(x,y)\,ds$ coincides with the area
+                            that is enclosed below the space curve $\bar{C}$ and above the
+                            plane curve $C$.
+                        </p>
+                    </div>
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/line-integral.png" alt="A line integral as an area">
+                    </div>
+                </div>
+                <h3>Line Integrals over Piecewise Smooth Curves</h3>
+                <p>
+                    We can extend the notion of line integrals to curves that are not
+                    completely smooth, but only have a finite number of corners.
+                </p>
+                <div class="definition-box">
+                    We say that a curve $C$ in $\RR^n$ is <b>piecewise smooth</b> if
+                    it is the union of smooth curves $C_1,\,\dots,\,C_k$
+                    where the terminal point of each $C_i$ is also the initial point of $C_{i+1}$.
+                    <div class="image-container" style="display: flex; flex-direction: row;">
+                        <img src="Pictures/piecewise.png" alt="A piecewise smooth curve" style="width: 25%; padding-top: 2%;">
+                    </div>
+                </div>
+                <div class="definition-box">
+                    If $C$ is a piecewise smooth curve comprised of the smooth curves
+                    $C_1,\,\dots,\,C_k$, then the line integral of a function $f$ over $C$
+                    is defined to be
+                    \[
+                        \int_C f(x_1,\dots,x_n)\,ds
+                        =
+                        \int_{C_1} f(x_1,\dots,x_n)\,ds
+                        +
+                        \cdots
+                        +
+                        \int_{C_k} f(x_1,\dots,x_n)\,ds.
+                    \]
+                </div>
+                <div class="example-box">
+                    Find the integral
+                    \[
+                        \int_C(x+y)\,ds,
+                    \]
+                    where $C$ is the arc of the unit circle traversing counter-clockwise from $(1,0)$
+                    to $(0,1)$ followed by the vertical segment that goes from $(0,1)$ to $(0,2)$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div class="columns">
+                        <div style="width: 60%;">
+                            <p>
+                                We can split the desired integral into
+                                \[
+                                    \int_C(x+y)\,ds
+                                    =
+                                    \int_{C_1}(x+y)\,ds
+                                    +
+                                    \int_{C_2}(x+y)\,ds,
+                                \]
+                                where $C_1$ denotes the arc of the circle and $C_2$
+                                is the vertical segment.
+                            </p>
+                            <p>
+                                The arc $C_1$ can be parametrized counter-clockwise with
+                                \[
+                                    \bf{r}_1(t)=\langle \cos t,\sin t\rangle,\qquad 0\leq t\leq\frac{\pi}{2}.
+                                \]
+                            </p>
+                        </div>
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/piecewise-2.png" alt="A piecewise curve">
+                        </div>
+                    </div>
+                    <p>
+                        Here, $\bf{r}_1'(t)=\langle -\sin t,\cos t\rangle$, so that
+                        $\lvert \bf{r}_1'(t)\rvert = 1$.
+                        This gives
+                        \[
+                            \begin{aligned}
+                                \int_{C_1}(x+y)\,ds
+                                ={}&
+                                \int_0^{\frac{\pi}{2}}(\cos t+\sin t)\,dt
+                                =
+                                \big[\sin t-\cos t\big]_{t=0}^{t=\frac{\pi}{2}}
+                                =
+                                2.
+                            \end{aligned}
+                        \]
+                    </p>
+                    <p>
+                        Moreover, the segment $C_2$ may be parametrized by
+                        \[
+                        \bf{r}_2(t)=\langle 0,t\rangle,\qquad 1\leq t\leq 2,
+                        \]
+                        with $\bf{r}_2'(t)=\langle 0,1\rangle$, so that $\lvert\bf{r}_2'(t)\rvert = 1$.
+                        Consequently,
+                        \[
+                            \begin{aligned}
+                            \int_{C_2}(x+y)\,ds
+                            ={}&
+                            \int_1^2t\,dt
+                            =
+                            \bigg[\frac{t^2}{2}\bigg]_{t=1}^{t=2}
+                            =
+                            \frac32.
+                            \end{aligned}
+                        \]
+                        In conclusion,
+                        \[
+                        \int_{C}(x+y)\,ds = 2+\frac32=\frac72.
+                        \]
+                    </p>
+                </details>
+                <h3>Orientation and Line Integrals</h3>
+                <p>
+                    Keep in mind that, by definition, the line integral of a function
+                    $f$ on the curve $C$ is explicitly dependent on the parametrization that we
+                    choose for $C$.
+                    Therefore, a natural question to consider is if changing the parametrization
+                    of our curve will result in a different line integral.
+                </p>
+                <p>
+                    Suppose that $C$ is a curve in $\RR^n$.
+                    Here, we only work with parametrizations that traverse $C$ exactly once.
+                    However, depending on the parametrization that we choose, we may be traversing
+                    $C$ in one of two possible directions.
+                    This is called an <b>orientation</b> of $C$, and every curve has exactly
+                    two orientations.
+                    For example, here are the two possible orientations for
+                    the curve $y=\arctan(x)$ in the plane:
+                </p>
+                <div class="columns" style="justify-content: space-around; padding-top: 2%;">
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/orientation-1.png" alt="An orientation for a curve">
+                    </div>
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/orientation-2.png" alt="An orientation for a curve">
+                    </div>
+                </div>
+                <p>
+                    Once we choose an orientation for a curve $C$, it is customary to denote
+                    by $-C$ the curve consisting of the same points as $C$, but parametrized
+                    with the opposite orientation.
+                </p>
+                <p>
+                    For the case of line integrals of scalar functions, we have:
+                </p>
+                <div class="theorem-box">
+                    If $C$ is a curve in $\RR^n$ and $f$ is a scalar field defined along $C$,
+                    then the integral
+                    \[
+                        \int_Cf(x_1,\dots,x_n)\,ds
+                    \]
+                    is independent of the parametrization that we choose for $C$, so long as the
+                    parametrization traverses $C$ exactly once.
+                </div>
+            </section>
+            <section id="line-integrals-vector-fields">
+                <h2>Line Integrals of Vector Fields</h2>
+                <p>
+                    It is also possible to find the line integral of a <em>vector field</em>
+                    along a curve.
+                    The motivation for these integrals comes from the notion of work in physics.
+                </p>
+                <div class="example-box">
+                    <div class="columns">
+                        <div style="width: 70%;">
+                            <p>
+                                Suppose that a particle is travelling along a curve $C$ in space, and
+                                there is a (continuous) force field $\bf{F}$ that is acting on this particle.
+                                Denote by $\bf{r}(t)$ the position vector of the particle at time $t$ and
+                                by $\bf{T}(t)=\bf{r}'(t)/\lvert \bf{r}'(t)\rvert$ the unit vector that
+                                points in the direction of $\bf{r}'(t)$.
+                            </p>
+                            <p>
+                                The <b>work</b> done by the force in moving the particle from $\bf{r}(a)$
+                                to $\bf{r}(b)$ along $C$ can be shown to be
+                                \[
+                                    W
+                                    =
+                                    \int_C \bf{F}\cdot \bf{T}\,ds
+                                    =
+                                    \int_a^b \bf{F}(\bf{r}(t))\cdot\frac{\bf{r}'(t)}{\lvert \bf{r}'(t)\rvert}
+                                    \lvert\bf{r}'(t)\rvert\,dt
+                                    =
+                                    \int_a^b \bf{F}(\bf{r}(t))\cdot\bf{r}'(t)\,dt.
+                                \]
+                            </p>
+                        </div>
+                        <div class="image-container" style="width: 20%;">
+                            <img src="Pictures/work.png" alt="Work exerted by a force">
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    With this in mind, we define the line integral of a vector field as follows:
+                </p>
+                <div class="definition-box">
+                    Let $C$ be a smooth curve in $\RR^n$ parametrized by $\bf{r}(t)$, where $a\leq t\leq b$,
+                    and suppose $\bf{F}$ is a continuous vector field on $C$.
+                    We define the <b>line integral</b> of $\bf{F}$ along $C$ to be the number
+                    \[
+                    \int_C \bf{F}\,\cdot\, d\bf{r}
+                    =
+                    \int_a^b\bf{F}(\bf{r}(t))\cdot \bf{r}'(t)\,dt
+                    =
+                    \int_C \bf{F}\cdot \bf{T}\,ds.
+                    \]
+                </div>
+                <p>
+                    If $C$ is a piecewise smooth curve, then the integral $\int_C \bf{F}\cdot d\bf{r}$ is computed
+                    by applying the above formula to the smooth components of $C$ and adding the corresponding
+                    integrals.
+                </p>
+                <div class="example-box">
+                    Compute the line integral
+                    \[
+                        \int_C \bf{F}\,\cdot\, d\bf{r},
+                    \]
+                    where $\bf{F}(x,y)=3x\,\bf{i}+4y\bf{j}$ and $C$ denotes the circle centered at the origin
+                    and of radius $2$, traversed counter-clockwise.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We can parametrize the circle $C$ by the vector function
+                        \[
+                        \bf{r}(t)=\langle 2 \cos t,2\sin t\rangle, \qquad 0\leq t\leq 2\pi.
+                        \]
+                        Here, we have $\bf{r}'(t)=\langle -\sin t,\cos t\rangle$.
+                        Therefore, the desired line integral is
+                        \[
+                            \begin{aligned}
+                                \int_C \bf{F}\,\cdot\, d\bf{r}
+                                ={}&
+                                \int_0^{2\pi}\langle 6\cos t,8\sin t\rangle\cdot
+                                \langle -2\sin t,2\cos t \rangle\,dt
+                                =
+                                \int_0^{2\pi}4\sin t\cos t\,dt
+                                =
+                                \int_{0}^{2\pi}2\sin(2t)\,dt
+                                =
+                                0.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                <div class="warning-box">
+                    Although for line integrals of scalar fields, the parametrization
+                    of $C$ does not affect the final integral, in the case of vector fields
+                    we have
+                    \[
+                    \int_{-C}\bf{F}\,\cdot\,d\bf{r}
+                    =
+                    -
+                    \int_{C}\bf{F}\,\cdot\,d\bf{r}.
+                    \]
+                    This is because changing the orientation of $C$ also changes the
+                    sign of $\bf{T}$.
+                </div>
+                <h3>A Component Description for Line Integrals</h3>
+                <p>
+                    Recall that a vector field $\bf{F}$ on a subset of $\RR^2$ may be
+                    decomposed into its components:
+                    \[
+                        \bf{F}=P\,\bf{i}+Q\,\bf{j}.
+                    \]
+                    If $C$ is a curve in $\RR^2$ parametrized by $\bf{r}(t)=\langle x(t),y(t)\rangle$,
+                    $t\in [a,b]$, then the line integral of $\bf{F}$ on $C$ is
+                    \[
+                        \int_C\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        \int_a^b \big(P(x(t),y(t))x'(t)+Q(x(t),y(t))y'(t)\big)\,dt.
+                    \]
+                    We may break this integral into two:
+                    \[
+                        \int_a^b P(x(t),y(t))x'(t)\,dt,
+                        \qquad\textsf{and}\qquad
+                        \int_a^b Q(x(t),y(t))y'(t)\,dt.
+                    \]
+                </p>
+                <p>
+                    It is customary to denote the above integrals by
+                    \[
+                        \int_C P\,dx
+                        =
+                        \int_a^b P(x(t),y(t))x'(t)\,dt,\qquad
+                        \int_C Q\,dy
+                        =
+                        \int_a^b Q(x(t),y(t))y'(t)\,dt.
+                    \]
+                    Here, we are recalling that $dx=x'(t)\,dt$ and $dy=y'(t)\,dt$.
+                    The first integral is called the <b>line integral with respect to $x$</b>
+                    of $P$ along $C$, whereas the second integral is the <b>line integral with
+                    respect to $y$</b> of $Q$ along $C$.
+                    This yields:
+                </p>
+                <div class="generic-box">
+                    <b>Component Form of the Line Integral of $\bf{F}=P\,\bf{i}+Q\,\bf{j}$ along $C$.</b>
+                    \[
+                    \int_C \bf{F}\,\cdot\,d\bf{r}
+                    =
+                    \int_C P\, dx + \int_C Q\,dy
+                    =
+                    \int_C P\, dx + Q\,dy.
+                    \]
+                </div>
+                <p>
+                    Similarly, for a vector field $\bf{F}=P\,\bf{i}+Q\,\bf{j}+R\,\bf{k}$ in three dimensions
+                    we also have a component expression for its line integral along a curve $C$:
+                </p>
+                <div class="generic-box">
+                    <b>Component Form of the Line Integral of $\bf{F}=P\,\bf{i}+Q\,\bf{j}+R\,\bf{k}$ along $C$.</b>
+                    \[
+                    \int_C \bf{F}\,\cdot\,d\bf{r}
+                    =
+                    \int_C P\, dx + Q\,dy + R \,dz.
+                    \]
+                </div>
+                <div class="example-box">
+                    Find the integral
+                    \[
+                        \int_C xy\,dx+yz\,dy+zx\,dz,
+                    \]
+                    where $C$ is the curve given by $\bf{r}(t)=\langle t,t^2,t^3\rangle$, $0\leq t\leq 1$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div class="columns">
+                        <div style="width: 70%;">
+                            <p>
+                                In this case, we have \[\bf{r}'(t)=\langle 1,2t,3t^2\rangle,\]
+                                so
+                                \[
+                                    \begin{aligned}
+                                        \int_C xy\,dx+yz\,dy+zx\,dz
+                                        ={}&
+                                        \int_0^1 \big(t^3+5t^6\big)\,dt=\frac{27}{28}.
+                                    \end{aligned}
+                                \]
+                            </p>
+                        </div>
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/twisted-cubic.png" alt="A twisted cubic">
+                        </div>
+                    </div>
+                </details>
+            </section>
+            <section id="appendix">
+                <h2>Appendix: Some Curves</h2>
+                <p>
+                    Here we collect the basic parametrizations of some curves in the plane:
+                </p>
+                <ul>
+                    <li>
+                        <b>The line segment.</b>
+                        Consider two points $p$ and $q$ in $\RR^n$.
+                        The line segment that goes from $p$ to $q$ can be parametrized by
+                        \[
+                            \bf{r}(t)=p+t(q-p),\qquad 0\leq t\leq 1.
+                        \]
+                    </li>
+                    <li>
+                        <b>The circle.</b>
+                        The circle of radius $R>0$ centered at the point $(a,b)$
+                        has equation
+                        \[
+                            (x-a)^2+(y-b)^2=R^2.
+                        \]
+                        It can be parametrized as follows:
+                        <ul>
+                            <li>
+                                Counter-clockwise parametrization (starting from $(a+R,b)$):
+                                \[
+                                    \bf{r}(t)=\langle a+ R\cos t, b+R\sin t\rangle,
+                                    \qquad
+                                    0\leq t\leq 2\pi.
+                                \]
+                            </li>
+                            <li>
+                                Clockwise parametrization (starting from $(a+R,b)$):
+                                \[
+                                    \bf{r}(t)=\langle a+ R\cos t, b-R\sin t\rangle,
+                                    \qquad
+                                    0\leq t\leq 2\pi.
+                                \]
+                            </li>
+                        </ul>
+                        If one needs to work with arcs of a circle, they would restrict $t$
+                        to an adequate subinterval of $[0,2\pi]$.
+                    </li>
+                    <li>
+                        <b>The ellipse.</b>
+                        The ellipse centered at the origin with semiaxes $a$ and $b$
+                        has equation
+                        \[
+                            \bigg(\frac{x}{a}\bigg)^2+\bigg(\frac{y}{b}\bigg)^2=1.
+                        \]
+                        This ellipse may be parametrized as follows:
+                        <ul>
+                            <li>
+                                Counter-clockwise parametrization (starting from $(a,0)$):
+                                \[
+                                    \bf{r}(t)=\langle a\cos t, b\sin t\rangle,
+                                    \qquad
+                                    0\leq t\leq 2\pi.
+                                \]
+                            </li>
+                            <li>
+                                Clockwise parametrization (starting from $(a,0)$):
+                                \[
+                                    \bf{r}(t)=\langle a\cos t, -b\sin t\rangle,
+                                    \qquad
+                                    0\leq t\leq 2\pi.
+                                \]
+                            </li>
+                        </ul>
+                        If one needs to work with arcs of the ellipse, they would restrict $t$
+                        to an adequate subinterval of $[0,2\pi]$.
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
