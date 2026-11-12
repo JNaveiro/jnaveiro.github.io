@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>The Fundamental Theorem for Line Integrals</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="text-align: center;">The Fundamental Theorem for Line Integrals</h1>
+            <p>
+                Suppose that $f\colon [a,b]\to\RR$ is a function that is continuous on $[a,b]$
+                and has a continuous derivative on $(a,b)$.
+                The <em>Fundamental Theorem of Calculus</em> then states that
+                \[
+                    \int_a^bf'(x)\,dx=f(b)-f(a).
+                \]
+            </p>
+            <p>
+                The purpose of this section is to describe a fundamental theorem
+                of calculus for line integrals of conservative vector fields.
+                Moreover, we will describe a way to determine when a vector field
+                $\bf{F}$ on a subset of $\RR^2$ is conservative.
+            </p>
+            <section id="fundamental-theorem">
+                <h2>Fundamental Theorem for Line Integrals</h2>
+                <p>
+                    Suppose $\bf{F}$ is a conservative vector field, and $f$ is
+                    a potential function for $\bf{F}$.
+                    This means that $\nabla f = \bf{F}$, so in some sense we can think of $f$ as
+                    an antiderivative of $\bf{F}$.
+                    The fundamental theorem for line integrals makes this relationship
+                    more explicit.
+                </p>
+                <div class="generic-box" id="th-fundamental">
+                    <b>Fundamental Theorem for Line Integrals.</b>
+                        Let $C$ be a piecewise smooth curve in $\RR^n$ parametrized by the
+                        function $\bf{r}(t)=\langle x(t),y(t)\rangle$, where $t\in[a,b]$.
+                        If $\bf{F}$ is a continuous conservative vector field on a subset of $\RR^n$
+                        containing $C$, and $f$ is a potential function for $\bf{F}$, then
+                        \[
+                            \int_C\bf{F}\,\cdot\, d\bf{r}
+                            =
+                            f(\bf{r}(b))-f(\bf{r}(a)).
+                        \]
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        For the purposes of the proof, let us suppose that $C$ is smooth
+                        and that $\bf{F}=P\,\bf{i}+Q\,\bf{j}$ is a vector field on $\RR^2$.
+                        Consider the function
+                        \[
+                            h(t)=f(\bf{r}(t))=f(x(t),y(t)), \qquad t\in[a,b].
+                        \]
+                    </p>
+                    <p>
+                        Then $h$ is differentiable and the chain rule yields
+                        \[
+                        h'(t)=\frac{\partial f}{\partial x}(\bf{r}(t))\,x'(t)
+                        +\frac{\partial f}{\partial y}(\bf{r}(t))\,y'(t)
+                        =
+                        \nabla f(\bf{r}(t))\cdot \bf{r}'(t)
+                        =
+                        \bf{F}(\bf{r}(t))\cdot \bf{r}'(t).
+                        \]
+                    </p>
+                    <p>
+                        The Fundamental Theorem of Calculus then gives
+                        \[
+                            \begin{aligned}
+                                f(\bf{r}(b))-f(\bf{r}(a))
+                                ={}&
+                                h(b)-h(a)
+                                =
+                                \int_a^bh'(t)\,dt
+                                =
+                                \int_a^b\bf{F}(\bf{r}(t))\,\cdot\,\bf{r}'(t)\,dt
+                                =
+                                \int_C\bf{F}\,\cdot\, d\bf{r},
+                            \end{aligned}
+                        \]
+                        so the theorem is proved.
+                    </p>
+                </details>
+                <p>
+                    The formula
+                    \[
+                        \int_C\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        f(\bf{r}(b))-f(\bf{r}(a))
+                    \]
+                    implies that if $\bf{F}$ is a conservative vector field, then
+                    the line integral of $\bf{F}$ along $C$ only depends on the values
+                    of $f$ at the initial and terminal points of $C$.
+                    More importantly, if $C'$ is another curve with the same initial and
+                    terminal points as $C$, then
+                    \[
+                        \int_C\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        \int_{C'}\bf{F}\,\cdot\,d\bf{r}.
+                    \]
+                </p>
+                <div class="example-box">
+                    Consider force field of the form
+                    \[
+                        \bf{F}(\bf{x})=-\frac{k\bf{x}}{\lvert\bf{x}\rvert^3}.
+                    \]
+                    What is the work done by $\bf{F}$ to move a particle along a piecewise
+                    smooth curve connecting $(1,1,1)$ and $(2,0,3)$?
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Recall that $\bf{F}$ is conservative and a potential function for
+                        $\bf{F}$ is
+                        \[
+                            f(x,y,z)=\frac{k}{\sqrt{x^2+y^2+z^2}}.
+                        \]
+                        Consequently, by the
+                        <a href=#th-fundamental>fundamental theorem for line integrals</a>,
+                        the work done by $\bf{F}$ is
+                        \[
+                            W
+                            =
+                            \int_C\bf{F}\,\cdot\,d\bf{r}
+                            =
+                            f(2,0,3)-f(1,1,1)
+                            =
+                            \frac{k}{\sqrt{13}}-\frac{k}{\sqrt{3}}.
+                        \]
+                    </p>
+                </details>
+            </section>
+            <section id="path-independence">
+                <h2>Path Independence</h2>
+                Due to the 
+                <a href=#th-fundamental>fundamental theorem for line integrals</a>,
+                whenever $\bf{F}$ is a conservative vector field,
+                the line integral
+                \[
+                    \int_{C}\bf{F}\,\cdot\,d\bf{r}
+                \]
+                is only dependent on the initial and terminal points in $C$.
+                This motivates the following definition.
+                <div class="definition-box">
+                    Let $\bf{F}$ be a continuous vector field on a domain $D$.
+                    We say that the line integral
+                    \[
+                        \int_C\bf{F}\,\cdot\,d\bf{r}
+                    \]
+                    is <b>path independent</b> if for any two curves $C_1$ and $C_2$
+                    having the same initial and terminal points we have
+                    \[
+                        \int_{C_1}\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        \int_{C_2}\bf{F}\,\cdot\,d\bf{r}.
+                    \]
+                </div>
+                <p>
+                    In particular, the line integrals of any conservative vector field
+                    are path independent.
+                </p>
+                <p>
+                    We can also relate the notion of path independence to line integrals
+                    along <em>closed curves</em>.
+                </p>
+                <div class="definition-box">
+                    We say that a curve $C$ in $\RR^n$ is <b>closed</b> if its initial
+                    and terminal points are the same.
+                    In other words, if $C$ is parametrized by $\bf{r}\colon [a,b]\to\RR^n$,
+                    then $C$ is closed if $\bf{r}(a)=\bf{r}(b)$.
+                </div>
+                <p>
+                    Suppose that $\bf{F}$ is a continuous vector field on $D$ such that
+                    the line integrals $\int_C\bf{F}\,\cdot\,d\bf{r}$ are path independent.
+                    If $C$ is a closed curve in $D$ with initial and terminal point $p$,
+                    then the integral $\int_C\bf{F}\,\cdot\,d\bf{r}$ is equal to
+                    $\int_{C'}\bf{F}\,\cdot\,d\bf{r}$, where $C'$ is the constant curve
+                    parametrized by $\bf{r}(t)=p$, $t\in [0,1]$.
+                    This gives
+                    \[
+                        \int_C\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        \int_{C'}\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        \int_0^1\bf{F}(p)\,\cdot \bf{0}\,dt
+                        =
+                        0.
+                    \]
+                    Therefore, the line integral of $\bf{F}$ along any closed curve is
+                    always equal to zero.
+                </p>
+                <p>
+                    Conversely, suppose that $\bf{F}$ is a continuous vector field
+                    whose line integral along any closed curve is equal to zero.
+                    Is $\int_C\bf{F}\,\cdot\,d\bf{r}$ path independent?
+                    Suppose $C_1$ and $C_2$ are two curves with the same initial and
+                    terminal points.
+                    Then the curve $C$ obtained by traversing $C_1$ and then $-C_2$
+                    is a closed curve, so
+                    \[
+                        0
+                        =
+                        \int_C\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        \int_{C_1}\bf{F}\,\cdot\,d\bf{r}+
+                        \int_{-C_2}\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        \int_{C_1}\bf{F}\,\cdot\,d\bf{r}
+                        -\int_{C_2}\bf{F}\,\cdot\,d\bf{r}.
+                    \]
+                    Consequently,
+                    \[
+                        \int_{C_1}\bf{F}\,\cdot\,d\bf{r}
+                        =\int_{C_2}\bf{F}\,\cdot\,d\bf{r}.
+                    \]
+                </p>
+                <p>
+                    Therefore, we have just proved the following result:
+                </p>
+                <div class="theorem-box">
+                    Let $\bf{F}$ be a continuous vector field on a domain $D$.
+                    Then the line integral $\int_C\bf{F}\,\cdot\,d\bf{r}$ is path
+                    independent if and only if $\int_C\bf{F}\,\cdot\,d\bf{r}=0$ for
+                    every closed curve $C$ in $D$.
+                </div>
+                <p>
+                    In fact, we can show that, under certain conditions, a vector
+                    field $\bf{F}$ has path idependent line integrals if and only if
+                    it is conservative.
+                    In order to explain when this is true, we need to work with a particular
+                    kind of domains for our vector fields.
+                </p>
+                <div class="definition-box">
+                    We say that a subset $D$ of $\RR^n$ is:
+                    <ul>
+                        <li>
+                            <b>Open</b> if it has not boundary points.
+                        </li>
+                        <li>
+                            <b>Connected</b> if for any two points $p,\,q\in D$ there exists
+                            a curve $C$ in $D$ whose initial and terminal points are precisely $p$ and $q$.
+                        </li>
+                    </ul>
+                </div>
+                <div class="theorem-box" id="conservative-characterization">
+                    Let $\bf{F}$ be a continuous vector field whose domain is an open connected
+                    subset $D$ of $\RR^n$.
+                    Then, the following conditions are equivalent:
+                    <ul>
+                        <li>
+                            The line integral $\int_C\bf{F}\,\cdot\,d\bf{r}$ is path independent.
+                        </li>
+                        <li>
+                            For any closed curve $C$ contained in $D$, we have $\int_C\bf{F}\,\cdot\,d\bf{r}=0$.
+                        </li>
+                        <li>
+                            The vector field $\bf{F}$ is conservative.
+                        </li>
+                    </ul>
+                </div>
+                <details>
+                    <summary>Sketch of proof.</summary>
+                    <p>
+                        The first two conditions are equivalent, as we already saw, and the
+                        third condition implies the first one.
+                        Thus, we need to show that the first condition implies that $\bf{F}$ is conservative.
+                    </p>
+                    <p>
+                        Suppose that $\int_C\bf{F}\,\cdot\,d\bf{r}$ is path independent.
+                        We need to show that $\bf{F}$ admits a potential function $f\colon D\to\RR$.
+                        We fix a point $a\in D$ and let $p\in D$ be any other point.
+                        Then, we can find a curve $C$ in $D$ that starts at $a$ and ends at $p$.
+                        We define
+                        \[
+                            f(p)=\int_C\bf{F}\,\cdot\,d\bf{r}.
+                        \]
+                        Firstly, the function $f(p)$ is well defined because the above integral
+                        does not depend on the chosen curve $C$.
+                        Secondly, one can see (see for example the textbook) that $\nabla f = \bf{F}$.
+                        Thus, $f$ is a potential function for $\bf{F}$, which means that $\bf{F}$
+                        is conservative.
+                    </p>
+                </details>
+                <p>
+                    Note that the above proof also gives a method to find a potential function for
+                    a conservative vector field $\bf{F}$.
+                    However, we will see an easier one later on in this section.
+                </p>
+            </section>
+            <section id="conservative">
+                <h2>Conservative Vector Fields on $\RR^2$</h2>
+                <p>
+                    Although
+                    <a href=#conservative-characterization>the preceding theorem</a>
+                    gives a way in theory to check whether a vector field is conservative
+                    (namely, that the line integral $\int_C\bf{F}\,\cdot\,d\bf{r}=0$ for any closed curve $C$
+                    in the domain of $\bf{F}$), this condition cannot be checked in general.
+                    However, the good news is that there is a way to check if a
+                    vector field in either two or three dimensions is conservative
+                    by looking at the partial derivatives of its components.
+                </p>
+                <p>
+                    For the purposes of this section, we only work in two dimensions.
+                    The three dimensional case will be tackled in the future.
+                </p>
+                <p>
+                    Suppose $\bf{F}=P\,\bf{i}+Q\,\bf{j}$ is a conservative vector field,
+                    and the partial derivatives of the functions $P$ and $Q$ are continuous.
+                    Since $\bf{F}$ is conservative, there exists a scalar field $f$ such that
+                    $\nabla f = \bf{F}$.
+                    Consequently,
+                    \[
+                        \frac{\partial f}{\partial x}=P\qquad
+                        \textsf{and}
+                        \qquad \frac{\partial f}{\partial y}=Q.
+                    \]
+                    Now, since the second order partial derivatives of $f$ coincide with
+                    the first order partial derivatives of $P$ and $Q$, all of those are continuous.
+                    In addition, Clairaut's theorem states that $f_{xy}=f_{yx}$.
+                    But
+                    \[
+                        f_{xy}=\frac{\partial P}{\partial y}\qquad
+                        \textsf{and}\qquad
+                        f_{yx}=\frac{\partial Q}{\partial x}.
+                    \]
+                    Consequently:
+                </p>
+                <div class="theorem-box">
+                    Let $\bf{F}=P\,\bf{i}+Q\,\bf{j}$ be a conservative vector field whose
+                    components have continuous partial derivatives.
+                    Then,
+                    \[
+                        \frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}.
+                    \]
+                </div>
+                <p>
+                    Despite this, there are examples of vector fields $\bf{F}=P\,\bf{i}+Q\,\bf{j}$
+                    that satisfy $P_y=Q_x$ but are not conservative.
+                    Fortunately, there will be a special type of regions for which
+                    conservative vector fields are characterized by the above equation.
+                    To introduce them, we need to define the notion of being <em>simply connected</em>.
+                </p>
+                <div class="definition-box">
+                    A subset $D$ of $\RR^2$ is called <b>simply connected</b> if it is connected
+                    and it has no holes.
+                </div>
+                <p>
+                    We can now state a tractable characterization of conservative vector fields:
+                </p>
+                <div class="theorem-box">
+                    Let $\bf{F}$ be a vector field on an open simply connected region $D$.
+                    Suppose that $\bf{F}=P\,\bf{i}+Q\,\bf{j}$, where $P$ and $Q$ have continuous
+                    partial derivatives.
+                    Then, $\bf{F}$ is conservative if and only if
+                    \[
+                        \frac{\partial P}{\partial y}=\frac{\partial Q}{\partial x}.
+                    \]
+                </div>
+                <p>
+                    Let's apply this criterion in some examples.
+                </p>
+                <div class="example-box">
+                    Determine if the vector field
+                    \[
+                        \bf{F}(x,y)=\langle x+y,x^2-y^2\rangle
+                    \]
+                    is conservative.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        In this case, the components of $\bf{F}$ are $P(x,y)=x+y$ and
+                        $Q(x,y)=x^2-y^2$.
+                        We have
+                        \[
+                            \frac{\partial P}{\partial y}=1 \qquad
+                            \textsf{and}\qquad
+                            \frac{\partial Q}{\partial x}=2x.
+                        \]
+                        Since these two functions are different, we conclude that $\bf{F}$
+                        is not conservative.
+                    </p>
+                </details>
+                <div class="example-box">
+                    Determine if the vector field
+                    \[
+                        \bf{F}(x,y)=e^xy^2\,\bf{i}+\big(2e^xy-\sin y\big)\,\bf{j}
+                    \]
+                    is conservative.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        The components of $\bf{F}$ are $P(x,y)=e^xy^2$ and
+                        $Q(x,y)=2e^xy-\sin y$.
+                        Here,
+                        \[
+                            \frac{\partial P}{\partial y}=2e^xy \qquad
+                            \textsf{and}\qquad
+                            \frac{\partial Q}{\partial x}=2e^xy.
+                        \]
+                        These two functions are equal, so $\bf{F}$ is conservative.
+                    </p>
+                </details>
+                <p>
+                    We can even go further and find a potential function of a conservative
+                    vector field by integrating:
+                </p>
+                <div class="example-box">
+                    Find a potential function for the vector field
+                    \[
+                        \bf{F}(x,y)=e^xy^2\,\bf{i}+\big(2e^xy-\sin y\big)\,\bf{j}.
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        We already know that $\bf{F}$ is conservative, so let's try to
+                        find a potential function for $\bf{F}$.
+                    </p>
+                    <p>
+                        Suppose that $f(x,y)$ is a potential function for $\bf{F}$.
+                        This means that $\nabla f=\bf{F}$, or equivalently,
+                        \[
+                            \frac{\partial f}{\partial x}=e^xy^2\qquad\textsf{and}\qquad
+                            \frac{\partial f}{\partial y}=2e^xy-\sin y.
+                        \]
+                    </p>
+                    <p>
+                        If we integrate the first equation with respect to $x$, we obtain
+                        \[
+                            f(x,y)=e^xy^2+C(y),
+                        \]
+                        where $C$ is constant with respect to $x$ (that is, only a function of $y$).
+                        Now, differentiating $f$ with respect to $y$ we deduce that
+                        \[
+                            \frac{\partial f}{\partial y}
+                            =
+                            2e^xy^2+C'(y)=2e^xy-\sin y
+                            \implies
+                            C'(y)=-\sin y
+                            \implies
+                            C(y)=\cos y+K,
+                        \]
+                        where $K$ is now a constant of integration.
+                        In conclusion, the function
+                        \[
+                            f(x,y)=e^xy^2+\cos y+K
+                        \]
+                        is a potential function for $\bf{F}$ for any real number $K$.
+                        Since we are only asked to find one potential function, we can set $K=0$, and
+                        \[
+                            f(x,y)=e^xy^2+\cos y
+                        \]
+                        is a potential function for $\bf{F}$.
+                    </p>
+                </details>
+                <p>
+                    Finding potential functions for conservative vector fields can be useful
+                    for computing line integrals of such fields.
+                </p>
+                <div class="example-box">
+                    Find the integral
+                    \[
+                        \int_Ce^xy^2\,dx+\big(2e^xy-\sin y\big)\,dy,
+                    \]
+                    where $C$ is the curve parametrized by $\bf{r}(t)=\left\langle t^2,\frac{\pi t}{8-2t}\right\rangle$, for $0\leq t\leq 2$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        The vector field $\bf{F}=\langle e^xy^2,2e^xy-\sin y\rangle$ is conservative,
+                        and the function $f(x,y)=e^xy^2+\cos y$ is a potential function for $\bf{F}$.
+                        Therefore,
+                        \[
+                        \int_C\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        f(\bf{r}(2))-f(\bf{r}(0))
+                        =
+                        f\bigg(4,\frac{\pi}{2}\bigg)-f(0,0)
+                        =
+                        \frac{\pi^2e^4}{4}.
+                        \]
+                    </p>
+                </details>
+                <p>
+                    Sometimes, we may prefer to evaluate a line integral of a conservative field
+                    $\bf{F}$ along a curve $C$ by replacing the curve with an easier curve $C'$
+                    having the same initial and terminal points as $C$.
+                    This can be done due to path independence, and it skips having to find
+                    a potential function for $\bf{F}$.
+                </p>
+                <div class="example-box">
+                    Find the integral
+                    \[
+                        \int_C\bf{\bf{F}}\,\cdot\,d\bf{r},
+                    \]
+                    where $\bf{F}=\langle 2xy+3x^2,x^2-2y\rangle$ and $C$ is the curve
+                    parametrized by $\bf{r}(t)=\langle te^t\cos t,e^t\sin t\rangle$, for
+                    $t\in\big[0,\frac{\pi}{2}\big]$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        The vector field $\bf{F}$ is conservative, since the components
+                        $P=2xy+3x^2$ and $Q=x^2-2y$ satisfy
+                        \[
+                            \frac{\partial P}{\partial y}
+                            =
+                            \frac{\partial Q}{\partial x}
+                            =
+                            2x.
+                        \]
+                    </p>
+                    <p>
+                        Now, note that the endpoints of the curve $C$ are $\bf{r}(0)=\langle 0,0\rangle$
+                        and $\bf{r}\big(\frac{\pi}{2}\big)=\langle 0,e^{\frac{\pi}{2}}\rangle$.
+                        We could find the desired line integral by computing a potential function for $\bf{F}$
+                        and applying the fundamental theorem for line integrals.
+                        Alternatively, since $\bf{F}$ is conservative, the line integral
+                        $\int_C\bf{F}\,\cdot\,d\bf{r}$ is path independent, so we may compute it
+                        by replacing $C$ with the line segment $C'$ that goes from $\langle 0,0\rangle$
+                        to $\langle 0,e^{\frac{\pi}{2}}\rangle$.
+                        This segment may be parametrized by
+                        \[
+                            \bf{s}(t)=\langle 0,t\rangle, \quad 0\leq t\leq e^{\frac{\pi}{2}},
+                        \]
+                        so
+                        \[
+                            \begin{aligned}
+                                \int_C\bf{\bf{F}}\,\cdot\,d\bf{r}
+                                =
+                                \int_{C'}\bf{\bf{F}}\,\cdot\,d\bf{r}
+                                =
+                                \int_0^{e^\frac{\pi}{2}}\langle 0,-2t\rangle \cdot
+                                \langle 0,1\rangle \,dt
+                                =
+                                \int_0^{e^{\frac{\pi}{2}}}-2t\,dt
+                                =
+                                -e^\pi.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+                <p>
+                    We finish this section by mentioning that finding potential functions
+                    for conservative vector fields in $\RR^3$ can be done in the same way,
+                    even if right now we do not have a way to check <em>a priori</em> if a
+                    vector field in three dimensions is conservative.
+                </p>
+                <div class="example-box">
+                    The vector field
+                    \[
+                    \bf{F}=\bigg\langle 2x\ln y,\frac{x^2}{y}+z^2,2yz\bigg\rangle
+                    \]
+                    is conservative.
+                    Find a potential function for $\bf{F}$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Suppose $f$ is a potential function for $\bf{F}$.
+                        Then $\nabla f = \bf{F}$, which yields
+                        \[
+                            \frac{\partial f}{\partial x}=2x\ln y,\qquad
+                            \frac{\partial f}{\partial y}=\frac{x^2}{y}+z^2,\qquad
+                            \frac{\partial f}{\partial z}=2yz.
+                        \]
+                    </p>
+                    <p>
+                        Integrating the first equation with respect to $x$, we see that
+                        \[
+                            f(x,y,z)=x^2\ln y + C(y,z),
+                        \]
+                        where $C$ is constant with respect to $x$ (that is, a function of $y$
+                        and $z$).
+                        Now, we can differentiate $f$ with respect to $y$ to obtain
+                        \[
+                            \frac{\partial f}{\partial y}=\frac{x^2}{y} + \frac{\partial C}{\partial y}(y,z)
+                            =\frac{x^2}{y}+z^2
+                            \implies \frac{\partial C}{\partial y}(y,z)=z^2.
+                        \]
+                        Integrating with respect to $y$ we see that
+                        \[
+                            C(y,z)=yz^2+g(z),
+                        \]
+                        where $g$ is constant with respect to $y$.
+                        Consequently,
+                        \[
+                            f(x,y,z)=x^2\ln y+yz^2+g(z).
+                        \]
+                        This is still not enough because we do not know who $g(z)$ is.
+                        Differentiating with respect to $z$, we see that
+                        \[
+                            \frac{\partial f}{\partial z}
+                            =
+                            2yz+g'(z)=2yz
+                            \implies g'(z)=0.
+                        \]
+                        Therefore, $g(z)=K$, where $K$ can be any constant.
+                        This yields that
+                        \[
+                            f(x,y,z)=x^2\ln y+yz^2+K
+                        \]
+                        is a potential function for $f$ for any value of $K$.
+                        Since we only need one potential function, we may set $K=0$
+                        to obtain that
+                        \[
+                            f(x,y,z)=x^2\ln y+yz^2
+                        \]
+                        is a potential function for $\bf{F}$.
+                    </p>
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
