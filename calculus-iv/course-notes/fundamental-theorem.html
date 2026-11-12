@@ -21,7 +21,7 @@
             <h1 style="text-align: center;">The Fundamental Theorem for Line Integrals</h1>
             <p>
                 Suppose that $f\colon [a,b]\to\RR$ is a function that is continuous on $[a,b]$
-                and has a continuous derivative on $(a,b)$.
+                and has a continuous derivative on $[a,b]$.
                 The <em>Fundamental Theorem of Calculus</em> then states that
                 \[
                     \int_a^bf'(x)\,dx=f(b)-f(a).
@@ -46,7 +46,7 @@
                 <div class="generic-box" id="th-fundamental">
                     <b>Fundamental Theorem for Line Integrals.</b>
                         Let $C$ be a piecewise smooth curve in $\RR^n$ parametrized by the
-                        function $\bf{r}(t)=\langle x(t),y(t)\rangle$, where $t\in[a,b]$.
+                        function $\bf{r}(t)$, where $t\in[a,b]$.
                         If $\bf{F}$ is a continuous conservative vector field on a subset of $\RR^n$
                         containing $C$, and $f$ is a potential function for $\bf{F}$, then
                         \[
@@ -59,7 +59,7 @@
                     <summary>Proof.</summary>
                     <p>
                         For the purposes of the proof, let us suppose that $C$ is smooth
-                        and that $\bf{F}=P\,\bf{i}+Q\,\bf{j}$ is a vector field on $\RR^2$.
+                        and that $\bf{F}=P\,\bf{i}+Q\,\bf{j}$ is a vector field on $\RR^2$, and $\bf{r}(t)=\langle x(t),y(t)\rangle$.
                         Consider the function
                         \[
                             h(t)=f(\bf{r}(t))=f(x(t),y(t)), \qquad t\in[a,b].
@@ -113,12 +113,12 @@
                     \]
                 </p>
                 <div class="example-box">
-                    Consider force field of the form
+                    Consider a force field of the form
                     \[
                         \bf{F}(\bf{x})=-\frac{k\bf{x}}{\lvert\bf{x}\rvert^3}.
                     \]
                     What is the work done by $\bf{F}$ to move a particle along a piecewise
-                    smooth curve connecting $(1,1,1)$ and $(2,0,3)$?
+                    smooth curve $C$ from $(1,1,1)$ to $(2,0,3)$?
                 </div>
                 <details>
                     <summary>Solution.</summary>
@@ -145,6 +145,7 @@
             </section>
             <section id="path-independence">
                 <h2>Path Independence</h2>
+                <p>
                 Due to the 
                 <a href=#th-fundamental>fundamental theorem for line integrals</a>,
                 whenever $\bf{F}$ is a conservative vector field,
@@ -152,21 +153,31 @@
                 \[
                     \int_{C}\bf{F}\,\cdot\,d\bf{r}
                 \]
-                is only dependent on the initial and terminal points in $C$.
+                is only dependent on the initial and terminal points of $C$.
                 This motivates the following definition.
+                </p>
                 <div class="definition-box">
                     Let $\bf{F}$ be a continuous vector field on a domain $D$.
-                    We say that the line integral
-                    \[
-                        \int_C\bf{F}\,\cdot\,d\bf{r}
-                    \]
-                    is <b>path independent</b> if for any two curves $C_1$ and $C_2$
-                    having the same initial and terminal points we have
-                    \[
-                        \int_{C_1}\bf{F}\,\cdot\,d\bf{r}
-                        =
-                        \int_{C_2}\bf{F}\,\cdot\,d\bf{r}.
-                    \]
+                    <div class="columns">
+                        <div style="width: 60%;">
+                            <p>
+                                We say that the line integral
+                                \[
+                                    \int_C\bf{F}\,\cdot\,d\bf{r}
+                                \]
+                                is <b>path independent</b> if for any two curves $C_1$ and $C_2$ in $D$
+                                having the same initial and terminal points we have
+                                \[
+                                    \int_{C_1}\bf{F}\,\cdot\,d\bf{r}
+                                    =
+                                    \int_{C_2}\bf{F}\,\cdot\,d\bf{r}.
+                                \]
+                            </p>
+                        </div>   
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/path-independence.svg">
+                        </div>
+                    </div>
                 </div>
                 <p>
                     In particular, the line integrals of any conservative vector field
@@ -177,10 +188,19 @@
                     along <em>closed curves</em>.
                 </p>
                 <div class="definition-box">
-                    We say that a curve $C$ in $\RR^n$ is <b>closed</b> if its initial
-                    and terminal points are the same.
-                    In other words, if $C$ is parametrized by $\bf{r}\colon [a,b]\to\RR^n$,
-                    then $C$ is closed if $\bf{r}(a)=\bf{r}(b)$.
+                    <div class="columns">
+                        <div style="width: 60%;">
+                            <p>
+                                We say that a curve $C$ in $\RR^n$ is <b>closed</b> if its initial
+                                and terminal points are the same.
+                                In other words, if $C$ is parametrized by $\bf{r}\colon [a,b]\to\RR^n$,
+                                then $C$ is closed if $\bf{r}(a)=\bf{r}(b)$.
+                            </p>
+                        </div>   
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/closed-curve.svg">
+                        </div>
+                    </div>
                 </div>
                 <p>
                     Suppose that $\bf{F}$ is a continuous vector field on $D$ such that
@@ -195,38 +215,53 @@
                         =
                         \int_{C'}\bf{F}\,\cdot\,d\bf{r}
                         =
-                        \int_0^1\bf{F}(p)\,\cdot \bf{0}\,dt
+                        \int_0^1\bf{F}(p)\,\cdot\, \bf{0}\,dt
                         =
                         0.
                     \]
                     Therefore, the line integral of $\bf{F}$ along any closed curve is
                     always equal to zero.
                 </p>
-                <p>
-                    Conversely, suppose that $\bf{F}$ is a continuous vector field
-                    whose line integral along any closed curve is equal to zero.
-                    Is $\int_C\bf{F}\,\cdot\,d\bf{r}$ path independent?
-                    Suppose $C_1$ and $C_2$ are two curves with the same initial and
-                    terminal points.
-                    Then the curve $C$ obtained by traversing $C_1$ and then $-C_2$
-                    is a closed curve, so
-                    \[
-                        0
-                        =
-                        \int_C\bf{F}\,\cdot\,d\bf{r}
-                        =
-                        \int_{C_1}\bf{F}\,\cdot\,d\bf{r}+
-                        \int_{-C_2}\bf{F}\,\cdot\,d\bf{r}
-                        =
-                        \int_{C_1}\bf{F}\,\cdot\,d\bf{r}
-                        -\int_{C_2}\bf{F}\,\cdot\,d\bf{r}.
-                    \]
-                    Consequently,
-                    \[
-                        \int_{C_1}\bf{F}\,\cdot\,d\bf{r}
-                        =\int_{C_2}\bf{F}\,\cdot\,d\bf{r}.
-                    \]
-                </p>
+                <div class="columns">
+                    <div style="width: 60%;">
+                        <p>
+                            Conversely, suppose that $\bf{F}$ is a continuous vector field
+                            whose line integral along any closed curve is equal to zero.
+                            Is $\int_C\bf{F}\,\cdot\,d\bf{r}$ path independent?
+                            Suppose $C_1$ and $C_2$ are two curves with the same initial and
+                            terminal points.
+                            Then the curve $C$ obtained by traversing $C_1$ and then $-C_2$
+                            is a closed curve, so
+                            \[
+                            \begin{aligned}
+                                0
+                                ={}&
+                                \int_C\bf{F}\,\cdot\,d\bf{r}
+                                =
+                                \int_{C_1}\bf{F}\,\cdot\,d\bf{r}+
+                                \int_{-C_2}\bf{F}\,\cdot\,d\bf{r}
+                                \\
+                                ={}&
+                                \int_{C_1}\bf{F}\,\cdot\,d\bf{r}
+                                -\int_{C_2}\bf{F}\,\cdot\,d\bf{r}.
+                            \end{aligned}
+                            \]
+                            Consequently,
+                            \[
+                                \int_{C_1}\bf{F}\,\cdot\,d\bf{r}
+                                =\int_{C_2}\bf{F}\,\cdot\,d\bf{r}.
+                            \]
+                        </p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; width: 20%; justify-content: center;">
+                        <div class="image-container">
+                            <img src="Pictures/closed-1.svg" alt="A closed curve" style="width: 200%;">
+                        </div>
+                        <div class="image-container">
+                            <img src="Pictures/closed-2.svg" alt="A closed curve" style="width: 200%;">
+                        </div>
+                    </div>
+                </div>
                 <p>
                     Therefore, we have just proved the following result:
                 </p>
@@ -238,7 +273,7 @@
                 </div>
                 <p>
                     In fact, we can show that, under certain conditions, a vector
-                    field $\bf{F}$ has path idependent line integrals if and only if
+                    field $\bf{F}$ has path independent line integrals if and only if
                     it is conservative.
                     In order to explain when this is true, we need to work with a particular
                     kind of domains for our vector fields.
@@ -247,7 +282,7 @@
                     We say that a subset $D$ of $\RR^n$ is:
                     <ul>
                         <li>
-                            <b>Open</b> if it has not boundary points.
+                            <b>Open</b> if it contains none of its boundary points.
                         </li>
                         <li>
                             <b>Connected</b> if for any two points $p,\,q\in D$ there exists
@@ -287,9 +322,9 @@
                         \[
                             f(p)=\int_C\bf{F}\,\cdot\,d\bf{r}.
                         \]
-                        Firstly, the function $f(p)$ is well defined because the above integral
+                        Firstly, the function $f$ is well defined because the above integral
                         does not depend on the chosen curve $C$.
-                        Secondly, one can see (see for example the textbook) that $\nabla f = \bf{F}$.
+                        Secondly, one can show (see for example the textbook) that $\nabla f = \bf{F}$.
                         Thus, $f$ is a potential function for $\bf{F}$, which means that $\bf{F}$
                         is conservative.
                     </p>
@@ -307,7 +342,7 @@
                     <a href=#conservative-characterization>the preceding theorem</a>
                     gives a way in theory to check whether a vector field is conservative
                     (namely, that the line integral $\int_C\bf{F}\,\cdot\,d\bf{r}=0$ for any closed curve $C$
-                    in the domain of $\bf{F}$), this condition cannot be checked in general.
+                    in the domain of $\bf{F}$), this condition cannot be checked in practice.
                     However, the good news is that there is a way to check if a
                     vector field in either two or three dimensions is conservative
                     by looking at the partial derivatives of its components.
@@ -449,7 +484,7 @@
                         \[
                             \frac{\partial f}{\partial y}
                             =
-                            2e^xy^2+C'(y)=2e^xy-\sin y
+                            2e^xy+C'(y)=2e^xy-\sin y
                             \implies
                             C'(y)=-\sin y
                             \implies
@@ -492,7 +527,7 @@
                         =
                         f\bigg(4,\frac{\pi}{2}\bigg)-f(0,0)
                         =
-                        \frac{\pi^2e^4}{4}.
+                        \frac{\pi^2e^4}{4}-1.
                         \]
                     </p>
                 </details>
@@ -506,7 +541,7 @@
                 <div class="example-box">
                     Find the integral
                     \[
-                        \int_C\bf{\bf{F}}\,\cdot\,d\bf{r},
+                        \int_C\bf{F}\,\cdot\,d\bf{r},
                     \]
                     where $\bf{F}=\langle 2xy+3x^2,x^2-2y\rangle$ and $C$ is the curve
                     parametrized by $\bf{r}(t)=\langle te^t\cos t,e^t\sin t\rangle$, for
@@ -525,35 +560,46 @@
                             2x.
                         \]
                     </p>
-                    <p>
-                        Now, note that the endpoints of the curve $C$ are $\bf{r}(0)=\langle 0,0\rangle$
-                        and $\bf{r}\big(\frac{\pi}{2}\big)=\langle 0,e^{\frac{\pi}{2}}\rangle$.
-                        We could find the desired line integral by computing a potential function for $\bf{F}$
-                        and applying the fundamental theorem for line integrals.
-                        Alternatively, since $\bf{F}$ is conservative, the line integral
-                        $\int_C\bf{F}\,\cdot\,d\bf{r}$ is path independent, so we may compute it
-                        by replacing $C$ with the line segment $C'$ that goes from $\langle 0,0\rangle$
-                        to $\langle 0,e^{\frac{\pi}{2}}\rangle$.
-                        This segment may be parametrized by
-                        \[
-                            \bf{s}(t)=\langle 0,t\rangle, \quad 0\leq t\leq e^{\frac{\pi}{2}},
-                        \]
-                        so
-                        \[
-                            \begin{aligned}
-                                \int_C\bf{\bf{F}}\,\cdot\,d\bf{r}
-                                =
-                                \int_{C'}\bf{\bf{F}}\,\cdot\,d\bf{r}
-                                =
-                                \int_0^{e^\frac{\pi}{2}}\langle 0,-2t\rangle \cdot
-                                \langle 0,1\rangle \,dt
-                                =
-                                \int_0^{e^{\frac{\pi}{2}}}-2t\,dt
-                                =
-                                -e^\pi.
-                            \end{aligned}
-                        \]
-                    </p>
+                    <div class="columns">
+                        <div style="width: 60%;">
+                            <p>
+                                Now, note that the endpoints of the curve $C$ are $\bf{r}(0)=\langle 0,0\rangle$
+                                and $\bf{r}\big(\frac{\pi}{2}\big)=\langle 0,e^{\frac{\pi}{2}}\rangle$.
+                                We could find the desired line integral by computing a potential function for $\bf{F}$
+                                and applying the fundamental theorem for line integrals.
+                            </p>
+                            <p>
+                                Alternatively, since $\bf{F}$ is conservative, the line integral
+                                $\int_C\bf{F}\,\cdot\,d\bf{r}$ is path independent, so we may compute it
+                                by replacing $C$ with the line segment $C'$ that goes from $\langle 0,0\rangle$
+                                to $\langle 0,e^{\frac{\pi}{2}}\rangle$.
+                                This segment may be parametrized by
+                                \[
+                                    \bf{s}(t)=\langle 0,t\rangle, \quad 0\leq t\leq e^{\frac{\pi}{2}},
+                                \]
+                                so
+                                \[
+                                    \begin{aligned}
+                                        \int_C\bf{F}\,\cdot\,d\bf{r}
+                                        ={}&
+                                        \int_{C'}\bf{F}\,\cdot\,d\bf{r}
+                                        =
+                                        \int_0^{e^\frac{\pi}{2}}\langle 0,-2t\rangle \cdot
+                                        \langle 0,1\rangle \,dt
+                                        =
+                                        \int_0^{e^{\frac{\pi}{2}}}-2t\,dt
+                                        \\={}&
+                                        -e^\pi.
+                                    \end{aligned}
+                                \]
+                                    </p>
+                        </div>
+                        <div style="width: 15%;">
+                            <div class="image-container">
+                                <img src="Pictures/two-curves.png" alt="Two curves">
+                            </div>
+                        </div>
+                </div>
                 </details>
                 <p>
                     We finish this section by mentioning that finding potential functions
@@ -602,7 +648,7 @@
                         \[
                             f(x,y,z)=x^2\ln y+yz^2+g(z).
                         \]
-                        This is still not enough because we do not know who $g(z)$ is.
+                        This is still not enough because we do not know what $g(z)$ is.
                         Differentiating with respect to $z$, we see that
                         \[
                             \frac{\partial f}{\partial z}
@@ -615,7 +661,7 @@
                         \[
                             f(x,y,z)=x^2\ln y+yz^2+K
                         \]
-                        is a potential function for $f$ for any value of $K$.
+                        is a potential function for $\bf{F}$ for any value of $K$.
                         Since we only need one potential function, we may set $K=0$
                         to obtain that
                         \[
