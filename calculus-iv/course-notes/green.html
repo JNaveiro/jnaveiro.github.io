@@ -23,7 +23,7 @@
                 Recall from
                 <a href="fundamental-theorem.html">the previous section</a>
                 that line integrals of conservative vector fields have their own
-                Fundamental Theorem of Calculus, which relates a line integral of
+                Fundamental theorem of calculus, which relates a line integral of
                 the form
                 \[
                     \int_C\nabla f\,\cdot\,d\bf{r}
@@ -34,7 +34,7 @@
             <p>
                 Here we will give an analog of the fundamental theorem of calculus for
                 double integrals, which will allow us to evaluate some double integrals
-                on a region of the form $D\subseteq \RR^2$ by studying the behavior of a vector
+                on a region $D\subseteq \RR^2$ by studying the behavior of a vector
                 field on the boundary of $D$.
             </p>
             <section id="green-basic">
@@ -89,7 +89,7 @@
                             <img src="Pictures/negative-orientation.svg" alt="Negative orientation">
                         </div>
                         <p class="center">
-                            Negative Orientation
+                            Negative orientation
                         </p>
                     </div>
                 </div>
@@ -114,17 +114,16 @@
                 <p>
                     Observe that the left hand side involves the line integral of $\bf{F}$ on the closed
                     curve $\partial D$.
-                    If we want to emphasize the fact that $\partial D$ is close, it is customary to denote
+                    If we want to emphasize the fact that $\partial D$ is closed, it is customary to denote
                     the line integral of $\bf{F}$ along $\partial D$ as
                     \[
                         \oint_{\partial D}\bf{F}\,\cdot\,d\bf{r}.
                     \]
                     The right hand side involves a double integral over the whole region $D$, and
-                    the integrand is comprised of partial derivatives of the components of $\bf{F}$, showing
+                    the integrand is composted of partial derivatives of the components of $\bf{F}$, showing
                     that the formula in Green's theorem is essentially a two-dimensional version of
                     the Fundamental theorem of calculus.
                 </p>
-            </section>
             <div class="example-box">
                 Compute the line integral
                 \[
@@ -178,6 +177,7 @@
                     \]
                 </p>
             </details>
+            </section>
             <section id="areas">
                 <h2>Computing Areas with Green's Theorem</h2>
                 <p>
@@ -263,7 +263,7 @@
                     <p>
                         The boundary $\partial D$ of the region $D$ is comprised of two
                         curves: the cycloid $C$ and the line segment $L$ from $(0,0)$ to $(2\pi,0)$.
-                        If we take the vector field $\bf{F}(x,y)=\langle -y,x\rangle$, then
+                        If we take the vector field $\bf{F}(x,y)=\langle -y,0\rangle$, then
                         Green's theorem yields
                         \[
                         A(D)=\oint_{\partial D}\bf{F}\,\cdot\,d\bf{r}
@@ -271,9 +271,9 @@
                         \oint_{\partial D}-y\,dx.
                         \]
                         Note that with the parametrization $\bf{r}(t)$, $C$ is not positively oriented,
-                        so the right hand side in the above integral is actually
+                        so the above integral is actually
                         \[
-                            A(D)=-\int_C-y\,dx+\int_L\,-y\,dx
+                            A(D)=-\int_C-y\,dx+\int_L-y\,dx
                             =
                             \int_Cy\,dx-\int_Ly\,dx.
                         \]
@@ -311,7 +311,7 @@
                 <div class="generic-box">
                     <b>Green's Theorem (general version).</b>
                     Let $D$ be a bounded connected region in the plane whose boundary $\partial D$
-                    is the union of a finite family of simple, closed and piecewise smooth
+                    is the union of a finite family of pairwise disjoint, simple, closed and piecewise smooth
                     curves $C_1,\,\dots,\,C_k$.
                     Then, if $\bf{F}=\langle P,Q\rangle$ is a vector field whose components
                     $P$ and $Q$ have continuous partial derivatives in an open set containing $D$,
@@ -336,9 +336,9 @@
                         \int_{C_2}\big(7x+y^2\big)\,dx+\big(2y-x^2\big)\,dy,
                     \]
                     where $C_1$ and $C_2$ are the circles centered at $(0,0)$ and of radius
-                    $1$ and $3$, respectively, with the orientation as shown below:
+                    $3$ and $1$, respectively, with the orientation as shown below:
                     <div class="image-container">
-                        <img src="Pictures/circles.png" style="width: 25%;">
+                        <img src="Pictures/circles.png" alt="Two circles" style="width: 25%;">
                     </div>
                 </div>
                 <details>
@@ -347,7 +347,7 @@
                         Observe that the curves $C_1$ and $C_2$ are bounding an annular
                         region $D$, and both curves are positively oriented relative to $D$.
                         Since the integrand in both terms is the vector field
-                        $\bf{F}=\big\langle 2y-x^2,7x+y^2\big\rangle$, we can apply
+                        $\bf{F}=\big\langle 7x+y^2,2y-x^2\big\rangle$, we can apply
                         Green's theorem to obtain that
                         \[
                             I=\iint_D (-2x-2y)\,dA.
