@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Green's Theorem</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="text-align: center;">Green's Theorem</h1>
+            <p>
+                Recall from
+                <a href="fundamental-theorem.html">the previous section</a>
+                that line integrals of conservative vector fields have their own
+                Fundamental Theorem of Calculus, which relates a line integral of
+                the form
+                \[
+                    \int_C\nabla f\,\cdot\,d\bf{r}
+                \]
+                with the values of the potential function $f$ at the endpoints of the curve
+                $C$ along which we are taking the integral.
+            </p>
+            <p>
+                Here we will give an analog of the fundamental theorem of calculus for
+                double integrals, which will allow us to evaluate some double integrals
+                on a region of the form $D\subseteq \RR^2$ by studying the behavior of a vector
+                field on the boundary of $D$.
+            </p>
+            <section id="green-basic">
+                <h2>Basic Formulation of Green's Theorem</h2>
+                <div class="columns">
+                    <div style="width: 60%;">
+                        <p>
+                            Let us start by considering a simple closed curve $C$ in the plane which is
+                            piecewise smooth.
+                            The fact that $C$ is simple means that it has no self-intersections.
+                            The curve $C$ then encloses a bounded region $D$ in such a way that
+                            $C$ coincides with the boundary of $D$.
+                        </p>
+                        <p>
+                            To denote that $C$ is the boundary of $D$, we will use the symbol
+                            \[
+                                C=\partial D.
+                            \]
+                        </p>
+                    </div>
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/green-1.svg" alt="A closed curve enclosing a region">
+                    </div>
+                </div>
+                <p>
+                    We are going to choose an orientation on $C=\partial D$ that is compatible with
+                    the region $D$:
+                </p>
+                <div class="definition-box">
+                    Let $C$ be a closed, piecewise smooth curve in $\RR^2$, and $D$ the region
+                    enclosed by $C$.
+                    We say that the curve $C$ is <b>positively oriented</b> if, as we traverse the curve
+                    $C$ in the direction given by this orientation, the region $D$ appears to
+                    our left.
+                    Otherwise, we say that $C$ is <b>negatively oriented</b>.
+                </div>
+                <p>
+                    The pictures below give an example of the positive and negative orientation
+                    on a closed curve.
+                </p>
+                <div class="columns images-with-caption" style="padding-top: 2%;">
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/positive-orientation.svg" alt="Positive orientation">
+                        </div>
+                        <p class="center">
+                            Positive orientation
+                        </p>
+                    </div>
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/negative-orientation.svg" alt="Negative orientation">
+                        </div>
+                        <p class="center">
+                            Negative Orientation
+                        </p>
+                    </div>
+                </div>
+                <p>
+                    With all of this in mind, we can now state a first version of the so-called
+                    <em>Green's theorem</em>.
+                </p>
+                <div class="generic-box">
+                    <b>Green's Theorem (basic version).</b>
+                    Let $D$ be a region in the plane whose boundary $\partial D$ is a simple,
+                    closed, and piecewise smooth curve.
+                    We orient $\partial D$ with the positive orientation.
+                    Then, if $\bf{F}=\langle P,Q\rangle$ is a vector field whose components
+                    $P$ and $Q$ have continuous partial derivatives in an open set containing $D$,
+                    we have
+                    \[
+                    \int_{\partial D}P\,dx+Q\,dy
+                    =
+                    \iint_D \bigg(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\bigg)\,dA.
+                    \]
+                </div>
+                <p>
+                    Observe that the left hand side involves the line integral of $\bf{F}$ on the closed
+                    curve $\partial D$.
+                    If we want to emphasize the fact that $\partial D$ is close, it is customary to denote
+                    the line integral of $\bf{F}$ along $\partial D$ as
+                    \[
+                        \oint_{\partial D}\bf{F}\,\cdot\,d\bf{r}.
+                    \]
+                    The right hand side involves a double integral over the whole region $D$, and
+                    the integrand is comprised of partial derivatives of the components of $\bf{F}$, showing
+                    that the formula in Green's theorem is essentially a two-dimensional version of
+                    the Fundamental theorem of calculus.
+                </p>
+            </section>
+            <div class="example-box">
+                Compute the line integral
+                \[
+                    \oint_Cxy\,dx+y^5\,dy,
+                \]
+                where $C$ is the triangle in the plane with vertices $(0,0)$, $(3,3)$ and $(0,3)$
+                oriented clockwise.
+            </div>
+            <details>
+                <summary>Solution.</summary>
+                <div class="columns">
+                    <div>
+                        <p>
+                            The curve $C$ is closed and simple, and the region $D$ enclosed
+                            by $C$ is
+                            \[
+                                D=\big\{(x,y)\mid 0\leq y\leq 3,0\leq x\leq y\big\}.
+                            \]
+                        </p>
+                        <p>
+                            Note that the clockwise orientation on $C$ is negative, so $-C$
+                            is positively oriented.
+                            Applying Green's theorem (with $P(x,y)=xy$ and $Q(x,y)=y^5$),
+                            we obtain
+                            \[
+                                \begin{aligned}
+                                    \oint_{-C}xy\,dx+y^5\,dy
+                                    =
+                                    -\iint_Dx\,dA
+                                    =
+                                    -\int_0^3\int_0^yx\,dx\,dy
+                                    =
+                                    -\int_0^3\frac{y^2}{2}\,dy
+                                    =
+                                    -\frac92.
+                                \end{aligned}
+                            \]
+                        </p>
+                    </div>
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/green-triangle.png" alt="A closed curve enclosing a region">
+                    </div>
+                </div>
+                <p>
+                    Now, to obtain the line integral with the correct orientation we can simply
+                    change the sign of the integral that we just computed:
+                    \[
+                         \oint_{C}xy\,dx+y^5\,dy=
+                         -\oint_{-C}xy\,dx+y^5\,dy
+                         =\frac92.
+                    \]
+                </p>
+            </details>
+            <section id="areas">
+                <h2>Computing Areas with Green's Theorem</h2>
+                <p>
+                    A nice application of Green's theorem is that we may apply it to compute
+                    the area of a plane region by setting up an appropriate line integral on
+                    its boundary.
+                    More precisely, if $D$ is a plane region and $\bf{F}=P\,\bf{i}+Q\,\bf{j}$
+                    is a vector field whose components satisfy
+                    \[
+                        \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=1,
+                    \]
+                    then Green's theorem yields
+                    \[
+                        \oint_{\partial D}P\,dx+Q\,dy=\iint_D1\,dA=A(D).
+                    \]
+                </p>
+                <p>
+                    There are several options for $\bf{F}$ that we can choose.
+                    The most common ones are
+                    \[
+                        \bf{F}(x,y)=\langle 0,x\rangle,\qquad
+                        \bf{F}(x,y)=\langle -y,0\rangle,\qquad
+                        \bf{F}(x,y)=\frac12\langle -y,x\rangle.
+                    \]
+                </p>
+                <div class="example-box">
+                    Compute the area of the region $D$ enclosed by the ellipse
+                    of semiaxes $a$ and $b$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <div class="columns">
+                        <div style="width: 60%;">
+                            <p>
+                                The ellipse $C$ of semiaxes $a$ and $b$ can be parametrized
+                                by the vector function $\bf{r}(t)=\langle a \cos t,b\sin t\rangle$,
+                                where $t\in[0,2\pi]$.
+                                With this parametrization, we are traversing $C$ counterclockwise,
+                                and this is the positive orientation for $C$.
+                            </p>
+                            <p>
+                                We can apply Green's theorem with, for instance, the vector
+                                field $\bf{F}=\frac12\langle -y,x\rangle$ to see that
+                                \[
+                                    \begin{aligned}
+                                        A(D)
+                                        ={}&
+                                        \frac12\oint_C-y\,dx+x\,dy
+                                        =
+                                        \frac12\int_0^{2\pi}\big(ab\sin^2 t+ab\cos^2t\big)\,dt
+                                        \\={}&
+                                        \frac12\int_0^{2\pi}ab\,dt
+                                        =
+                                        \pi ab.
+                                    \end{aligned}
+                                \]
+                            </p>
+                        </div>
+                        <div class="image-container" style="width: 30%;">
+                            <img src="Pictures/ellipse-area.png" alt="An ellipse" style="width: 100%;">
+                        </div>
+                    </div>
+                </details>
+                <div class="example-box">
+                    Let $C$ be the <em>cycloid</em> parametrized by the vector function
+                    \[
+                        \bf{r}(t)=\langle t-\sin t,1-\cos t\rangle,\qquad 0\leq t\leq 2\pi.
+                    \]
+                    <div class="columns">
+                        <div style="width: 50%;">
+                            <p>
+                                Find the area of the region $D$ that is enclosed between the cycloid $C$
+                                and the $x$-axis.
+                            </p>
+                        </div>
+                        <div class="image-container" style="width: 40%;">
+                            <img src="Pictures/cycloid.png" alt="A cycloid">
+                        </div>
+                    </div>
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        The boundary $\partial D$ of the region $D$ is comprised of two
+                        curves: the cycloid $C$ and the line segment $L$ from $(0,0)$ to $(2\pi,0)$.
+                        If we take the vector field $\bf{F}(x,y)=\langle -y,x\rangle$, then
+                        Green's theorem yields
+                        \[
+                        A(D)=\oint_{\partial D}\bf{F}\,\cdot\,d\bf{r}
+                        =
+                        \oint_{\partial D}-y\,dx.
+                        \]
+                        Note that with the parametrization $\bf{r}(t)$, $C$ is not positively oriented,
+                        so the right hand side in the above integral is actually
+                        \[
+                            A(D)=-\int_C-y\,dx+\int_L\,-y\,dx
+                            =
+                            \int_Cy\,dx-\int_Ly\,dx.
+                        \]
+                        In addition, note that $y=0$ on $L$, so the second integral is zero and
+                        we deduce that
+                        \[
+                            \begin{aligned}
+                                A(D)
+                                ={}&
+                                \int_Cy\,dx
+                                =
+                                \int_0^{2\pi}(1-\cos t)(1-\cos t)\,dt
+                                =
+                                \int_0^{2\pi}\,dt
+                                -2\int_0^{2\pi}\cos t\,dt
+                                +
+                                \int_0^{2\pi}\cos^2 t\,dt
+                                \\
+                                ={}&
+                                2\pi+\pi=3\pi.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+            </section>
+            <section id="green-general">
+                <h2>General Formulation of Green's Theorem</h2>
+                <p>
+                    For now, we have only discussed Green's theorem for regions that
+                    are enclosed by a simple closed curve.
+                    What if we work with a more general region whose boundary is comprised
+                    of more than one curve?
+                    In this case, Green's theorem still works:
+                </p>
+                <div class="generic-box">
+                    <b>Green's Theorem (general version).</b>
+                    Let $D$ be a bounded connected region in the plane whose boundary $\partial D$
+                    is the union of a finite family of simple, closed and piecewise smooth
+                    curves $C_1,\,\dots,\,C_k$.
+                    Then, if $\bf{F}=\langle P,Q\rangle$ is a vector field whose components
+                    $P$ and $Q$ have continuous partial derivatives in an open set containing $D$,
+                    we have
+                    \[
+                    \iint_D \bigg(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\bigg)\,dA
+                    =
+                    \oint_{C_1}(P\,dx+Q\,dy)
+                    +\cdots+
+                    \oint_{C_k}(P\,dx+Q\,dy),
+                    \]
+                    provided that the curves $C_1,\,\dots,\,C_k$ are all positively oriented.
+                    <div class="image-container" style="margin-top: 2%;">
+                        <img src="Pictures/green-general.svg" alt="A general bounded region" style="width: 60%;">
+                    </div>
+                </div>
+                <div class="example-box">
+                    Evaluate the sum
+                    \[
+                        I=\int_{C_1}\big(7x+y^2\big)\,dx+\big(2y-x^2\big)\,dy
+                        +
+                        \int_{C_2}\big(7x+y^2\big)\,dx+\big(2y-x^2\big)\,dy,
+                    \]
+                    where $C_1$ and $C_2$ are the circles centered at $(0,0)$ and of radius
+                    $1$ and $3$, respectively, with the orientation as shown below:
+                    <div class="image-container">
+                        <img src="Pictures/circles.png" style="width: 25%;">
+                    </div>
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Observe that the curves $C_1$ and $C_2$ are bounding an annular
+                        region $D$, and both curves are positively oriented relative to $D$.
+                        Since the integrand in both terms is the vector field
+                        $\bf{F}=\big\langle 2y-x^2,7x+y^2\big\rangle$, we can apply
+                        Green's theorem to obtain that
+                        \[
+                            I=\iint_D (-2x-2y)\,dA.
+                        \]
+                    </p>
+                    <p>
+                        We can change to polar coordinates in order to find the above double
+                        integral.
+                        Indeed, the region $D$ is described by the inequalities $1\leq r\leq 3$
+                        and $0\leq \theta\leq 2\pi$, where $(r,\theta)$ denote polar coordinates,
+                        so
+                        \[
+                            \begin{aligned}
+                               \iint_D (-2x-2y)\,dA 
+                               ={}&
+                               \int_0^{2\pi}\int_1^3(-2r\cos\theta-2r\sin\theta)r\,dr\,d\theta
+                               =
+                               \int_0^{2\pi}\int_1^3-2r^2(\cos\theta+\sin\theta)\,dr\,d\theta
+                               \\={}&
+                                -\frac{52}{3}\int_0^{2\pi}(\cos\theta+\sin\theta)\,d\theta
+                                =0.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
