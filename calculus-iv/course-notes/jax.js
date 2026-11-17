@@ -13,6 +13,8 @@ window.MathJax = {
             tr: "{\\operatorname{tr}}",
             dom: "{\\operatorname{Dom}}",
             grad: "{\\operatorname{grad}\\,}",
+            curl: "{\\operatorname{curl}\\,}",
+            ddiv: "{\\operatorname{div}\\,}",
             bf: ["{\\mathbf{#1}}", 1]
         }
     }

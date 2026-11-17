@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Curl and Divergence</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="text-align: center;">Curl and Divergence</h1>
+            <p>
+                In this section we introduce two differential operators that we can apply
+                to vector fields in $\RR^3$, called <em>curl</em> and <em>divergence</em>.
+                The curl will allow us to determine whether a vector field is conservative,
+                and both the divergence and curl will be related to fluid flow.
+            </p>
+            <section id="curl">
+                <h2>Curl of a Vector Field</h2>
+                <p>
+                    The curl of a vector field can be defined with a lengthy formula which may be a bit hard
+                    to memorize.
+                    A way to make it more memorable is to introduce a formal vector known as
+                    the <em>nabla operator</em>.
+                </p>
+                <div class="definition-box">
+                    The <b>nabla operator</b> is defined to be the formal vector
+                    \[
+                        \nabla
+                        =
+                        \bigg\langle
+                        \frac{\partial}{\partial x},
+                        \frac{\partial}{\partial y},
+                        \frac{\partial}{\partial z}
+                        \bigg\rangle.
+                    \]
+                </div>
+                <div class="warning-box">
+                    The nabla operator $\nabla$ is not a real vector or vector field on $\RR^3$, as its
+                    components are neither numbers nor functions.
+                    However, we will see that we can formally operate with it.
+                </div>
+                <div class="definition-box">
+                    Let $\bf{F}=\langle P,Q,R\rangle$ be a vector field defined on a subset of $\RR^3$
+                    and suppose that $P,\,Q$ and $R$ have first order partial derivatives.
+                    Then, the <b>curl</b> of $\bf{F}$ is defined to be the vector field
+                    \[
+                    \curl \bf{F}=
+                    \nabla \times \bf{F}
+                    =
+                    \left\lvert
+                    \begin{array}{ccc}
+                    \bf{i} & \bf{j} & \bf{k} \\
+                    \frac{\partial}{\partial x}& \frac{\partial}{\partial y}& \frac{\partial}{\partial z} \\ 
+                    P & Q & R
+                    \end{array}
+                    \right\rvert
+                    =
+                    \bigg\langle
+                    \frac{\partial R}{\partial y}-\frac{\partial Q}{\partial z},
+                    \frac{\partial P}{\partial z}-\frac{\partial R}{\partial x},
+                    \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}
+                    \bigg\rangle
+                    .
+                    \]
+                </div>
+                <p>
+                    Let's give a geometric interpretation of the curl of a vector field.
+                    Suppose that $\bf{F}$ is a vector field representing the velocity flow
+                    of some fluid in $\RR^3$, and $p$ is any point.
+                    If $(\curl \bf{F})(p)\neq\bf{0}$, then the particles near $p$ in the fluid
+                    will tend to rotate about the axis pointing in the direction of $(\curl \bf{F})(p)$.
+                    The direction of this rotation is determined by the right hand rule.
+                    If $(\curl\bf{F})(p)=\bf{0}$, then there is no rotation at $p$.
+                    We say that $\bf{F}$ is <b>irrotational</b> at $p$ if $(\curl\bf{F})(p)=\bf{0}$.
+                </p>
+                <div class="columns">
+                    <div style="width: 60%;">
+                        <p>
+                            For example, consider $\bf{F}(x,y,z)=\langle \cos(\pi y),\sin(\pi x),0\rangle$.
+                            On the right we have a representation of the vector field on the $xy$-plane.
+                            Using the geometric interpretation of the curl, we see that for the points
+                            $p$ and $q$ shown, we have
+                        </p>
+                        <ul>
+                            <li>
+                                $(\curl \bf{F})(p)$ points in the direction of the $z$-axis.
+                            </li>
+                            <li>
+                                $(\curl \bf{F})(q)$ points in the direction of the negative $z$-axis.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="image-container" style="width: 30%;">
+                        <img src="Pictures/curl.png" alt="A vector field">
+                    </div>
+                </div>
+                <div class="example-box">
+                    Find the curl of the vector field
+                    \[
+                        \bf{F}=z^2\,\bf{i}-xy\,\bf{j}+2xyz\,\bf{k}.
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        Using the definition of the curl, we have
+                        \[
+                            \begin{aligned}
+                            \curl\bf{F}
+                            =
+                            \left\lvert
+                            \begin{array}{ccc}
+                                \bf{i} & \bf{j} & \bf{k} \\
+                                \frac{\partial}{\partial x}&
+                                \frac{\partial}{\partial y}&
+                                \frac{\partial}{\partial z}\\
+                                z^2 & -xy & 2xyz
+                            \end{array}
+                            \right\rvert
+                            =
+                            \langle 2xz,-2yz+2z,-y\rangle.
+                            \end{aligned}
+                        \]
+                    </p>
+                </details>
+            </section>
+            <section id="conservative">
+                <h2>Conservative Vector Fields and Curl</h2>
+                <p>
+                    Here we will see how to use the curl of a vector field $\bf{F}$
+                    in order to determine if it is conservative.
+                    A first result is that conservative vector fields are irrotational.
+                </p>
+                <div class="theorem-box">
+                    Suppose that $f$ is a function of three variables with continuous partial derivatives
+                    of order two.
+                    Then, $\curl \nabla f = \bf{0}$.
+                    In particular, if $\bf{F}$ is a conservative vector field, then $\curl\bf{F}=\bf{0}$.
+                </div>
+                <details>
+                    <summary>Proof.</summary>
+                    <p>
+                        The curl of $\nabla f$ is
+                        \[
+                        \curl \nabla f
+                        =
+                        \left\lvert
+                        \begin{array}{ccc}
+                        \bf{i} & \bf{j} & \bf{k} \\
+                        \frac{\partial}{\partial x}& \frac{\partial}{\partial y}& \frac{\partial}{\partial z} \\ 
+                        \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y} & \frac{\partial f}{\partial z}
+                        \end{array}
+                        \right\rvert
+                        =
+                        \bigg\langle
+                        \frac{\partial^2f}{\partial y\partial z}
+                        -
+                        \frac{\partial^2f}{\partial z\partial y},
+                        \frac{\partial^2f}{\partial z\partial x}
+                        -
+                        \frac{\partial^2f}{\partial x\partial z},
+                        \frac{\partial^2f}{\partial x\partial y}
+                        -
+                        \frac{\partial^2f}{\partial y\partial x}
+                        \bigg\rangle
+                        =
+                        \langle 0,0,0\rangle,
+                        \]
+                        where all of the terms vanish due to
+                        <a href="partial-derivatives.html#clairaut">Clairaut's theorem</a>.
+                    </p>
+                </details>
+                <p>
+                    However, there exist vector fields $\bf{F}$ with zero curl
+                    that are not conservative.
+                    An example of this is the vector field
+                    \[
+                        \bf{F}(x,y,z)
+                        =
+                        \bigg\langle
+                        -\frac{y}{x^2+y^2},
+                        \frac{x}{x^2+y^2},
+                        0
+                        \bigg\rangle.
+                    \]
+                    Observe that the domain of $\bf{F}$ is the set of all points $(x,y,z)$ with
+                    $(x,y)\neq (0,0)$.
+                    One can check that $\curl \bf{F}=\bf{0}$, but it is not conservative.
+                    A way to see this is to note that if $C$ denotes the unit circle in the $xy$-plane,
+                    parametrized by $\bf{r}(t)=\langle\cos t,\sin t,0\rangle$ for $0\leq t\leq 2\pi$, then
+                    \[
+                        \oint_C\bf{F}\,\cdot\,d\bf{r}=2\pi\neq 0,
+                    \]
+                    so $\bf{F}$ is not conservative.
+                </p>
+                <p>
+                    Nevertheless, when the domain of $\bf{F}$ is the whole $\RR^3$, we have
+                    the following result:
+                </p>
+                <div class="theorem-box">
+                    Let $\bf{F}\colon \RR^3\to\RR^3$ be a vector field whose components have
+                    continuous partial derivatives.
+                    Then, $\bf{F}$ is conservative if and only if $\curl \bf{F}=\bf{0}$.
+                </div>
+                <p>
+                    With this, we can now determine whether a vector field defined on $\RR^3$ is
+                    conservative or not.
+                </p>
+                <div class="example-box">
+                    Decide if the vector field
+                    \[
+                        \bf{F}(x,y,z)
+                        =
+                        \langle y-\cos z,x+2y,x\sin z\rangle
+                    \]
+                    is conservative or not.
+                    If it is conservative, find a potential function $f$ for $\bf{F}$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        To check if $\bf{F}$ is conservative, we can just see if $\curl\bf{F}=\bf{0}$.
+                        We have
+                        \[
+                            \begin{aligned}
+                                \curl\bf{F}
+                                =
+                                \nabla\times\bf{F}
+                                =
+                                \left\lvert
+                                \begin{array}{ccc}
+                                \bf{i} & \bf{j} & \bf{k} \\
+                                \frac{\partial}{\partial x}& \frac{\partial}{\partial y}& \frac{\partial}{\partial z} \\ 
+                                y-\cos z & x+2y & x\sin z
+                                \end{array}
+                                \right\rvert
+                                =
+                                \langle 0,\sin z-\sin z,1-1\rangle
+                                =\bf{0},
+                            \end{aligned}
+                        \]
+                        so $\bf{F}$ is irrotational, and thus conservative.
+                    </p>
+                    <p>
+                        Let's find a potential function $f$ for $\bf{F}$.
+                        This means that $\nabla f = \bf{F}$, so we have
+                        \[
+                            \frac{\partial f}{\partial x}
+                            =
+                            y-\cos z,\qquad
+                            \frac{\partial f}{\partial y}
+                            =
+                            x+2y,\qquad
+                            \frac{\partial f}{\partial z}
+                            =
+                            x\sin z.
+                        \]
+                    </p>
+                    <p>
+                        Integrating the first function with respect to $x$, we deduce that
+                        \[
+                            f(x,y,z)=\int(y-\cos z)\,dx
+                            =xy-x\cos z+C(y,z),
+                        \]
+                        where $C(y,z)$ depends on $y$ and $z$.
+                        If we now differentiate with respect to $y$, we obtain
+                        \[
+                            \frac{\partial f}{\partial y}=x+\frac{\partial C}{\partial y}
+                            =
+                            x+2y
+                            \implies
+                            \frac{\partial C}{\partial y}=2y
+                            \implies
+                            C(y,z)=y^2+K(z),
+                        \]
+                        where $K(z)$ depends on $z$.
+                        Consequently,
+                        \[
+                            f(x,y,z)=xy-x\cos z+y^2+K(z).
+                        \]
+                        We still need to know $K(z)$.
+                        Taking the partial derivative with respect to $z$, we obtain
+                        \[
+                            \frac{\partial f}{\partial z}
+                            =
+                            x\sin z+K'(z)
+                            =
+                            x\sin z
+                            \implies K'(z)=0\implies K(z)=L,
+                        \]
+                        where $L$ is a constant.
+                        Summarizing, we discovered that
+                        \[
+                            f(x,y,z)=xy-x\cos z+y^2+L
+                        \]
+                        is a potential function for $\bf{F}$ for any $L\in\RR$.
+                        Taking $L=0$ (because we only need one potential function), we may take
+                        \[
+                            f(x,y,z)=xy-x\cos z+y^2.
+                        \]
+                    </p>
+                </details>
+            </section>
+            <section id="divergence">
+                <h2>Divergence of a Vector Field</h2>
+                <p>
+                    We now define the divergence of a vector field in $\RR^3$.
+                </p>
+                <div class="definition-box">
+                    Let $\bf{F}=\langle P,Q,R\rangle$ be a vector field defined on a subset of $\RR^3$ and whose
+                    component functions have first order partial derivatives.
+                    We define the <b>divergence</b> of $\bf{F}$ to be the scalar field
+                    \[
+                    \ddiv \bf{F}
+                    =
+                    \nabla \cdot \bf{F}
+                    =
+                    \frac{\partial P}{\partial x}+
+                    \frac{\partial Q}{\partial y}+
+                    \frac{\partial R}{\partial z}.
+                    \]
+                </div>
+                <div class="example-box">
+                    Compute the divergence of the vector field
+                    \[
+                        \bf{F}=\langle z^2,-xy,2xyz\rangle.
+                    \]
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        In this case, the divergence of $\bf{F}$ is
+                        \[
+                            \ddiv \bf{F}=0-x+2xy=x(2y-1).
+                        \]
+                    </p>
+                </details>
+                <p>
+                    If a vector field $\bf{G}$ is the curl of another vector field $\bf{F}$, then one
+                    can show that $\ddiv \bf{G}=0$.
+                    This follows from Clairaut's theorem as in the proof of the formula $\curl (\nabla f) = \bf{0}$.
+                </p>
+                <div class="theorem-box">
+                    Let $\bf{F}$ be a vector field in $\RR^3$ that has continuous partial derivatives
+                    of order two.
+                    Then $\ddiv \curl{\bf{F}}=0$.
+                </div>
+                <p>
+                    We can use this result to show that some vector fields cannot appear as the
+                    curl of a vector field:
+                </p>
+                <div class="example-box">
+                    Show that the vector field
+                    \[
+                        \bf{F}=x\,\bf{i}+y^2z\,\bf{j}+\big(\cos x+z^2\big)\,\bf{k}
+                    \]
+                    cannot be the curl of a vector field.
+                    In other words, show that $\bf{F}\neq\curl\bf{G}$ for any vector field $\bf{G}$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        If $\bf{F}=\curl\bf{G}$ for a vector field $\bf{G}$, then we would have
+                        $\ddiv \bf{F}=\ddiv \curl \bf{G}=0$.
+                        However,
+                        \[
+                            \ddiv \bf{F}=1+2yz+2z\neq 0,
+                        \]
+                        so $\bf{F}$ cannot be the curl of any vector field $\bf{G}$.
+                    </p>
+                </details>
+                <p>
+                    Similarly to the curl, the divergence of a vector field $\bf{F}$ can be interpreted
+                    in terms of fluid flow.
+                    Suppose that $\bf{F}$ is the velocity field of a fluid in $\RR^3$ and $p$ is a point in $\RR^3$.
+                    Then $(\ddiv \bf{F})(p)$ represents the tendency of the fluid to diverge out of the point
+                    $p$.
+                </p>
+                <div class="columns images-with-caption" style="padding-top: 2%;">
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/positive-divergence.png" alt="Positive divergence">
+                        </div>
+                        <p class="center">
+                            Positive divergence
+                        </p>
+                    </div>
+                    <div>
+                        <div class="image-container">
+                            <img src="Pictures/negative-divergence.png" alt="Negative divergence">
+                        </div>
+                        <p class="center">
+                            Negative divergence
+                        </p>
+                    </div>
+                </div>
+                <p>
+                    We also note that a vector field $\bf{F}$ with $\ddiv\bf{F}=0$ is called
+                    <b>incompressible</b>.
+                </p>
+                <h3>The Laplace operator</h3>
+                <p>
+                    We can combine the gradient and divergence operators to obtain the so-called
+                    <em>Laplace operator</em>.
+                    If $f$ is a function of three variables, then its <b>Laplacian</b>
+                    is the function $\Delta f$ given by
+                    \[
+                        \Delta f=\ddiv(\nabla f)
+                        =
+                        \nabla\cdot (\nabla f)
+                        =
+                        \frac{\partial^2 f}{\partial x^2}+
+                        \frac{\partial^2 f}{\partial y^2}+
+                        \frac{\partial^2 f}{\partial z^2}.
+                    \]
+                    This operator appears commonly in the setting of <em>partial differential equations</em>.
+                    One such example is the <b>Laplace equation</b>
+                    \[
+                        \Delta f = 0.
+                    \]
+                    The solutions to the Laplace equation are called <b>harmonic functions</b>.
+                </p>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 
