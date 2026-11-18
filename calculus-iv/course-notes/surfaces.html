@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Parametric Surfaces</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta author="Juan Manuel Lorenzo Naveiro" />
+        <meta name="description" content="" />
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="html5-reset.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="calculus.css">
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    </head>
+
+    <body>
+        <main>
+            <h1 style="text-align: center;">Parametric Surfaces</h1>
+            <p>
+                In this section we will discuss parametric surfaces in $\RR^3$.
+                Essentially, a parametric surface in $\RR^3$ is a set of points
+                that can be described by a function $\bf{r}$ of two variables.
+                We will see how to compute the tangent plane of a surface at a point,
+                as well as how to use a double integral to find the area of a surface.
+            </p>
+            <section id="surfaces">
+                <h2>Parametric Surfaces in $\RR^3$</h2>
+                <div class="definition-box">
+                    We say that a subset $S$ of $\RR^3$ is a <b>parametric surface</b>
+                    if there exists a subset $D\subseteq \RR^2$ and a vector function
+                    $\bf{r}\colon D\to \RR^3$ whose image is $S$.
+                    We say that $\bf{r}$ is a <b>parametrization</b> of $S$.
+                </div>
+                <p>
+                    Note that a parametrization $\bf{r}$ is a function that takes two variables
+                    and returns a vector in $\RR^3$.
+                    Thus, if $(u,v)$ is a point in the domain $D$ of $\bf{r}$, then we
+                    can write
+                    \[
+                        \bf{r}(u,v)=\langle x(u,v),y(u,v),z(u,v)\rangle,
+                    \]
+                    where $x,\,y,\,z\colon D\to \RR$ are functions of two variables.
+                    Therefore, a point $(x,y,z)$ is in $S$ if there exists a point
+                    $(u,v)\in D$ such that
+                    \[
+                        x=x(u,v),\qquad
+                        y=y(u,v),\qquad
+                        z=z(u,v).
+                    \]
+                    The above equations are called the <b>parametric equations</b> of $S$.
+                </p>
+                <div class="example-box">
+                    Find parametric equations for the cone of equation $z=\sqrt{x^2+y^2}$.
+                </div>
+                <details>
+                    <summary>Solution.</summary>
+                    <p>
+                        For example, we can parametrize the cone by letting $x=u$ and $y=v$,
+                        so that $z=\sqrt{u^2+v^2}$.
+                        Therefore, a set of parametric equations of the cone would be
+                        \[
+                            x=u,\qquad y=v,\qquad z=\sqrt{u^2+v^2}, \qquad (u,v)\in \RR^2.
+                        \]
+                    </p>
+                    <p>
+                        Alternatively, we could look at the cone in cylindrical coordinates,
+                        and the equation $z=\sqrt{x^2+y^2}$ becomes $z=r$.
+                        Changing from cylindrical coordinates to rectangular coordinates and
+                        letting $r=u$ and $\theta=v$, we
+                        obtain the parametric equations
+                        \[
+                            x=u\cos v, \qquad y=u\sin v,\qquad z=u,\qquad r>0, \, 0\leq\theta\leq 2\pi.
+                        \]
+                    </p>
+                </details>
+                <p>
+                    We now give some examples of parametrizations for well-known surfaces:
+                </p>
+                <div class="generic-box">
+                    <b>Planes in $\RR^3$.</b>
+                    Consider a plane $S$ in $\RR^3$.
+                    If $p\in S$ is a given point in the plane, and $\bf{a}\,\bf{b}$ are two
+                    nonparallel directions that are contained to $S$, then any other point in the plane
+                    $S$ will be of the form $p+u\,\bf{a}+v\,\bf{b}$, where $u$ and $v$ are scalars.
+                    Thus, a parametrization of the plane $S$ is
+                    \[
+                    \bf{r}(u,v)=p+u\,\bf{a}+v\,\bf{b}, \qquad (u,v)\in\RR^2.
+                    \]
+                    <div class="image-container">
+                        <img src="Pictures/plane-parametrization.png" alt="A plane" style="width: 30%;">
+                    </div>
+                </div>
+                <div class="generic-box">
+                    <b>Cylinders in $\RR^3$.</b>
+                        Suppose $S$ is a cylinder about the $z$-axis and of radius $R$.
+                        The equation of such a cylinder is
+                        \[
+                            y^2+z^2=R^2.
+                        \]
+                        In cylindrical coordinates $(r,\theta,z)$, this equation becomes
+                        \[
+                            r=R,
+                        \]
+                        so $r=R$ is constant and we can set $\theta=u$, $z=v$ to obtain
+                        the following parametrization of the cylinder:
+                        \[
+                            \bf{r}(u,v)=(R\cos u,R\sin u,v), \qquad 0\leq u\leq 2\pi,\, v\in\RR.
+                        \]
+                    <div class="image-container">
+                        <img src="Pictures/cylinder-parametrization.png" alt="A cylinder" style="width: 20%;">
+                    </div>
+                </div>
+                <div class="generic-box">
+                    <b>The sphere.</b>
+                    Let $S$ be the sphere of radius $R$ centered at the origin.
+                    The equation of $S$ is
+                    \[
+                        x^2+y^2+z^2=R^2,
+                    \]
+                    which in spherical coordinates $(\rho,\theta,\phi)$ becomes
+                    \[
+                        \rho=R.
+                    \]
+                    By letting $\theta$ and $\phi$ vary and changing to Cartesian coordinates,
+                    we see that a parametrization of the sphere is
+                    \[
+                        \bf{r}(\phi,\theta)=(R\sin \phi\cos \theta,R\sin \phi\sin \theta,R\cos \phi), \qquad 0\leq \phi\leq\pi,\,
+                        0\leq \theta\leq 2\pi.
+                    \]
+                    <div class="image-container">
+                        <img src="Pictures/sphere-parametrization.png" alt="A sphere" style="width: 30%;">
+                    </div>
+                </div>
+                <h3>Grid Curves</h3>
+                <p>
+                    Suppose $S$ is a parametric surface given by the parametrization $\bf{r}(u,v)$.
+                    Using vertical and horizontal lines in the plane, we can construct two families
+                    of curves in $S$.
+                </p>
+                <p>
+                    For example, if we fix $v=b$ to be constant and we let $u$ vary, we obtain
+                    the vector function $\bf{r}(u,b)$, which only depends on $u$.
+                    This vector function describes a curve $C_1$ in $S$.
+                </p>
+                <p>
+                    Similarly, if we set $u=a$ to be a constant and let $v$ vary, we get the
+                    vector function $\bf{r}(a,v)$ of $v$.
+                    This function parametrizes a curve $C_2$ in $S$.
+                </p>
+                <p>
+                    The curves $C_1$ and $C_2$ are known as <b>grid curves</b> of the surface
+                    $S$.
+                    Note that different parametrizations of $S$ may yield different families
+                    of grid curves.
+                </p>
+                <div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 2%;">
+                    <div style="width: 30%; display: flex; justify-content: center;">
+                        <img src="Pictures/parametrization-1.png" alt="A set in the plane" style="width: 100%;">
+                    </div>
+                    <div style="width: 15%; display: flex; justify-content: center;">
+                        <img src="Pictures/arrow-r.svg" alt="An arrow" style="width: 100%;">
+                    </div>
+                    <div style="width: 30%; display: flex; justify-content: center;">
+                        <img src="Pictures/parametrization-2.png" alt="A surface in space" style="width: 100%;">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+    <script src="code.js"></script>
+    <script src="jax.js"></script>
+</html> 

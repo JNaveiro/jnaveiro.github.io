@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="31.282393mm"
+   height="7.5576839mm"
+   viewBox="0 0 31.282393 7.5576839"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.9186156"
+     inkscape:cx="199.88371"
+     inkscape:cy="109.71453"
+     inkscape:window-width="1872"
+     inkscape:window-height="963"
+     inkscape:window-x="20"
+     inkscape:window-y="93"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="31.282393"
+       height="7.5576839"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="DartArrow"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Dart arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         transform="scale(-0.5)"
+         id="path6" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-16.369633,-7.5156926)">
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.264999;marker-end:url(#DartArrow)"
+       d="m 16.410487,14.617745 c 14.175642,-4.594769 21.938919,-2.20622 29.6492,0"
+       id="path1"
+       sodipodi:nodetypes="cc" />
+    <g
+       inkscape:label=""
+       transform="translate(29.718153,7.515692)"
+       id="g1">
+      <g
+         fill="#000000"
+         fill-opacity="1"
+         id="g2"
+         transform="matrix(0.352778,0,0,0.352778,-0.879475,-0.675525)">
+        <g
+           id="use1"
+           transform="translate(1.993,8.368)">
+          <path
+             d="m 2.984375,-3.234375 c 0,-0.46875 0.09375,-2.75 1.78125,-2.75 -0.203125,0.15625 -0.3125,0.40625 -0.3125,0.65625 0,0.59375 0.484375,0.84375 0.84375,0.84375 0.359375,0 0.828125,-0.25 0.828125,-0.84375 0,-0.71875 -0.75,-1.125 -1.4375,-1.125 -1.125,0 -1.625,0.984375 -1.8125,1.59375 H 2.859375 v -1.59375 L 0.5,-6.34375 v 0.625 c 0.890625,0 0.984375,0 0.984375,0.5625 v 4.546875 H 0.5 V 0 c 0.328125,-0.03125 1.40625,-0.03125 1.8125,-0.03125 0.40625,0 1.578125,0 1.921875,0.03125 v -0.609375 h -1.25 z m 0,0"
+             id="path2" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
